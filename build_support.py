@@ -66,7 +66,7 @@ class BuildPy(build_py):
     def mkpath(self, name, mode=0o777):
         # Distutils caches created paths across command instances. An owned
         # output tree removed below must still be recreated on a repeat build.
-        if self.dry_run or self.distribution.dry_run:
+        if self.dry_run or getattr(self.distribution, 'dry_run', False):
             return
         owned = getattr(self, '_owned_package_output', None)
         directory = Path(name).absolute()
@@ -80,7 +80,7 @@ class BuildPy(build_py):
     def run(self) -> None:
         source, target = _checked_package_paths(self.build_lib)
         self._owned_package_output = target
-        if self.dry_run or self.distribution.dry_run:
+        if self.dry_run or getattr(self.distribution, 'dry_run', False):
             # The pinned Setuptools copy/mkpath wrappers do not themselves pass
             # dry_run through, so delegating would still write package files.
             self.announce(f'Would rebuild and verify {target}', level=2)

@@ -32,7 +32,8 @@ def build_fixture(tmp_path, monkeypatch):
             'package_dir': {'': 'src'}, 'include_package_data': False,
             'package_data': {'otqa': ['schemas/*.json', '_source_inventory.json', '_build_provenance.json']},
         })
-        dist.dry_run = dry_run
+        if dry_run:
+            dist.dry_run = True
         dist.script_name = 'setup.py'
         command = hook.BuildPy(dist)
         command.dry_run = command_dry_run
