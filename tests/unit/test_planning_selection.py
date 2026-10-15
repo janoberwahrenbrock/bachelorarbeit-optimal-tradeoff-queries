@@ -242,3 +242,176 @@ def test_pickling_failure_is_an_execution_failure_but_math_error_is_preserved():
             with pytest.raises(NumericalError) as caught:
                 PlannerSession._receive(failed_result, None)
             assert caught.value is cause
+
+
+@pytest.mark.parametrize("capture_enabled", [False, True])
+def test_root_dispatch_refills_completed_slot_before_slow_first_query(monkeypatch, capture_enabled):
+    """Root zero depends on root two starting, so ordered waiting would stall."""
+    from concurrent.futures import ThreadPoolExecutor
+    from threading import Event
+    from otqa.planning.capture import EvaluationCaptureOptions, TaskCapture
+
+    queries(monkeypatch, {})
+    planner = session()
+    planner.execution = SolverExecution(2)
+    started_later = Event()
+    delivered = []
+
+    class Sink:
+        def accept(self, block):
+            if block.task_end:
+                delivered.append(int(block.task_address[-1][-1]))
+
+    if capture_enabled:
+        planner._capture_options = EvaluationCaptureOptions(Sink(), 100_000, 100_000, 800_000, 800_000)
+        planner._plan_address = ("analytical", 1)
+
+    def evaluate(task):
+        index = int(task.query.value)
+        if index == 0:
+            assert started_later.wait(2), "a free worker was blocked behind root zero"
+        elif index == 2:
+            started_later.set()
+        result = _Evaluated(QueryEvaluation(task.query, float(3 - index), ()))
+        if capture_enabled:
+            capture = TaskCapture(*task.capture_address, *task.capture_limits)
+            return result, capture.finish()
+        return result
+
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        class Pool:
+            def submit(self, _function, task):
+                if capture_enabled and task.query.value == 2:
+                    assert 1 in delivered, "capture must be delivered before replacing its task"
+                return executor.submit(evaluate, task)
+
+        pool = Pool()
+        planner._pool = lambda: pool
+        candidates = tuple(Query(0, 1, value) for value in (0, 1, 2))
+        values = planner._evaluate_many(Node("root", (0, 1, 2)),
+            SimpleNamespace(query_candidates=candidates, query_sources={}), 3, "count", root=True)
+    assert [value.evaluation.query for value in values] == list(candidates)
+    assert [value.evaluation.expected_terminal_candidates for value in values] == [3, 2, 1]
+    if capture_enabled:
+        assert set(delivered) == {0, 1, 2}
+
+
+def test_parallel_errors_keep_original_query_priority_and_cleanup_pool(monkeypatch):
+    from concurrent.futures import Future
+
+    queries(monkeypatch, {})
+    planner = session()
+    planner.execution = SolverExecution(2)
+    earlier = RuntimeError("earlier mathematical failure")
+    later = RuntimeError("later mathematical failure")
+    submitted, shutdown = [], []
+
+    class Pool:
+        def submit(self, _function, task):
+            submitted.append(task.query.value)
+            future = Future()
+            future.set_exception(earlier if task.query.value == 0 else later)
+            return future
+
+        def shutdown(self, **kwargs):
+            shutdown.append(kwargs)
+
+    pool = Pool()
+    planner._executor = pool
+    planner._pool = lambda: pool
+    with pytest.raises(RuntimeError) as caught:
+        planner._evaluate_many(Node("root", (0, 1, 2)), SimpleNamespace(
+            query_candidates=tuple(Query(0, 1, value) for value in (0, 1, 2)), query_sources={}),
+            3, "count", root=True)
+    assert caught.value is earlier
+    assert submitted == [0, 1]
+    assert shutdown == [{"wait": True, "cancel_futures": True}]
+    assert planner._executor is None
+
+
+def test_parallel_sink_failure_stops_dispatch_and_cleans_pool(monkeypatch):
+    from concurrent.futures import Future
+    from otqa.planning.capture import EvaluationCaptureError, EvaluationCaptureOptions, TaskCapture
+
+    queries(monkeypatch, {})
+    planner = session()
+    planner.execution = SolverExecution(2)
+    cause = RuntimeError("analytical sink failure")
+    submitted, shutdown = [], []
+
+    class Sink:
+        def accept(self, block):
+            raise cause
+
+    planner._capture_options = EvaluationCaptureOptions(Sink(), 100_000, 100_000, 800_000, 800_000)
+    planner._plan_address = ("analytical", 1)
+
+    class Pool:
+        def submit(self, _function, task):
+            submitted.append(task.query.value)
+            capture = TaskCapture(*task.capture_address, *task.capture_limits)
+            future = Future()
+            future.set_result((_Evaluated(QueryEvaluation(task.query, 2, ())), capture.finish()))
+            return future
+
+        def shutdown(self, **kwargs):
+            shutdown.append(kwargs)
+
+    pool = Pool()
+    planner._executor = pool
+    planner._pool = lambda: pool
+    with pytest.raises(EvaluationCaptureError) as caught:
+        planner._evaluate_many(Node("root", (0, 1, 2)), SimpleNamespace(
+            query_candidates=tuple(Query(0, 1, value) for value in (0, 1, 2)), query_sources={}),
+            3, "count", root=True)
+    assert caught.value.__cause__ is cause
+    assert submitted == [0, 1]
+    assert shutdown == [{"wait": True, "cancel_futures": True}]
+    assert planner._executor is None
+
+
+def test_later_completed_error_waits_for_earlier_query_error(monkeypatch):
+    from concurrent.futures import Future
+    import otqa.planning.session as module
+
+    queries(monkeypatch, {})
+    planner = session()
+    planner.execution = SolverExecution(2)
+    earlier, later = RuntimeError("root zero"), RuntimeError("root one")
+    futures, submitted = [], []
+
+    class Pool:
+        def submit(self, _function, task):
+            submitted.append(task.query.value)
+            future = Future()
+            if task.query.value == 1:
+                future.set_exception(later)
+            futures.append(future)
+            return future
+
+        def shutdown(self, **kwargs):
+            pass
+
+    waits = []
+    original_wait = module.wait
+
+    def controlled_wait(pending, **kwargs):
+        waits.append(tuple(pending))
+        if len(waits) == 1:
+            # The second task arrives first. Its observation cannot determine
+            # the mathematical error while the earlier task is unresolved.
+            futures[0].set_exception(earlier)
+            return {futures[1]}, {futures[0]}
+        return original_wait(pending, **kwargs)
+
+    monkeypatch.setattr(module, "wait", controlled_wait)
+    pool = Pool()
+    planner._executor = pool
+    planner._pool = lambda: pool
+    with pytest.raises(RuntimeError) as caught:
+        planner._evaluate_many(Node("root", (0, 1, 2)), SimpleNamespace(
+            query_candidates=tuple(Query(0, 1, value) for value in (0, 1, 2)), query_sources={}),
+            3, "count", root=True)
+    assert caught.value is earlier
+    assert submitted == [0, 1]
+    assert len(waits) == 2

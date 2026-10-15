@@ -66,4 +66,10 @@ def export_series(request: ExportRequest) -> ExportReceipt:
     return implementation(request)
 
 
-__all__ = ['RunRequest', 'RunOutcome', 'GenerateDatasetRequest', 'DatasetOutcome', 'CreateSuiteRequest', 'SuiteOutcome', 'PlanRequest', 'PlanOutcome', 'SeriesOutcome', 'SeriesStatus', 'AuditRequest', 'AuditOutcome', 'ExportRequest', 'ExportReceipt', 'ProjectContext', 'load_project_context', 'generate_dataset', 'create_suite', 'run_problem', 'plan_suite', 'run_suite', 'resume_suite', 'inspect_series', 'audit_series', 'export_series']
+def seal_series(series_dir: Path, output_path: Path, *, context: ProjectContext) -> dict:
+    """Create an explicit portable archive; return its bundle-relative FileRef."""
+    from .analysis.seal import seal_inventory
+    return seal_inventory(context, series_dir, output_path)
+
+
+__all__ = ['RunRequest', 'RunOutcome', 'GenerateDatasetRequest', 'DatasetOutcome', 'CreateSuiteRequest', 'SuiteOutcome', 'PlanRequest', 'PlanOutcome', 'SeriesOutcome', 'SeriesStatus', 'AuditRequest', 'AuditOutcome', 'ExportRequest', 'ExportReceipt', 'ProjectContext', 'load_project_context', 'generate_dataset', 'create_suite', 'run_problem', 'plan_suite', 'run_suite', 'resume_suite', 'inspect_series', 'audit_series', 'export_series', 'seal_series']

@@ -5,11 +5,10 @@ import argparse
 import os
 import sys
 import time
-import traceback
-from dataclasses import asdict
 from pathlib import Path
 
 from .codec import DocumentError, mathematical_hex, read_json, utc_now
+from .error_serialization import error_wire
 from .documents import file_ref, load_answer_history, load_config_document, load_execution_profile, load_oracle, load_problem, resolve_ref
 from .processes import process_identity
 from .project import load_project_context
@@ -17,29 +16,12 @@ from .schema import validate
 from .storage import RunStore, empty_counts, publish_json
 
 
-def error_wire(error: BaseException, stage="controller") -> dict:
-    codes = {"InputValidationError": ("invalid_input", "input"), "InvalidAnswerError": ("invalid_answer", "provider"),
-        "InfeasibleStateError": ("infeasible_state", "numerics"), "NumericalError": ("numerical_failure", "numerics"),
-        "PlanningInvariantError": ("planning_invariant", "planning"), "AnswerProviderError": ("answer_provider", "provider"),
-        "ObserverError": ("observer", "observer"), "RecorderError": ("persistence_failure", "persistence"),
-        "PersistenceError": ("persistence_failure", "persistence"), "ExecutionContextError": ("context_unavailable", "worker")}
-    code, resolved_stage = codes.get(type(error).__name__, ("unknown", stage))
-    context = {}
-    partial = getattr(error, "partial_context", None)
-    if partial is not None:
-        context["memory_query_counts"] = asdict(partial.query_counts)
-        context["memory_answer_count"] = len(partial.answers)
-    if getattr(error, "cleanup_errors", None):
-        context["cleanup_errors"] = list(error.cleanup_errors)
-    return {"code": code, "type": type(error).__name__, "message": str(error) or type(error).__name__,
-        "traceback": "".join(traceback.format_exception(error)), "stage": resolved_stage, "context": context}
-
-
-def timings(*, case_elapsed=None, api_elapsed=None, partial=None, recorder=None, answer_wait=None, complete=False):
-    keys = ("state_analysis_wall_seconds", "planning_wall_seconds", "observer_wall_seconds", "persistence_in_call_wall_seconds",
+def timings(*, case_elapsed=None, api_elapsed=None, partial=None, recorder=None, answer_wait=None, observer=None, complete=False):
+    keys = ("state_analysis_wall_seconds", "planning_wall_seconds", "persistence_in_call_wall_seconds",
             "worker_startup_wall_seconds", "worker_shutdown_wall_seconds", "unattributed_wall_seconds", "worker_cpu_seconds")
     return {**{key: None for key in keys}, "case_elapsed_seconds": case_elapsed, "api_call_wall_seconds": api_elapsed,
         "partial_api_elapsed_seconds": partial, "recorder_wall_seconds": recorder, "answer_wait_wall_seconds": answer_wait,
+        "observer_wall_seconds": observer,
         "scope_version": 1, "complete_api_measurement": complete}
 
 
@@ -138,6 +120,13 @@ def run_attempt(payload: dict, *, case_start: float, started_at: str, identity: 
         finally:
             provider_elapsed += time.perf_counter() - before
 
+    from .telemetry import TelemetryObserver, terminal_display
+    sink = terminal_display(sys.stderr)
+    observer = TelemetryObserver(context, attempt, config["recording"]["telemetry_failure_policy"], sink) if sink is not None else None
+    profiler = None
+    if config["recording"]["profile"]:
+        from .profiling import ParentCallProfiler
+        profiler = ParentCallProfiler()
     api_start = time.perf_counter()
     recorder.api_started = api_start
     prior_recording = recorder.elapsed
@@ -147,9 +136,11 @@ def run_attempt(payload: dict, *, case_start: float, started_at: str, identity: 
     api_elapsed = partial = None
     exit_code = 0
     try:
+        if profiler is not None:
+            profiler.start()
         from otqa import solve
         result = solve(domain_problem, policy, measured_provider, budget=budget, execution=execution,
-                       initial_answers=initial, recorder=recorder)
+                       initial_answers=initial, recorder=recorder, observer=observer)
         api_elapsed = time.perf_counter() - api_start
         complete = True
     except KeyboardInterrupt as exc:
@@ -161,19 +152,30 @@ def run_attempt(payload: dict, *, case_start: float, started_at: str, identity: 
         complete = True
         error = error_wire(exc)
         exit_code = 1
+    finally:
+        if profiler is not None:
+            profiler.stop()
     recording_in_call = recorder.elapsed - prior_recording
+    observer_elapsed = observer.elapsed if observer is not None else 0.0
     confirmed = store.cursor["query_counts"]
     status = "completed" if result is not None else "interrupted" if interruption else "failed"
     solver_result = result_wire(result, problem["alternative_ids"], stop_aware=config["algorithm"]["planning_evaluation"] == "stop_aware", trace_level=config["recording"]["trace_level"]) if result else None
     from otqa.analysis.quality import evaluate_quality
-    from .journal import verify_prefix
-    confirmed_prefix = verify_prefix((attempt / "events.jsonl").read_bytes(), store.cursor["valid_prefix_bytes"],
-        store.cursor["valid_prefix_sha256"], store.cursor["last_good_sequence"], initial_answers=len(initial))
+    from .journal import verify_cursor
+    from .validation import journal_policy
+    confirmed_prefix = verify_cursor((attempt / "events.jsonl").read_bytes(), store.cursor, **journal_policy(manifest, root, attempt / "manifest.json"))
     accepted_answers = list(history["answers"]) if history else []
     accepted_answers += [{**event["payload"]["query"], "answer": event["payload"]["answer"]} for event in confirmed_prefix["events"] if event["event_type"] == "answer_received"]
     quality = evaluate_quality(problem, oracle, solver_result["selected_candidate_id"] if solver_result else None,
         accepted_answers)
     try:
+        if profiler is not None:
+            metrics = [{"metric_id": "api_call", "scope": "wall", "aggregation": "inclusive", "value": api_elapsed or partial or 0.0, "unit": "seconds"},
+                {"metric_id": "recorder_in_call", "scope": "wall", "aggregation": "inclusive", "value": recording_in_call, "unit": "seconds"},
+                {"metric_id": "observer_in_call", "scope": "wall", "aggregation": "inclusive", "value": observer_elapsed, "unit": "seconds"}]
+            # Publish the requested diagnostics before the terminal event. A
+            # failed publication cannot leave a successful terminal decision.
+            profiler.publish(context, attempt, root, payload["run_id"], payload["attempt_id"], metrics)
         if not store.failed:
             if result is not None:
                 recorder.event("run_finished", {"termination_reason": result.termination_reason, "solved": result.solved, "query_counts": dict(confirmed)}, commit=True)
@@ -196,15 +198,11 @@ def run_attempt(payload: dict, *, case_start: float, started_at: str, identity: 
         "configuration_id": config["configuration_id"], "execution_status": status, "execution_stage": "solver", "finalized_by": "case_process",
         "started_at_utc": started_at, "finished_at_utc": utc_now(), "query_counts": dict(store.cursor["query_counts"]),
         "timings": timings(case_elapsed=time.perf_counter() - case_start, api_elapsed=api_elapsed, partial=partial,
-                           recorder=recording_in_call, answer_wait=provider_elapsed, complete=complete),
-        "solver_result": solver_result, "quality": quality, "error": error, "interruption": interruption, "telemetry_errors": [],
+                           recorder=recording_in_call, answer_wait=provider_elapsed, observer=observer_elapsed, complete=complete),
+        "solver_result": solver_result, "quality": quality, "error": error, "interruption": interruption,
+        "telemetry_errors": observer.errors if observer is not None else [],
         "journal": journal, "numeric_hex": mathematical_hex(solver_result, "/solver_result") if solver_result else {}}
     publish_json(context, attempt / "result.json", envelope, kind="result")
-    if config["recording"]["profile"]:
-        metrics = [{"metric_id": "api_call", "scope": "wall", "aggregation": "inclusive", "value": api_elapsed or partial or 0.0, "unit": "seconds"},
-                   {"metric_id": "recorder_in_call", "scope": "wall", "aggregation": "inclusive", "value": recording_in_call, "unit": "seconds"}]
-        publish_json(context, attempt / "profile.json", {"schema_version": 1, "run_id": payload["run_id"], "attempt_id": payload["attempt_id"],
-            "manifest": file_ref(attempt / "manifest.json", root), "collector": "phase_ledger", "metrics": metrics, "raw_reports": []}, kind="profile")
     return exit_code
 
 

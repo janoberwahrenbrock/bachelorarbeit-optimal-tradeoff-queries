@@ -10,9 +10,9 @@ from otqa.runtime.documents import _at, file_ref, load_document, references, res
 from otqa.runtime.project import verify_binding
 from otqa.runtime.source import loaded_source
 from otqa.runtime.storage import create_directory, publish_json
-from otqa.runtime.validation import verify_result
+from otqa.runtime.validation import journal_policy, verify_result
 
-from .journal import verify_prefix
+from .journal import verify_cursor, verify_prefix
 from .quality import evaluate_quality
 
 
@@ -74,11 +74,6 @@ def verify_materialization(root: Path, receipt: dict) -> None:
             raise DocumentError("Materialization entrypoint is absent from its mapping")
 
 
-def _initial_count(manifest, root):
-    history = manifest["inputs"]["initial_answers"]
-    return len(read_json(resolve_ref(root, history))["answers"]) if history else 0
-
-
 def capture_prefix(root: Path, attempt: dict, destination: Path, *, context) -> dict | None:
     directory = root / attempt["directory"]
     progress_path = directory / "progress.json"
@@ -87,10 +82,12 @@ def capture_prefix(root: Path, attempt: dict, destination: Path, *, context) -> 
     cursor = load_document("progress", progress_path, reference_root=root)
     manifest_path = directory / "manifest.json"
     manifest = load_document("manifest", manifest_path, reference_root=root)
+    if manifest["project_binding"] != context.binding(root):
+        raise DocumentError("Live manifest project binding differs from its enclosing series")
     if cursor["run_id"] != attempt["run_id"] or cursor["attempt_id"] != attempt["attempt_id"] or cursor["process"] != manifest["process"]:
         raise DocumentError("Live cursor identity/process binding differs")
     data = (directory / "events.jsonl").read_bytes()
-    verified = verify_prefix(data, cursor["valid_prefix_bytes"], cursor["valid_prefix_sha256"], cursor["last_good_sequence"], initial_answers=_initial_count(manifest, root))
+    verified = verify_cursor(data, cursor, **journal_policy(manifest, root, manifest_path))
     if verified["query_counts"] != cursor["query_counts"] or verified["run_id"] != attempt["run_id"]:
         raise DocumentError("Live cursor counts do not match its exact journal prefix")
     snapshot = {"schema_version": 1, "snapshot_id": str(uuid4()), "created_at_utc": utc_now(), "run_id": cursor["run_id"], "attempt_id": cursor["attempt_id"],
@@ -133,6 +130,11 @@ def audit_series(request, *, _allow_qualification=False):
             raise DocumentError("More than one active case")
         for relative, sha256 in plan["frozen_files"].items():
             resolve_ref(root, {"path": relative, "sha256": sha256})
+        for job in state["jobs"]:
+            for attempt in job["attempts"]:
+                path = root / attempt["directory"] / "manifest.json"
+                if path.exists() and load_document("manifest", path, reference_root=root)["project_binding"] != plan["project_binding"]:
+                    raise DocumentError("Attempt manifest project binding differs from its immutable series plan")
     record("plan-state-and-frozen-inputs", plan_state)
     record("materialization", lambda: verify_materialization(root, load_document("materialization_receipt", resolve_ref(root, plan["materialization_receipt"]), reference_root=root)))
     jobs = {job["job_id"]: job for job in plan["jobs"]}
@@ -154,7 +156,7 @@ def audit_series(request, *, _allow_qualification=False):
                 continue
             def verify_attempt(job=job, attempt=attempt):
                 path = resolve_ref(root, attempt["result"])
-                result = verify_result(path, root, {"run_id": attempt["run_id"], "attempt_id": attempt["attempt_id"], "problem_id": job["problem_id"], "configuration_id": job["configuration_id"]})
+                result = verify_result(path, root, {"run_id": attempt["run_id"], "attempt_id": attempt["attempt_id"], "problem_id": job["problem_id"], "configuration_id": job["configuration_id"], "project_binding": plan["project_binding"]})
                 if result["execution_status"] != attempt["execution_status"]:
                     raise DocumentError("Controller status differs from immutable result")
                 if result["execution_stage"] == "solver":

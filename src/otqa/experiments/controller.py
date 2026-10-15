@@ -11,11 +11,13 @@ from uuid import uuid4
 from otqa.runtime.codec import DocumentError, digest, read_json, utc_now
 from otqa.runtime.documents import file_ref, load_document, load_execution_profile, load_oracle, materialize_inputs, resolve_ref, verified_closure
 from otqa.runtime.processes import group_status, process_identity
+from otqa.runtime.ownership import verified_process_chain
 from otqa.runtime.profiles import production_resolver
 from otqa.runtime.project import bound_directory, verify_binding
 from otqa.runtime.source import loaded_source, same_source
 from otqa.runtime.storage import create_directory, publish_json
 from otqa.runtime.supervisor import RecoveryBlockedError, finalize_ended_attempt, supervise_attempt, verify_result
+from otqa.runtime.validation import journal_policy
 
 from .suite import ordered_jobs
 
@@ -79,6 +81,7 @@ def load_series(series_dir, *, context, resolver=production_resolver):
         raise DocumentError("Series state does not bind this immutable plan")
     if [job["job_id"] for job in state["jobs"]] != [job["job_id"] for job in plan["jobs"]]:
         raise DocumentError("Series state omitted, added or reordered planned jobs")
+    _verify_manifest_bindings(root, plan, state)
     for relative, sha256 in plan["frozen_files"].items():
         resolve_ref(root, {"path": relative, "sha256": sha256})
     source, _, _ = loaded_source()
@@ -89,6 +92,16 @@ def load_series(series_dir, *, context, resolver=production_resolver):
     if verified.run_purpose != plan["run_purpose"]:
         raise DocumentError("Production cannot run or resume a qualification plan")
     return root, plan, state
+
+
+def _verify_manifest_bindings(root, plan, state):
+    for job in state["jobs"]:
+        for attempt in job["attempts"]:
+            path = root / attempt["directory"] / "manifest.json"
+            if path.exists():
+                manifest = load_document("manifest", path, reference_root=root)
+                if manifest["project_binding"] != plan["project_binding"]:
+                    raise DocumentError("Attempt manifest project binding differs from its immutable series plan")
 
 
 @contextmanager
@@ -114,6 +127,7 @@ def _save(context, root, state):
 def _attempt_payload(root, plan, job, attempt, source):
     config = load_document("config", resolve_ref(root, job["configuration"]), reference_root=root)
     return {"project_root": str(root.parents[len(Path(plan["project_binding"]["relative_root"]).parts) - 1]),
+        "project_binding": plan["project_binding"],
         "reference_root": str(root), "attempt_dir": str(root / attempt["directory"]), "run_id": attempt["run_id"], "attempt_id": attempt["attempt_id"],
         "series_id": plan["series_id"], "job_id": job["job_id"], "problem_id": job["problem_id"], "configuration_id": job["configuration_id"], "source": source,
         "source_inventory": file_ref(root / "source" / "inventory.json", root), "run_purpose": plan["run_purpose"], "materialization_receipt": plan["materialization_receipt"],
@@ -134,27 +148,45 @@ def _recover(root, plan, state, context):
     planned = {job["job_id"]: job for job in plan["jobs"]}
     for job_state in state["jobs"]:
         for attempt in job_state["attempts"]:
+            job = planned[job_state["job_id"]]
+            identities = {"run_id": attempt["run_id"], "attempt_id": attempt["attempt_id"],
+                "series_id": plan["series_id"], "job_id": job["job_id"],
+                "problem_id": job["problem_id"], "configuration_id": job["configuration_id"], "project_binding": plan["project_binding"]}
             if attempt["execution_status"] not in ("launching", "running"):
-                if attempt["result"] is not None:
-                    resolve_ref(root, attempt["result"])
+                if attempt["result"] is None:
+                    raise RecoveryBlockedError("Terminal attempt lacks its immutable result")
+                result = verify_result(resolve_ref(root, attempt["result"]), root, identities)
+                if result["execution_status"] != attempt["execution_status"]:
+                    raise RecoveryBlockedError("Terminal controller status differs from its immutable result")
+                try:
+                    identity, _, _ = verified_process_chain(root, root / attempt["directory"],
+                        identities=identities, intent_ref=attempt["launch_intent"],
+                        registration_ref=attempt["child_registration"], grant_ref=attempt["start_grant"],
+                        recorded_process=attempt["process"])
+                except (OSError, ValueError, KeyError, TypeError) as exc:
+                    raise RecoveryBlockedError("Unverified terminal process/launch chain") from exc
+                if identity is not None and group_status(identity) != "dead":
+                    raise RecoveryBlockedError("A terminal attempt still has a live or unknown group")
+                if identity is None and result["execution_stage"] != "bootstrap":
+                    raise RecoveryBlockedError("Solver attempt lacks an immutable process identity")
                 continue
             directory = root / attempt["directory"]
-            identity = attempt["process"]
-            registration_path = directory / "child_registration.json"
-            if identity is None and registration_path.exists():
-                registration = load_document("child_registration", registration_path, reference_root=root)
-                intent = load_document("launch_intent", resolve_ref(root, attempt["launch_intent"]), reference_root=root)
-                if registration["intent"] != attempt["launch_intent"] or registration["nonce"] != intent["nonce"]:
-                    raise RecoveryBlockedError("Unbound bootstrap registration")
-                identity = registration["process"]
-                attempt["process"] = identity
-                attempt["child_registration"] = file_ref(registration_path, root)
+            try:
+                identity, registration, grant = verified_process_chain(root, directory,
+                    identities=identities, intent_ref=attempt["launch_intent"],
+                    registration_ref=attempt["child_registration"], grant_ref=attempt["start_grant"],
+                    recorded_process=attempt["process"], running=attempt["execution_status"] == "running")
+            except (OSError, ValueError, KeyError, TypeError) as exc:
+                raise RecoveryBlockedError("Unverified prior process/launch chain; no second solver may start") from exc
             if identity is None:
                 # No nonce-bearing registration means the spawn gap cannot be
                 # inferred away merely because a file/process is absent now.
                 raise RecoveryBlockedError("Unregistered spawn remains uncertain; no second solver may start")
             if group_status(identity) != "dead":
                 raise RecoveryBlockedError("A prior solver group is alive or cannot be proven ended")
+            attempt["process"] = identity
+            attempt["child_registration"] = registration
+            attempt["start_grant"] = grant
             payload = _attempt_payload(root, plan, planned[job_state["job_id"]], attempt, source)
             payload["project_root"] = str(context.project_root)
             if not (directory / "result.json").exists():
@@ -251,6 +283,7 @@ def inspect_series(series_dir, *, context, _allow_qualification=False):
     state = load_document("series_state", root / "state.json", reference_root=root)
     if state["plan_sha256"] != file_ref(root / "plan.json", root)["sha256"] or state["series_id"] != plan["series_id"]:
         raise DocumentError("State/plan binding differs")
+    _verify_manifest_bindings(root, plan, state)
     processes, warnings = [], []
     for job in state["jobs"]:
         for attempt in job["attempts"]:
@@ -264,13 +297,11 @@ def inspect_series(series_dir, *, context, _allow_qualification=False):
             progress = None
             progress_path = root / attempt["directory"] / "progress.json"
             if progress_path.exists():
-                from otqa.runtime.journal import verify_prefix
+                from otqa.runtime.journal import verify_cursor
                 cursor = load_document("progress", progress_path, reference_root=root)
                 manifest = load_document("manifest", progress_path.parent / "manifest.json", reference_root=root)
-                history_ref = manifest["inputs"]["initial_answers"]
-                count = len(read_json(resolve_ref(root, history_ref))["answers"]) if history_ref else 0
                 data = (progress_path.parent / "events.jsonl").read_bytes()
-                verified = verify_prefix(data, cursor["valid_prefix_bytes"], cursor["valid_prefix_sha256"], cursor["last_good_sequence"], initial_answers=count)
+                verified = verify_cursor(data, cursor, **journal_policy(manifest, root, progress_path.parent / "manifest.json"))
                 if verified["query_counts"] != cursor["query_counts"] or cursor["run_id"] != attempt["run_id"] or cursor["process"] != manifest["process"]:
                     raise DocumentError("Live status cursor binding differs")
                 progress = cursor

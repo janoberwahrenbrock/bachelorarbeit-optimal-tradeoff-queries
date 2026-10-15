@@ -77,3 +77,20 @@ def test_reference_reader_uses_the_hash_checked_snapshot_after_replacement(tmp_p
     bound = resolve_ref(tmp_path, {"path": "p.json", "sha256": digest(raw)})
     path.write_bytes(encode({**original, "alternatives": [[0.75]]}))
     assert load_document("problem", bound, reference_root=tmp_path) == original
+
+
+def test_reference_reader_rejects_fifo_without_blocking_before_fstat(tmp_path, monkeypatch):
+    import os
+    import otqa.runtime.documents as module
+    fifo = tmp_path / 'race.fifo'
+    os.mkfifo(fifo)
+    original_open = module.os.open
+    observed = []
+    def checked_open(path, flags, *args, **kwargs):
+        assert flags & os.O_NONBLOCK, 'A FIFO replacement must not block before its regular-file check'
+        observed.append(path)
+        return original_open(path, flags, *args, **kwargs)
+    monkeypatch.setattr(module.os, 'open', checked_open)
+    with pytest.raises(DocumentError, match='not a regular file'):
+        resolve_ref(tmp_path, {'path': 'race.fifo', 'sha256': '0' * 64})
+    assert observed == [fifo]

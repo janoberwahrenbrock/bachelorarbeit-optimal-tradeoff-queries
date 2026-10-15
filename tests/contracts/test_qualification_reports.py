@@ -35,3 +35,26 @@ def test_arbitrary_existing_raw_bytes_are_not_qualification(mutation):
         report["observations"][0]["details"] = {}
     with pytest.raises(DocumentError):
         verify_raw_report(encode(report), evidence)
+
+
+def test_qualifier_binds_actual_active_jsonschema_dependency_closure():
+    from tools.qualification.qualify import PRODUCTION_PACKAGES, production_dependency_versions
+    import importlib.metadata
+    versions = production_dependency_versions()
+    assert set(versions) == set(PRODUCTION_PACKAGES)
+    assert {'attrs', 'jsonschema-specifications', 'referencing', 'rpds-py'}.issubset(versions)
+    assert versions == {name: importlib.metadata.version(name) for name in PRODUCTION_PACKAGES}
+
+
+def test_qualifier_rejects_an_unbound_new_active_dependency(monkeypatch):
+    import tools.qualification.qualify as module
+    from types import SimpleNamespace
+    original = module.importlib.metadata.distribution
+    def distribution(name):
+        value = original(name)
+        if name == 'jsonschema':
+            return SimpleNamespace(requires=[*(value.requires or ()), 'unbound-validator-helper>=1'])
+        return value
+    monkeypatch.setattr(module.importlib.metadata, 'distribution', distribution)
+    with pytest.raises(RuntimeError, match='Unbound active production dependency'):
+        module.production_dependency_versions()

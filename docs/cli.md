@@ -98,6 +98,22 @@ otqa benchmark export --series runs/pilot --audit-ref reports/REPORT_UUID/audit.
 Without `--audit-ref`, export creates exactly one fresh audit and uses only that
 snapshot. JSON and CSV preserve every planned job and all attempt-result links.
 
+## Portable archive
+
+After the series and all its groups have ended:
+
+```sh
+otqa benchmark seal --series runs/pilot
+```
+
+This creates a new bundle below `runs/pilot/seals/<UUID>/` and returns its
+inventory FileRef. `--output runs/archive-name/archive_inventory.json` selects a
+different new bundle inside the same project. Nothing is overwritten. A live or
+unknown group, unfinished attempt or invalid raw artifact blocks the operation.
+The inventory is published last; an unfinished destination is not a valid
+archive. [Portable archives](seal.md) explains offline verification and its
+distinction from executable project relocation.
+
 ## Exit status and timing
 
 | Code | Meaning |

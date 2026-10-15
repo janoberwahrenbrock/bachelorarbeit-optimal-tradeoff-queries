@@ -34,17 +34,17 @@ def parser():
     create.add_argument("--suite-id", required=True)
     create.add_argument("--config", type=Path, nargs="+", required=True)
     create.add_argument("--repetitions", type=int, required=True)
-    benchmark = commands.add_parser("benchmark", help="Plan, run, resume, inspect, audit and export saved experiments")
+    benchmark = commands.add_parser("benchmark", help="Plan, run, resume, inspect, audit, export and archive experiments")
     operations = benchmark.add_subparsers(dest="operation", required=True)
     plan = operations.add_parser("plan")
     for option in ("source-root", "suite", "execution-profile", "output"):
         plan.add_argument("--" + option, type=Path, required=True)
     run = operations.add_parser("run")
     run.add_argument("--plan", type=Path, required=True)
-    for operation in ("status", "resume", "audit", "export"):
+    for operation in ("status", "resume", "audit", "export", "seal"):
         sub = operations.add_parser(operation)
         sub.add_argument("--series", type=Path, required=True)
-        if operation == "audit":
+        if operation in ("audit", "seal"):
             sub.add_argument("--output", type=Path)
         elif operation == "export":
             sub.add_argument("--format", choices=("json", "csv"), required=True)
@@ -107,6 +107,11 @@ def main(argv=None):
             output = _path(args.output) if args.output else _path(args.series) / "reports" / str(uuid4()) / "audit.json"
             outcome = app.audit_series(app.AuditRequest(context, _path(args.series), output))
             response, code = {"audit_path": str(outcome.report_path), "status": outcome.report["status"]}, outcome.exit_code
+        elif args.operation == "seal":
+            root = _path(args.series)
+            output = _path(args.output) if args.output else root / "seals" / str(uuid4()) / "archive_inventory.json"
+            inventory = app.seal_series(root, output, context=context)
+            response, code = {"bundle_root": str(output.parent), "inventory": inventory}, 0
         else:
             from otqa.runtime.documents import file_ref, resolve_ref
             root = _path(args.series)

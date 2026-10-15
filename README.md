@@ -36,8 +36,8 @@ print(result.termination_reason, result.query_counts.answered_total)
 
 ## Dokumentation
 
-- [Algorithmus](docs/algorithm.md), [Parameter](docs/configuration.md) und [Python-API](docs/python_api.md)
-- [Benchmarkverfahren](docs/benchmarks.md), [CLI](docs/cli.md) und [gespeicherte Artefakte](docs/artifacts.md)
+- [Architektur](docs/architecture.md), [Algorithmus](docs/algorithm.md), [Parameter](docs/configuration.md) und [Python-API](docs/python_api.md)
+- [Benchmarkverfahren](docs/benchmarks.md), [CLI](docs/cli.md), [gespeicherte Artefakte](docs/artifacts.md) und [portable Archive](docs/seal.md)
 - [Numerik](docs/numerical_behavior.md), [Laufzeitprüfung](docs/performance.md) und [Entwicklung](docs/development.md)
 - [Vollständige Konfigurationsbeispiele](examples/README.md)
 

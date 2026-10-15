@@ -56,3 +56,87 @@ def test_regenerating_a_dataset_does_not_overwrite(tmp_path):
     with pytest.raises(DocumentError):
         generate_dataset(request)
     assert load_document("dataset", first.dataset_path, reference_root=context.project_root) == first.dataset
+
+
+def test_dataset_destination_race_cannot_replace_empty_directory(tmp_path, monkeypatch):
+    import otqa.experiments.dataset as module
+    context = context_at(tmp_path)
+    target = context.project_root / 'inputs/datasets/race'
+    original = module.create_directory
+    def race(context, path, **kwargs):
+        target.mkdir(parents=True)
+        return original(context, path, **kwargs)
+    monkeypatch.setattr(module, 'create_directory', race)
+    with pytest.raises(DocumentError, match='already exists'):
+        generate_dataset(GenerateDatasetRequest(context, 'race', 5, (2,), (2,), 1, target))
+    assert target.is_dir() and list(target.iterdir()) == []
+
+
+def test_dataset_payload_failure_never_publishes_commit_marker(tmp_path, monkeypatch):
+    import otqa.experiments.dataset as module
+    context = context_at(tmp_path)
+    target = context.project_root / 'inputs/datasets/partial'
+    original = module.publish_bytes
+    calls = 0
+    def fail(context, path, data, **kwargs):
+        nonlocal calls
+        calls += 1
+        if calls == 2:
+            raise OSError('injected payload failure')
+        return original(context, path, data, **kwargs)
+    monkeypatch.setattr(module, 'publish_bytes', fail)
+    request = GenerateDatasetRequest(context, 'partial', 5, (2,), (2,), 1, target)
+    with pytest.raises(OSError, match='injected'):
+        generate_dataset(request)
+    assert (target / 'problems/d2-m2-c000000.json').is_file()
+    assert not (target / 'dataset.json').exists()
+    with pytest.raises(FileNotFoundError):
+        load_document('dataset', target / 'dataset.json', reference_root=context.project_root)
+    with pytest.raises(DocumentError, match='already exists'):
+        generate_dataset(request)
+
+
+def _suite_request(context):
+    from otqa.application_types import CreateSuiteRequest
+    from otqa.runtime.storage import publish_json
+    dataset = generate_dataset(GenerateDatasetRequest(context, 'suite-data', 3, (2,), (2,), 1, context.project_root / 'inputs/datasets/suite-data'))
+    config_path = context.project_root / 'inputs/config.json'
+    config = {'schema_version': 1, 'configuration_id': 'fixed',
+              'algorithm': {'query_strategy': 'fixed', 'depth': 1, 'higher_depth_query_source': 'both', 'grid_size': 5,
+                            'planning_evaluation': 'candidate_count', 'stopping': {'rule': 'single_candidate'}},
+              'budget': {'max_queries': None},
+              'execution': {'workers': 1, 'native_threads': 1, 'start_method': 'forkserver', 'cache_policy_id': 'bounded_v1', 'case_timeout_seconds': None},
+              'recording': {'durability': 'per_answer', 'trace_level': 'standard', 'profile': False, 'telemetry_failure_policy': 'continue'}}
+    publish_json(context, config_path, config, kind='config', namespace='inputs')
+    return CreateSuiteRequest(context, context.project_root, 'suite-race', dataset.dataset_path, (config_path,),
+                              ({'configuration_id': 'fixed', 'case_ids': [dataset.dataset['cases'][0]['case_id']]},), 1,
+                              context.project_root / 'inputs/suites/suite-race/suite.json')
+
+
+def test_suite_destination_race_cannot_replace_empty_directory(tmp_path, monkeypatch):
+    import otqa.experiments.suite as module
+    context = context_at(tmp_path)
+    request = _suite_request(context)
+    original = module.create_directory
+    def race(context, path, **kwargs):
+        path.mkdir(parents=True)
+        return original(context, path, **kwargs)
+    monkeypatch.setattr(module, 'create_directory', race)
+    with pytest.raises(DocumentError, match='already exists'):
+        module.create_suite(request)
+    assert list(request.output_path.parent.iterdir()) == []
+
+
+def test_suite_publication_failure_is_not_a_committed_suite(tmp_path, monkeypatch):
+    import otqa.experiments.suite as module
+    context = context_at(tmp_path)
+    request = _suite_request(context)
+    def fail(*args, **kwargs):
+        raise OSError('injected suite publication failure')
+    monkeypatch.setattr(module, 'publish_json', fail)
+    with pytest.raises(OSError, match='injected'):
+        module.create_suite(request)
+    assert request.output_path.parent.is_dir()
+    assert not request.output_path.exists()
+    with pytest.raises(FileNotFoundError):
+        load_document('suite', request.output_path, reference_root=context.project_root)

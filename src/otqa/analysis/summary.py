@@ -6,11 +6,11 @@ import statistics
 from collections import defaultdict
 from pathlib import Path
 
-from otqa.runtime.codec import DocumentError, read_json
+from otqa.runtime.codec import DocumentError
 from otqa.runtime.documents import load_document, resolve_ref
-from otqa.runtime.validation import verify_result
+from otqa.runtime.validation import journal_policy, verify_result
 
-from .journal import verify_prefix
+from .journal import verify_cursor
 
 
 def distribution(values):
@@ -38,9 +38,9 @@ def build_summary(root: Path, audit: dict, audit_ref: dict) -> dict:
         snapshot = load_document("partial_snapshot", resolve_ref(root, ref), reference_root=root)
         data = (root / snapshot["journal_path"]).read_bytes()
         manifest = load_document("manifest", resolve_ref(root, snapshot["manifest"]), reference_root=root)
-        initial_ref = manifest["inputs"]["initial_answers"]
-        initial_count = len(read_json(resolve_ref(root, initial_ref))["answers"]) if initial_ref else 0
-        verified = verify_prefix(data, snapshot["valid_prefix_bytes"], snapshot["valid_prefix_sha256"], snapshot["last_good_sequence"], initial_answers=initial_count)
+        if manifest["project_binding"] != plan["project_binding"]:
+            raise DocumentError("Partial manifest project binding differs from its immutable series plan")
+        verified = verify_cursor(data, snapshot, **journal_policy(manifest, root, resolve_ref(root, snapshot["manifest"])))
         if verified["query_counts"] != snapshot["query_counts"]:
             raise DocumentError("Immutable partial snapshot counts differ")
         prefixes[(snapshot["run_id"], snapshot["attempt_id"])] = snapshot
@@ -52,7 +52,7 @@ def build_summary(root: Path, audit: dict, audit_ref: dict) -> dict:
         for attempt in job_state["attempts"]:
             if attempt["result"] is not None:
                 document = verify_result(resolve_ref(root, attempt["result"]), root,
-                    {"run_id": attempt["run_id"], "attempt_id": attempt["attempt_id"], "problem_id": job["problem_id"], "configuration_id": job["configuration_id"]})
+                    {"run_id": attempt["run_id"], "attempt_id": attempt["attempt_id"], "problem_id": job["problem_id"], "configuration_id": job["configuration_id"], "project_binding": plan["project_binding"]})
                 result_refs.append(attempt["result"])
                 results.append((attempt, document))
         terminal = results[-1] if results and job_state["status"] in ("completed", "failed", "interrupted") else None

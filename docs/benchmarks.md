@@ -92,3 +92,10 @@ distinguishable from unique problem instances.
 API call time includes synchronous provider, recorder, observer and worker
 lifecycle costs. Case time and controller time have narrower documented endpoints
 and do not substitute for an externally measured complete CLI duration.
+
+Generated dataset and suite directories are reserved with exclusive directory
+creation. An existing directory, including an empty directory created concurrently,
+is never replaced. The final `dataset.json` or `suite.json` is the commit marker,
+published only after its payload files and directories are durable. A failed
+creation may retain forensic payload files without that final entrypoint; it is
+not a usable dataset/suite and is not silently retried or overwritten.

@@ -94,3 +94,20 @@ Native qualification raw reports have method-specific required observations and
 pass rules. Existing files or a self-declared top-level passed flag do not suffice;
 unknown, incomplete, incorrectly bound or failed evidence is rejected. Analytical
 and format controls remain distinct from actual installed/process checks.
+
+## Diagnostic collection
+
+`recording.profile=true` enables cProfile only in the CaseProcess around the
+public solver call. `profile.json` binds the manifest and the actual binary
+`profiles/case-api.pstats` plus its readable text report. The report identifies
+the CaseProcess PID. It records no worker profiles or cumulative worker CPU.
+Function cumulative times overlap; they are not an exclusive phase breakdown.
+Unmeasured detailed timing fields remain null. Unprofiled performance runs use
+`profile=false` and never construct or enable this profiler.
+
+A terminal stderr can receive a small optional progress display. Redirected logs
+are silent. A failed display produces a durable `telemetry/errorNNNNNN.json` and
+appears in `result.json.telemetry_errors`. `continue` disables the failed display
+and continues the same solve; `abort` propagates an observer failure. Failure to
+publish the required diagnostic remains fatal under either policy. The display
+never handles required recorder errors.

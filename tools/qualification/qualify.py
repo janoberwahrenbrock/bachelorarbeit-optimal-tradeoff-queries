@@ -10,6 +10,7 @@ import importlib.metadata
 import json
 import math
 import os
+import re
 import subprocess
 import sys
 import time
@@ -26,6 +27,46 @@ from otqa.runtime.project import load_project_context
 from otqa.runtime.qualification_evidence import METHOD_CASES
 from otqa.runtime.source import loaded_source
 from otqa.runtime.storage import create_directory, publish_bytes, publish_json
+
+
+PRODUCTION_PACKAGES = ("bachelorarbeit-optimal-tradeoff-queries", "numpy", "scipy", "jsonschema",
+                       "attrs", "jsonschema-specifications", "referencing", "rpds-py")
+
+
+def production_dependency_versions():
+    """Bind the full active production closure for supported Python 3.13/3.14.
+
+    Optional extras are inactive. The only active-installation Python marker in
+    this fixed metadata family is referencing's pre-3.13 typing-extensions edge.
+    Unexpected marker syntax or new dependencies require a deliberate harness
+    review, rather than silently omitting an unbound validator dependency.
+    """
+    if sys.version_info[:2] not in ((3, 13), (3, 14)):
+        raise RuntimeError("The production dependency closure is qualified only for Python 3.13/3.14")
+    allowed, visited, pending = set(PRODUCTION_PACKAGES), set(), [PRODUCTION_PACKAGES[0]]
+    while pending:
+        name = pending.pop()
+        if name in visited:
+            continue
+        if name not in allowed:
+            raise RuntimeError(f"Unbound active production dependency: {name}")
+        visited.add(name)
+        for requirement in importlib.metadata.distribution(name).requires or ():
+            dependency, separator, marker = requirement.partition(";")
+            if separator:
+                marker = marker.strip()
+                if re.search(r'''\bextra\s*==\s*["'][^"']+["']''', marker) and " or " not in marker:
+                    continue
+                if re.fullmatch(r'''python_version\s*<\s*["']3\.13["']''', marker):
+                    continue  # Supported interpreters are both >=3.13.
+                raise RuntimeError(f"Unreviewed production dependency marker: {requirement}")
+            match = re.match(r"\s*([A-Za-z0-9][A-Za-z0-9._-]*)", dependency)
+            if match is None:
+                raise RuntimeError(f"Invalid production dependency metadata: {requirement}")
+            pending.append(re.sub(r"[-_.]+", "-", match.group(1)).lower())
+    if visited != allowed:
+        raise RuntimeError("Declared production package set differs from the installed active dependency closure")
+    return {name: importlib.metadata.version(name) for name in PRODUCTION_PACKAGES}
 
 
 class Controls:
@@ -84,9 +125,9 @@ class Controls:
             schemas = list((Path(otqa.__file__).parent / "schemas").glob("*.schema.json"))
             assert len(schemas) == 28
             return {"document_validators": 27, "schema_resources": len(schemas)}
-        versions = {name: importlib.metadata.version(name) for name in self.profile["packages"]}
+        versions = production_dependency_versions()
         assert versions == self.profile["packages"]
-        return {"packages": versions, "python": self.profile["python_version"]}
+        return {"packages": versions, "python": self.profile["python_version"], "active_production_closure_verified": True}
 
     def backend_conformance(self, case):
         import numpy as np
@@ -337,8 +378,7 @@ def qualify(project_root: Path, output: Path, scope: str):
         os.environ[key] = "1"
     from otqa.numerics.profile import actual_backend_capabilities, resolved_cache_policy, resolved_numerical_profile
     import platform
-    package_names = ("bachelorarbeit-optimal-tradeoff-queries", "numpy", "scipy", "jsonschema")
-    versions = {name: importlib.metadata.version(name) for name in package_names}
+    versions = production_dependency_versions()
     lock_bytes = "".join(f"{name}=={versions[name]}\n" for name in sorted(versions)).encode()
     publish_bytes(context, output / "environment-lock.txt", lock_bytes)
     profile = {"schema_version": 1, "profile_id": "native-" + uuid4().hex, "platform_family": "linux" if sys.platform.startswith("linux") else "macos",

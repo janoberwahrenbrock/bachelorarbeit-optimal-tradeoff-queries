@@ -47,7 +47,7 @@ def resolve_ref(root: Path, reference: dict) -> Path:
         path.relative_to(base)
     except ValueError as exc:
         raise DocumentError("Reference escapes its explicit root") from exc
-    descriptor = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+    descriptor = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
     try:
         if not stat.S_ISREG(os.fstat(descriptor).st_mode):
             raise DocumentError("Referenced artifact is not a regular file")

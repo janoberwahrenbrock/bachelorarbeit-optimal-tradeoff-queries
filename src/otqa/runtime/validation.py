@@ -7,6 +7,15 @@ from .schema import validate
 from .storage import empty_counts
 
 
+def journal_policy(manifest: dict, root: Path, manifest_path: Path) -> dict:
+    """Resolve the stored actual policy inputs for every shared prefix reader."""
+    problem = load_document("problem", resolve_ref(root, manifest["inputs"]["problem"]), reference_root=root)
+    history = manifest["inputs"]["initial_answers"]
+    initial = len(load_document("answer_history", resolve_ref(root, history), reference_root=root)["answers"]) if history else 0
+    return {"manifest_sha256": file_ref(manifest_path, root)["sha256"], "initial_answers": initial, "algorithm": manifest["effective_algorithm"],
+            "budget": manifest["effective_budget"], "alternative_ids": problem["alternative_ids"]}
+
+
 def verify_result(path: Path, root: Path, payload: dict) -> dict:
     result = validate("result", read_json(path))
     for key in ("run_id", "attempt_id", "problem_id", "configuration_id"):
@@ -34,6 +43,8 @@ def verify_result(path: Path, root: Path, payload: dict) -> dict:
                 raise DocumentError("Manifest and result attempt identity differ")
         if "source" in payload and payload["source"] != manifest["source"]:
             raise DocumentError("Manifest source differs from the actually loaded immutable build stamp")
+        if "project_binding" in payload and manifest["project_binding"] != payload["project_binding"]:
+            raise DocumentError("Manifest project binding differs from its enclosing run or series")
         problem = load_document("problem", resolve_ref(root, manifest["inputs"]["problem"]), reference_root=root)
         configuration = load_document("config", resolve_ref(root, manifest["inputs"]["configuration"]), reference_root=root)
         if problem["problem_id"] != result["problem_id"] or configuration["configuration_id"] != result["configuration_id"]:
@@ -52,7 +63,8 @@ def verify_result(path: Path, root: Path, payload: dict) -> dict:
         if journal["uncommitted_suffix_bytes"] != len(data) - journal["valid_prefix_bytes"] or journal["trailing_partial_line"] != bool(data and not data.endswith(b"\n")):
             raise DocumentError("Journal suffix metadata differs from actual raw bytes")
         from .journal import mathematically_equal, verify_prefix
-        prefix = verify_prefix(data, journal["valid_prefix_bytes"], journal["valid_prefix_sha256"], journal["last_good_sequence"], initial_answers=initial_count)
+        prefix = verify_prefix(data, journal["valid_prefix_bytes"], journal["valid_prefix_sha256"], journal["last_good_sequence"],
+            initial_answers=initial_count, algorithm=manifest["effective_algorithm"], budget=manifest["effective_budget"], alternative_ids=problem["alternative_ids"])
         if prefix["events"][0]["payload"]["manifest_sha256"] != file_ref(manifest_path, root)["sha256"]:
             raise DocumentError("Journal start does not bind this manifest")
         if prefix["query_counts"] != result["query_counts"]:
@@ -106,6 +118,10 @@ def verify_result(path: Path, root: Path, payload: dict) -> dict:
             selected = solver["selected_candidate_id"]
             if selected is not None and (selected not in alternative_ids or selected not in solver["final_state"]["candidate_ids"]):
                 raise DocumentError("Selected candidate is not in the actual final candidate set")
+            from .journal import actual_stop
+            _, policy_selection = actual_stop(solver["final_state"], algorithm, manifest["effective_budget"], problem["alternative_ids"])
+            if selected != policy_selection:
+                raise DocumentError("Selected candidate differs from actual maximum-share/original-index stopping selection")
             if reason == "exact_single_candidate" and (not solver["solved"] or not solver["exactly_solved"] or len(solver["final_state"]["candidate_ids"]) != 1):
                 raise DocumentError("Singleton result is inconsistent")
             if reason == "volume_confidence" and (not solver["solved"] or solver["exactly_solved"] or len(solver["final_state"]["candidate_ids"]) < 2):
@@ -122,7 +138,7 @@ def verify_result(path: Path, root: Path, payload: dict) -> dict:
             for result_key, state_key in (("selected_candidate_volume", "candidate_volumes"), ("selected_candidate_volume_share", "candidate_volume_shares")):
                 mapping = solver["final_state"][state_key]
                 expected = mapping.get(selected) if mapping is not None and selected is not None else None
-                if solver[result_key] != expected:
+                if not mathematically_equal(solver[result_key], expected):
                     raise DocumentError("Selected candidate volume/share differs from the final state")
     if result["numeric_hex"] != mathematical_hex(result["solver_result"], "/solver_result"):
         raise DocumentError("Result mathematical binary64 evidence differs")

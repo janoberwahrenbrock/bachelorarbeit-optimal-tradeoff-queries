@@ -1,12 +1,10 @@
-"""Independent per-case seed streams and atomic new native datasets."""
+"""Independent per-case seed streams and exclusively reserved native datasets."""
 from __future__ import annotations
 
-import os
 from pathlib import Path
-from uuid import uuid4
 
 from otqa.runtime.codec import DocumentError, digest, encode
-from otqa.runtime.project import bound_directory, identifier
+from otqa.runtime.project import identifier
 from otqa.runtime.schema import validate
 from otqa.runtime.storage import create_directory, publish_bytes
 
@@ -40,8 +38,10 @@ def generate_dataset(request):
         raise DocumentError("Dataset output already exists")
     # Validation intentionally precedes the only numerical dependency import.
     import numpy as np
-    staging = destination.parent / (".staging-" + uuid4().hex)
-    create_directory(context, staging, namespace="inputs")
+    # mkdirat is the no-overwrite reservation: even an empty concurrent target
+    # must cause failure. The final dataset.json is the bundle commit marker;
+    # interrupted payload files remain inspectable without a readable dataset.
+    create_directory(context, destination, namespace="inputs")
     cases, artifacts, seed_records = [], [], []
     for dimensions in request.objective_counts:
         for alternatives in request.alternative_counts:
@@ -60,7 +60,7 @@ def generate_dataset(request):
                     validate(kind, data)
                     relative = f"{kind}s/{case_id}.json"
                     raw = encode(data)
-                    publish_bytes(context, staging / relative, raw, namespace="inputs")
+                    publish_bytes(context, destination / relative, raw, namespace="inputs")
                     reference = {"path": (destination / relative).relative_to(context.project_root).as_posix(), "sha256": digest(raw)}
                     refs[kind] = reference
                     artifacts.append(reference)
@@ -73,14 +73,6 @@ def generate_dataset(request):
             "matrix_distribution": "Uniform[0,1)", "case_seed_provenance": seed_records}, "cases": cases}
     validate("dataset", dataset)
     dataset_bytes = encode(dataset)
-    publish_bytes(context, staging / "dataset.json", dataset_bytes, namespace="inputs")
-    # The only visible final bundle appears after every file and directory fsync.
-    with bound_directory(context, destination.parent, namespace="inputs") as parent:
-        if destination.exists():
-            raise DocumentError("Dataset destination appeared during generation")
-        # renameat is safe under the held parent; a conflicting nonempty target
-        # cannot be merged. Both operation names are fresh private directories.
-        os.rename(staging.name, destination.name, src_dir_fd=parent, dst_dir_fd=parent)
-        os.fsync(parent)
+    publish_bytes(context, destination / "dataset.json", dataset_bytes, namespace="inputs")
     dataset_ref = {"path": (destination / "dataset.json").relative_to(context.project_root).as_posix(), "sha256": digest(dataset_bytes)}
     return DatasetOutcome(destination / "dataset.json", dataset, tuple(artifacts + [dataset_ref]), context.project_root)

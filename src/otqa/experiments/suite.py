@@ -1,13 +1,11 @@
 """Explicit suite selections; deterministic serial rotated job order."""
 from __future__ import annotations
 
-import os
 from pathlib import Path
-from uuid import uuid4
 
 from otqa.runtime.codec import DocumentError
 from otqa.runtime.documents import file_ref, load_document, resolve_ref, verified_closure
-from otqa.runtime.project import bound_directory, identifier
+from otqa.runtime.project import identifier
 from otqa.runtime.schema import validate
 from otqa.runtime.storage import create_directory, publish_json
 
@@ -40,14 +38,10 @@ def create_suite(request):
     entries = {"dataset": ("dataset", request.dataset_path)}
     entries.update({f"config{index}": ("config", path) for index, path in enumerate(request.configuration_paths)})
     verified_closure(root, entries)
-    staging = destination.parent / (".staging-" + uuid4().hex)
-    create_directory(context, staging, namespace="inputs")
-    publish_json(context, staging / "suite.json", suite, kind="suite", namespace="inputs")
-    with bound_directory(context, destination.parent, namespace="inputs") as parent:
-        if destination.exists():
-            raise DocumentError("Suite destination appeared during preparation")
-        os.rename(staging.name, destination.name, src_dir_fd=parent, dst_dir_fd=parent)
-        os.fsync(parent)
+    # Reserve the exact destination without replacing even an empty directory.
+    # suite.json is published last and is the only committed suite entrypoint.
+    create_directory(context, destination, namespace="inputs")
+    publish_json(context, destination / "suite.json", suite, kind="suite", namespace="inputs")
     return SuiteOutcome(destination / "suite.json", suite, file_ref(destination / "suite.json", root), root)
 
 

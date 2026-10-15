@@ -10,18 +10,32 @@ from uuid import uuid4
 
 from .case import bootstrap_result, error_wire, timings
 from .codec import DocumentError, digest, read_json, utc_now
-from .documents import file_ref, load_answer_history, load_config_document, load_execution_profile, load_oracle, load_problem, materialize_inputs, resolve_ref, verified_closure
+from .documents import file_ref, load_answer_history, load_config_document, load_execution_profile, load_oracle, load_problem, materialize_inputs, verified_closure
 from .processes import group_status, identity_status, process_identity, terminate_owned_group
 from .profiles import THREAD_VARIABLES, production_resolver
 from .schema import validate
 from .source import loaded_source
 from .storage import create_directory, publish_json
 from .project import bound_directory
-from .validation import verify_result
+from .validation import journal_policy, verify_result
 
 
 class RecoveryBlockedError(RuntimeError):
     """Existing process ownership or durable stage is uncertain; no solver starts."""
+
+
+def _confirm_group_end(identity, child):
+    """Bounded read retries; no unknown group is signaled or assumed absent."""
+    state = group_status(identity, owned_child=child)
+    for _ in range(100):
+        if state == "dead":
+            return
+        # On macOS the exact Popen child may already have exited while its
+        # forkserver/tracker is still leaving the group. That transient state
+        # is unknown, so retry the observation without granting any new start.
+        time.sleep(0.01)
+        state = group_status(identity, owned_child=child)
+    raise RecoveryBlockedError("Case ended but its complete process group is still live or unknown")
 
 
 def _validate_answer_selection(request, problem):
@@ -64,6 +78,7 @@ def prepare_standalone(request, *, resolver=production_resolver) -> dict:
     publish_json(context, output / "source" / "build-provenance.json", provenance, kind="source_build_provenance")
     refs = receipt["entrypoints"]
     return {"project_root": str(context.project_root), "reference_root": str(output), "attempt_dir": str(output),
+        "project_binding": context.binding(output),
         "run_id": str(uuid4()), "attempt_id": "attempt0001", "series_id": None, "job_id": None,
         "problem_id": problem["problem_id"], "configuration_id": config["configuration_id"], "source": source,
         "source_inventory": file_ref(output / "source" / "inventory.json", output), "run_purpose": verified.run_purpose,
@@ -188,16 +203,8 @@ def supervise_attempt(payload: dict, *, context, on_phase=None):
             log_stream.close()
 
     if identity is not None:
-        # There is deliberately no invented cleanup timeout. A live/unknown own
-        # group blocks the next case. Normal forkserver helpers exit on owner EOF.
-        state = group_status(identity, owned_child=child)
-        for _ in range(100):
-            if state != "alive":
-                break
-            time.sleep(0.01)
-            state = group_status(identity, owned_child=child)
-        if state != "dead":
-            raise RecoveryBlockedError("Case ended but its complete process group is still live or unknown")
+        # Retrying a read is not a kill deadline or a successful cleanup claim.
+        _confirm_group_end(identity, child)
     if not (attempt / "result.json").exists():
         if not release_sent:
             result = bootstrap_result(payload, started, None,
@@ -226,12 +233,12 @@ def finalize_ended_attempt(payload, *, context, interruption=None):
         publish_json(context, attempt / "result.json", result, kind="result")
         return
     cursor = validate("progress", read_json(attempt / "progress.json"))
-    from .journal import verify_prefix
+    from .journal import verify_cursor
     data = (attempt / "events.jsonl").read_bytes()
     manifest = validate("manifest", read_json(attempt / "manifest.json"))
-    history_ref = manifest["inputs"]["initial_answers"]
-    initial_count = len(read_json(resolve_ref(root, history_ref))["answers"]) if history_ref else 0
-    verified = verify_prefix(data, cursor["valid_prefix_bytes"], cursor["valid_prefix_sha256"], cursor["last_good_sequence"], initial_answers=initial_count)
+    if manifest["project_binding"] != payload.get("project_binding", context.binding(root)):
+        raise RecoveryBlockedError("Stored manifest project binding differs from this run")
+    verified = verify_cursor(data, cursor, **journal_policy(manifest, root, attempt / "manifest.json"))
     if verified["query_counts"] != cursor["query_counts"] or cursor["run_id"] != payload["run_id"] or cursor["attempt_id"] != payload["attempt_id"]:
         raise RecoveryBlockedError("Stored cursor is not a valid binding for this run")
     result = {"schema_version": 1, "run_id": payload["run_id"], "attempt_id": payload["attempt_id"], "problem_id": payload["problem_id"], "configuration_id": payload["configuration_id"],

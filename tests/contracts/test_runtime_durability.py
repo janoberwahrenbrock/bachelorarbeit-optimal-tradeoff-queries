@@ -88,3 +88,35 @@ def test_unknown_start_cannot_be_recovered_from_raw_start_line(tmp_path):
     with pytest.raises(RecoveryBlockedError, match="without a confirmed start cursor"):
         finalize_ended_attempt(payload, context=store.context)
     assert not (store.attempt_dir / "result.json").exists()
+
+
+def test_owned_child_cleanup_retries_transient_unknown_until_proven_dead(monkeypatch):
+    import otqa.runtime.supervisor as module
+    child = object()
+    identity = {'pid': 15}
+    observations = iter(('unknown', 'alive', 'unknown', 'dead'))
+    seen = []
+    def status(current, *, owned_child):
+        assert current is identity and owned_child is child
+        value = next(observations)
+        seen.append(value)
+        return value
+    monkeypatch.setattr(module, 'group_status', status)
+    monkeypatch.setattr(module.time, 'sleep', lambda seconds: None)
+    module._confirm_group_end(identity, child)
+    assert seen == ['unknown', 'alive', 'unknown', 'dead']
+
+
+@pytest.mark.parametrize('status', ['unknown', 'alive'])
+def test_unproven_cleanup_stays_blocked_after_bounded_read_retries(monkeypatch, status):
+    import otqa.runtime.supervisor as module
+    observed = []
+    def group_status(*args, **kwargs):
+        observed.append(status)
+        return status
+    monkeypatch.setattr(module, 'group_status', group_status)
+    monkeypatch.setattr(module.time, 'sleep', lambda seconds: None)
+    monkeypatch.setattr(module, 'terminate_owned_group', lambda *args, **kwargs: pytest.fail('Read retry must not signal a group'))
+    with pytest.raises(module.RecoveryBlockedError, match='live or unknown'):
+        module._confirm_group_end({'pid': 15}, object())
+    assert len(observed) == 101

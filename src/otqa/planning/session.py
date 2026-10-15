@@ -7,8 +7,8 @@ existing arithmetic order of its method. This module performs no file IO.
 
 from __future__ import annotations
 
-from collections import OrderedDict, deque
-from concurrent.futures import ProcessPoolExecutor
+from collections import OrderedDict
+from concurrent.futures import FIRST_COMPLETED, ProcessPoolExecutor, wait
 from concurrent.futures.process import BrokenProcessPool
 from dataclasses import dataclass, replace
 import math
@@ -587,23 +587,81 @@ class PlannerSession:
                     result = self._evaluate_one(state, task.query, depth, task.source, mode)
                 results.append(result)
             return tuple(results)
-        # Consume in inventory order, with at most workers pending results.
-        # A slower first root can never cause an unbounded capture result queue.
-        pool, pending, results = self._pool(), deque(), []
-        iterator = iter(tasks)
-        for _ in range(min(self.execution.workers, len(tasks))):
-            pending.append(self._submit(pool, next(iterator)))
-        while pending:
-            received = self._receive(pending.popleft().result, options)
-            if options is not None:
-                result, blocks = received
-                deliver(options, blocks)
-            else:
-                result = received
-            results.append(result)
-            task = next(iterator, None)
-            if task is not None:
-                pending.append(self._submit(pool, task))
+        # Refill a completed slot even when an earlier query is still running.
+        # Only mathematical values remain in this inventory-ordered array;
+        # capture payloads are delivered and released before another submit.
+        pool, pending = self._pool(), {}
+        results, errors = [None] * len(tasks), {}
+        next_index = 0
+
+        def submit_next():
+            nonlocal next_index
+            index = next_index
+            next_index += 1
+            try:
+                pending[self._submit(pool, tasks[index])] = index
+            except Exception as error:
+                errors[index] = error
+
+        try:
+            for _ in range(min(self.execution.workers, len(tasks))):
+                submit_next()
+                if errors:
+                    break
+            while pending:
+                completed, _ = wait(pending, return_when=FIRST_COMPLETED)
+                while completed:
+                    # Several errors can become ready together. Inspect them
+                    # in logical order rather than choosing by delivery time.
+                    future = min(completed, key=pending.__getitem__)
+                    completed.remove(future)
+                    index = pending.pop(future)
+                    try:
+                        received = self._receive(future.result, options)
+                        if options is not None:
+                            result, blocks = received
+                            deliver(options, blocks)
+                            results[index] = result
+                            del result, blocks
+                        else:
+                            results[index] = received
+                        del received
+                    except EvaluationCaptureError:
+                        # A failed sink invalidates capture immediately.
+                        raise
+                    except Exception as error:
+                        errors[index] = error
+                        if options is not None and hasattr(error, "evaluation_capture_blocks"):
+                            # _receive has synchronously delivered these blocks.
+                            # Retaining them on a deferred mathematical error
+                            # would exceed the bounded capture transport scope.
+                            error.evaluation_capture_blocks = ()
+                            error.evaluation_capture_delivered = True
+                    finally:
+                        # Future._result owns the transport tuple until this
+                        # final reference is removed. Do so before refilling.
+                        del future
+                    if errors:
+                        earliest_error = min(errors)
+                        for outstanding in tuple(pending):
+                            if pending[outstanding] > earliest_error and outstanding.cancel():
+                                pending.pop(outstanding)
+                    elif next_index < len(tasks):
+                        submit_next()
+            if errors:
+                # Earlier pending tasks have also been inspected, preserving
+                # inventory-order mathematical error priority.
+                raise errors[min(errors)]
+        except BaseException as error:
+            for future in pending:
+                future.cancel()
+            try:
+                pool.shutdown(wait=True, cancel_futures=True)
+            except BaseException as cleanup_error:
+                error.add_note(f"root pool cleanup also failed: {cleanup_error}")
+            finally:
+                self._executor = None
+            raise
         return tuple(results)
 
     def plan(self, state: PreparedState) -> PlanningDecision | NoQuery:
