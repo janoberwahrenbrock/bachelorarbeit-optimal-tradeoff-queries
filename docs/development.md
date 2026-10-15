@@ -26,7 +26,8 @@ Konfigurationen ändern keine Parameter verdeckt: Strategie, Tiefe, Grid, Queryq
 
 Für dauerhafte Läufe kann eine eigene `.venv-runtime` das gebaute Wheel enthalten.
 `requirements/runtime-macos-py313.txt` bindet die auf dem Mac tatsächlich geprüften
-Produktionsabhängigkeiten; eine andere Umgebung benötigt eigene Qualifizierung.
+Produktionsabhängigkeiten. `requirements/runtime-linux-py314.txt` enthält die
+getrennt geprüfte Linux-Umgebung. Eine andere Umgebung benötigt eigene Qualifizierung.
 
 ```sh
 uv venv --python 3.13 .venv-runtime

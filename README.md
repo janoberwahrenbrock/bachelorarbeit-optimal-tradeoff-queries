@@ -14,6 +14,7 @@ Benötigt werden Python 3.13 oder 3.14 und eine eigene virtuelle Umgebung. Eine 
 
 ```sh
 python3 -m venv .venv
+.venv/bin/python -m pip install pip==26.2.1
 .venv/bin/python -m pip install -e . --group dev
 .venv/bin/python -m pytest
 .venv/bin/otqa --help

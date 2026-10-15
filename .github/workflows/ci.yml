@@ -24,7 +24,7 @@ jobs:
       - name: Unit and contract tests
         run: python -m pytest
       - name: Lint
-        run: python -m ruff check src tests
+        run: python -m ruff check src tests tools/validation/installed_smoke.py
       - name: Build source and wheel distributions
         run: python -m build
       - name: Install wheel outside checkout
@@ -32,6 +32,9 @@ jobs:
         run: |
           python -m venv "$RUNNER_TEMP/otqa-wheel"
           "$RUNNER_TEMP/otqa-wheel/bin/python" -m pip install dist/*.whl
+          cp tools/validation/installed_smoke.py "$RUNNER_TEMP/otqa-installed-smoke.py"
           cd "$RUNNER_TEMP"
           "$RUNNER_TEMP/otqa-wheel/bin/otqa" --help
-          "$RUNNER_TEMP/otqa-wheel/bin/python" -c 'import otqa; from otqa.runtime.source import loaded_source; loaded_source(); print(otqa.__version__)'
+          OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 \
+            VECLIB_MAXIMUM_THREADS=1 BLIS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 \
+            "$RUNNER_TEMP/otqa-wheel/bin/python" -I "$RUNNER_TEMP/otqa-installed-smoke.py"

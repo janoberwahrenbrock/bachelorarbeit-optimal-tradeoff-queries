@@ -48,7 +48,11 @@ def test_continue_display_failure_is_durable_and_does_not_repeat_answer(tmp_path
     baseline, baseline_calls = solve()
     result, calls = solve(observer)
     assert result == baseline
-    assert len(calls) == len(baseline_calls) == 1
+    # Equivalent ratio choices can require different valid trajectory lengths
+    # across numerical builds. The observer must preserve the actual trajectory.
+    assert calls == baseline_calls == [record.query for record in result.queries]
+    assert calls
+    assert result.query_counts.dispatched_new == result.query_counts.answered_new == len(calls)
     diagnostic = read_json(attempt / 'telemetry/error000001.json')
     assert observer.errors == [diagnostic]
     assert diagnostic['code'] == 'observer'
@@ -106,7 +110,10 @@ def test_cprofile_contains_actual_public_solver_and_bound_raw_reports(tmp_path):
         result, calls = solve()
     finally:
         profiler.stop()
-    assert result.exactly_solved and len(calls) == 1
+    assert result.exactly_solved
+    assert calls == [record.query for record in result.queries]
+    assert calls
+    assert result.query_counts.dispatched_new == result.query_counts.answered_new == len(calls)
     profiler.publish(context, attempt, attempt, str(uuid4()), 'attempt0001', [{'metric_id': 'api_call', 'scope': 'wall', 'aggregation': 'inclusive', 'value': time.perf_counter() - started, 'unit': 'seconds'}])
     document = read_json(attempt / 'profile.json')
     assert document['collector'] == 'cprofile'
