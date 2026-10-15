@@ -1,15 +1,41 @@
 # Implementierungsstatus
 
-Dieser Stand befindet sich in der integrierten Implementierungs- und Abnahmephase. Die nachfolgenden Ergebnisse beschreiben begrenzte tatsächlich ausgeführte Prüfungen und keine allgemeine Freigabe aller Modi und Umgebungen.
+Stand der integrierten Quelle `988e6b4` am 15. Oktober 2026. Die mathematische
+Paketidentität wird unabhängig vom Gitstand durch das tatsächliche
+Paketdateiinventar gebunden. Ein bestandener Betriebscheck ist keine allgemeine
+Geschwindigkeitsfreigabe.
 
-| Bereich | Status |
+| Bereich | Tatsächlich geprüfter Stand |
 |---|---|
-| Installierbares src-Paket und leichtgewichtige öffentliche Modelle | Implementiert; lokale Editable-Installation geprüft |
-| Eingabevalidierung, Provider und gemeinsame Solverschleife | Implementiert; spezifische Tests für Ereignisse, Counts und Fehlercleanup bestanden |
-| Numerik, Geometrie, Zustände und Queries | Implementiert; analytische Tests und begrenzte externe Vergleichsdiagnostik ausgeführt |
-| Feste und adaptive Planung bis Tiefe drei | Implementiert; Methodentests und externe Vergleichsdiagnostik laufen |
-| Dateilaufzeit, Prozesssteuerung und dauerhafte Serien | Implementierung und Integration laufen |
-| Native Betriebsqualifizierung | Noch nicht abgeschlossen |
-| Vollständige Ergebnis- und Performanceabnahme des ausgelieferten Wheels | Noch nicht abgeschlossen |
+| Eigenständiges src-Paket, Modelle und gemeinsame SDK-Solverschleife | Implementiert; 310 native Tests bestanden, Ruff sauber |
+| Feste und adaptive Planung bis Tiefe drei | Implementiert; analytische Tests, vollständige kleine Vergleichsläufe und interne Captureprüfungen |
+| Numerik, Geometrie, Zustände und Queries | Implementiert; externe installierte Vergleichskontrollen einschließlich negativer und dünner Geometrien |
+| Dauerhafte Standaloneläufe, Serien und Wiederaufnahme | Implementiert; Mac- und Linux-Betriebsqualifizierung bestanden |
+| Audit, JSON-/CSV-Export und portable Archive | Implementiert; vollständiger öffentlicher CLI-Ablauf auf beiden Hosts geprüft |
+| Installation und Distribution | Wheel außerhalb des Checkouts installiert; tatsächliche Paketbytes geprüft; Sdist-Rebuild erhält alle Paketbytes |
+| CI | macOS/Linux mit Python 3.13/3.14 bestanden |
+| Vollständige externe Laufzeitabnahme | Noch offen; ungeprofilte gepaarte Messungen werden separat durchgeführt |
 
-Die gesamte bisherige native Testsuite bestand zuletzt mit 133 Tests. Die vollständige Ergebnis- und Laufzeitabnahme folgt auf einen eingefrorenen Paketstand. Explorative Messungen während laufender Entwicklung werden nicht als endgültige Geschwindigkeitsfreigabe ausgewiesen.
+Die aktuelle native Betriebsqualifizierung umfasst 34 bestandene Einzelkontrollen
+auf macOS und 39 auf Linux. Linux prüft zusätzlich reale Prozessgruppen,
+Startfreigabe, unbekannte Zustände und die Erhaltung alter Versuche. Das sind
+begrenzte tatsächliche Kontrollen, kein pauschaler Nachweis gegen jeden Strom-
+oder Dateisystemausfall.
+
+Der neue funktionelle CLI-Test erzeugte pro Host vier neue Probleme und acht Jobs
+mit acht Workern. Alle acht Jobs waren korrekt; der erneute Resume-Aufruf legte
+keinen Versuch an. Vier Jobs zeichneten echte Parent-cProfile-Daten auf. Audit,
+beide Exportformate und die anschließende Offline-Archivprüfung bestanden.
+Profilierte Zeiten sind keine Performanceabnahme.
+
+Die vollständigen nativen Rohdaten, Qualifikationsprofile und Quittungen liegen
+lokal unter `runs/`. Unterschiedliche Python-/Numerikversionen auf verschiedenen
+Hosts werden nicht als direkter Performance- oder Paritätsvergleich verwendet.
+Externe Alt-Neu-Abnahmebelege bleiben im getrennten bisherigen Projekt.
+
+Eine Veröffentlichung als vollständig abgenommene V1 setzt zusätzlich bestandene
+externe Mathematik- und Laufzeitgates im jeweils ausdrücklich gemessenen Umfang
+voraus. Unklare oder langsamere Messergebnisse werden nicht als bestanden gezählt.
+Die Auswahl einer Projektlizenz und die Git-Veröffentlichung tatsächlicher
+Laufarchive sind separate Entscheidungen; bisher wurde keine Lizenz erfunden und
+keine automatische Rohdatenveröffentlichung eingerichtet.
