@@ -1,0 +1,17 @@
+include README.md pyproject.toml MANIFEST.in build_support.py THIRD_PARTY_NOTICES.md
+recursive-include LICENSES *.txt
+recursive-include src/otqa *.py *.json py.typed
+recursive-include docs *.md
+recursive-include tests *.py
+recursive-include tools/qualification *.py *.md
+recursive-include examples *.json *.md
+recursive-include requirements *.txt
+recursive-exclude * __pycache__ *.py[cod]
+prune runs
+prune inputs
+prune .venv
+prune .git
+prune .pytest_cache
+prune build
+prune dist
+prune .ruff_cache
