@@ -35,8 +35,11 @@ def build_provenance() -> tuple[str, str | None, bool]:
     return version, commit, dirty
 
 
-def stamp(package_root: Path) -> None:
-    source_tools().write_build_metadata(package_root, *build_provenance(), preserve_existing=True)
+def stamp(package_root: Path, *, provenance: tuple[str, str | None, bool] | None = None) -> None:
+    source_tools().write_build_metadata(
+        package_root, *(build_provenance() if provenance is None else provenance),
+        preserve_existing=True,
+    )
 
 
 def _normalized_build_path(path: Path) -> Path:
@@ -116,6 +119,32 @@ class BuildPy(build_py):
 
 
 class SourceDist(sdist):
+    def run(self) -> None:
+        # Capture checkout provenance before Setuptools creates its own
+        # untracked release tree. Do not filter any real checkout changes from
+        # Git status; the package snapshot below binds the copied source bytes.
+        self._source_snapshot = (
+            build_provenance(), source_tools().build_inventory(ROOT / 'src' / 'otqa'),
+        )
+        try:
+            super().run()
+        finally:
+            del self._source_snapshot
+
     def make_release_tree(self, base_dir, files) -> None:
+        snapshot = getattr(self, '_source_snapshot', None)
+        if snapshot is None:
+            # Setuptools also permits invoking this method directly. Its own
+            # release directory must likewise not exist at capture time.
+            snapshot = build_provenance(), source_tools().build_inventory(ROOT / 'src' / 'otqa')
+        provenance, expected = snapshot
         super().make_release_tree(base_dir, files)
-        stamp(Path(base_dir) / 'src' / 'otqa')
+        if self.dry_run or getattr(self.distribution, 'dry_run', False):
+            return
+        tools = source_tools()
+        if tools.build_inventory(ROOT / 'src' / 'otqa') != expected:
+            raise ValueError('Package source changed during source distribution build')
+        package = Path(base_dir) / 'src' / 'otqa'
+        if tools.build_inventory(package) != expected:
+            raise ValueError('Source distribution package inventory differs from package source')
+        stamp(package, provenance=provenance)

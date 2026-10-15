@@ -3,6 +3,8 @@ import importlib.util
 import json
 from pathlib import Path
 import shutil
+import subprocess
+import tarfile
 
 import pytest
 from setuptools.dist import Distribution
@@ -232,3 +234,72 @@ def test_system_temporary_alias_does_not_allow_other_aliases_or_source_overlap(
         run(build_lib)
     assert source_bytes(source) == before
     assert sentinel.read_text() == 'Must not be removed'
+
+
+def source_distribution(hook, root):
+    dist = Distribution({
+        'name': 'build-control', 'version': '0.1.0', 'packages': ['otqa'],
+        'package_dir': {'': 'src'}, 'include_package_data': False,
+        'package_data': {'otqa': ['schemas/*.json']},
+    })
+    dist.script_name = 'setup.py'
+    command = hook.SourceDist(dist)
+    command.dist_dir = str(root / 'dist')
+    command.formats = ['gztar']
+    command.ensure_finalized()
+    command.run()
+    return next((root / 'dist').glob('*.tar.gz'))
+
+
+def initialize_git(root):
+    (root / '.gitignore').write_text('dist/\nbuild/\n*.egg-info/\n__pycache__/\n')
+    subprocess.run(['git', 'init', '-q', str(root)], check=True)
+    subprocess.run(['git', 'add', '.'], cwd=root, check=True)
+    subprocess.run(['git', '-c', 'user.name=Build Control', '-c', 'user.email=build@example.invalid',
+                    'commit', '-qm', 'Initial analytical fixture'], cwd=root, check=True)
+
+
+@pytest.mark.parametrize('user_change', ['clean', 'tracked', 'untracked'])
+def test_sdist_records_checkout_before_own_release_tree_without_hiding_user_changes(
+        build_fixture, monkeypatch, user_change):
+    hook, root, source, _ = build_fixture
+    initialize_git(root)
+    if user_change == 'tracked':
+        (source / 'keep.py').write_text('VALUE = 2\n')
+    elif user_change == 'untracked':
+        (root / 'user-notes.txt').write_text('Real user change\n')
+    expected = hook.build_provenance()
+    before = source_bytes(source)
+    original = hook.sdist.make_release_tree
+    observed = []
+
+    def observe_staging(command, base_dir, files):
+        original(command, base_dir, files)
+        observed.append((Path(base_dir).is_dir(), hook.build_provenance()[2]))
+
+    monkeypatch.setattr(hook.sdist, 'make_release_tree', observe_staging)
+    archive = source_distribution(hook, root)
+    assert observed == [(True, True)]  # Even a clean checkout has its own untracked staging tree.
+    with tarfile.open(archive) as stream:
+        path = next(member for member in stream.getmembers()
+                    if member.name.endswith('/src/otqa/_build_provenance.json'))
+        metadata = json.load(stream.extractfile(path))
+    assert metadata['source']['dirty'] is (user_change != 'clean')
+    assert metadata['source']['git_commit'] == expected[1]
+    assert hook.build_provenance() == expected
+    assert source_bytes(source) == before
+
+
+def test_sdist_rejects_package_changes_after_provenance_snapshot(build_fixture, monkeypatch):
+    hook, root, source, _ = build_fixture
+    initialize_git(root)
+    original = hook.sdist.make_release_tree
+
+    def mutate_during_release(command, base_dir, files):
+        original(command, base_dir, files)
+        (source / 'keep.py').write_text('VALUE = 3\n')
+
+    monkeypatch.setattr(hook.sdist, 'make_release_tree', mutate_during_release)
+    with pytest.raises(ValueError, match='source changed'):
+        source_distribution(hook, root)
+    assert not list((root / 'dist').glob('*.tar.gz'))
