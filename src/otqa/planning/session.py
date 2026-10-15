@@ -71,19 +71,42 @@ class _CapturedRootTask(_RootTask):
 
 
 _WORKER: PlannerSession | None = None
+_WORKER_CONTEXT: tuple | None = None
+_WORKER_FAILURE: ExecutionContextError | None = None
 
 
 def _initialize_worker(problem, policy, execution, numerical_profile, backend_factory, session_id) -> None:
-    from multiprocessing.util import Finalize
-    global _WORKER
-    _WORKER = PlannerSession(problem, policy, replace(execution, workers=1), numerical_profile,
-        backend_factory=backend_factory, _session_id=session_id, _worker=True)
-    Finalize(_WORKER, _WORKER.close, exitpriority=10)
+    global _WORKER_CONTEXT
+    if _WORKER_CONTEXT is not None or _WORKER is not None:
+        raise ExecutionContextError("root worker context is already registered")
+    # An executor can start a worker that never receives a task. Register only
+    # immutable inputs here; numerical imports and handles belong to first use.
+    _WORKER_CONTEXT = problem, policy, execution, numerical_profile, backend_factory, session_id
 
 
 def _run_worker(task: _RootTask):
+    global _WORKER, _WORKER_FAILURE
     if _WORKER is None:
-        raise RuntimeError("root worker has not been initialized")
+        if _WORKER_FAILURE is not None:
+            raise _WORKER_FAILURE
+        if _WORKER_CONTEXT is None:
+            raise ExecutionContextError("root worker context has not been registered")
+        problem, policy, execution, numerical_profile, backend_factory, session_id = _WORKER_CONTEXT
+        worker = None
+        try:
+            from multiprocessing.util import Finalize
+            worker = PlannerSession(problem, policy, replace(execution, workers=1), numerical_profile,
+                backend_factory=backend_factory, _session_id=session_id, _worker=True)
+            Finalize(worker, worker.close, exitpriority=10)
+        except Exception as error:
+            if worker is not None:
+                try:
+                    worker.close()
+                except Exception as cleanup_error:
+                    error.add_note(f"worker session cleanup also failed: {cleanup_error}")
+            _WORKER_FAILURE = ExecutionContextError("root worker session setup failed")
+            raise _WORKER_FAILURE from error
+        _WORKER = worker
     result, blocks = _WORKER._execute_task(task)
     return (result, blocks) if isinstance(task, _CapturedRootTask) else result
 
@@ -759,10 +782,13 @@ class PlannerSession:
             try:
                 self.geometry.close()
             finally:
-                self._plan_cache.clear()
-                if self._captured_plans is not None:
-                    self._captured_plans.clear()
-                self._closed = True
+                try:
+                    self.states.cache.clear()
+                finally:
+                    self._plan_cache.clear()
+                    if self._captured_plans is not None:
+                        self._captured_plans.clear()
+                    self._closed = True
 
     def __enter__(self):
         self._check_open()

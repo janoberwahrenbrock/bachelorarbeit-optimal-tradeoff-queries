@@ -415,3 +415,138 @@ def test_later_completed_error_waits_for_earlier_query_error(monkeypatch):
     assert caught.value is earlier
     assert submitted == [0, 1]
     assert len(waits) == 2
+
+
+def worker_context(monkeypatch):
+    import otqa.planning.session as module
+    monkeypatch.setattr(module, "_WORKER", None)
+    monkeypatch.setattr(module, "_WORKER_CONTEXT", None)
+    monkeypatch.setattr(module, "_WORKER_FAILURE", None)
+    return module
+
+
+def test_worker_initializer_registers_inputs_without_creating_session(monkeypatch):
+    module = worker_context(monkeypatch)
+    calls = []
+
+    def forbidden(*args, **kwargs):
+        calls.append(args)
+        raise AssertionError("idle worker constructed a numerical session")
+
+    monkeypatch.setattr(module, "PlannerSession", forbidden)
+    config = AlgorithmPolicy("fixed", 1, "both", 5, "candidate_count", SingleCandidateStop())
+    execution = SolverExecution(8)
+    module._initialize_worker("problem", config, execution, None, forbidden, "owner")
+    assert calls == []
+    assert module._WORKER_CONTEXT == ("problem", config, execution, None, forbidden, "owner")
+    assert module._WORKER is None
+
+
+def test_worker_creates_session_and_finalizer_only_once_on_first_task(monkeypatch):
+    import multiprocessing.util
+    module = worker_context(monkeypatch)
+    created, finalized, closed, executed = [], [], [], []
+
+    class Worker:
+        def __init__(self, *args, **kwargs):
+            created.append((args, kwargs))
+
+        def close(self):
+            closed.append(self)
+
+        def _execute_task(self, task):
+            executed.append(task)
+            return task, ()
+
+    monkeypatch.setattr(module, "PlannerSession", Worker)
+    monkeypatch.setattr(multiprocessing.util, "Finalize", lambda owner, callback, **kw: finalized.append((owner, callback, kw)))
+    module._initialize_worker("problem", "policy", SolverExecution(8), None, None, "owner")
+    assert not created and not finalized
+    first, second = object(), object()
+    assert module._run_worker(first) is first
+    assert module._run_worker(second) is second
+    assert len(created) == len(finalized) == 1
+    assert created[0][0][2].workers == 1
+    assert created[0][1] == {"backend_factory": None, "_session_id": "owner", "_worker": True}
+    assert executed == [first, second]
+    assert finalized[0][0] is module._WORKER
+    assert finalized[0][2] == {"exitpriority": 10}
+    assert not closed
+    finalized[0][1]()
+    assert closed == [module._WORKER]
+    with pytest.raises(module.ExecutionContextError, match="already registered"):
+        module._initialize_worker("foreign", "foreign", SolverExecution(), None, None, "foreign")
+    assert closed == [module._WORKER]
+
+
+def test_failed_first_worker_factory_is_typed_and_not_retried(monkeypatch):
+    module = worker_context(monkeypatch)
+    calls = []
+    cause = ValueError("analytical first-use setup failure")
+
+    def factory(*args, **kwargs):
+        calls.append(args)
+        raise cause
+
+    monkeypatch.setattr(module, "PlannerSession", factory)
+    module._initialize_worker("problem", "policy", SolverExecution(8), None, None, "owner")
+    with pytest.raises(module.ExecutionContextError) as first:
+        module._run_worker(object())
+    assert first.value.__cause__ is cause
+    with pytest.raises(module.ExecutionContextError) as second:
+        module._run_worker(object())
+    assert second.value is first.value
+    assert len(calls) == 1
+    assert module._WORKER is None
+
+
+def test_worker_finalize_setup_failure_closes_only_its_new_session(monkeypatch):
+    import multiprocessing.util
+    module = worker_context(monkeypatch)
+    created, closed = [], []
+    cause = RuntimeError("analytical finalizer registration failure")
+
+    class Worker:
+        def __init__(self, *args, **kwargs):
+            created.append(self)
+
+        def close(self):
+            closed.append(self)
+
+    def fail(*args, **kwargs):
+        raise cause
+
+    monkeypatch.setattr(module, "PlannerSession", Worker)
+    monkeypatch.setattr(multiprocessing.util, "Finalize", fail)
+    module._initialize_worker("problem", "policy", SolverExecution(8), None, None, "owner")
+    with pytest.raises(module.ExecutionContextError) as caught:
+        module._run_worker(object())
+    assert caught.value.__cause__ is cause
+    assert closed == created
+    assert len(closed) == 1
+    assert module._WORKER is None
+
+
+def test_lazy_worker_preserves_mathematical_failure_after_setup(monkeypatch):
+    import multiprocessing.util
+    module = worker_context(monkeypatch)
+    cause = RuntimeError("analytical mathematical evaluation failure")
+
+    class Worker:
+        def __init__(self, *args, **kwargs):
+            pass
+
+        def close(self):
+            pass
+
+        def _execute_task(self, task):
+            raise cause
+
+    monkeypatch.setattr(module, "PlannerSession", Worker)
+    monkeypatch.setattr(multiprocessing.util, "Finalize", lambda *a, **kw: None)
+    module._initialize_worker("problem", "policy", SolverExecution(8), None, None, "owner")
+    with pytest.raises(RuntimeError) as caught:
+        module._run_worker(object())
+    assert caught.value is cause
+    assert module._WORKER_FAILURE is None
+    assert module._WORKER is not None

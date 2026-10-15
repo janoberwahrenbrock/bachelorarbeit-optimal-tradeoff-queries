@@ -240,3 +240,47 @@ def test_unpicklable_worker_bootstrap_fails_typed_and_cleans_pool():
             planner.plan(planner.initial_state())
     assert planner._closed
     assert not ({child.pid for child in multiprocessing.active_children()} - existing)
+
+
+def test_idle_worker_registration_in_fresh_interpreter_imports_no_numerics():
+    from pathlib import Path
+    import subprocess
+    import sys
+    source = Path(__file__).resolve().parents[2] / "src"
+    code = """
+import sys
+from otqa import Problem, AlgorithmPolicy, SingleCandidateStop, SolverExecution
+from otqa.planning.session import _initialize_worker
+
+def forbidden():
+    raise AssertionError('idle registration called the numerical factory')
+
+_initialize_worker(Problem([[1., 0.], [0., 1.]]),
+    AlgorithmPolicy('fixed', 1, 'both', 5, 'candidate_count', SingleCandidateStop()),
+    SolverExecution(8), None, forbidden, 'idle-owner')
+assert 'numpy' not in sys.modules
+assert 'scipy' not in sys.modules
+"""
+    result = subprocess.run([sys.executable, "-c", code], capture_output=True, text=True,
+        env=dict(os.environ, PYTHONPATH=str(source)), timeout=10)
+    assert result.returncode == 0, result.stderr
+
+
+def test_close_releases_own_prepared_state_cache_without_touching_other_session():
+    first = PlannerSession(Problem(MATRIX), policy(depth=1), SolverExecution())
+    second = PlannerSession(Problem(MATRIX), policy(depth=1), SolverExecution())
+    try:
+        first.initial_state()
+        second_state = second.initial_state()
+        assert first.states.cache.info().entries > 0
+        other_entries = second.states.cache.info().entries
+        first.close()
+        assert first.states.cache.info().entries == 0
+        assert second.states.cache.info().entries == other_entries
+        assert not second.geometry.closed
+        assert second.initial_state() is second_state
+        assert second.plan(second_state).query is not None
+    finally:
+        first.close()
+        second.close()
+    assert second.states.cache.info().entries == 0
