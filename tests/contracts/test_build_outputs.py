@@ -191,3 +191,44 @@ def test_source_change_during_copy_is_rejected(build_fixture, monkeypatch):
     monkeypatch.setattr(hook.build_py, 'run', changed_source)
     with pytest.raises(ValueError, match='source changed'):
         run()
+
+
+def test_declared_system_temporary_root_alias_supports_real_builds(build_fixture, monkeypatch):
+    hook, root, source, run = build_fixture
+    real = root.parent / 'real-system-temp'
+    real.mkdir()
+    declared = root.parent / 'declared-system-temp'
+    declared.symlink_to(real, target_is_directory=True)
+    monkeypatch.setattr(hook.tempfile, 'gettempdir', lambda: str(declared))
+    output = run(declared / 'pip-build' / 'lib')
+    assert output.resolve() == real / 'pip-build' / 'lib' / 'otqa'
+    assert hook.source_tools().build_inventory(source) == hook.source_tools().build_inventory(output)
+
+
+@pytest.mark.parametrize('location', ['descendant', 'undeclared', 'source_overlap'])
+def test_system_temporary_alias_does_not_allow_other_aliases_or_source_overlap(
+        build_fixture, monkeypatch, location):
+    hook, root, source, run = build_fixture
+    real = root.parent / 'real-system-temp'
+    real.mkdir()
+    declared = root.parent / 'declared-system-temp'
+    declared.symlink_to(real, target_is_directory=True)
+    monkeypatch.setattr(hook.tempfile, 'gettempdir', lambda: str(declared))
+    foreign = root.parent / 'foreign-build'
+    foreign.mkdir()
+    sentinel = foreign / 'keep.txt'
+    sentinel.write_text('Must not be removed')
+    if location == 'descendant':
+        (real / 'nested-alias').symlink_to(foreign, target_is_directory=True)
+        build_lib = declared / 'nested-alias' / 'lib'
+    elif location == 'undeclared':
+        other = root.parent / 'other-alias'
+        other.symlink_to(real, target_is_directory=True)
+        build_lib = other / 'lib'
+    else:
+        build_lib = declared / '..' / root.name / 'src'
+    before = source_bytes(source)
+    with pytest.raises(ValueError, match='overlap' if location == 'source_overlap' else 'Symlink'):
+        run(build_lib)
+    assert source_bytes(source) == before
+    assert sentinel.read_text() == 'Must not be removed'

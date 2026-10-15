@@ -4,6 +4,7 @@ from __future__ import annotations
 import importlib.util
 import shutil
 import subprocess
+import tempfile
 import tomllib
 from pathlib import Path
 
@@ -38,9 +39,21 @@ def stamp(package_root: Path) -> None:
     source_tools().write_build_metadata(package_root, *build_provenance(), preserve_existing=True)
 
 
+def _normalized_build_path(path: Path) -> Path:
+    path = path.absolute()
+    # macOS declares /var/folders/.../T as its system temp root even though
+    # /var aliases /private/var. Trust only that declared prefix, keeping every
+    # suffix component intact for the normal symlink and overlap checks.
+    temporary = Path(tempfile.gettempdir()).absolute()
+    resolved_temporary = temporary.resolve()
+    if temporary != resolved_temporary and path.is_relative_to(temporary):
+        return resolved_temporary / path.relative_to(temporary)
+    return path
+
+
 def _checked_package_paths(build_lib: str) -> tuple[Path, Path]:
-    source = (ROOT / 'src' / 'otqa').absolute()
-    target = (Path(build_lib) / 'otqa').absolute()
+    source = _normalized_build_path(ROOT / 'src' / 'otqa')
+    target = _normalized_build_path(Path(build_lib) / 'otqa')
     for path in (source, target):
         # Inspect the lexical ancestors before resolving aliases. In particular,
         # a symlinked build parent must never redirect cleanup into another tree.
@@ -69,12 +82,13 @@ class BuildPy(build_py):
         if self.dry_run or getattr(self.distribution, 'dry_run', False):
             return
         owned = getattr(self, '_owned_package_output', None)
-        directory = Path(name).absolute()
-        if owned is not None and directory.resolve().is_relative_to(owned):
+        directory = _normalized_build_path(Path(name))
+        if owned is not None:
             for ancestor in (directory, *directory.parents):
                 if ancestor.is_symlink():
                     raise ValueError(f'Symlink in package build path: {ancestor}')
-            directory.mkdir(mode=mode, parents=True, exist_ok=True)
+            if directory.resolve().is_relative_to(owned):
+                directory.mkdir(mode=mode, parents=True, exist_ok=True)
         return super().mkpath(name, mode)
 
     def run(self) -> None:
