@@ -8,16 +8,40 @@ from collections.abc import Callable
 from .models import PolicyOption, option_identity
 
 
-def pareto_options(options: tuple[PolicyOption, ...] | list[PolicyOption]) -> tuple[PolicyOption, ...]:
-    """Keep strictly improving loss in cost/loss/identity order, without epsilon."""
+def pareto_options(
+    options: tuple[PolicyOption, ...] | list[PolicyOption],
+    observe: Callable[[str, object], None] | None = None,
+) -> tuple[PolicyOption, ...]:
+    """Keep strictly improving loss and optionally observe the actual branches.
+
+    Pruning records retain the already available option and, for a discarded
+    option, the preceding retained witness. They compute no additional keys.
+    """
     retained: list[PolicyOption] = []
     lowest = math.inf
+    if observe is None:
+        for option in sorted(options, key=lambda item: (
+            item.expected_queries, item.expected_terminal_loss, option_identity(item),
+        )):
+            if option.expected_terminal_loss < lowest:
+                retained.append(option)
+                lowest = option.expected_terminal_loss
+        return tuple(retained)
     for option in sorted(options, key=lambda item: (
         item.expected_queries, item.expected_terminal_loss, option_identity(item),
     )):
         if option.expected_terminal_loss < lowest:
             retained.append(option)
             lowest = option.expected_terminal_loss
+            observe("frontier_projection", (
+                "pruning_decision", "child_options", None, option, True,
+                "strict_loss_improvement", None,
+            ))
+        else:
+            observe("frontier_projection", (
+                "pruning_decision", "child_options", None, option, False,
+                "dominated_or_equal_loss", retained[-1] if retained else None,
+            ))
     return tuple(retained)
 
 
@@ -48,10 +72,25 @@ def combine_frontiers(
         ) for chosen in expanded]
         combinations = []
         lowest = math.inf
-        for _, loss, _, chosen in sorted(weighted, key=lambda item: item[:3]):
-            if loss < lowest:
-                combinations.append(chosen)
-                lowest = loss
+        if observe is None:
+            for _, loss, _, chosen in sorted(weighted, key=lambda item: item[:3]):
+                if loss < lowest:
+                    combinations.append(chosen)
+                    lowest = loss
+        else:
+            for _, loss, _, chosen in sorted(weighted, key=lambda item: item[:3]):
+                if loss < lowest:
+                    combinations.append(chosen)
+                    lowest = loss
+                    observe("frontier_projection", (
+                        "pruning_decision", "weighted_combinations", index, chosen, True,
+                        "strict_loss_improvement", None,
+                    ))
+                else:
+                    observe("frontier_projection", (
+                        "pruning_decision", "weighted_combinations", index, chosen, False,
+                        "dominated_or_equal_loss", combinations[-1] if combinations else None,
+                    ))
         if observe is not None:
             observe("frontier_projection", (index, tuple(weighted), tuple(combinations)))
 

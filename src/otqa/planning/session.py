@@ -402,7 +402,10 @@ class PlannerSession:
         options = tuple(PolicyOption(item.evaluation, item.evaluation.expected_terminal_candidates,
             item.evaluation.expected_terminal_loss if self._stop_aware else item.evaluation.expected_terminal_candidates,
             item.expected_queries, item.continuations, maximum_volume_share=maximum) for item in results)
-        frontier = pareto_options(options)
+        if self._capturing:
+            frontier = pareto_options(options, lambda kind, value: self._observe(kind, state, 2, value))
+        else:
+            frontier = pareto_options(options)
         self._observe("child_options", state, 2, options)
         if self._capturing:
             self._observe("frontier_projection", state, 2, (options, frontier))

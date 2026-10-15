@@ -57,3 +57,80 @@ def test_empty_positive_child_frontier_is_an_error():
     import pytest
     with pytest.raises(RuntimeError, match="missing positive-probability"):
         combine_frontiers(3, (1.0,), ((),))
+
+
+def test_child_pruning_capture_reports_actual_ties_and_existing_witnesses(monkeypatch):
+    import otqa.planning.frontier as module
+
+    a, b, same, worse = option(1, 3, 1), option(2, 2, 2), option(3, 2, 2), option(4, 3, 3)
+    nearer = option(5, math.nextafter(2, 0), 3)
+    inputs = [worse, same, nearer, b, a]
+    original_identity = module.option_identity
+    identities = []
+
+    def identity(item):
+        identities.append(item)
+        return original_identity(item)
+
+    monkeypatch.setattr(module, "option_identity", identity)
+    expected = pareto_options(inputs)
+    ordinary_calls = tuple(identities)
+    identities.clear()
+    events = []
+    actual = pareto_options(inputs, lambda kind, value: events.append((kind, value)))
+    assert actual == expected == (a, b, nearer)
+    assert tuple(identities) == ordinary_calls
+    assert all(kind == "frontier_projection" for kind, _ in events)
+    decisions = [value for _, value in events]
+    assert [item[3] for item in decisions] == [a, b, same, nearer, worse]
+    assert [item[4:6] for item in decisions] == [
+        (True, "strict_loss_improvement"), (True, "strict_loss_improvement"),
+        (False, "dominated_or_equal_loss"), (True, "strict_loss_improvement"),
+        (False, "dominated_or_equal_loss"),
+    ]
+    assert all(item[:3] == ("pruning_decision", "child_options", None) for item in decisions)
+    assert decisions[2][3] is same and decisions[2][6] is b
+    assert decisions[4][3] is worse and decisions[4][6] is nearer
+    assert all(item[6] is None for item in decisions if item[4])
+
+
+def test_weighted_pruning_capture_adds_no_identity_or_sum_calculations(monkeypatch):
+    import otqa.planning.frontier as module
+
+    a, b, same, worse = option(1, 3, 1), option(2, 2, 2), option(3, 2, 2), option(4, 3, 3)
+    other = option(5, 1, 1)
+    inputs = ((worse, same, b, a), (other,))
+    original_identity, original_sum = module.option_identity, module.math.fsum
+    identities, summands = [], []
+
+    def identity(item):
+        identities.append(item)
+        return original_identity(item)
+
+    def fsum(values):
+        values = tuple(values)
+        summands.append(values)
+        return original_sum(values)
+
+    monkeypatch.setattr(module, "option_identity", identity)
+    monkeypatch.setattr(module.math, "fsum", fsum)
+    expected = combine_frontiers(5, (.5, .5), inputs)
+    ordinary_calls = (tuple(identities), tuple(summands))
+    identities.clear()
+    summands.clear()
+    events = []
+    actual = combine_frontiers(5, (.5, .5), inputs,
+                               lambda kind, value: events.append((kind, value)))
+    assert actual == expected
+    assert (tuple(identities), tuple(summands)) == ordinary_calls
+    decisions = [value for kind, value in events
+                 if kind == "frontier_projection" and value[0] == "pruning_decision"]
+    assert all(item[:2] == ("pruning_decision", "weighted_combinations") for item in decisions)
+    assert [item[2] for item in decisions] == [0, 0, 0, 0, 1, 1]
+    assert [item[3] for item in decisions[:4]] == [(a,), (b,), (same,), (worse,)]
+    assert decisions[2][4:6] == (False, "dominated_or_equal_loss")
+    assert decisions[3][4:6] == (False, "dominated_or_equal_loss")
+    assert decisions[2][3][0] is same and decisions[2][6][0] is b
+    assert decisions[3][3][0] is worse and decisions[3][6][0] is b
+    assert all(item[6] is None for item in decisions if item[4])
+    assert any(kind == "combination_choice" for kind, _ in events)

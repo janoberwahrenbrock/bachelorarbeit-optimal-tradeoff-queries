@@ -63,6 +63,13 @@ def test_capture_h3_contains_full_child_options_frontiers_and_combination():
     assert len(result.horizons) == 3
     kinds = {item.kind for block in sink.blocks for item in block.observations}
     assert {"child_options", "frontier_projection", "combination_choice"} <= kinds
+    decisions = [item for block in sink.blocks for item in block.observations
+                 if item.kind == "frontier_projection" and item.value.value[0] == "pruning_decision"]
+    assert {item.value.value[1] for item in decisions} == {"child_options", "weighted_combinations"}
+    assert {item.value.value[5] for item in decisions} == {
+        "strict_loss_improvement", "dominated_or_equal_loss",
+    }
+    assert all(item.mathematical_address[2] in (2, 3) for item in decisions)
 
 
 @pytest.mark.parametrize("capture_enabled", [False, True])
