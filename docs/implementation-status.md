@@ -7,7 +7,7 @@ Dokumentations- und Laufdatenänderungen verändern diese Identität nicht.
 
 | Bereich | Geprüfter Stand |
 | --- | --- |
-| Eigenständiges src-Paket und gemeinsame SDK-Solverschleife | 361 native Tests bestanden; Ruff sauber |
+| Eigenständiges src-Paket und gemeinsame SDK-Solverschleife | 365 native Tests bestanden; Ruff sauber |
 | Feste und adaptive Planung | Horizonte eins bis drei, getrennte Stop-/Bewertungsregeln, vollständige H3-Kindoptionen und gewichtete erwartete Querykosten |
 | Numerik, Geometrie, Zustände und Queries | Installierte externe Vergleichskontrollen einschließlich dünner, degenerierter und negativer Geometriefälle; Einschränkungen ausdrücklich erfasst |
 | Interne Diagnosecapture | Sechs vollständige H3-Aufzeichnungen, einschließlich tatsächlicher Pruning-Gründe und vorhandener Dominanzreferenzen, gegen die Referenz geprüft |
