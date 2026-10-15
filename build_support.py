@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import importlib.util
+import shutil
 import subprocess
 import tomllib
 from pathlib import Path
@@ -37,16 +38,67 @@ def stamp(package_root: Path) -> None:
     source_tools().write_build_metadata(package_root, *build_provenance(), preserve_existing=True)
 
 
+def _checked_package_paths(build_lib: str) -> tuple[Path, Path]:
+    source = (ROOT / 'src' / 'otqa').absolute()
+    target = (Path(build_lib) / 'otqa').absolute()
+    for path in (source, target):
+        # Inspect the lexical ancestors before resolving aliases. In particular,
+        # a symlinked build parent must never redirect cleanup into another tree.
+        for ancestor in (path, *path.parents):
+            if ancestor.is_symlink():
+                raise ValueError(f'Symlink in package build path: {ancestor}')
+    source, target = source.resolve(), target.resolve()
+    if source == target or source.is_relative_to(target) or target.is_relative_to(source):
+        raise ValueError('Package build output must not overlap package source')
+    if not source.is_dir():
+        raise ValueError('Package source must be a real directory')
+    if target.exists() and not target.is_dir():
+        raise ValueError('Package build output must be a real directory')
+    for root in (source, target):
+        if root.is_dir():
+            for path in root.rglob('*'):
+                if path.is_symlink():
+                    raise ValueError(f'Symlink in package build tree: {path}')
+    return source, target
+
+
 class BuildPy(build_py):
+    def mkpath(self, name, mode=0o777):
+        # Distutils caches created paths across command instances. An owned
+        # output tree removed below must still be recreated on a repeat build.
+        if self.dry_run or self.distribution.dry_run:
+            return
+        owned = getattr(self, '_owned_package_output', None)
+        directory = Path(name).absolute()
+        if owned is not None and directory.resolve().is_relative_to(owned):
+            for ancestor in (directory, *directory.parents):
+                if ancestor.is_symlink():
+                    raise ValueError(f'Symlink in package build path: {ancestor}')
+            directory.mkdir(mode=mode, parents=True, exist_ok=True)
+        return super().mkpath(name, mode)
+
     def run(self) -> None:
-        # build/lib may retain stamps from a previous build of this checkout.
-        # Only stamps present in an input sdist carry preserved provenance.
-        for name in ('_source_inventory.json', '_build_provenance.json'):
-            stale = Path(self.build_lib) / 'otqa' / name
-            if stale.exists():
-                stale.unlink()
+        source, target = _checked_package_paths(self.build_lib)
+        self._owned_package_output = target
+        if self.dry_run or self.distribution.dry_run:
+            # The pinned Setuptools copy/mkpath wrappers do not themselves pass
+            # dry_run through, so delegating would still write package files.
+            self.announce(f'Would rebuild and verify {target}', level=2)
+            return
+        tools = source_tools()
+        expected = tools.build_inventory(source)
+        # Setuptools copies current files but does not remove deleted modules or
+        # data. Rebuild only our package directory, leaving sibling outputs alone.
+        if target.exists():
+            shutil.rmtree(target)
         super().run()
-        stamp(Path(self.build_lib) / 'otqa')
+        if tools.build_inventory(source) != expected:
+            raise ValueError('Package source changed during build')
+        if tools.build_inventory(target) != expected:
+            raise ValueError('Built package inventory differs from package source')
+        # A stamp copied from an input sdist is verified and preserved; a
+        # checkout build receives metadata only after the exact copy check.
+        stamp(target)
 
 
 class SourceDist(sdist):

@@ -7,7 +7,7 @@ Geschwindigkeitsfreigabe.
 
 | Bereich | Tatsächlich geprüfter Stand |
 |---|---|
-| Eigenständiges src-Paket, Modelle und gemeinsame SDK-Solverschleife | Implementiert; 336 native Tests bestanden, Ruff sauber |
+| Eigenständiges src-Paket, Modelle und gemeinsame SDK-Solverschleife | Implementiert; 355 native Tests bestanden, Ruff sauber |
 | Feste und adaptive Planung bis Tiefe drei | Implementiert; analytische Tests, vollständige kleine Vergleichsläufe und interne Captureprüfungen |
 | Numerik, Geometrie, Zustände und Queries | Implementiert; externe installierte Vergleichskontrollen einschließlich negativer und dünner Geometrien |
 | Dauerhafte Standaloneläufe, Serien und Wiederaufnahme | Implementiert; Mac- und Linux-Betriebsqualifizierung bestanden |
@@ -54,3 +54,9 @@ Elf neue analytische Tests prüfen nicht unterstützte Räume, erhaltene Ursache
 erfolgreiche Reparaturen und unveränderte normale Volumenpfade. Dieser neue
 Quellstand benötigt erneut seine eigenen Installations- und Vergleichsbelege;
 Messungen eines früheren Wheels werden ihm nicht automatisch zugeschrieben.
+
+Neunzehn zusätzliche Buildkontrollen prüfen wiederholte Builds nach entfernten
+Modulen und Schemadateien, erhaltene sdist-Provenienz, Dryrun und sichere
+Ausgabegrenzen. Der Build bereinigt ausschließlich seinen geprüften eigenen
+Paketordner und stempelt ihn erst nach vollständiger Inventargleichheit mit den
+Quellen. Diese Distributionkorrektur ändert keine Algorithmusdatei.

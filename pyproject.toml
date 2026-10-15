@@ -22,7 +22,7 @@ otqa = "otqa.cli:main"
 Repository = "https://github.com/janoberwahrenbrock/bachelorarbeit-optimal-tradeoff-queries"
 
 [dependency-groups]
-dev = ["pytest==9.1.1", "build==1.6.1", "ruff==0.17.0"]
+dev = ["pytest==9.1.1", "build==1.6.1", "ruff==0.17.0", "setuptools==84.0.0", "wheel==0.48.0"]
 
 [tool.setuptools]
 # The build-only command module is resolved at the repository root.
