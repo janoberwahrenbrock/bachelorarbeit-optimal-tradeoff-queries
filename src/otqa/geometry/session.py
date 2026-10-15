@@ -147,6 +147,13 @@ class GeometrySession:
         self.support_hits += 1
         return lower, upper
 
+    def _recover_probability_failure(self, system, query, message):
+        """Keep the original probability failure and its exact-recovery cause."""
+        try:
+            return recover_probabilities(system, query)
+        except (RecoveryNotApplicable, RecoveryGeometryError) as error:
+            raise RuntimeError(message) from error
+
     def probabilities(self, system, query, tolerance=1e-10):
         self._check_open()
         if tolerance <= 0:
@@ -176,7 +183,8 @@ class GeometrySession:
         try:
             total = self._volume_by_key(constraint_key, tolerance)
             if total <= 0:
-                return recover_probabilities(system, query)
+                return self._recover_probability_failure(
+                    system, query, "weight space has no positive intrinsic volume")
             inequalities, inequality_rhs, equalities, equality_rhs = constraint_key
             less_key = (inequalities + (tuple(objective),), inequality_rhs + (0.0,), equalities, equality_rhs)
             greater_key = (inequalities + (tuple(-value for value in objective),),
@@ -193,12 +201,14 @@ class GeometrySession:
         if any(getattr(value, "exact_positive_correction", False) or
                getattr(value, "exact_exception_recovery", False)
                for value in (total, left_volume, right_volume)):
-            return recover_probabilities(system, query)
+            return self._recover_probability_failure(
+                system, query, "native volume recovery requires a common exact partition")
         raw = np.asarray([left_volume, right_volume], dtype=float) / total
         raw = np.maximum(raw, 0.0)
         probability_sum = float(np.sum(raw))
         if probability_sum <= 0:
-            return recover_probabilities(system, query)
+            return self._recover_probability_failure(
+                system, query, "exact query branches have zero total probability")
         raw /= probability_sum
         return {"<": float(raw[0]), "=": 0.0, ">": float(raw[1])}
 

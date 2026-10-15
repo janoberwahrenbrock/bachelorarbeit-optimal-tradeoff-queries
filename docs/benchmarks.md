@@ -41,7 +41,10 @@ and never interprets configuration IDs as defaults or overrides.
 
 ## Freeze and execute
 
-Use a natively qualified profile for the execution host:
+Use a natively qualified profile for the execution host. Linux series require
+`series_linux_recovery`; macOS series use `standalone`. The profile path in the
+example must point to that host's successful qualification. See the exact
+[qualification commands](cli.md#installation-and-native-qualification):
 
 ```sh
 otqa benchmark plan --source-root . --suite inputs/suites/pilot/suite.json \

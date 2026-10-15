@@ -24,8 +24,19 @@ python tools/qualification/qualify.py --project-root "$PWD" \
   --output "$PWD/runs/native-qualification" --scope standalone
 ```
 
-Linux additionally supports the `series_linux_recovery` scope. A Mac cannot
-qualify Linux recovery. The harness writes all observations, including failures,
+The `standalone` scope is sufficient for standalone solves on either host and
+for series on macOS. Linux `benchmark plan`, `run` and `resume` require the
+`series_linux_recovery` scope; a standalone-only profile cannot admit them.
+For a Linux benchmark series, qualify a fresh output destination instead:
+
+```sh
+python tools/qualification/qualify.py --project-root "$PWD" \
+  --output "$PWD/runs/native-qualification-linux" --scope series_linux_recovery
+```
+
+Use `runs/native-qualification-linux/profile.json` as `--execution-profile` in
+the benchmark examples below when running on Linux. A Mac cannot qualify Linux
+recovery. The harness writes all observations, including failures,
 under its output root. Only a completely passing run creates a new `profile.json`
 with a validated native runtime certificate. A failed run retains its candidate
 profile and failed evidence. Public commands have no trust or skip switch.
@@ -118,11 +129,15 @@ distinction from executable project relocation.
 
 | Code | Meaning |
 |---:|---|
-| 0 | Regular solved return; a confidence selection may independently be incorrect |
-| 3 | Regular unresolved return, including no-query and query-budget outcomes |
+| 0 | `solve` or benchmark `run`/`resume`: regular solved outcome(s); setup, status, audit, export and seal: command success |
+| 3 | `solve` or benchmark `run`/`resume`: at least one regular unresolved outcome, including no-query and query-budget returns |
 | 2 | Invalid input, unsupported document, argument combination or output conflict |
 | 1 | Runtime, replay, watchdog, integrity or process-ownership failure |
 | 130 | User interruption |
+
+A successful setup, status or analysis command does not assert that its series
+contains only solved problems. Likewise, a regular confidence selection can
+independently be incorrect; inspect the recorded quality fields.
 
 Structured references and diagnostics go to stdout; prompts and logs are separate.
 The optional case watchdog changes no algorithm parameter and returns no partial

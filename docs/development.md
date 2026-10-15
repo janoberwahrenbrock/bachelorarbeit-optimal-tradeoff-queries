@@ -39,8 +39,26 @@ uv pip install --python .venv-runtime/bin/python \
   --execution-profile "$PWD/runs/my-native-qualification/profile.json"
 ```
 
-Unter Linux wird das Scope `series_linux_recovery` verwendet. Der neue Smoke-Test
-verwendet die öffentlichen CLI-Befehle für Generierung, Suite, Planung, Ausführung,
+Für Linux-Serien sind Python 3.14, die Linux-Abhängigkeiten und das Scope
+`series_linux_recovery` erforderlich. `standalone` allein reicht dort für
+`benchmark plan`, `run` und `resume` nicht aus. Als Alternative zum Mac-Block auf
+einem frischen Linux-Ausführungshost:
+
+```sh
+uv venv --python 3.14 .venv-runtime
+uv pip install --python .venv-runtime/bin/python \
+  -r requirements/runtime-linux-py314.txt dist/*.whl
+.venv-runtime/bin/python tools/qualification/qualify.py --project-root "$PWD" \
+  --output "$PWD/runs/my-native-qualification" --scope series_linux_recovery
+.venv-runtime/bin/python tools/validation/smoke_workflow.py --project-root "$PWD" \
+  --execution-profile "$PWD/runs/my-native-qualification/profile.json"
+```
+
+Mac- und Linux-Befehle sind Alternativen für ihren jeweiligen Host. Verwende für
+jede neue Qualifizierung einen neuen Ausgabepfad. Linux-Einzelläufe mit `solve`
+können auch mit einem `standalone`-Profil ausgeführt werden.
+
+Der neue Smoke-Test verwendet die öffentlichen CLI-Befehle für Generierung, Suite, Planung, Ausführung,
 Status, Audit, Export, Resume und Seal. Er speichert neue Eingaben unter `inputs/`
 und Quittungen/Rohresultate unter `runs/`. Bestehende Verzeichnisse werden nicht
 überschrieben. Vier der acht Jobs aktivieren Parent-cProfile; der Test ist deshalb

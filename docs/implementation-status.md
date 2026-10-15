@@ -1,19 +1,19 @@
 # Implementierungsstatus
 
-Stand der integrierten Quelle `645c424` am 15. Oktober 2026. Die mathematische
+Stand der integrierten Implementierung am 15. Oktober 2026. Die mathematische
 Paketidentität wird unabhängig vom Gitstand durch das tatsächliche
 Paketdateiinventar gebunden. Ein bestandener Betriebscheck ist keine allgemeine
 Geschwindigkeitsfreigabe.
 
 | Bereich | Tatsächlich geprüfter Stand |
 |---|---|
-| Eigenständiges src-Paket, Modelle und gemeinsame SDK-Solverschleife | Implementiert; 325 native Tests bestanden, Ruff sauber |
+| Eigenständiges src-Paket, Modelle und gemeinsame SDK-Solverschleife | Implementiert; 336 native Tests bestanden, Ruff sauber |
 | Feste und adaptive Planung bis Tiefe drei | Implementiert; analytische Tests, vollständige kleine Vergleichsläufe und interne Captureprüfungen |
 | Numerik, Geometrie, Zustände und Queries | Implementiert; externe installierte Vergleichskontrollen einschließlich negativer und dünner Geometrien |
 | Dauerhafte Standaloneläufe, Serien und Wiederaufnahme | Implementiert; Mac- und Linux-Betriebsqualifizierung bestanden |
 | Audit, JSON-/CSV-Export und portable Archive | Implementiert; vollständiger öffentlicher CLI-Ablauf auf beiden Hosts geprüft |
 | Installation und Distribution | Wheel außerhalb des Checkouts installiert; tatsächliche Paketbytes geprüft; Sdist-Rebuild erhält alle Paketbytes |
-| CI | Vier Plattform-/Pythonkombinationen eingerichtet; ein zusätzlicher Linux-Testfehler wurde auf eine feste Queryzahlannahme eingegrenzt, die Tests vergleichen jetzt den tatsächlichen vollständigen Verlauf; erneuter Matrixlauf ausstehend |
+| CI | macOS/Linux mit Python 3.13/3.14 bestanden, einschließlich mathematischem Smoke-Test des außerhalb des Checkouts installierten Wheels |
 | Vollständige externe Laufzeitabnahme | Noch offen; ungeprofilte gepaarte Messungen werden separat durchgeführt |
 
 Die aktuelle native Betriebsqualifizierung umfasst 34 bestandene Einzelkontrollen
@@ -47,3 +47,10 @@ voraus. Unklare oder langsamere Messergebnisse werden nicht als bestanden gezäh
 Die Auswahl einer Projektlizenz und die Git-Veröffentlichung tatsächlicher
 Laufarchive sind separate Entscheidungen; bisher wurde keine Lizenz erfunden und
 keine automatische Rohdatenveröffentlichung eingerichtet.
+
+Eine zusätzliche Fehlerprüfung stellte die ursprüngliche Fehlerursache an drei
+Grenzen der begrenzten rationalen Wahrscheinlichkeitsreparatur wieder her.
+Elf neue analytische Tests prüfen nicht unterstützte Räume, erhaltene Ursachen,
+erfolgreiche Reparaturen und unveränderte normale Volumenpfade. Dieser neue
+Quellstand benötigt erneut seine eigenen Installations- und Vergleichsbelege;
+Messungen eines früheren Wheels werden ihm nicht automatisch zugeschrieben.
