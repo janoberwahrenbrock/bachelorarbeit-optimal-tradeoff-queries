@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "configuration_id": "adaptive2-singleton",
+  "algorithm": {
+    "query_strategy": "reduction_per_query",
+    "depth": 2,
+    "higher_depth_query_source": "both",
+    "grid_size": 5,
+    "planning_evaluation": "candidate_count",
+    "stopping": {
+      "rule": "single_candidate"
+    }
+  },
+  "budget": {
+    "max_queries": null
+  },
+  "execution": {
+    "workers": 8,
+    "start_method": "forkserver",
+    "native_threads": 1,
+    "case_timeout_seconds": null,
+    "cache_policy_id": "bounded_v1"
+  },
+  "recording": {
+    "durability": "per_answer",
+    "trace_level": "standard",
+    "profile": false,
+    "telemetry_failure_policy": "continue"
+  }
+}

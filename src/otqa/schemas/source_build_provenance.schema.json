@@ -1,0 +1,1 @@
+{"$id":"urn:otqa:v1:source_build_provenance","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"properties":{"inventory_sha256":{"pattern":"^[0-9a-f]{64}$","type":"string"},"schema_version":{"const":1},"source":{"$ref":"urn:otqa:v1:common#/$defs/Source"}},"required":["schema_version","source","inventory_sha256"],"type":"object"}

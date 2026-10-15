@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "configuration_id": "adaptive3-confidence99",
+  "algorithm": {
+    "query_strategy": "reduction_per_query",
+    "depth": 3,
+    "higher_depth_query_source": "both",
+    "grid_size": 5,
+    "planning_evaluation": "stop_aware",
+    "stopping": {
+      "rule": "volume_confidence",
+      "threshold": 0.99
+    }
+  },
+  "budget": {
+    "max_queries": null
+  },
+  "execution": {
+    "workers": 8,
+    "start_method": "forkserver",
+    "native_threads": 1,
+    "case_timeout_seconds": null,
+    "cache_policy_id": "bounded_v1"
+  },
+  "recording": {
+    "durability": "per_answer",
+    "trace_level": "standard",
+    "profile": false,
+    "telemetry_failure_policy": "continue"
+  }
+}
