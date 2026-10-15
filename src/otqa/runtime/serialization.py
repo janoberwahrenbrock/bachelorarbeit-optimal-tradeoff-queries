@@ -113,7 +113,7 @@ def _existing_plan_tree(decision, candidate_count, stop_aware):
             loss = branch.expected_terminal_loss
             if loss is None and not stop_aware:
                 loss = branch.expected_terminal_candidates
-            if branch.probability > 0 and branch.candidate_count is not None and loss is not None:
+            if decision.horizon == 1 and branch.probability > 0 and branch.candidate_count is not None and loss is not None:
                 child = {"node_id": f"root-b{index}", "candidate_count": branch.candidate_count, "stop_reason": branch.stop_reason,
                     "maximum_volume_share": branch.maximum_volume_share, "query": None, "expected_terminal_candidates": branch.expected_terminal_candidates,
                     "expected_terminal_loss": loss, "branches": []}
