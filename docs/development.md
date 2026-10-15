@@ -10,7 +10,7 @@ Die Entwicklung verwendet Python 3.13 oder 3.14. Eine kontrollierte Umgebung wir
 uv venv --python 3.13
 uv pip install --python .venv/bin/python -e . pytest==9.1.1 build==1.6.1 ruff==0.17.0
 .venv/bin/python -m pytest
-.venv/bin/python -m ruff check src tests
+.venv/bin/python -m ruff check src tests tools build_support.py
 .venv/bin/python -m build
 ```
 
@@ -63,3 +63,32 @@ Status, Audit, Export, Resume und Seal. Er speichert neue Eingaben unter `inputs
 und Quittungen/Rohresultate unter `runs/`. Bestehende Verzeichnisse werden nicht
 überschrieben. Vier der acht Jobs aktivieren Parent-cProfile; der Test ist deshalb
 ausdrücklich ein Funktionsnachweis und kein Laufzeitvergleich.
+
+Die tatsächliche interaktive Terminalroute kann zusätzlich auf macOS oder Linux
+mit demselben qualifizierten Wheelinterpreter geprüft werden:
+
+```sh
+.venv-runtime/bin/python tools/validation/interactive_tty.py \
+  --project-root "$PWD" \
+  --execution-profile "$PWD/runs/my-native-qualification/profile.json" \
+  --output-id interactive-tty-01
+```
+
+Dieser Test verwendet eine echte neue Terminalsession mit kontrollierter
+Foregroundgruppe und führt drei kleine native Läufe aus: ungültige Eingabe mit
+derselben Frage und anschließender gültiger Antwort, Terminal-EOF und Strg-C.
+Er verwendet ausdrücklich feste Tiefe eins, eine erlaubte Antwort, einen Worker
+und einen 15-Sekunden-Casewatchdog. Das ist eine Funktionsprüfung dieser
+Bediengrenze. Sämtliche neuen Eingaben, nativen Laufartefakte, Rohtranskripte und
+die Quittung bleiben unter dem markierten Projekt in `inputs/` und `runs/`.
+Ein neuer Durchlauf benötigt eine neue `--output-id`; keine frühere Prüfung wird
+überschrieben. Die drei zusätzlichen Terminalproben verändern die Zählung der
+separaten 34-/39-Betriebsqualifizierung nicht.
+
+Bei einem Fehler der Terminalbeobachtung stoppt das Werkzeug nach dem aktuellen
+Fall. Es schließt den PTY-Master und versucht begrenzt, das exakt eigene, noch
+nicht gereapte Foregroundkind über die tatsächliche Terminal-Interrupttaste
+beenden zu lassen. Es sendet keine Signale an bloß aufgezeichnete PIDs oder
+unbewiesene Casegruppen. Unklare Start- oder Cleanupzustände bleiben als
+`blocked_unknown` in `failure-cleanup.json` sichtbar; ein weiterer Solver wird
+nach einer fehlgeschlagenen Beobachtung nie gestartet.

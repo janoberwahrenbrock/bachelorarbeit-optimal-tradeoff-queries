@@ -22,6 +22,8 @@ python3 -m venv .venv
 
 Für dauerhafte CLI- und Benchmarkläufe wird das gebaute Wheel installiert und auf dem Ausführungshost nativ qualifiziert. [Installation und Entwicklung](docs/development.md) und [CLI](docs/cli.md) beschreiben die Schritte.
 
+Der [Quickstart](docs/quickstart.md) führt von der Installation über zwei neue Probleme bis zu gespeicherten Ergebnissen, Export und Archiv.
+
 Die dateiunabhängige Python-API benötigt keine Profildatei:
 
 ```python
@@ -38,7 +40,7 @@ print(result.termination_reason, result.query_counts.answered_total)
 ## Dokumentation
 
 - [Architektur](docs/architecture.md), [Algorithmus](docs/algorithm.md), [Parameter](docs/configuration.md) und [Python-API](docs/python_api.md)
-- [Benchmarkverfahren](docs/benchmarks.md), [CLI](docs/cli.md), [gespeicherte Artefakte](docs/artifacts.md) und [portable Archive](docs/seal.md)
+- [Quickstart](docs/quickstart.md), [Benchmarkverfahren](docs/benchmarks.md), [CLI](docs/cli.md), [gespeicherte Artefakte](docs/artifacts.md) und [portable Archive](docs/seal.md)
 - [Numerik](docs/numerical_behavior.md), [Laufzeitprüfung](docs/performance.md) und [Entwicklung](docs/development.md)
 - [Vollständige Konfigurationsbeispiele](examples/README.md)
 

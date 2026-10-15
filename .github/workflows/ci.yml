@@ -24,7 +24,7 @@ jobs:
       - name: Unit and contract tests
         run: python -m pytest
       - name: Lint
-        run: python -m ruff check src tests tools/validation/installed_smoke.py
+        run: python -m ruff check src tests tools build_support.py
       - name: Build source and wheel distributions
         run: python -m build
       - name: Install wheel outside checkout

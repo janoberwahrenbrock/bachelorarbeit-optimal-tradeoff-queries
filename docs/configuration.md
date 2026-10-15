@@ -14,10 +14,15 @@ Die Python-API verwendet unveränderliche Konfigurationsobjekte. Native JSON-Dat
 | `depth` | Ganzzahl `1`, `2`, `3` | Bei `fixed` die verwendete Tiefe; adaptiv werden alle Horizonte von `1` bis `depth` ausgewertet. |
 | `higher_depth_query_source` | `"grid"`, `"both"` | Oberhalb der letzten Planungsebene nur Grid oder Grid plus Ratioqueries. |
 | `grid_size` | Ganzzahl mindestens `1` | Anzahl logarithmischer Gridwerte; bestimmt keine Obergrenze der insgesamt gestellten Fragen. |
-| `planning_evaluation` | `"candidate_count"`, `"stop_aware"` | Ob Konfidenzterminale bereits in hypothetischen Zuständen absorbiert werden. |
+| `planning_evaluation` | `"candidate_count"`, `"stop_aware"` | Kandidatenbewertung oder Bewertung mit der aktiven Stopregel; die festgelegten Singleton-Rechenpfade bleiben erhalten. |
 | `stopping` | `SingleCandidateStop()` oder `VolumeConfidenceStop(threshold)` | Tatsächliches Ende bei einem Kandidaten beziehungsweise zusätzlich bei ausreichendem Volumenanteil. |
 
 `threshold` ist eine endliche Zahl mit `0 < threshold <= 1`. Ein Wert von `.95` bedeutet einen Anteil von mindestens 95 Prozent, nicht die Zahl `95`. Die Grenze ist einschließlich. Auch bei `VolumeConfidenceStop(1.0)` bleibt die Stopregel semantisch eine Volumenregel; `SingleCandidateStop()` bezeichnet ausdrücklich genau einen verbleibenden Kandidaten.
+
+Die Wahl der Bewertungsroute bleibt auch ohne Volumenschwelle ausdrücklich:
+Adaptive Singletonplanung mit `stop_aware` behält ihren eigenen festgelegten
+Rechenpfad einschließlich Kandidaten-/Recovery-/Akkumulationsschritten. Feste
+Singletonplanung mit `stop_aware` delegiert auf den gewöhnlichen Fixed-Pfad.
 
 Auf der letzten Planungsebene werden immer Ratioqueries verwendet, auch bei `higher_depth_query_source="grid"`. Grid-only ändert die zulässige Querymenge und kann deshalb andere Verläufe oder `no_query` erzeugen. Es ist keine reine Performanceoption.
 

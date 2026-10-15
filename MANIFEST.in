@@ -1,9 +1,10 @@
-include README.md pyproject.toml MANIFEST.in build_support.py THIRD_PARTY_NOTICES.md
+include README.md pyproject.toml MANIFEST.in build_support.py THIRD_PARTY_NOTICES.md otqa-project.json
 recursive-include LICENSES *.txt
 recursive-include src/otqa *.py *.json py.typed
 recursive-include docs *.md
 recursive-include tests *.py
 recursive-include tools/qualification *.py *.md
+recursive-include tools/validation *.py *.md
 recursive-include examples *.json *.md
 recursive-include requirements *.txt
 recursive-exclude * __pycache__ *.py[cod]
