@@ -110,19 +110,16 @@ threshold; conversion creates a separate current input rather than rewriting dat
 
 ## Abnahmestand der Integration vom 16. Oktober 2026
 
-Der aktuelle Release-6-Kandidat bindet Quellinventar
-`cd8137876aabd8041f36aa4494b068d13f07f6d94c6fe5c6843064880e68c63b`.
-662 Tests bestanden im Hauptcheckout in 45,40 Sekunden; Ruff ist sauber.
-Er optimiert die im nativen Release-5-Gate nachgewiesene Schema-/Journalmehrarbeit
-mit eindeutiger Variantenwahl und einem gemeinsamen privaten strukturellen Fold.
-40 Schemaressourcen bleiben byteidentisch; neue Grenz- und Differentialtests
-prüfen strikte Zulassung sowie die historische Fehlerpräzedenz.
+Der Release-7-Kandidat bindet Quellinventar
+`da17a517dffd7011dcf6021ee21edd208b684ae7d5028f04a609a308a2a1db39`. Der neue Payload ergänzt
+aufruflokale Planschemaprüfungswiederverwendung. 87 reine Vertragsprüfungen,
+Ruff und unabhängiger Review bestehen; 40 Schemaressourcen bleiben byteidentisch.
+Die gesamte Testsuite besteht mit 726 Tests in 43,10 Sekunden; Ruff ist sauber.
+Neue installierte Mac-/Linux- sowie SDK-/CLI-Gates folgen für diesen Payload.
 
-Der neue Payload benötigt eigene Installation, Mac-/Linuxqualifizierung und
-frische vollständige SDK-/CLI-Gates. Die zuvor bestandenen R5-Funktionsprüfungen
-und SDK-Messungen werden nicht übertragen. Ebenso bleiben R5-Regression und
-profilierte Diagnose getrennt von einer späteren Freigabe.
-Fortschreitende Ergebnisse und Quittungen stehen im
-[Implementierungsstatus](implementation-status.md) und im
-[laufenden Abnahmenachweis](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json).
+Release 6 ist funktional qualifiziert, besitzt aber keine native Laufzeitfreigabe.
+Seine 78 korrekten Läufe mit 39 exakt gleichen Paaren zeigen elf Regressionen und
+einen unklaren Befund. Frühere Freigaben werden nicht übertragen. Fortlaufende
+Ergebnisse und Quittungen stehen im [Implementierungsstatus](implementation-status.md)
+und im [Abnahmenachweis](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json).
 Eine weitere Änderung des Paketpayloads benötigt neue quellgebundene Gates.

@@ -4,6 +4,7 @@ from functools import lru_cache
 from typing import Any
 from . import schema_v1, schema_v2
 from .codec import DocumentError
+from .schema_reuse import ReferenceReuse, begin_call, end_call
 
 # Legacy construction API remains available to readers of historical artifacts.
 BASE, DIALECT = schema_v1.BASE, schema_v1.DIALECT
@@ -29,7 +30,8 @@ def all_validators():
     from referencing import Registry, Resource
     checker = Draft202012Validator.TYPE_CHECKER.redefine('integer', lambda checker, v: type(v) is int)
     checker = checker.redefine('number', lambda checker, v: type(v) in (int, float) and schema_v1._finite(v))
-    strict = validators.extend(Draft202012Validator, type_checker=checker)
+    reuse = ReferenceReuse(Draft202012Validator.VALIDATORS['$ref'])
+    strict = validators.extend(Draft202012Validator, {'$ref': reuse.reference}, type_checker=checker)
     registry = Registry()
     families = {}
     for version, module in ((1, schema_v1), (2, schema_v2)):
@@ -38,11 +40,16 @@ def all_validators():
             from .schema_v2 import continuation_schema
             docs['continuation'] = continuation_schema()
         families[version] = docs
+        reuse.register_family(module.BASE, defs)
         registry = registry.with_resource(module.BASE + 'common', Resource.from_contents(
             {'$schema': DIALECT, '$id': module.BASE + 'common', '$defs': defs}))
-    return {(kind, version): strict({'$schema': DIALECT, '$id': f'urn:otqa:v{version}:' + kind, **doc},
+    result = {(kind, version): strict({'$schema': DIALECT, '$id': f'urn:otqa:v{version}:' + kind, **doc},
             registry=registry, format_checker=FormatChecker())
             for version, docs in families.items() for kind, doc in docs.items()}
+    for (kind, _), validator in result.items():
+        reuse.register_root(kind, validator)
+    strict._otqa_reference_reuse = reuse
+    return result
 
 
 def registry_and_validators(version=1):
@@ -88,16 +95,20 @@ def validate(kind: str, document: Any) -> Any:
         validator = all_validators()[kind, version]
     except KeyError as exc:
         raise DocumentError(f'Unknown native document kind/version: {kind}/{version}') from exc
-    if kind == 'event' and type(document) is dict and type(document.get('event_type')) is str:
-        selected = _event_validators(version).get(document['event_type'])
-        if selected is not None and selected.is_valid(document):
-            return document
-    # Invalid data retains the full validator's established error ordering.
-    errors = sorted(validator.iter_errors(document), key=lambda e: str(list(e.path)))
-    if errors:
-        first = errors[0]
-        raise DocumentError(f"{kind} v{version} at /{'/'.join(map(str, first.path))}: {first.message}")
-    return document
+    token = begin_call(kind, validator, document)
+    try:
+        if kind == 'event' and type(document) is dict and type(document.get('event_type')) is str:
+            selected = _event_validators(version).get(document['event_type'])
+            if selected is not None and selected.is_valid(document):
+                return document
+        # Invalid data retains the full validator's established error ordering.
+        errors = sorted(validator.iter_errors(document), key=lambda e: str(list(e.path)))
+        if errors:
+            first = errors[0]
+            raise DocumentError(f"{kind} v{version} at /{'/'.join(map(str, first.path))}: {first.message}")
+        return document
+    finally:
+        end_call(token)
 
 
 def write_schema_resources(directory):

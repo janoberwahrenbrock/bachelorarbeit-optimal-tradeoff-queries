@@ -161,6 +161,16 @@ Felder mit denselben strikten Typ- und Endlichkeitsregeln. Unbekannte Formen,
 veränderte Auflösungskontexte und ungültige Daten verwenden den vollständigen
 Validator einschließlich seiner bisherigen Fehlerreihenfolge.
 
+Innerhalb genau eines Formatprüfungsaufrufs kann die Runtime erfolgreiche
+Prüfungen identischer `Planning`- und `PlanSummary`-Werte wiederverwenden. Der
+private Kontext gilt ausschließlich für die bekannten v2-Resultate und drei
+planhaltige Ereignisse. Er bindet aufgelöstes Schema, Prüfumgebung und vollständige,
+typgetreue JSON-Werte; höchstens 64 Einträge und 512 KiB Schlüsselbytes bleiben
+bis zum Aufrufende erhalten. Reentrante und parallele Aufrufe besitzen eigene
+Kontexte. Ungültige Daten, unbekannte Kontexte und erschöpfte Grenzen verwenden
+die vollständige Prüfung. Dateien, Hashes, numerische Werte und fachliche
+Übergänge werden dadurch nicht als bereits geprüft übernommen.
+
 Die versionsspezifischen Journalreader prüfen originale Bytes, Hash, Schema,
 Sequenz, Zeitstempel und binary64-Evidenz. Danach verarbeitet ein privater
 versionsneutraler Fold die strukturellen Übergänge. V2 projiziert die gemeinsamen

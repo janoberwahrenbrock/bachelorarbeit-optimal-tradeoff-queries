@@ -5,42 +5,34 @@
 Stand: 16. Oktober 2026. Countdown mit vollständiger Ersatzplanung,
 `min_expected_progress=0.001`, explizite Fortsetzungen und versionierte
 Aufzeichnung sind auf `codex/countdown-progress-integration` implementiert.
-Der aktuelle Release-6-Kandidat bindet das Paket-/Quellinventar
-`cd8137876aabd8041f36aa4494b068d13f07f6d94c6fe5c6843064880e68c63b`. Er übernimmt die funktional
-geprüfte Countdown-/Fortschrittsintegration und behebt zusätzlich wiederholte
-native Schema-/Journalarbeit. Die neue Version benötigt eigene installierte
-Betriebs- und Laufzeitgates; ältere Freigaben werden nicht übertragen.
+Der Release-7-Kandidat bindet das Paket-/Quellinventar
+`da17a517dffd7011dcf6021ee21edd208b684ae7d5028f04a609a308a2a1db39`. Er vermeidet zusätzlich
+wiederholte erfolgreiche Planschemaprüfungen innerhalb eines einzelnen Aufrufs.
+Die numerischen Verfahren und alle 40 Schemaressourcen bleiben unverändert.
 
 | Bereich | Nachgewiesener Stand für den aktuellen Kandidaten |
 | --- | --- |
-| Vollständige Testsuite | 662 Tests bestanden in 45,40 Sekunden im Hauptcheckout; identische isolierte Vorprüfung 45,74 Sekunden |
-| Statische Prüfung | Ruff sauber |
-| Schema und Journal | 40 unveränderte Schemaressourcen; neue Grenz- und Differentialtests einschließlich ursprünglicher v1-Fehlerreihenfolge |
-| Quellenprüfung | Isolierter Schemareview und 315 Vergleiche echter Ereignisse mit dem vollständigen Validator bestanden |
-| Installation und Betriebsqualifizierung | Neue Release-6-Prüfung erforderlich |
+| Reine neue Verträge und unabhängiger Review | 87 Tests bestanden; keine offenen Befunde im bekannten nativen JSON-Umfang |
+| Vollständige Testsuite | 726 Tests bestanden in 43,10 Sekunden im tatsächlichen Hauptcheckout |
+| Statische Prüfung | Ruff für gesamten Quellcode, Tests, Werkzeuge und Buildbackend sauber |
+| Quellenprüfung | Nur zwei Runtimeproduktdateien gegenüber Release 6 geändert; numerische Quelle unverändert |
+| Installation und Betriebsqualifizierung | Neuer Build und frische Release-7-Prüfung erforderlich |
 | SDK-/CLI-Laufzeitkontrollen und Policyeffekte | Neue vollständige Prüfungen erforderlich |
 | Größere Strategien-/Gridstudie | Noch nicht gestartet; 100 neue Probleme × zwölf Bedingungen erst nach bestandenen Freigabegates |
 
-Release 5 bestand 554 Tests, externe Installation und Sdist-Wiederbau,
-34 macOS- und 39 Linux-Kontrollen, native Fortsetzungen und je acht korrekte
-öffentliche Benchmarkjobs. Seine 128 SDK-Aufrufe bestanden alle 20 Screens
-mit 60 mathematisch bitgleichen Paaren; zwölf Budgetabschlüsse blieben ungelöst.
-Das vollständige native CLIgate fand anschließend bei allen zwölf Bedingungen
-27,6 bis 87,9 Prozent Mehrzeit trotz 72 korrekter Läufe und 36 gleichen Paaren.
-Ein symmetrischer profilierter Diagnosevergleich lokalisiert die Mehrarbeit in
-wiederholter Schema- und Journalprüfung. Profilierte Zeiten sind kein neues Gate.
+Release 6 bestand 662 Tests, 34 macOS- und 39 Linux-Kontrollen, öffentliche
+Fortsetzungen und Acht-Job-Workflows auf beiden Hosts. Sein natives Gate bleibt
+mit 78 korrekten Ergebnissen und 39 gleichen Paaren bei elf Regressionen und einem
+unklaren Befund gesperrt. Profile zeigen wiederholte Schemaarbeit als Hauptkosten.
+Release 5 bestand zuvor 128 SDK-Aufrufe und 20 Zeitscreens, scheiterte aber an
+allen zwölf nativen Bedingungen. Alle Versuche und Fehler bleiben erhalten.
 
-Release 6 prüft bekannte Ereignisvarianten direkt und verarbeitet vollständig
-geprüfte Records im gemeinsamen privaten strukturellen Fold. Die originalen
-Bytes, Hash-/Schema-/Hexprüfungen, Persistenzbarrieren und tatsächlichen
-Policyprüfungen bleiben erhalten. CPU-Mikroproben beweisen keine vollständige
-Laufzeitfreigabe. Alle früheren Versuche und Belege bleiben unter
-`runs/countdown-progress-integration-20261016T030055Z/` erhalten;
-der [fortlaufende Abnahmestand](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json)
-hält die aktuelle Quelle und offenen Schritte fest.
-
-Die folgenden historischen Freigaben gelten ausschließlich für ihre ursprüngliche
-Quelle und werden nicht auf den aktuellen Quellpayload übertragen.
+Reine CPUproben gespeicherter Dokumente zeigen für Release 7 etwa 58 Prozent
+weniger Resultat- und 33 Prozent weniger Ereignisprüfzeit. Daraus folgt noch
+keine vollständige Laufzeitfreigabe. Neue installierte Betriebs- und Laufzeitgates
+sind erforderlich. Der [fortlaufende Abnahmestand](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json)
+bindet Quelle, Rohdaten und offene Schritte. Historische Freigaben gelten nur für
+ihre ursprünglichen Quellen.
 
 ## Historische Freigabe 0.1.0
 

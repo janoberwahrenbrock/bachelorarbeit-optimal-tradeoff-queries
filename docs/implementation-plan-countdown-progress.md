@@ -8,22 +8,21 @@ Die gesicherte Hauptzweig-Ausgangsbasis ist `3f70c16c962d01a5846659dd0bb49f32899
 
 ## Umsetzungs- und Abnahmestand
 
-Der aktuelle Release-6-Kandidat von Version `0.2.0` enthält zusätzlich die
-gezielte Optimierung der nativen Formatprüfung. Sein Paket-/Quellinventar ist
-`cd8137876aabd8041f36aa4494b068d13f07f6d94c6fe5c6843064880e68c63b`. Alle 662 Tests
-bestanden im tatsächlichen Hauptcheckout in 45,40 Sekunden; Ruff ist sauber.
-Die isolierte Vorprüfung bestand dieselben 662 Tests sowie unabhängige
-Schemavergleiche. Alle 40 Schemaressourcen sind unverändert. Ein neuer Build,
-installierte Qualifizierung und frische Laufzeitgates bleiben erforderlich.
+Der Release-7-Kandidat von Version `0.2.0` bindet Quellinventar
+`da17a517dffd7011dcf6021ee21edd208b684ae7d5028f04a609a308a2a1db39`. Zusätzlich zur eindeutigen
+Ereignisschemaauswahl und dem gemeinsamen Journal-Fold verwendet er eine eng
+begrenzte aufruflokale Wiederverwendung erfolgreicher identischer Planschemata.
+87 reine Vertragsprüfungen und ein unabhängiger Review sind bestanden; alle
+40 Schemaressourcen und die numerischen Verfahren bleiben unverändert.
+Die vollständige Testsuite besteht mit 726 Tests in 43,10 Sekunden; Ruff ist
+sauber. Neuer Build und frische installierte Funktions- und Laufzeitgates folgen
+für diesen konkreten Payload.
 
-Release 5 bestand zuvor 34 macOS- und 39 Linux-Betriebskontrollen,
-öffentliche Fortsetzungen und Acht-Job-Workflows auf beiden Hosts sowie die
-128 SDK-Kontrollen. Seine native Laufzeitprüfung scheiterte jedoch bei allen
-zwölf Bedingungen trotz gleicher Rechnungen. Profile zeigen wiederholte
-Schemaarbeit als Hauptursache. Release 6 wählt eindeutige Ereignisschemata direkt
-und verwendet einen gemeinsamen strukturellen Journal-Fold nach vollständiger
-Originalprüfung. Daten, Barrieren und fachliche Prüfungen bleiben erhalten.
-Frühere Versuche werden nicht als Freigabe der neuen Quelle übertragen.
+Release 6 bestand 662 Tests, 34 macOS- und 39 Linux-Kontrollen, öffentliche
+Fortsetzungen und Acht-Job-Workflows. Die native Laufzeitprüfung bleibt mit
+78 korrekten Ergebnissen und 39 gleichen Paaren bei elf Regressionen und einem
+unklaren Befund gesperrt. Release 5 bestand zuvor SDK-Prüfungen, scheiterte aber
+am nativen Gate. Kein früherer Nachweis ersetzt die Abnahme einer neuen Quelle.
 
 Konkrete Quellen, Prüflogs und Quittungen stehen im
 [Implementierungsstatus](implementation-status.md) und im

@@ -92,3 +92,13 @@ den gemeinsamen strukturellen Journal-Fold. Sie lässt alle gespeicherten
 Belege, Schemaressourcen, Persistenzbarrieren und fachlichen Prüfungen bestehen.
 CPU-Mikroproben auf gespeicherten Dokumenten sind dabei nur Diagnose; der neue
 Payload benötigt einen eigenen Build und frische vollständige Freigabegates.
+
+Release 6 besteht alle installierten Funktionskontrollen auf beiden Hosts. Sein
+vollständiges CLIgate bleibt jedoch gesperrt: 78 korrekte Läufe und 39 exakt
+übereinstimmende Paare ergeben elf Regressionen und nach der festgelegten
+Erweiterung einen weiterhin unklaren Befund. Die Folgekorrektur beschränkt sich
+auf die wiederholte Planschemaprüfung innerhalb eines einzigen Aufrufs.
+87 reine Prüfungen einschließlich unabhängig ergänzter Fehler- und Kontextfälle
+bestanden. Ein CPUvergleich gespeicherter Dokumente zeigt rund 58 Prozent weniger
+Resultat- und 33 Prozent weniger Ereignisprüfzeit. Das sind keine vollständigen
+CLI-Laufzeitgewinne; Release 7 erhält neue installierte Funktions- und Laufzeitgates.

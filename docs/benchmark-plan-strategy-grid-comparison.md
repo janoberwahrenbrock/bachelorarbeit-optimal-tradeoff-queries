@@ -4,13 +4,14 @@ Stand: 16. Oktober 2026. Status: Umfang und Ausführung autorisiert; die Integra
 
 Die Umsetzung selbst folgt dem [Implementierungsplan für Countdown und Mindestfortschritt](implementation-plan-countdown-progress.md). Die dortigen Funktions-, Integrations- und Qualifizierungsprüfungen bleiben Voraussetzung dieser Studie. Dieser Benchmarkplan definiert die anschließende inhaltliche Untersuchung der Varianten.
 
-Der aktuelle Release-6-Kandidat enthält die Korrektur der im Release-5-CLIgate
-erkannten Schema-/Journalmehrarbeit. Quellinventar:
-`cd8137876aabd8041f36aa4494b068d13f07f6d94c6fe5c6843064880e68c63b`.
-662 Tests bestanden in 45,40 Sekunden; Ruff und unabhängige Differentialprüfungen
-sind bestanden. Installierte Qualifizierung und neue vollständige Laufzeitgates
-folgen vor dieser Studie. Frühere bestandene SDK-/Funktionsprüfungen ersetzen
-diese neue Abnahme nicht. Der [fortlaufende Abnahmestand](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json)
+Der aktuelle Release-7-Kandidat bindet Quellinventar
+`da17a517dffd7011dcf6021ee21edd208b684ae7d5028f04a609a308a2a1db39`. Er enthält die gezielten
+Korrekturen der beim nativen Release-5-/Release-6-Gate belegten Schemaarbeit.
+87 reine Vertragsprüfungen und unabhängiger Review sind bestanden; die vollständige
+Testsuite besteht mit 726 Tests in 43,10 Sekunden; Ruff ist sauber. Neue installierte
+Gates folgen vor der Studie. Frühere SDK- und
+Funktionsprüfungen werden nicht auf geänderte Quellen übertragen. Der
+[fortlaufende Abnahmestand](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json)
 enthält Quellen, Fehlerhistorie und konkrete Belege.
 
 ## Fragestellungen
@@ -34,7 +35,7 @@ Vorhandene Projektbelege:
 
 | Größe | Vorgeschlagene Festlegung |
 | --- | --- |
-| Unabhängige Probleme | 100 neue ungefilterte Probleme; identische Matrizen und simulierte Antworten für sämtliche Varianten |
+| Unabhängige Probleme | 100 neue ungefilterte Probleme; identische Matrizen und Zielgewichte; jede Antwort wird aus der tatsächlich gestellten Query simuliert |
 | Ziele | 5 |
 | Alternativen | 5 |
 | Masterseed | `2026101601`, Erzeugung einmal mit dem nativen Datasetgenerator |
@@ -135,7 +136,7 @@ Die neue Fortschrittsregel, Countdownneustarts und andere Fälle können die Dau
 
 Dieser Vorschlag vertieft den gewünschten Strategien-/Gridvergleich. Er ersetzt keine ausführliche Tiefe-3-, Sieben-Ziele-, Konfidenz- oder Thresholdsensitivitätsstudie. Solche Untersuchungen erhalten eigene festgelegte Fragen und Fallgruppen.
 
-Die reguläre Integration ist im Release-6-Kandidaten implementiert; noch offene
+Die reguläre Integration ist im Release-7-Kandidaten implementiert; noch offene
 Abnahmen und ihre Belege bleiben im fortlaufenden Implementierungsstatus
 sichtbar. Die Benchmarkserie folgt erst nach bestandener Abnahme. Vor ihrem
 Start und einer Wiederaufnahme werden der Implementierungsplan, dieser
