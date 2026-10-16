@@ -4,8 +4,8 @@
 
 Stand: 16. Oktober 2026. Countdown mit vollständiger Ersatzplanung,
 `min_expected_progress=0.001`, explizite Fortsetzungen und versionierte
-Aufzeichnung sind auf `codex/countdown-progress-integration` implementiert.
-Der neue Release-11-Kandidat bindet das Paket-/Quellinventar
+Aufzeichnung sind als regulärer Vertrag der Version 0.2.0 implementiert.
+Der abgenommene Release-11-Payload bindet das Paket-/Quellinventar
 `47c3d8b2f66446e1ba07f4538879ac9a99bdb567f3082bff254564ff2736ca76`.
 Er bereitet unveränderliche Schemametadaten einmalig vor, prüft die häufigen
 Planobjekte mit vollständigen positiven Strukturbelegen und sammelt binäre
@@ -15,13 +15,13 @@ prüft der Supervisor das terminale Resultat einmal vollständig nach bewiesenem
 Prozessgruppenende. Mit Zeitlimit bleibt die zusätzliche frühe Watchdogprüfung
 erhalten. Die abschließende Validierung bleibt in beiden Fällen verpflichtend.
 
-| Bereich | Nachgewiesener Stand für den aktuellen Kandidaten |
+| Bereich | Nachgewiesener Stand für die reguläre Integration |
 | --- | --- |
 | Reine Verträge und unabhängiger Review | Gezielte Quellprüfungen bestanden; keine offenen P1/P2 im unterstützten nativen JSON-Umfang |
-| Vollständige Testsuite | 942 Tests in 43.52 Sekunden im tatsächlichen Hauptcheckout |
+| Vollständige Testsuite | 942 Tests in 43.52 Sekunden im tatsächlichen Hauptcheckout; zusätzlich 64 reine Verträge für die getrennte statistische Nachprüfung bestanden |
 | Statische Prüfung | Ruff für Quellcode, Tests, Werkzeuge und Buildbackend sauber |
 | Installation und Betriebsqualifizierung | Release 11: 34 Mac- und 39 Linux-Kontrollen, öffentliche Fortsetzung und je acht korrekte CLI-Fälle bestanden; zusätzlich drei Mac-Terminalabläufe und externe SDK-Installation geprüft |
-| SDK-/CLI-Laufzeitkontrollen und Policyeffekte | Ursprünglicher CLI-Vergleich beendet: 84 korrekte Läufe, 42 mathematisch gleiche Paare, zehn klare Bestehen und zwei unklare Bedingungen. SDK- und Policykontrollen laufen; getrennte statistische CLI-Nachprüfung wird vorbereitet |
+| SDK-/CLI-Laufzeitkontrollen und Policyeffekte | SDK: 128 Aufrufe, 60 mathematisch gleiche Vergleichspaare und alle 20 ursprünglichen Laufzeitscreens bestanden. Separate CLI-Nachprüfung: 720 korrekte Aufrufe, 360 mathematisch gleiche Paare, alle zwölf festen Sign-Gates bestanden; acht gezielte Verhaltensprüfungen bestanden |
 | Größere Strategien-/Gridstudie | Noch nicht gestartet; 100 neue Probleme × zwölf Bedingungen erst nach bestandenen Freigabegates |
 
 Die Releases 5, 6 und 7 sind trotz bestandener Funktionskontrollen am vollständigen
@@ -37,15 +37,29 @@ bei einem medianen Zeitquotienten von 1,04785 unklar. Drei isolierte Vorschläge
 am Zahlenvergleich verfehlten ihre vorab festgelegten Nutzenhürden und wurden
 verworfen. Release 11 enthält ausschließlich den zusätzlich geprüften
 Supervisorumbau. Sein ursprünglicher nativer Vergleich ist ohne klare
-Regression beendet, aber nicht insgesamt freigegeben.
+Regression beendet, bleibt aber nach seiner ursprünglichen Regel insgesamt
+unklar.
 
 Die implementierte Max-/Min-Screeningregel enthält einen Prüfdesignfehler:
 Sobald Werte auf beiden Seiten der Grenze liegen, kann eine Ergänzung diesen
 Zustand nicht mehr auflösen. Alle ursprünglichen Einstufungen bleiben erhalten.
-Eine neue, getrennte Nachprüfung fixiert ihre vollständige Stichprobe und
-Auswertung vor dem ersten neuen Lauf; die Grenze von fünf Prozent bleibt
-unverändert. Die dabei erforderlichen statistischen Annahmen werden ausdrücklich
-ausgewiesen. Sie ist keine nachträgliche Umwertung der bisherigen Messungen.
+Die neue, getrennte Nachprüfung fixierte ihre vollständige Stichprobe und
+Auswertung vor dem ersten neuen Lauf; die Grenze von fünf Prozent blieb
+unverändert. Alle zwölf Bedingungen bestehen, mit medianen CLI-Zeitquotienten
+zwischen 0,9616 und 1,0317. Alle 721 Controller-/Fallgruppen sind nachweislich
+beendet. Die Binomialinterpretation setzt unabhängige Vorzeichen innerhalb
+jeder Bedingung voraus; dieser Nachweis auf zwei kleinen analytischen Problemen
+ist keine allgemeine Laufzeitgarantie. Die Nachprüfung wertet keine früheren
+Messungen um.
+
+Die acht getrennten Verhaltensprüfungen sind absichtlich ungelöste Kontrollen:
+sechs enden nach zwei Antworten am Budget, zwei ohne Antwort am
+Mindestfortschritt. Alle zwölf Antworten sind unabhängig korrekt geprüft.
+Vier Ersatzplanungen wurden über ausdrücklich deklarierte Cursor geprüft;
+native Herkunfts- und Fortsetzungsnachweise sind separat qualifiziert. Eine
+frühere Kontrollserie blieb an einer falschen exakten Testannahme stehen;
+deren Fehler und sieben nicht gestartete Jobs bleiben erhalten. Die Korrektur
+betraf ausschließlich den Test der unveränderten binären gewichteten Summe.
 
 Komponentenmessungen beschreiben ausschließlich ihre angegebenen Prüfgrenzen;
 sie ersetzen keine vollständigen Laufzeitgates. Der

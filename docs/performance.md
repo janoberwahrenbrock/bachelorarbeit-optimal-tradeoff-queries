@@ -201,3 +201,31 @@ Eine gesonderte Nachprüfung wird mit festen neuen Paarzahlen, derselben Grenze
 und vollständiger Auswertungsregel vor ihrem ersten Lauf festgelegt. Ihr
 statistisches Screening gilt nur unter den dokumentierten Annahmen und für die
 untersuchten Kontrollen; es ist keine allgemeine Laufzeitgarantie.
+
+Der neue SDK-Vergleich bestand alle 128 vorgesehenen Aufrufe, die 60
+mathematisch identischen Zeitvergleichspaare und sämtliche 20 ursprünglichen
+Laufzeitscreens. Die Quotienten der SDK-Zeitmediane liegen zwischen 0,93735 und
+1,04098. Von den 128 Kontrollen sind 116 gelöst; zwölf enden ohne Auswahl am
+vorher festgelegten Antwortbudget. Diese begrenzten Kontrollen werden nicht als
+vollständig gelöste Probleme oder als Nachweis unbegrenzter H3-Laufzeit gezählt.
+Alle gespeicherten Antworten und vorhandenen Auswahlen sind unabhängig geprüft.
+
+Die getrennte native Nachprüfung umfasst vorab festgelegte 30 neue Paare je
+zwölf Bedingungen, also 720 vollständige CLI-Aufrufe auf zwei analytischen
+Problemen. Sie verwendet den einseitigen exakten Binomialschwanz der strikten
+Unterschreitungen von `1.05` und die feste Grenze `0.05/12`. Mindestens 23 von
+30 Quotienten müssen strikt darunter liegen; Gleichheit zählt nicht als
+Unterschreitung. Zusätzlich müssen alle Paare vollständig und mathematisch
+identisch sein und die Prozessgruppen nachweislich enden. Es gibt weder
+Ausreißerentfernung noch Verlängerung bis zum Bestehen. Die Binomialinterpretation
+setzt unabhängige Vorzeichen innerhalb jeder Bedingung voraus. Ausbalancierte
+Reihenfolgen und die Korrektur über zwölf Bedingungen beweisen diese Annahme
+nicht. Werkzeug, vollständige Reihenfolge und Protokoll wurden vor dem ersten
+neuen Aufruf eingefroren. Tatsächlich bestehen alle zwölf Bedingungen mit
+29, 29, 26, 23, 29, 30, 29, 30, 30, 30, 30 und 29 strikten Unterschreitungen
+von jeweils 30; es gab keine Gleichheiten an der Grenze. Die medianen
+CLI-Quotienten liegen zwischen 0,9616 und 1,0317. Alle 720 Resultate sind korrekt,
+alle 360 Mathematik-/Journalpaare identisch und alle 721 Controller-/Fallgruppen
+beendet. Die feste Stichprobe wurde nicht ergänzt. Der ursprüngliche
+84-Aufruf-Befund bleibt unverändert unklar; der separate neue Nachweis besteht
+innerhalb seiner oben angegebenen Grenzen.
