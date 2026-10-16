@@ -18,6 +18,7 @@ from otqa import (
 from otqa.answers import SimulatedAnswers
 from otqa.errors import InputValidationError
 from otqa.models import QueryPlanned
+from otqa.models.execution import PlanningAttempt, ProgressEvidence
 from otqa.models.planning import FixedScore, PlanningDecision, QueryEvaluation
 from otqa.execution import cursor_after_answer, initial_cursor
 from otqa.planning import PlannerSession
@@ -102,7 +103,17 @@ def test_complete_countdown_matches_independent_remaining_depth_reference(depth,
         history.append(AnsweredQuery(decision.query, provider(decision.query)))
 
     result = solve(PROBLEM, config, provider, budget=QueryBudget(8))
-    assert result.exactly_solved and result.selected_candidate_index == 2
+    assert result.solved and result.selected_candidate_index == 2
+    if planning == 'candidate_count':
+        assert result.exactly_solved and result.termination_reason == 'exact_single_candidate'
+        assert result.final_state.candidate_count == 1
+    elif result.exactly_solved:
+        assert result.termination_reason == 'exact_single_candidate'
+        assert result.final_state.candidate_count == 1
+    else:
+        assert result.termination_reason == 'volume_confidence'
+        assert result.final_state.candidate_count > 1
+        assert result.selected_candidate_volume_share >= .99
     assert result.answers == tuple(history)
     assert tuple(record.planning.horizon for record in result.queries) == expected_horizons
     assert len(result.queries) == len(expected)
@@ -225,12 +236,35 @@ def test_no_query_at_remaining_depth_one_checks_full_depth_before_progress_stop(
     assert result.query_counts.dispatched_new == 0
 
 
-def test_confidence_reached_after_actual_first_answer_skips_the_remaining_query():
+@pytest.mark.parametrize('value,reason,remaining_candidates', [
+    (.91, 'volume_confidence', 2),
+    (1.001, 'exact_single_candidate', 1),
+])
+def test_terminal_state_after_actual_first_answer_skips_the_remaining_query(
+        monkeypatch, value, reason, remaining_candidates):
     problem = Problem(((1., 0.), (0., 1.)))
+    # Exercise the solver's stop boundary with a declared first query. A free
+    # numerical planner may instead choose an exact separating query, which
+    # legitimately invokes singleton precedence rather than confidence.
+    query = Query(0, 1, value)
+
+    def first_plan(self, state, *, requested_depth):
+        assert requested_depth == 2 and not state.history
+        decision = PlanningDecision(query, 2, FixedScore(1., 1., (1.,)), (),
+                                    QueryEvaluation(query, 1., ()))
+        progress = ProgressEvidence('candidate_count', 2., 1., 1., .001)
+        return PlanningAttempt(2, (2,), 'available', decision, progress)
+
+    monkeypatch.setattr(PlannerSession, 'plan', first_plan)
     events = []
     result = solve(problem, policy(stopping=VolumeConfidenceStop(.95)),
-                   SimulatedAnswers((.1, .9)), recorder=events.append, budget=QueryBudget(8))
-    assert result.solved and result.termination_reason == 'volume_confidence'
+                   SimulatedAnswers((.9, .1)), recorder=events.append, budget=QueryBudget(8))
+    assert result.solved and result.termination_reason == reason
+    assert result.exactly_solved == (reason == 'exact_single_candidate')
+    assert result.selected_candidate_index == 0
+    assert result.final_state.candidate_count == remaining_candidates
+    if reason == 'volume_confidence':
+        assert .95 <= result.selected_candidate_volume_share < 1.
     assert result.query_counts.answered_new == 1
     decisions = [event.planning for event in events if isinstance(event, QueryPlanned)]
     assert tuple(decision.horizon for decision in decisions) == (2,)
