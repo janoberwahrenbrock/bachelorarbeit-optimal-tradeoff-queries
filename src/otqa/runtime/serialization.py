@@ -97,7 +97,7 @@ def _existing_plan_tree(decision, candidate_count, stop_aware):
         if loss is None:
             return None
         evaluation = item.evaluation
-        node = {"node_id": node_id, "candidate_count": item.candidate_count, "stop_reason": item.stop_reason,
+        node = {"node_id": node_id, "candidate_count": item.candidate_count, "stop_reason": _plan_stop_reason_wire(item.stop_reason),
             "maximum_volume_share": item.maximum_volume_share, "query": query_wire(evaluation.query) if evaluation else None,
             "expected_terminal_candidates": item.expected_terminal_candidates, "expected_terminal_loss": loss,
             "branches": [{"answer": child.answer, "probability": child.probability,
@@ -118,7 +118,7 @@ def _existing_plan_tree(decision, candidate_count, stop_aware):
             if loss is None and not stop_aware:
                 loss = branch.expected_terminal_candidates
             if decision.horizon == 1 and branch.probability > 0 and branch.candidate_count is not None and loss is not None:
-                child = {"node_id": f"root-b{index}", "candidate_count": branch.candidate_count, "stop_reason": branch.stop_reason,
+                child = {"node_id": f"root-b{index}", "candidate_count": branch.candidate_count, "stop_reason": _plan_stop_reason_wire(branch.stop_reason),
                     "maximum_volume_share": branch.maximum_volume_share, "query": None, "expected_terminal_candidates": branch.expected_terminal_candidates,
                     "expected_terminal_loss": loss, "branches": []}
             branches.append({"answer": branch.answer, "probability": branch.probability, "child": child})
@@ -128,6 +128,11 @@ def _existing_plan_tree(decision, candidate_count, stop_aware):
     if decision.score.expected_queries is not None:
         tree["expected_queries"] = decision.score.expected_queries
     return tree
+
+
+def _plan_stop_reason_wire(reason):
+    """Project the internal singleton label to the established artifact tag."""
+    return "exact_single_candidate" if reason == "single_candidate" else reason
 
 
 def state_wire(state, alternatives: list[str], last_query_id: str | None, execution_cursor=None) -> dict:
