@@ -257,3 +257,13 @@ def test_deep_or_changed_recursion_limit_declines_certificate(monkeypatch):
 def test_noncanonical_ref_and_definition_names_decline(tail):
     definitions = {'Root': {'$ref': 'urn:test:common#/$defs/' + tail}, tail: {'const': 1}}
     assert schema_predicate.compile_reference('urn:test:', definitions, 'Root') is None
+
+
+def test_cyclic_nonjson_value_declines_certificate_and_retains_native_admission():
+    value = []
+    value.append(value)
+    certificate = compile_synthetic({})
+    assert not certificate(value)
+    # An unconstrained original schema permits it; False must never reject.
+    validator = REFERENCE.all_validators()['event', 2].evolve(schema={})
+    assert validator.is_valid(value)

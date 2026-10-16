@@ -5,7 +5,7 @@
 Stand: 16. Oktober 2026. Countdown mit vollständiger Ersatzplanung,
 `min_expected_progress=0.001`, explizite Fortsetzungen und versionierte
 Aufzeichnung sind auf `codex/countdown-progress-integration` implementiert.
-Der neue Release-8-Kandidat bindet das Paket-/Quellinventar
+Der neue Release-9-Kandidat bindet das Paket-/Quellinventar
 `d2ab33384bf2652999b4bcfa74a99b150b07eedc25f4b35a9c740bd938005539`.
 Er bereitet unveränderliche Schemametadaten einmalig vor, prüft die häufigen
 Planobjekte mit vollständigen positiven Strukturbelegen und sammelt binäre
@@ -15,9 +15,9 @@ ist entfernt. Numerische Verfahren und alle 40 Schemaressourcen bleiben erhalten
 | Bereich | Nachgewiesener Stand für den aktuellen Kandidaten |
 | --- | --- |
 | Reine Verträge und unabhängiger Review | Gezielte Quellprüfungen bestanden; keine offenen P1/P2 im unterstützten nativen JSON-Umfang |
-| Vollständige Testsuite | 888 Tests in 41,43 Sekunden im Hauptcheckout; acht zusätzliche unabhängige Fälle separat bestanden |
+| Vollständige Testsuite | 903 Tests in 42.32 Sekunden im tatsächlichen Hauptcheckout |
 | Statische Prüfung | Ruff für Quellcode, Tests, Werkzeuge und Buildbackend sauber |
-| Installation und Betriebsqualifizierung | Frischer Build und Mac-/Linux-Prüfungen für Release 8 erforderlich |
+| Installation und Betriebsqualifizierung | Frischer Build und Mac-/Linux-Prüfungen für Release 9 erforderlich |
 | SDK-/CLI-Laufzeitkontrollen und Policyeffekte | Neue vollständige Prüfungen erforderlich |
 | Größere Strategien-/Gridstudie | Noch nicht gestartet; 100 neue Probleme × zwölf Bedingungen erst nach bestandenen Freigabegates |
 

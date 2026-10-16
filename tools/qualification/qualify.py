@@ -122,13 +122,16 @@ class Controls:
             return {"source_sha256": source["source_sha256"], "files": len(inventory["files"])}
         if case == "offline_schemas":
             from otqa.runtime.schema import all_validators
+            from otqa.runtime.schema_immutable import _thaw_schema
             validators = all_validators()
             assert validators and ("config", 1) in validators and ("config", 2) in validators
             schemas = list((Path(otqa.__file__).parent / "schemas").glob("*.schema.json"))
             schema_ids = {read_json(path)["$id"] for path in schemas}
             for validator in validators.values():
                 assert validator.schema["$id"] in schema_ids
-                validator.check_schema(validator.schema)
+                # The metaschema expects JSON containers; check a faithful fresh
+                # view of this actual compiled schema with the same validator.
+                validator.check_schema(_thaw_schema(validator.schema))
             assert len(schema_ids) == len(schemas)
             return {"document_validators": len(validators), "schema_resources": len(schemas),
                     "versions": sorted({version for _, version in validators})}

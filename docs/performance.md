@@ -136,3 +136,14 @@ zwischenzeitlich erzeugte pyc-Dateien; sämtliche ursprünglichen Messungen wurd
 aus unveränderten Produkt- und Rohdaten ausgewertet, ohne Wiederholung oder
 Fallauswahl. Die Kombination mit unveränderlicher Metadatenvorbereitung und
 Akkumulator benötigt weiterhin neue vollständige Paket- und Laufzeitgates.
+
+
+Die erste installierte Abnahme dieser Kombination erkannte einen Fehler im
+Qualifizierungswerkzeug: Die unveränderliche interne Schemaansicht wurde direkt
+an die JSON-Metaschemaprüfung übergeben. Der korrigierte Kontrollaufruf erzeugt
+eine frische getreue JSON-Ansicht des tatsächlichen kompilierten Schemas und
+verwendet dieselbe vollständige Metaschemaprüfung. Alle 40 Ressourcen und vier
+absichtlich fehlerhafte Schemas werden durch neue Vertragsfälle geprüft; die
+fehlerhaften werden unverändert abgelehnt. Der Paket-/Algorithmuscode wurde
+dabei nicht verändert. Die fehlgeschlagene Abnahme bleibt separat erhalten;
+der neue Tool-/Buildstand erhält frische installierte Kontrollen.
