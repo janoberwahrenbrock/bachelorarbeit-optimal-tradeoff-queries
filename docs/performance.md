@@ -65,13 +65,13 @@ mit ausdrücklich deaktivierter Fortschrittsschwelle misst den Implementierungs-
 aufwand bei gleichen vollständigen Rechnungen. Eine zweite Gruppe vergleicht
 die neue Quelle mit `None` und `0.001` und beschreibt die fachlich veränderten
 Stopps. Zusätzliche volle Countdownersatzplanung ist gewollter Suchaufwand und
-wird separat gezählt. Die Hauptstudie mit100neuenFällen×12Bedingungen misst
+wird separat gezählt. Die Hauptstudie mit 100 neuen Fällen × 12 Bedingungen misst
 Strategie und Grid bei überall gleicher Schwelle, nicht einen isolierten
 Codegeschwindigkeitsgewinn.
 
 Die vorab festgelegte kurze Matrix und drei gepaarten Blöcke stehen im
 [Implementierungsplan](implementation-plan-countdown-progress.md). Ein medianer
-neuer/alter Zeitquotient über1.05 wird untersucht; bei unklarem Screening ist
+neuer/alter Zeitquotient über 1.05 wird untersucht; bei unklarem Screening ist
 eine einmalige feste Ergänzung für alle betroffenen Bedingungen vorgesehen.
 Ein unklarer Befund bleibt unklar. Die historischen Messwerte darüber sind kein
 Laufzeitnachweis für den neuen Quellpayload. Tatsächliche neue Nachweise werden

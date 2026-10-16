@@ -16,6 +16,7 @@ from pathlib import Path
 import statistics
 import subprocess
 import time
+from uuid import uuid4
 
 
 OLD_SOURCE = 'b40342c2cbf7712992ce6a62b01647b5c275dbc3b6358430b637b206e1d41e4a'
@@ -69,6 +70,26 @@ def write_new(path, value):
         stream.write(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + '\n')
         stream.flush()
         os.fsync(stream.fileno())
+
+
+def update_status(directory, value):
+    """Only operational progress replaces bytes; raw results remain immutable."""
+    temporary = directory / ('.live-status-' + uuid4().hex + '.tmp')
+    write_new(temporary, {**value, 'updated_at_utc': datetime.now(timezone.utc).isoformat()})
+    os.replace(temporary, directory / 'live-status.json')
+    descriptor = os.open(directory, os.O_RDONLY)
+    try:
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+
+
+def process_identity():
+    value = {'pid': os.getpid(), 'hostname': os.uname().nodename, 'boot_id': None, 'start_ticks': None}
+    if Path('/proc/self/stat').is_file():
+        value['start_ticks'] = int(Path('/proc/self/stat').read_text().rsplit(')', 1)[1].split()[19])
+        value['boot_id'] = Path('/proc/sys/kernel/random/boot_id').read_text().strip()
+    return value
 
 
 def environment():
@@ -231,6 +252,48 @@ def quality(case, problem, solver):
             'actual_answers_correct': True}
 
 
+def verify_job(root, directory, plan, job, target, condition, receipt):
+    """Attach verified evidence; the caller preserves a receipt for gate failures."""
+    variant, case_id = job['variant'], condition['case_id']
+    python = plan['interpreters'][variant]
+    verified = subprocess.run([python, '-c', VERIFY, str(target)], cwd=root, env=environment(),
+                              text=True, capture_output=True)
+    receipt['reader_returncode'] = verified.returncode
+    if verified.returncode:
+        receipt['reader_error'] = verified.stderr
+        return
+    evidence = json.loads(verified.stdout)
+    result, manifest = evidence['result'], evidence['manifest']
+    expected_source = plan['source_probes'][variant]['source']['source_sha256']
+    if evidence['source']['source_sha256'] != expected_source:
+        raise ValueError('native job source changed after frozen admission')
+    actual = manifest['environment']
+    admitted = plan['source_probes'][variant]
+    if actual['python'] != admitted['python_version'] or actual['packages'] != admitted['packages']:
+        raise ValueError('native job environment changed after frozen admission')
+    if any(actual['native_thread_environment'].get(name) != '1' for name in THREADS):
+        raise ValueError('native job did not retain exactly one native thread per process')
+    expected_config = config(condition, variant)
+    if (manifest['effective_algorithm'] != expected_config['algorithm']
+            or manifest['effective_execution'] != expected_config['execution']
+            or manifest['effective_recording'] != expected_config['recording']
+            or manifest['effective_budget'] != expected_config['budget']):
+        raise ValueError('native job effective configuration differs from frozen controls')
+    solver = result['solver_result']
+    receipt.update(source=manifest['source'], result_sha256=digest((target / 'result.json').read_bytes()),
+        journal_sha256=result['journal']['sha256'] if result['journal'] else None,
+        result_ref=(target / 'result.json').relative_to(root).as_posix(), status=result['execution_status'],
+        api_seconds=result['timings']['api_call_wall_seconds'], case_seconds=result['timings']['case_elapsed_seconds'],
+        effective_execution=manifest['effective_execution'], native_thread_environment=actual['native_thread_environment'])
+    if solver is not None:
+        problem = json.loads((directory / 'inputs' / (case_id + '-problem.json')).read_bytes())
+        receipt.update(solved=solver['solved'], termination_reason=solver['termination_reason'],
+            answered_queries=result['query_counts']['answered_new'], mathematical_result=mathematical(solver),
+            quality=quality(plan['cases'][case_id], problem, solver),
+            fallbacks=sum(cycle['restart_reason'] is not None for cycle in solver.get('planning_cycles', ())))
+    receipt['verified'] = True
+
+
 def run_job(root, directory, plan, job):
     check_frozen(root, directory, plan)
     condition = next(item for item in plan['conditions'] if item['condition_id'] == job['condition_id'])
@@ -254,31 +317,13 @@ def run_job(root, directory, plan, job):
         elapsed = time.perf_counter() - start
     receipt = {'job': job, 'cli_returncode': completed.returncode, 'cli_wall_seconds': elapsed,
         'command': command, 'verified': False}
-    if (target / 'result.json').exists():
-        verified = subprocess.run([python, '-c', VERIFY, str(target)], cwd=root, env=environment(),
-                                  text=True, capture_output=True)
-        receipt['reader_returncode'] = verified.returncode
-        if verified.returncode:
-            receipt['reader_error'] = verified.stderr
-        else:
-            evidence = json.loads(verified.stdout)
-            result, manifest = evidence['result'], evidence['manifest']
-            expected_source = plan['source_probes'][variant]['source']['source_sha256']
-            if evidence['source']['source_sha256'] != expected_source:
-                raise ValueError('native job source changed after frozen admission')
-            solver = result['solver_result']
-            receipt.update(verified=True, source=manifest['source'], result_sha256=digest((target / 'result.json').read_bytes()),
-                journal_sha256=result['journal']['sha256'] if result['journal'] else None,
-                result_ref=(target / 'result.json').relative_to(root).as_posix(), status=result['execution_status'],
-                api_seconds=result['timings']['api_call_wall_seconds'], case_seconds=result['timings']['case_elapsed_seconds'])
-            if solver is not None:
-                problem = json.loads((directory / 'inputs' / (case_id + '-problem.json')).read_bytes())
-                receipt.update(solved=solver['solved'], termination_reason=solver['termination_reason'],
-                    answered_queries=result['query_counts']['answered_new'], mathematical_result=mathematical(solver),
-                    quality=quality(plan['cases'][case_id], problem, solver),
-                    fallbacks=sum(cycle['restart_reason'] is not None for cycle in solver.get('planning_cycles', ())))
+    try:
+        if (target / 'result.json').exists():
+            verify_job(root, directory, plan, job, target, condition, receipt)
+        check_frozen(root, directory, plan)
+    except Exception as exc:
+        receipt.update(verified=False, gate_error={'type': type(exc).__name__, 'message': str(exc)})
     write_new(receipt_path, receipt)
-    check_frozen(root, directory, plan)
     return receipt
 
 
@@ -339,8 +384,12 @@ def run(root, directory):
     check_frozen(root, directory, plan)
     with (directory / 'driver.lock').open('a+') as lock:
         fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        identity = process_identity()
+        write_new(directory / 'driver-process.json', identity)
         failed = False
         for job in (item for item in plan['jobs'] if not item['conditional']):
+            update_status(directory, {'phase': 'running_initial_blocks', 'current_job': job,
+                'process': identity, 'completed_cli_calls': len(list((directory / 'receipts').glob('*.json')))})
             value = run_job(root, directory, plan, job)
             if not value['verified'] or value['cli_returncode'] != 0:
                 failed = True
@@ -358,6 +407,8 @@ def run(root, directory):
             'blocks': [4, 5, 6] if affected else [], 'additional_blocks_after_this': False})
         if not failed:
             for job in (item for item in plan['jobs'] if item['conditional'] and item['condition_id'] in affected):
+                update_status(directory, {'phase': 'running_declared_extension', 'current_job': job,
+                    'process': identity, 'completed_cli_calls': len(list((directory / 'receipts').glob('*.json')))})
                 value = run_job(root, directory, plan, job)
                 if not value['verified'] or value['cli_returncode'] != 0:
                     failed = True
@@ -379,6 +430,11 @@ def run(root, directory):
             and final['all_completed_pairs_math_valid']
             and all(row['screening'] == 'screening_pass' for row in final['conditions']))
         write_new(directory / 'report.json', final)
+        update_status(directory, {'phase': 'completed' if not failed else 'stopped_for_failure',
+            'process': identity, 'current_job': None,
+            'completed_cli_calls': len(list((directory / 'receipts').glob('*.json'))),
+            'screening_passed': final['screening_passed'],
+            'report_sha256': digest((directory / 'report.json').read_bytes())})
     if final['screening_passed']:
         return 0
     if final['screening_inconclusive'] and not failed and not final['screening_regressions']:

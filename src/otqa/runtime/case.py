@@ -210,7 +210,7 @@ def run_attempt(payload: dict, *, case_start: float, started_at: str, identity: 
     if payload["answer_source"] == "replay":
         consumed = provider.consumed
         declared = len(replay["answers"])
-        publish_json(context, attempt / "replay-status.json", {"schema_version": 2, "run_id": payload["run_id"], "attempt_id": payload["attempt_id"],
+        publish_json(context, attempt / "replay-status.json", {"schema_version": 1, "run_id": payload["run_id"], "attempt_id": payload["attempt_id"],
             "script": payload["inputs"]["replay_answers"], "declared_answers": declared, "consumed_answers": consumed,
             "remaining_answers": declared - consumed, "complete_replay": consumed == declared})
     envelope = {"schema_version": 2, "run_id": payload["run_id"], "attempt_id": payload["attempt_id"], "problem_id": problem["problem_id"],

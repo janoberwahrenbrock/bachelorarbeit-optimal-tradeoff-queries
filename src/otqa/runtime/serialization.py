@@ -187,11 +187,27 @@ def progress_wire(progress):
     return {key: getattr(progress, key) for key in ('basis', 'starting_value', 'expected_terminal_value',
         'expected_progress', 'threshold', 'comparison', 'admissible')}
 
+def _attempt_starting_count(attempt):
+    """Reuse the already computed actual count for consistent optional trees."""
+    evidence = attempt.selected_progress
+    if evidence is None:
+        evidence = next((item.best_progress for item in attempt.horizon_evidence
+                         if item.best_progress is not None), None)
+    if evidence is None:
+        return None
+    count = evidence.starting_value
+    if not count.is_integer() or count < 1:
+        raise DocumentError('Planning progress does not bind an actual candidate count')
+    return int(count)
+
+
 def attempt_wire(attempt, *, stop_aware, trace_level):
+    candidate_count = _attempt_starting_count(attempt)
     def plan(value, *, witness=False):
         if value is None:
             return None
-        result = planning_wire(value, stop_aware=stop_aware, trace_level=trace_level)
+        result = planning_wire(value, stop_aware=stop_aware, trace_level=trace_level,
+                               candidate_count=candidate_count)
         if witness:
             # A maximum-gain witness may lose the rate comparison even within
             # its own horizon. Its enclosing field supplies the witness role;
@@ -214,6 +230,8 @@ def cycle_wire(cycle, *, stop_aware, trace_level):
         raise DocumentError('Version-two query record lacks its planning cycle')
     return {'cursor_before': cursor_wire(cycle.cursor_before),
         'attempts': [attempt_wire(a, stop_aware=stop_aware, trace_level=trace_level) for a in cycle.attempts],
-        'selected_plan': None if cycle.selected_plan is None else planning_wire(cycle.selected_plan, stop_aware=stop_aware, trace_level=trace_level),
+        'selected_plan': None if cycle.selected_plan is None else planning_wire(cycle.selected_plan,
+            stop_aware=stop_aware, trace_level=trace_level,
+            candidate_count=_attempt_starting_count(cycle.attempts[-1])),
         'outcome': cycle.outcome, 'restart_reason': cycle.restart_reason,
         'proposed_cursor_after_answer': None if cycle.proposed_cursor_after_answer is None else cursor_wire(cycle.proposed_cursor_after_answer)}

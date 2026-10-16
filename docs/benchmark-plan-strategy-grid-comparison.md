@@ -1,6 +1,6 @@
 # Benchmarkplan für Strategien und Gridgrößen
 
-Stand: 16. Oktober 2026. Status: Umfang und Ausführung am16.10.2026autorisiert; Implementierung und Vorabnahmen laufen, die größere Vergleichsserie ist noch nicht gestartet. Der Nutzer hat den Vergleich von Neuplanung, Countdown und adaptiver Strategie als Gegenstand bestätigt und Grid 3, 5, 10 und 20 vorgeschlagen. Der hier konkret vorgeschlagene Umfang beträgt 100 neue Probleme und 1.200 Läufe.
+Stand: 16. Oktober 2026. Status: Umfang und Ausführung am 16.10.2026 autorisiert; Implementierung und Vorabnahmen laufen, die größere Vergleichsserie ist noch nicht gestartet. Der Nutzer hat den Vergleich von Neuplanung, Countdown und adaptiver Strategie als Gegenstand bestätigt und Grid 3, 5, 10 und 20 vorgeschlagen. Der hier konkret vorgeschlagene Umfang beträgt 100 neue Probleme und 1.200 Läufe.
 
 Die Umsetzung selbst folgt dem [Implementierungsplan für Countdown und Mindestfortschritt](implementation-plan-countdown-progress.md). Die dortigen Funktions-, Integrations- und Qualifizierungsprüfungen bleiben Voraussetzung dieser Studie. Dieser Benchmarkplan definiert die anschließende inhaltliche Untersuchung der Varianten.
 
@@ -70,9 +70,9 @@ Vor dem großen Lauf müssen die relevanten Funktionstests und die native Qualif
 
 Zunächst laufen die ersten drei der ohnehin festgelegten 100 Probleme mit allen zwölf Konfigurationen. Diese 36 Jobs bleiben normale Primärdaten und werden nicht nochmals ausgeführt oder nachträglich als Pilot ausgeschlossen. Sie dienen zugleich der Überprüfung des gesamten Datenflusses und einer aktualisierten Aufwandsschätzung.
 
-Der eine unveränderte100er-Datensatz wird vorab auf zwei native Serienpläne verteilt: die ersten drei Probleme mit36Jobs und die übrigen97mit1.164Jobs. Eine vor dem Start gespeicherte Zuordnung bindet alle100×12Primärergebnisse an genau einen Plan und Job. Beide Pläne verwenden dieselben Quellen, Konfigurationen und Eingaben; es gibt keine nachträgliche Fallauswahl. Die ursprüngliche Datasetposition steuert die zyklische Konfigurationsrotation auch im zweiten Abschnitt.
+Der eine unveränderte 100er-Datensatz wird vorab auf zwei native Serienpläne verteilt: die ersten drei Probleme mit 36 Jobs und die übrigen 97 mit 1.164 Jobs. Eine vor dem Start gespeicherte Zuordnung bindet alle 100 × 12 Primärergebnisse an genau einen Plan und Job. Beide Pläne verwenden dieselben Quellen, Konfigurationen und Eingaben; es gibt keine nachträgliche Fallauswahl. Die ursprüngliche Datasetposition steuert die zyklische Konfigurationsrotation auch im zweiten Abschnitt.
 
-Nach Ende des ersten Abschnitts werden alle36Resultate, Rohantworten und Gewinner geprüft sowie ein nativer Audit mit passenden Exporten erstellt. Nur bei konsistenten Belegen und ohne fehlerhafte oder falsche Auswahl folgt der zweite Abschnitt. Reguläre NoQuery- oder Fortschrittsabschlüsse bleiben Primärdaten und sind bei korrekter Evidenz kein Integritätsfehler.
+Nach Ende des ersten Abschnitts werden alle 36 Resultate, Rohantworten und Gewinner geprüft sowie ein nativer Audit mit passenden Exporten erstellt. Nur bei konsistenten Belegen und ohne fehlerhafte oder falsche Auswahl folgt der zweite Abschnitt. Reguläre NoQuery- oder Fortschrittsabschlüsse bleiben Primärdaten und sind bei korrekter Evidenz kein Integritätsfehler.
 
 Die Reihenfolge der zwölf Konfigurationen wird vorab festgelegt und je Problem zyklisch rotiert. Problemjobs laufen nacheinander auf Bench i7; ihre Worker konkurrieren nicht mit gleichzeitig gestarteten Solverjobs um dieselben Kerne. Der Wrapper überwacht eigene Fehlerzustände. Bei einem späteren echten Fehler fordert er den bewiesenen eigenen Controller über dessen regulären Interruptpfad zum Stop auf; ein unmittelbar bereits gestarteter Folgeversuch kann dabei als Unterbrechung erhalten bleiben. Es gibt keine stille Wiederholung oder Fallersetzung. Dieses dokumentierte enge Zeitfenster ist keine strikt atomare Zulassungssperre nach jedem Resultat.
 
@@ -126,4 +126,4 @@ Die neue Fortschrittsregel, Countdownneustarts und andere Fälle können die Dau
 
 Dieser Vorschlag vertieft den gewünschten Strategien-/Gridvergleich. Er ersetzt keine ausführliche Tiefe-3-, Sieben-Ziele-, Konfidenz- oder Thresholdsensitivitätsstudie. Solche Untersuchungen erhalten eigene festgelegte Fragen und Fallgruppen.
 
-Die reguläre Integration wurde am16.10.2026gestartet. Die Benchmarkserie folgt erst nach bestandener Abnahme. Beim Umsetzungsstart werden der Implementierungsplan, dieser Benchmarkplan und die vorhandenen Arbeitsanweisungen zuerst gelesen. Fortschritt und Wiederaufnahmepunkte werden dann fortlaufend dokumentiert.
+Die reguläre Integration wurde am 16.10.2026 gestartet. Die Benchmarkserie folgt erst nach bestandener Abnahme. Beim Umsetzungsstart werden der Implementierungsplan, dieser Benchmarkplan und die vorhandenen Arbeitsanweisungen zuerst gelesen. Fortschritt und Wiederaufnahmepunkte werden dann fortlaufend dokumentiert.

@@ -120,13 +120,17 @@ def policy_conditions(rows):
         ('case_id', 'strategy', 'depth', 'mode', 'evaluation')) == identity) for identity in wanted]
 
 
-def prepare(root, output):
+def prepare(root, output, *, new_source=Path('src')):
+    root, output = root.resolve(), output.resolve()
     if not output.is_relative_to(root / 'runs'):
         raise ValueError('comparison artifacts must be inside the marked project runs directory')
     if output.exists():
         raise FileExistsError(output)
     baseline = Path('runs/countdown-progress-integration-20261016T030055Z/baseline/files/src')
-    sources = {'old': baseline.as_posix(), 'new': 'src'}
+    resolved_new_source = (root / new_source).resolve()
+    if not resolved_new_source.is_relative_to(root):
+        raise ValueError('new SDK source must be inside the marked project')
+    sources = {'old': baseline.as_posix(), 'new': resolved_new_source.relative_to(root).as_posix()}
     inventories = {key: source_inventory(root / path) for key, path in sources.items()}
     if any(not items for items in inventories.values()):
         raise ValueError('missing frozen source inventory')
@@ -358,10 +362,12 @@ def main(argv=None):
     parser.add_argument('--project-root', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--job-id')
+    parser.add_argument('--new-source', type=Path, default=Path('src'),
+                        help='project-relative frozen new SDK src directory; prepare only')
     args = parser.parse_args(argv)
     root, directory = args.project_root.resolve(), args.output.resolve()
     if args.command == 'prepare':
-        plan = prepare(root, directory)
+        plan = prepare(root, directory, new_source=args.new_source)
         print(json.dumps({'conditions': len(plan['conditions']), 'calls': len(plan['jobs']), 'plan': str(directory / 'plan.json')}))
         return 0
     if args.command == 'child':

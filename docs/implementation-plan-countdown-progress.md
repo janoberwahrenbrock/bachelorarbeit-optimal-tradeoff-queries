@@ -1,6 +1,6 @@
 # Implementierungsplan für Countdown und Mindestfortschritt
 
-Stand: 16. Oktober 2026. Status: Umsetzung am16.10.2026autorisiert und gestartet; Abnahmearbeitspakete und Prüfkriterien bleiben verbindlich. Fortschritt und ursprünglicher Quellstand sind unter `runs/countdown-progress-integration-20261016T030055Z/` gesichert.
+Stand: 16. Oktober 2026. Status: Umsetzung am 16.10.2026 autorisiert und gestartet; Abnahmearbeitspakete und Prüfkriterien bleiben verbindlich. Fortschritt und ursprünglicher Quellstand sind unter `runs/countdown-progress-integration-20261016T030055Z/` gesichert.
 
 Countdown wird ein regulärer Ausführungsmodus der festen Strategie. Eine zusätzliche Policy `min_expected_progress` begrenzt die Fortsetzung auf Pläne mit ausreichender erwarteter Verbesserung. Ihr Default ist `0.001`. Beide Funktionen werden in dieselbe Solverarchitektur, dieselben öffentlichen Schnittstellen und dieselbe nachvollziehbare Ausführung integriert.
 
