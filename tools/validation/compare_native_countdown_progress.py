@@ -23,6 +23,8 @@ OLD_SOURCE = 'b40342c2cbf7712992ce6a62b01647b5c275dbc3b6358430b637b206e1d41e4a'
 THREADS = ('OMP_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'MKL_NUM_THREADS',
            'BLIS_NUM_THREADS', 'VECLIB_MAXIMUM_THREADS', 'NUMEXPR_NUM_THREADS')
 EXCLUDE = frozenset(('execution_cursor', 'planning_cycles', 'planning_cycle', 'continuation_binding'))
+COMMON_EVENTS = frozenset(('state_analyzed', 'query_planned', 'query_dispatched',
+                          'answer_received', 'query_completed', 'run_finished'))
 SCALARS = frozenset(('value', 'probability', 'expected_terminal_candidates', 'expected_terminal_loss',
     'expected_queries', 'gain', 'rate', 'maximum_volume_share', 'selected_candidate_volume', 'selected_candidate_volume_share'))
 MAPS = frozenset(('candidate_volumes', 'candidate_volume_shares', 'answer_probabilities', 'lexicographic_expected_values'))
@@ -46,13 +48,19 @@ from pathlib import Path
 import json,sys
 from otqa.runtime.validation import verify_result
 from otqa.runtime.source import loaded_source
+from otqa.runtime.documents import resolve_ref
 root=Path(sys.argv[1]); result_path=root/'result.json'
 manifest=json.loads((root/'manifest.json').read_bytes())
 source,_,_=loaded_source()
 result=verify_result(result_path,root,manifest)
 if source['source_sha256'] != manifest['source']['source_sha256']:
  raise ValueError('result was not produced by the expected installed source')
-print(json.dumps({'source':source,'verified_result':True,'result':result,'manifest':manifest}))
+journal=result['journal']
+events=[]
+if journal is not None:
+ data=resolve_ref(root,{'path':journal['path'],'sha256':journal['sha256']}).read_bytes()
+ events=[json.loads(line) for line in data[:journal['valid_prefix_bytes']].splitlines()]
+print(json.dumps({'source':source,'verified_result':True,'result':result,'manifest':manifest,'events':events}))
 """
 
 
@@ -207,6 +215,14 @@ def prepare(root, directory, args):
             for variant in (('old', 'new') if block % 2 else ('new', 'old'))]
     plan = {**proposed, 'proposal_sha256': digest(proposal_path.read_bytes()),
         'harness_sha256': digest(Path(__file__).read_bytes()), 'source_probes': probes,
+        'comparison_contract': {'common_actual_events_in_order': sorted(COMMON_EVENTS),
+            'excluded_v2_execution_fields': sorted(EXCLUDE),
+            'excluded_event_envelope': ['schema_version', 'run_id', 'attempt_id', 'sequence',
+                                         'occurred_at_utc', 'monotonic_ns', 'numeric_hex'],
+            'v2_only_events_verified_by_native_reader': ['planning_attempt_started',
+                'planning_attempt_completed', 'planning_resolved'],
+            'compared_event_fields': ['event_type', 'query_id', 'payload'],
+            'all_common_mathematical_fields_binary64': True},
         'interpreters': {variant: str(getattr(args, variant + '_python').absolute()) for variant in ('old', 'new')},
         'profiles': {variant: {'path': str(getattr(args, variant + '_profile').relative_to(root)),
             'sha256': digest(getattr(args, variant + '_profile').read_bytes())} for variant in ('old', 'new')},
@@ -236,6 +252,19 @@ def mathematical(value, name='', all_numbers=False):
     if isinstance(value, list):
         return [mathematical(item, name, all_numbers or name in MAPS) for item in value]
     return value
+
+
+def actual_sequence(events):
+    """Pair all common actual actions/states, omitting only v2 execution metadata.
+
+    Global journal sequence numbers, timestamps and run/attempt IDs differ across
+    native calls. New planning-attempt/cycle events have no v1 counterpart; their
+    integrity is checked by the installed v2 reader rather than silently compared
+    with a manufactured historical equivalent.
+    """
+    return [mathematical({'event_type': event['event_type'], 'query_id': event['query_id'],
+                          'payload': event['payload']})
+            for event in events if event['event_type'] in COMMON_EVENTS]
 
 
 def quality(case, problem, solver):
@@ -284,7 +313,8 @@ def verify_job(root, directory, plan, job, target, condition, receipt):
         journal_sha256=result['journal']['sha256'] if result['journal'] else None,
         result_ref=(target / 'result.json').relative_to(root).as_posix(), status=result['execution_status'],
         api_seconds=result['timings']['api_call_wall_seconds'], case_seconds=result['timings']['case_elapsed_seconds'],
-        effective_execution=manifest['effective_execution'], native_thread_environment=actual['native_thread_environment'])
+        effective_execution=manifest['effective_execution'], native_thread_environment=actual['native_thread_environment'],
+        actual_sequence=actual_sequence(evidence['events']))
     if solver is not None:
         problem = json.loads((directory / 'inputs' / (case_id + '-problem.json')).read_bytes())
         receipt.update(solved=solver['solved'], termination_reason=solver['termination_reason'],
@@ -340,9 +370,12 @@ def pairs(directory, plan):
                 continue
             eligible = all(value['verified'] and value['cli_returncode'] == 0 and value.get('solved')
                 and value['quality']['selected_correct'] and value.get('fallbacks') == 0 for value in data.values())
-            same = eligible and data['old']['mathematical_result'] == data['new']['mathematical_result']
+            same_result = eligible and data['old']['mathematical_result'] == data['new']['mathematical_result']
+            same_sequence = eligible and data['old']['actual_sequence'] == data['new']['actual_sequence']
+            same = same_result and same_sequence
             rows.append({'condition_id': condition['condition_id'], 'block': block, 'eligible': same,
-                'math_equal': same, 'cli_ratio': data['new']['cli_wall_seconds'] / data['old']['cli_wall_seconds'] if same else None,
+                'math_equal': same, 'solver_result_equal': same_result, 'actual_sequence_equal': same_sequence,
+                'cli_ratio': data['new']['cli_wall_seconds'] / data['old']['cli_wall_seconds'] if same else None,
                 'api_ratio': data['new']['api_seconds'] / data['old']['api_seconds'] if same else None,
                 'old_cli_seconds': data['old']['cli_wall_seconds'], 'new_cli_seconds': data['new']['cli_wall_seconds'],
                 'old_api_seconds': data['old'].get('api_seconds'), 'new_api_seconds': data['new'].get('api_seconds')})
@@ -372,6 +405,7 @@ def audit(directory, plan):
     return {'purpose': plan['purpose'], 'plan_sha256': digest((directory / 'plan.json').read_bytes()),
         'pairs': paired, 'conditions': rows, 'all_initial_pairs_complete': all(item['complete_pairs'] >= 3 for item in rows),
         'all_completed_pairs_math_valid': all(item['eligible'] for item in paired),
+        'comparison_contract': plan['comparison_contract'],
         'limits': plan['limits'], 'no_geometric_recertification_claimed': True}
 
 
