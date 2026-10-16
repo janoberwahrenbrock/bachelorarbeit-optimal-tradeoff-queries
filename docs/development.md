@@ -110,20 +110,8 @@ threshold; conversion creates a separate current input rather than rewriting dat
 
 ## Abnahmestand der Integration vom 16. Oktober 2026
 
-Der Release-10-Kandidat von Version `0.2.0` bindet Quellinventar
-`9339e88e7885015290ca118208e48d45ad58130af3e0058fcc2b50448a4d3b72`. Die Runtime bereitet unveränderliche Schemametadaten einmalig vor,
-prüft bekannte Planobjekte mit vollständigen positiven Strukturbelegen und
-sammelt binäre Zahlennachweise mit einem gemeinsamen Akkumulator. Der frühere
-Nutzdatencache ist entfernt. Alle 40 Schemaressourcen und die numerischen
-Verfahren bleiben unverändert.
-
-Die vollständige Testsuite im Hauptcheckout besteht mit 927 Tests in 40.40 Sekunden;
-Ruff ist sauber. Unabhängiger Review findet keine offenen P1/P2
-im unterstützten nativen JSON-Umfang. Neuer Build sowie frische installierte
-Funktions- und Laufzeitgates folgen für diesen konkreten Payload.
-
-Die früheren Releases 5 bis 7 sind funktional geprüft, besitzen aber keine
-native Laufzeitfreigabe. Neue SDK-/CLI-Gates sind erforderlich. Fortlaufende
-Ergebnisse und Quittungen stehen im [Implementierungsstatus](implementation-status.md)
-und im [Abnahmenachweis](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json).
-Eine weitere Änderung des Paketpayloads benötigt neue quellgebundene Gates.
+Quellenbindung, vollständige Testzahlen und noch offene Freigabegates stehen
+zentral im [Implementierungsstatus](implementation-status.md). Der
+[Abnahmenachweis](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json)
+erhält auch fehlgeschlagene Abnahmen und verworfene Kandidaten. Jede Änderung
+des Paketpayloads benötigt neue quellgebundene Kontrollen und Laufzeitgates.

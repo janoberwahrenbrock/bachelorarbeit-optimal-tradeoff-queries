@@ -139,6 +139,23 @@ den mathematischen Wert um einen unveränderlichen geprüften Herkunftspräfix u
 passende Quellen-/Umgebungsbindung. Die native Serienwiederaufnahme beginnt
 weiterhin einen neuen Versuch aus Originaleingaben.
 
+## Terminale Resultatübernahme
+
+Der Supervisor überwacht Kind und Prozessgruppe. Ohne externes Zeitlimit folgt
+die vollständige Resultatprüfung auf `wait` und den bewiesenen Gruppenabschluss.
+Erst danach darf ein Ergebnis übernommen werden. Ein gesetztes Zeitlimit
+benötigt zusätzlich die frühe vollständige Prüfung eines bereits publizierten
+Resultats, damit der Watchdog einen regulären Abschluss erkennt; diese Prüfung
+ersetzt die abschließende Prüfung nicht.
+
+Die frühe Prüfung war vom tatsächlichen Prozess-Timing abhängig. Ohne Zeitlimit
+kann ein beschädigtes Resultat deshalb erst nach Gruppenende gemeldet werden.
+Ein unbegrenzt hängendes Kind erhält damit keine zugesicherte Fehlerfrist;
+eine kontinuierliche Überwachung externer Dateiänderungen wird nicht behauptet.
+Die Pflichtprüfung samt Bytes, Quellen, Journal und numerischen Nachweisen bleibt
+erhalten. Es werden weder Resultate zwischengespeichert noch mathematische
+Berechnungen ausgelassen.
+
 ## Versionierte Dokumentgrenzen
 
 Die Registry adressiert `(Dokumenttyp, Version)`. Neue Konfigurationen und

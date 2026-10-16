@@ -8,29 +8,13 @@ Die gesicherte Hauptzweig-Ausgangsbasis ist `3f70c16c962d01a5846659dd0bb49f32899
 
 ## Umsetzungs- und Abnahmestand
 
-Der Release-10-Kandidat von Version `0.2.0` bindet Quellinventar
-`9339e88e7885015290ca118208e48d45ad58130af3e0058fcc2b50448a4d3b72`. Die Runtime bereitet unveränderliche Schemametadaten einmalig vor,
-prüft bekannte Planobjekte mit vollständigen positiven Strukturbelegen und
-sammelt binäre Zahlennachweise mit einem gemeinsamen Akkumulator. Der frühere
-Nutzdatencache ist entfernt. Alle 40 Schemaressourcen und die numerischen
-Verfahren bleiben unverändert.
-
-Die vollständige Testsuite im Hauptcheckout besteht mit 927 Tests in 40.40 Sekunden;
-Ruff ist sauber. Unabhängiger Review findet keine offenen P1/P2
-im unterstützten nativen JSON-Umfang. Neuer Build sowie frische installierte
-Funktions- und Laufzeitgates folgen für diesen konkreten Payload.
-
-Release 6 bestand 662 Tests, 34 macOS- und 39 Linux-Kontrollen, öffentliche
-Fortsetzungen und Acht-Job-Workflows. Die native Laufzeitprüfung bleibt mit
-78 korrekten Ergebnissen und 39 gleichen Paaren bei elf Regressionen und einem
-unklaren Befund gesperrt. Release 5 bestand zuvor SDK-Prüfungen, scheiterte aber
-am nativen Gate. Kein früherer Nachweis ersetzt die Abnahme einer neuen Quelle.
-
-Konkrete Quellen, Prüflogs und Quittungen stehen im
-[Implementierungsstatus](implementation-status.md) und im
-[laufenden Abnahmenachweis](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json).
-Die große Studie ist noch nicht gestartet. Diese Statusbeschreibung ersetzt
-keines der nachfolgenden Abnahmekriterien.
+Die aktuellen Quellen, vollständigen Testzahlen, installierten Kontrollen und
+noch offenen Laufzeitgates stehen zentral im
+[Implementierungsstatus](implementation-status.md). Der
+[laufende Abnahmenachweis](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json)
+erhält zusätzlich sämtliche fehlgeschlagenen und verworfenen Versuche.
+Kein früherer Nachweis wird auf geänderte Quellen übertragen. Dieser Status
+ersetzt keines der nachfolgenden verbindlichen Abnahmekriterien.
 
 ## Ziel und Umfang
 

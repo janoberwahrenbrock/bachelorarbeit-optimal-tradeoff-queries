@@ -4,21 +4,11 @@ Stand: 16. Oktober 2026. Status: Umfang und Ausführung autorisiert; die Integra
 
 Die Umsetzung selbst folgt dem [Implementierungsplan für Countdown und Mindestfortschritt](implementation-plan-countdown-progress.md). Die dortigen Funktions-, Integrations- und Qualifizierungsprüfungen bleiben Voraussetzung dieser Studie. Dieser Benchmarkplan definiert die anschließende inhaltliche Untersuchung der Varianten.
 
-Der Release-10-Kandidat von Version `0.2.0` bindet Quellinventar
-`9339e88e7885015290ca118208e48d45ad58130af3e0058fcc2b50448a4d3b72`. Die Runtime bereitet unveränderliche Schemametadaten einmalig vor,
-prüft bekannte Planobjekte mit vollständigen positiven Strukturbelegen und
-sammelt binäre Zahlennachweise mit einem gemeinsamen Akkumulator. Der frühere
-Nutzdatencache ist entfernt. Alle 40 Schemaressourcen und die numerischen
-Verfahren bleiben unverändert.
-
-Die vollständige Testsuite im Hauptcheckout besteht mit 927 Tests in 40.40 Sekunden;
-Ruff ist sauber. Unabhängiger Review findet keine offenen P1/P2
-im unterstützten nativen JSON-Umfang. Neuer Build sowie frische installierte
-Funktions- und Laufzeitgates folgen für diesen konkreten Payload.
-
-Frühere SDK- und Funktionsprüfungen werden nicht auf geänderte Quellen
-übertragen. Der [fortlaufende Abnahmestand](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json)
-enthält Quellen, Fehlerhistorie und konkrete Belege.
+Quellenbindung, Testzahlen und Freigabegates werden zentral im
+[Implementierungsstatus](implementation-status.md) geführt. Der
+[fortlaufende Abnahmenachweis](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json)
+erhält die Fehlerhistorie und konkreten Belege. Frühere SDK- und
+Funktionsprüfungen werden nicht auf geänderte Quellen übertragen.
 
 ## Fragestellungen
 
@@ -142,7 +132,7 @@ Die neue Fortschrittsregel, Countdownneustarts und andere Fälle können die Dau
 
 Dieser Vorschlag vertieft den gewünschten Strategien-/Gridvergleich. Er ersetzt keine ausführliche Tiefe-3-, Sieben-Ziele-, Konfidenz- oder Thresholdsensitivitätsstudie. Solche Untersuchungen erhalten eigene festgelegte Fragen und Fallgruppen.
 
-Die reguläre Integration ist im Release-10-Kandidaten implementiert; noch offene
+Die reguläre Integration ist im aktuellen Abnahmekandidaten implementiert; noch offene
 Abnahmen und ihre Belege bleiben im fortlaufenden Implementierungsstatus
 sichtbar. Die Benchmarkserie folgt erst nach bestandener Abnahme. Vor ihrem
 Start und einer Wiederaufnahme werden der Implementierungsplan, dieser

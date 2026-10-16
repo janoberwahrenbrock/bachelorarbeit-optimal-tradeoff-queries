@@ -2,6 +2,7 @@
 
 ## 0.2.0
 
+- Unbegrenzte Caseausführung prüft terminale Artefakte am verpflichtenden abschließenden Gruppenendpunkt; das vollständige Watchdogverhalten mit Zeitlimit bleibt erhalten.
 - Regulärer Fixed-Countdown mit explizitem Antwortcursor und einmaliger voller Ersatzplanung nach fehlender Query oder unzureichendem Restplan.
 - `min_expected_progress` als Schlüsselwortparameter, Default `0.001`, strikter vollständiger Horizontgewinn; `None` deaktiviert. Neuer ungelöster Endgrund `insufficient_expected_progress`.
 - Adaptive zulässige Planwahl bis Tiefe drei und zertifizierte Frontierdominanz bei unveränderter finaler Scorearithmetik.

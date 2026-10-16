@@ -167,3 +167,25 @@ kopierenden Rewrite entfällt. Die Schemaerzeugung benötigte dadurch rund
 4,5 Prozent. Alle Rohdaten, vollständigen Ergebnisse und 40 Schemaressourcen
 bleiben unverändert. Diese separaten Komponentenbefunde behaupten keine
 gemessene kombinierte CLIwirkung; die neue Quelle erhält frische Gates.
+
+
+Release 10 bestand die installierten Funktionskontrollen auf beiden Hosts und
+lieferte 78 korrekte Ergebnisse mit 39 mathematisch gleichen Paaren. Elf native
+Bedingungen bestehen; ein kurzer fester Konfidenzfall bleibt nach der vorgesehenen
+Ergänzung unklar (medianer CLIquotient 1,04785). Drei anschließend isolierte
+Vorschläge am Zahlenbeleg und direkten Vergleich wurden verworfen. Die
+Hexwalkeränderung erreichte einen Komponentenquotienten von 0,923 und praktisch
+keine Readerverbesserung. Ein direkter Paarvergleich erreichte 0,905, die
+geordneten Nichtnullvergleiche 0,566. Beide verfehlten ebenfalls die vorab
+festgelegten vollständigen Readerhürden. Kein verworfener Kandidat ist im
+Paket enthalten; alle ursprünglichen Daten und Messversuche bleiben erhalten.
+
+Der Release-11-Kandidat beseitigt dagegen eine strukturelle Doppelprüfung:
+Ohne externes Zeitlimit steuert die vorzeitige Resultatprüfung im Supervisor
+keine Watchdogentscheidung und entfällt. Die vollständige verpflichtende Prüfung
+nach bewiesenem Gruppenende bleibt immer erhalten; mit Zeitlimit bleibt auch
+die frühe Prüfung erhalten. Elf neue Ablaufkontrollen und vier unabhängige
+Kontrollen prüfen diese Grenzen einschließlich fehlerhafter Resultate. Die
+Laufzeitwirkung muss das unveränderte vollständige Gate erst nach frischer
+Paketqualifizierung bestätigen. Aus der Anzahl vermiedener Readeraufrufe wird
+keine vorweggenommene Zeitfreigabe abgeleitet.

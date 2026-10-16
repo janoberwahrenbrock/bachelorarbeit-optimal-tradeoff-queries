@@ -169,7 +169,7 @@ def supervise_attempt(payload: dict, *, context, on_phase=None):
                 on_phase("running", {"process": identity})
             accepted_terminal = False
             while child.poll() is None:
-                if not accepted_terminal and (attempt / "result.json").exists():
+                if payload["case_timeout_seconds"] is not None and not accepted_terminal and (attempt / "result.json").exists():
                     verify_result(attempt / "result.json", root, payload)
                     accepted_terminal = True
                 deadline = payload["case_timeout_seconds"]

@@ -5,19 +5,22 @@
 Stand: 16. Oktober 2026. Countdown mit vollständiger Ersatzplanung,
 `min_expected_progress=0.001`, explizite Fortsetzungen und versionierte
 Aufzeichnung sind auf `codex/countdown-progress-integration` implementiert.
-Der neue Release-10-Kandidat bindet das Paket-/Quellinventar
-`9339e88e7885015290ca118208e48d45ad58130af3e0058fcc2b50448a4d3b72`.
+Der neue Release-11-Kandidat bindet das Paket-/Quellinventar
+`47c3d8b2f66446e1ba07f4538879ac9a99bdb567f3082bff254564ff2736ca76`.
 Er bereitet unveränderliche Schemametadaten einmalig vor, prüft die häufigen
 Planobjekte mit vollständigen positiven Strukturbelegen und sammelt binäre
 Zahlennachweise mit einem gemeinsamen Akkumulator. Der frühere Nutzdatencache
-ist entfernt. Numerische Verfahren und alle 40 Schemaressourcen bleiben erhalten.
+ist entfernt. Numerische Verfahren und alle 40 Schemaressourcen bleiben erhalten. Ohne Zeitlimit
+prüft der Supervisor das terminale Resultat einmal vollständig nach bewiesenem
+Prozessgruppenende. Mit Zeitlimit bleibt die zusätzliche frühe Watchdogprüfung
+erhalten. Die abschließende Validierung bleibt in beiden Fällen verpflichtend.
 
 | Bereich | Nachgewiesener Stand für den aktuellen Kandidaten |
 | --- | --- |
 | Reine Verträge und unabhängiger Review | Gezielte Quellprüfungen bestanden; keine offenen P1/P2 im unterstützten nativen JSON-Umfang |
-| Vollständige Testsuite | 927 Tests in 40.40 Sekunden im tatsächlichen Hauptcheckout |
+| Vollständige Testsuite | 942 Tests in 43.52 Sekunden im tatsächlichen Hauptcheckout |
 | Statische Prüfung | Ruff für Quellcode, Tests, Werkzeuge und Buildbackend sauber |
-| Installation und Betriebsqualifizierung | Frischer Build und Mac-/Linux-Prüfungen für Release 10 erforderlich |
+| Installation und Betriebsqualifizierung | Frischer Build und Mac-/Linux-Prüfungen für Release 11 erforderlich |
 | SDK-/CLI-Laufzeitkontrollen und Policyeffekte | Neue vollständige Prüfungen erforderlich |
 | Größere Strategien-/Gridstudie | Noch nicht gestartet; 100 neue Probleme × zwölf Bedingungen erst nach bestandenen Freigabegates |
 
@@ -27,6 +30,13 @@ und 42 mathematisch gleiche Paare; zehn Bedingungen waren langsamer und zwei
 nach der festgelegten Ergänzung unklar. Keine frühere Freigabe wird auf eine
 geänderte Quelle übertragen. Verworfene Vorschläge und sämtliche Versuche
 bleiben im projektinternen Nachweis erhalten.
+
+Release 10 lieferte 78 korrekte Ergebnisse und 39 mathematisch gleiche Paare.
+Elf native Bedingungen bestehen, eine bleibt nach der vorgesehenen Ergänzung
+bei einem medianen Zeitquotienten von 1,04785 unklar. Drei isolierte Vorschläge
+am Zahlenvergleich verfehlten ihre vorab festgelegten Nutzenhürden und wurden
+verworfen. Release 11 enthält ausschließlich den zusätzlich geprüften
+Supervisorumbau; dessen Laufzeitwirkung ist noch nicht freigegeben.
 
 Komponentenmessungen beschreiben ausschließlich ihre angegebenen Prüfgrenzen;
 sie ersetzen keine vollständigen Laufzeitgates. Der
