@@ -110,28 +110,19 @@ threshold; conversion creates a separate current input rather than rewriting dat
 
 ## Abnahmestand der Integration vom 16. Oktober 2026
 
-Der bisher funktional geprüfte Release-4-Kandidat `0.2.0` bindet Commit
-`289fbe35929f58ce9257213a5956ba42142ac0ce` und Paket-/Quellinventar
-`b9f796c8f0150f4621749b2118f84349b89347293c198c60cd5e1a92ea8904ef`.
-551 Tests bestanden in 32,55 Sekunden; Ruff ist sauber. Das gebaute Wheel wurde
-frisch außerhalb des Checkouts installiert und mit analytischen SDK-Aufrufen
-einschließlich adaptiver Tiefe drei und Stop-aware-Bewertung geprüft. Die
-quellgebundene native Qualifizierung bestand 34 Kontrollen auf macOS und 39
-auf Linux.
+Der aktuelle Release-6-Kandidat bindet Quellinventar
+`cd8137876aabd8041f36aa4494b068d13f07f6d94c6fe5c6843064880e68c63b`.
+662 Tests bestanden im Hauptcheckout in 45,40 Sekunden; Ruff ist sauber.
+Er optimiert die im nativen Release-5-Gate nachgewiesene Schema-/Journalmehrarbeit
+mit eindeutiger Variantenwahl und einem gemeinsamen privaten strukturellen Fold.
+40 Schemaressourcen bleiben byteidentisch; neue Grenz- und Differentialtests
+prüfen strikte Zulassung sowie die historische Fehlerpräzedenz.
 
-Der unabhängige Review fand eine konkrete Inkonsistenz bei der Fulltrace-
-Serialisierung: der interne Singletonbezeichner musste in den unveränderten
-nativen Bezeichner übersetzt werden. Die Korrektur liegt an der Wiregrenze;
-sieben zusätzliche Regressionstestfälle prüfen H1-Blätter,
-H2-Fortsetzungen und H3-Singletonoptionen gegen v1/v2. Historische Schemata
-wurden dafür nicht erweitert. Weitere zuvor korrigierte Wirefehler und ihre
-ursprünglichen Fehlversuche bleiben erhalten.
-
-Die öffentlichen nativen Release-4-Fortsetzungen bestanden auf beiden Hosts.
-Je acht native Jobs wurden auf Mac und Bench korrekt beendet, auditiert,
-exportiert, ohne neue Versuche fortgesetzt und versiegelt. Die gepaarte
-Performanceabnahme und die 1.200-Job-Studie sind noch offen. Fortschreitende Ergebnisse und konkrete Quittungen stehen im
+Der neue Payload benötigt eigene Installation, Mac-/Linuxqualifizierung und
+frische vollständige SDK-/CLI-Gates. Die zuvor bestandenen R5-Funktionsprüfungen
+und SDK-Messungen werden nicht übertragen. Ebenso bleiben R5-Regression und
+profilierte Diagnose getrennt von einer späteren Freigabe.
+Fortschreitende Ergebnisse und Quittungen stehen im
 [Implementierungsstatus](implementation-status.md) und im
 [laufenden Abnahmenachweis](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json).
-Eine weitere Änderung des Paketpayloads benötigt neue quellgebundene Gates;
-historische Qualifizierungen und Laufzeiten ersetzen diese nicht.
+Eine weitere Änderung des Paketpayloads benötigt neue quellgebundene Gates.

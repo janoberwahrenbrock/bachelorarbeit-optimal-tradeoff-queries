@@ -8,29 +8,28 @@ Die gesicherte Hauptzweig-Ausgangsbasis ist `3f70c16c962d01a5846659dd0bb49f32899
 
 ## Umsetzungs- und Abnahmestand
 
-Der bisher funktional geprüfte Release-4-Payload von Version `0.2.0` bindet Commit
-`289fbe35929f58ce9257213a5956ba42142ac0ce` und Paket-/Quellinventar
-`b9f796c8f0150f4621749b2118f84349b89347293c198c60cd5e1a92ea8904ef`.
-Die vollständige Suite bestand 551 Tests in 32,55 Sekunden; Ruff ist sauber.
-Die frische Wheelinstallation außerhalb des Checkouts bestand die analytischen
-SDK-Kontrollen. Die quellgebundene native Betriebsqualifizierung bestand
-34 Kontrollen auf macOS und 39 auf Linux.
+Der aktuelle Release-6-Kandidat von Version `0.2.0` enthält zusätzlich die
+gezielte Optimierung der nativen Formatprüfung. Sein Paket-/Quellinventar ist
+`cd8137876aabd8041f36aa4494b068d13f07f6d94c6fe5c6843064880e68c63b`. Alle 662 Tests
+bestanden im tatsächlichen Hauptcheckout in 45,40 Sekunden; Ruff ist sauber.
+Die isolierte Vorprüfung bestand dieselben 662 Tests sowie unabhängige
+Schemavergleiche. Alle 40 Schemaressourcen sind unverändert. Ein neuer Build,
+installierte Qualifizierung und frische Laufzeitgates bleiben erforderlich.
 
-Der unabhängige Review wies einen konkreten Fulltrace-Wirefehler nach: der
-interne Singletonbezeichner entsprach nicht dem bestehenden nativen
-Baumvertrag. Das Mapping an der Serialisierungsgrenze und sieben zusätzliche
-Regressionstestfälle sind im Release-4-Payload enthalten. Auch die zuvor
-gefundenen Fehler der Bootstrapversion und der konsistenten optionalen
-Baumprojektion sind korrigiert; ihre ursprünglichen Versuche bleiben erhalten.
+Release 5 bestand zuvor 34 macOS- und 39 Linux-Betriebskontrollen,
+öffentliche Fortsetzungen und Acht-Job-Workflows auf beiden Hosts sowie die
+128 SDK-Kontrollen. Seine native Laufzeitprüfung scheiterte jedoch bei allen
+zwölf Bedingungen trotz gleicher Rechnungen. Profile zeigen wiederholte
+Schemaarbeit als Hauptursache. Release 6 wählt eindeutige Ereignisschemata direkt
+und verwendet einen gemeinsamen strukturellen Journal-Fold nach vollständiger
+Originalprüfung. Daten, Barrieren und fachliche Prüfungen bleiben erhalten.
+Frühere Versuche werden nicht als Freigabe der neuen Quelle übertragen.
 
-Die öffentlichen nativen Fortsetzungs- und Acht-Job-Workflows bestanden für
-Release 4 auf beiden Hosts. Die gepaarten Performance-/Qualitätsgates
-und die reguläre Übernahme sind nicht abgeschlossen. Die große Studie ist
-noch nicht gestartet. Dieser Zwischenstand ersetzt keines der nachfolgenden
-Abnahmekriterien. Konkrete Quellen, Prüflogs und fortschreitende Quittungen
-stehen im [Implementierungsstatus](implementation-status.md), in der
-[Releasebindung](../runs/countdown-progress-integration-20261016T030055Z/release4.json)
-und im [laufenden Abnahmenachweis](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json).
+Konkrete Quellen, Prüflogs und Quittungen stehen im
+[Implementierungsstatus](implementation-status.md) und im
+[laufenden Abnahmenachweis](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json).
+Die große Studie ist noch nicht gestartet. Diese Statusbeschreibung ersetzt
+keines der nachfolgenden Abnahmekriterien.
 
 ## Ziel und Umfang
 

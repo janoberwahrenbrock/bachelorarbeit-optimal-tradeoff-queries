@@ -5,45 +5,39 @@
 Stand: 16. Oktober 2026. Countdown mit vollständiger Ersatzplanung,
 `min_expected_progress=0.001`, explizite Fortsetzungen und versionierte
 Aufzeichnung sind auf `codex/countdown-progress-integration` implementiert.
-Der bisher gebaute und funktional geprüfte Abnahmekandidat ist Release 4 von Version `0.2.0`:
+Der aktuelle Release-6-Kandidat bindet das Paket-/Quellinventar
+`cd8137876aabd8041f36aa4494b068d13f07f6d94c6fe5c6843064880e68c63b`. Er übernimmt die funktional
+geprüfte Countdown-/Fortschrittsintegration und behebt zusätzlich wiederholte
+native Schema-/Journalarbeit. Die neue Version benötigt eigene installierte
+Betriebs- und Laufzeitgates; ältere Freigaben werden nicht übertragen.
 
-- Implementierungscommit: `289fbe35929f58ce9257213a5956ba42142ac0ce`;
-- Paket-/Quellinventar: `b9f796c8f0150f4621749b2118f84349b89347293c198c60cd5e1a92ea8904ef`;
-- Wheel-SHA256: `95f3c74553fafb2abd8d16c10ecdde73c5a8c1ce39de97b7da3b84572f82f29a`.
-
-Die [Releasebindung](../runs/countdown-progress-integration-20261016T030055Z/release4.json)
-und der [fortlaufende Abnahmestand](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json)
-halten den geprüften Payload und die noch offenen Schritte fest. Änderungen
-an Produktcode oder Paketressourcen erfordern erneut passende Prüfungen.
-
-| Bereich | Nachgewiesener Stand für die Integration |
+| Bereich | Nachgewiesener Stand für den aktuellen Kandidaten |
 | --- | --- |
-| Vollständige Testsuite | 551 Tests bestanden in 32,55 Sekunden; [Testlog](../runs/countdown-progress-integration-20261016T030055Z/pytest-release4.log) |
+| Vollständige Testsuite | 662 Tests bestanden in 45,40 Sekunden im Hauptcheckout; identische isolierte Vorprüfung 45,74 Sekunden |
 | Statische Prüfung | Ruff sauber |
-| Unabhängiger Review | Konkreter Fulltrace-Befund korrigiert; keine weiteren belastbaren P1/P2 im beschriebenen Prüfumfang; [Reviewbeleg](../runs/countdown-progress-integration-20261016T030055Z/review-independent.md) |
-| Frische Wheelinstallation außerhalb des Checkouts | Analytische SDK-Kontrollen bestanden, einschließlich adaptiver Tiefe 3 mit Stop-aware-Bewertung; [Quellbindung und Ergebnis](../runs/countdown-progress-integration-20261016T030055Z/external-installed-smoke-release4.json) |
-| Native Betriebsqualifizierung des Release-4-Payloads | 34 Kontrollen auf macOS und 39 auf Linux bestanden; [macOS-Zertifikat](../runs/countdown-progress-integration-20261016T030055Z/macos-qualification-release4/certification.json), hostübergreifende Belegzuordnung im fortlaufenden Abnahmestand |
-| Öffentliche native Fortsetzung und Benchmarkbedienung | CLI-Fortsetzung auf beiden Hosts bestanden; je acht native Jobs auf Mac und Bench korrekt, einschließlich Audit/Export/Resume/Seal; frühere Release-Ergebnisse werden nicht übertragen |
-| Gepaarte Laufzeit- und Qualitätskontrollen | Noch offen; deaktivierte Schwelle für Implementierungsaufwand und `None` gegen `0.001` für verändertes Abbruchverhalten getrennt prüfen |
+| Schema und Journal | 40 unveränderte Schemaressourcen; neue Grenz- und Differentialtests einschließlich ursprünglicher v1-Fehlerreihenfolge |
+| Quellenprüfung | Isolierter Schemareview und 315 Vergleiche echter Ereignisse mit dem vollständigen Validator bestanden |
+| Installation und Betriebsqualifizierung | Neue Release-6-Prüfung erforderlich |
+| SDK-/CLI-Laufzeitkontrollen und Policyeffekte | Neue vollständige Prüfungen erforderlich |
 | Größere Strategien-/Gridstudie | Noch nicht gestartet; 100 neue Probleme × zwölf Bedingungen erst nach bestandenen Freigabegates |
 
-Die frühen Abnahmekandidaten deckten drei konkrete Wirefehler auf: eine
-unveränderte Bootstrapregistrierung erhielt fälschlich Version zwei; ein
-Fulltrace-Planungszyklus ließ die bereits bekannte Rootkandidatenzahl aus;
-interne Singletonbezeichner wurden nicht in den bestehenden nativen
-Baumbezeichner übersetzt. Die Korrekturen und Regressionstests sind im
-Release-4-Payload enthalten. Frühere Fehlversuche und Nachweise bleiben unter
-`runs/countdown-progress-integration-20261016T030055Z/` erhalten. Eine bestandene
-Betriebsqualifizierung ist noch keine Freigabe der Laufzeit oder der großen Studie.
+Release 5 bestand 554 Tests, externe Installation und Sdist-Wiederbau,
+34 macOS- und 39 Linux-Kontrollen, native Fortsetzungen und je acht korrekte
+öffentliche Benchmarkjobs. Seine 128 SDK-Aufrufe bestanden alle 20 Screens
+mit 60 mathematisch bitgleichen Paaren; zwölf Budgetabschlüsse blieben ungelöst.
+Das vollständige native CLIgate fand anschließend bei allen zwölf Bedingungen
+27,6 bis 87,9 Prozent Mehrzeit trotz 72 korrekter Läufe und 36 gleichen Paaren.
+Ein symmetrischer profilierter Diagnosevergleich lokalisiert die Mehrarbeit in
+wiederholter Schema- und Journalprüfung. Profilierte Zeiten sind kein neues Gate.
 
-Die anschließende Workerimport-Korrektur wird als eigener Release-5-Payload
-neu gebaut und qualifiziert. Die vollständige Suite bestand dafür 554 Tests
-in 33,23 Sekunden; 118 fokussierte Tests und Ruff sind ebenfalls bestanden.
-Ihre benötigten Module werden im eigenen
-Workerinitializer geladen; numerische Handles bleiben first-task-lazy. Der
-Release-4-Laufzeitbefund und die isolierte Tuninggruppe bleiben separat erhalten.
-Die endgültige Quellenbindung und Gesamtmessung stehen im fortlaufenden
-Abnahmenachweis, bis die erneuten Gates abgeschlossen sind.
+Release 6 prüft bekannte Ereignisvarianten direkt und verarbeitet vollständig
+geprüfte Records im gemeinsamen privaten strukturellen Fold. Die originalen
+Bytes, Hash-/Schema-/Hexprüfungen, Persistenzbarrieren und tatsächlichen
+Policyprüfungen bleiben erhalten. CPU-Mikroproben beweisen keine vollständige
+Laufzeitfreigabe. Alle früheren Versuche und Belege bleiben unter
+`runs/countdown-progress-integration-20261016T030055Z/` erhalten;
+der [fortlaufende Abnahmestand](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json)
+hält die aktuelle Quelle und offenen Schritte fest.
 
 Die folgenden historischen Freigaben gelten ausschließlich für ihre ursprüngliche
 Quelle und werden nicht auf den aktuellen Quellpayload übertragen.

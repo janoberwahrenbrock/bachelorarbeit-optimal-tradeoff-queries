@@ -155,6 +155,22 @@ Cursor zusammen mit der Antwort; der algorithmische In-Memory-Cursor allein
 behauptet keine Dauerhaftigkeit. Audit und Seal prüfen auch gemischte v1/v2-
 Referenzketten.
 
+Die Ereignisprüfung nutzt den eindeutigen `event_type` nur bei der bekannten
+Schemaform als Diskriminator. Die ausgewählte Variante prüft weiterhin alle
+Felder mit denselben strikten Typ- und Endlichkeitsregeln. Unbekannte Formen,
+veränderte Auflösungskontexte und ungültige Daten verwenden den vollständigen
+Validator einschließlich seiner bisherigen Fehlerreihenfolge.
+
+Die versionsspezifischen Journalreader prüfen originale Bytes, Hash, Schema,
+Sequenz, Zeitstempel und binary64-Evidenz. Danach verarbeitet ein privater
+versionsneutraler Fold die strukturellen Übergänge. V2 projiziert die gemeinsamen
+Records ausschließlich im Speicher; eine zweite Kodierung und erneute
+Schemaprüfung dieser bereits geprüften Daten entfällt. Die eigenständige
+V2-Prüfung von Cursor, Fortschritt und Ersatzplanung bleibt erhalten. Es gibt
+weder einen öffentlichen Prüfungsbypass noch einen Artefaktcache. V1 behält seine
+Prüfungsreihenfolge; eingefrorene Reader dienen nur als Differentialreferenzen
+in kleinen Tests, nicht als zusätzlicher Produktionspfad.
+
 Der [Implementierungsplan](implementation-plan-countdown-progress.md) enthält die
 Abnahmematrix; der [Implementierungsstatus](implementation-status.md) hält die
 an die konkrete Quelle gebundenen tatsächlich bestandenen Nachweise fest.

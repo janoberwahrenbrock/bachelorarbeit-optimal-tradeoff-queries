@@ -4,18 +4,14 @@ Stand: 16. Oktober 2026. Status: Umfang und Ausführung autorisiert; die Integra
 
 Die Umsetzung selbst folgt dem [Implementierungsplan für Countdown und Mindestfortschritt](implementation-plan-countdown-progress.md). Die dortigen Funktions-, Integrations- und Qualifizierungsprüfungen bleiben Voraussetzung dieser Studie. Dieser Benchmarkplan definiert die anschließende inhaltliche Untersuchung der Varianten.
 
-Der bisher funktional geprüfte Release-4-Abnahmekandidat bindet Commit
-`289fbe35929f58ce9257213a5956ba42142ac0ce` und Paket-/Quellinventar
-`b9f796c8f0150f4621749b2118f84349b89347293c198c60cd5e1a92ea8904ef`.
-551 Tests in 32,55 Sekunden, Ruff, die frische externe Wheelprüfung sowie
-34 macOS- und 39 Linux-Betriebskontrollen sind bestanden. Der unabhängige
-Reviewbefund zur Fulltrace-Singletonserialisierung wurde korrigiert und mit
-zusätzlichen Vertragstests abgesichert. Die öffentlichen nativen
-Release-4-Fortsetzungen und Acht-Job-Workflows sind auf beiden Hosts
-bestanden; die gepaarte Laufzeitabnahme läuft. Die [Releasebindung](../runs/countdown-progress-integration-20261016T030055Z/release4.json)
-und der [fortlaufende Abnahmestand](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json)
-enthalten die konkreten Nachweise. Betriebsqualifizierung allein gibt die
-große Studie noch nicht frei.
+Der aktuelle Release-6-Kandidat enthält die Korrektur der im Release-5-CLIgate
+erkannten Schema-/Journalmehrarbeit. Quellinventar:
+`cd8137876aabd8041f36aa4494b068d13f07f6d94c6fe5c6843064880e68c63b`.
+662 Tests bestanden in 45,40 Sekunden; Ruff und unabhängige Differentialprüfungen
+sind bestanden. Installierte Qualifizierung und neue vollständige Laufzeitgates
+folgen vor dieser Studie. Frühere bestandene SDK-/Funktionsprüfungen ersetzen
+diese neue Abnahme nicht. Der [fortlaufende Abnahmestand](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json)
+enthält Quellen, Fehlerhistorie und konkrete Belege.
 
 ## Fragestellungen
 
@@ -139,7 +135,7 @@ Die neue Fortschrittsregel, Countdownneustarts und andere Fälle können die Dau
 
 Dieser Vorschlag vertieft den gewünschten Strategien-/Gridvergleich. Er ersetzt keine ausführliche Tiefe-3-, Sieben-Ziele-, Konfidenz- oder Thresholdsensitivitätsstudie. Solche Untersuchungen erhalten eigene festgelegte Fragen und Fallgruppen.
 
-Die reguläre Integration ist im Release-4-Kandidaten implementiert; noch offene
+Die reguläre Integration ist im Release-6-Kandidaten implementiert; noch offene
 Abnahmen und ihre Belege bleiben im fortlaufenden Implementierungsstatus
 sichtbar. Die Benchmarkserie folgt erst nach bestandener Abnahme. Vor ihrem
 Start und einer Wiederaufnahme werden der Implementierungsplan, dieser

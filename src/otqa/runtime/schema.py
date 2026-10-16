@@ -49,6 +49,37 @@ def registry_and_validators(version=1):
     return {kind: v for (kind, ver), v in all_validators().items() if ver == version}
 
 
+
+@lru_cache(maxsize=2)
+def _event_validators(version: int):
+    """Compile the unique event discriminator without weakening oneOf admission.
+
+    Only the known metadata-only envelope is eligible. A different schema shape
+    or nonunique discriminator falls back to the full validator. Evolve without
+    a dialect declaration retains our strict integer/finite-number type checker.
+    """
+    validator = all_validators()['event', version]
+    schema = validator.schema
+    if not isinstance(schema, dict) or set(schema) != {'$schema', '$id', 'oneOf'}:
+        return {}
+    if not isinstance(schema['oneOf'], list):
+        return {}
+    result = {}
+    for variant in schema['oneOf']:
+        if not isinstance(variant, dict) or any(
+            key in variant for key in ('$id', '$schema', '$anchor', '$dynamicAnchor')
+        ):
+            return {}
+        properties = variant.get('properties')
+        if not isinstance(properties, dict) or not isinstance(properties.get('event_type'), dict):
+            return {}
+        tag = properties['event_type'].get('const')
+        if type(tag) is not str or tag in result:
+            return {}
+        result[tag] = validator.evolve(schema=variant)
+    return result
+
+
 def validate(kind: str, document: Any) -> Any:
     if not isinstance(document, dict) or type(document.get('schema_version')) is not int:
         raise DocumentError(f'{kind} has no integer schema_version')
@@ -57,6 +88,11 @@ def validate(kind: str, document: Any) -> Any:
         validator = all_validators()[kind, version]
     except KeyError as exc:
         raise DocumentError(f'Unknown native document kind/version: {kind}/{version}') from exc
+    if kind == 'event' and type(document) is dict and type(document.get('event_type')) is str:
+        selected = _event_validators(version).get(document['event_type'])
+        if selected is not None and selected.is_valid(document):
+            return document
+    # Invalid data retains the full validator's established error ordering.
     errors = sorted(validator.iter_errors(document), key=lambda e: str(list(e.path)))
     if errors:
         first = errors[0]

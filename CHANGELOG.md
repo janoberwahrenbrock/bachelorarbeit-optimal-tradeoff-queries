@@ -8,6 +8,7 @@
 - Gebundene SDK- und native Fortsetzung; Anfangshistorien sind Warmstarts mit voller Tiefe.
 - Eigene Prozessworker laden benötigte Module beim Start; numerische Sessions und Handles bleiben bis zur ersten tatsächlichen Aufgabe unangelegt. Importfehler bleiben dem betroffenen tatsächlichen Auftrag zugeordnet.
 - Versionierte Laufdokumente, sequentieller Phasenaudit, ausdrückliche Konfigurationskonvertierung und mehrversionige Exporte/Archive. Historische Bytes und Digests bleiben unverändert.
+- Eindeutige Ereignisschemaauswahl und gemeinsamer privater Journal-Fold vermeiden wiederholte Formatprüfungen; Schemaressourcen, Originalnachweise und fachliche Prüfungen bleiben erhalten.
 - Aktualisierte Schnittstellen, Beispiele und Produktdokumentation. Tatsächliche sourcegebundene Prüfungen stehen im Implementierungsstatus.
 
 ## 0.1.0

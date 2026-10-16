@@ -83,3 +83,12 @@ Wartefristen oder geänderte Workerzahlen werden eingesetzt. Der Initializer lä
 nur die benötigten Module; geometrische Rechnungen und native Handles entstehen
 weiterhin bei der ersten tatsächlichen Aufgabe. Ein isolierter Tuningbefund
 ersetzt keine erneute Gesamtprüfung des daraus gebauten Pakets.
+
+Die native Release-5-Prüfung erkannte trotz gleicher Rechnungen eine konsistente
+Regression aller zwölf CLI-Kontrollen. Profile grenzen den zusätzlichen Aufwand
+auf die wiederholte Prüfung umfangreicher Ereignis- und Ergebnisdokumente ein.
+Die anschließende Korrektur verwendet einen eindeutigen Schemadiskriminator und
+den gemeinsamen strukturellen Journal-Fold. Sie lässt alle gespeicherten
+Belege, Schemaressourcen, Persistenzbarrieren und fachlichen Prüfungen bestehen.
+CPU-Mikroproben auf gespeicherten Dokumenten sind dabei nur Diagnose; der neue
+Payload benötigt einen eigenen Build und frische vollständige Freigabegates.

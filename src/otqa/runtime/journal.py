@@ -1,11 +1,10 @@
 """Versioned journal readers with strict execution-cycle and durable cursor binding."""
 from __future__ import annotations
 from . import journal_v1 as legacy
-from .codec import DocumentError, decode, digest, encode, mathematical_hex
+from .codec import DocumentError, decode, digest, mathematical_hex
 from .schema import validate
+from .journal_structure import _fold_validated_events, mathematically_equal, validate_planning
 
-mathematically_equal = legacy.mathematically_equal
-validate_planning = legacy.validate_planning
 actual_stop = legacy.actual_stop
 
 
@@ -249,12 +248,16 @@ def verify_prefix(data, byte_count, sha256, last_sequence, *, initial_answers=0,
             p.pop('planning_cycle', None)
             if p.get('termination_reason') == 'insufficient_expected_progress':
                 p['termination_reason'] = 'no_query'
-            projected.append({**e, 'schema_version': 1, 'sequence': len(projected) + 1, 'payload': p,
-                'numeric_hex': mathematical_hex(p, '/payload')})
+            # These are private semantic records, not synthetic v1 wire bytes.
+            # The retained fields already passed the original v2 schema and
+            # binary64 checks; stripping only the declared v2 extensions needs
+            # no second JSON/schema/hex roundtrip.
+            projected.append({'run_id': e['run_id'], 'attempt_id': e['attempt_id'],
+                'occurred_at_utc': e['occurred_at_utc'], 'event_type': e['event_type'],
+                'query_id': e['query_id'], 'payload': p})
         if len(events) != last_sequence or not events:
             raise DocumentError('Cursor last sequence differs from verified prefix')
-        raw = b''.join(encode(e) for e in projected)
-        result = legacy.verify_prefix(raw, len(raw), digest(raw), len(projected), initial_answers=initial_answers)
+        result = _fold_validated_events(projected, len(projected), initial_answers=initial_answers)
         result['events'] = events
         result['last_event_type'] = events[-1]['event_type']
         result['last_state'] = next((e['payload'] for e in reversed(events) if e['event_type'] == 'state_analyzed'), None)
