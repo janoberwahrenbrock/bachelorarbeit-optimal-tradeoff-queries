@@ -57,6 +57,16 @@ def source_inventory(source):
             for item in sorted(source.rglob('*')) if item.is_file() and item.suffix in ('.py', '.json')]
 
 
+def dependency_versions():
+    versions = {name: importlib.metadata.version(name) for name in ('numpy', 'scipy')}
+    try:
+        versions['highspy'] = importlib.metadata.version('highspy')
+    except importlib.metadata.PackageNotFoundError:
+        # The solver uses SciPy's bundled backend; this distribution is optional.
+        versions['highspy'] = None
+    return versions
+
+
 def mathematical(value):
     if is_dataclass(value):
         return {item.name: mathematical(getattr(value, item.name)) for item in fields(value)
@@ -215,13 +225,16 @@ def child(root, directory, job_id):
     execution = SolverExecution(8, multiprocessing.get_context('forkserver'))
     problem = otqa.Problem(tuple(tuple(row) for row in case['alternatives']))
     provider = SimulatedAnswers(tuple(case['weights']))
+    dependencies = dependency_versions()
     started = time.perf_counter()
+    phase = 'api_call'
     try:
         result = otqa.solve(problem, policy, provider, budget=QueryBudget(12), execution=execution)
         elapsed = time.perf_counter() - started
+        phase = 'result_projection'
         record = {'job': job, 'status': 'returned', 'api_call_wall_seconds': elapsed,
                   'source_path': str(source), 'python': sys.version, 'platform': platform.platform(),
-                  'dependencies': {name: importlib.metadata.version(name) for name in ('numpy', 'scipy', 'highspy')},
+                  'dependencies': dependencies,
                   'native_thread_environment': {key: os.environ.get(key) for key in THREAD_VARIABLES},
                   'mathematical_result': mathematical(result), 'quality': quality(case, result),
                   'execution_evidence': mathematical(getattr(result, 'planning_cycles', ())),
@@ -235,6 +248,7 @@ def child(root, directory, job_id):
                   'query_counts': mathematical(result.query_counts), 'answered_new': result.query_counts.answered_new}
     except BaseException as error:
         record = {'job': job, 'status': 'failed', 'api_call_wall_seconds': None,
+                  'failure_phase': phase,
                   'failed_call_elapsed_seconds': time.perf_counter() - started,
                   'error': {'type': type(error).__name__, 'message': str(error), 'traceback': traceback.format_exc()}}
     check_frozen(root, plan)
