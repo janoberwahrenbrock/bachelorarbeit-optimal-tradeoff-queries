@@ -1,0 +1,8 @@
+# Published original files and checksum-bearing metadata retain exact bytes.
+studies/**/*.json -text
+studies/**/results/** -text
+studies/**/SHA256SUMS -text
+studies/**/provenance/environment-lock.txt -text
+
+# Native CSV exports use the standard CRLF record terminator.
+studies/**/results/*.csv whitespace=cr-at-eol
