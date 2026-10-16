@@ -11,7 +11,7 @@ from types import FunctionType, MappingProxyType, MethodType
 
 from . import schema_v1
 from .schema_immutable import _SchemaSequence, _thaw_schema
-from .schema_predicate import _KEYWORDS as _PREDICATE_KEYWORDS, compile_reference
+from .schema_predicate import _KEYWORDS as _PREDICATE_KEYWORDS, compile_reference, compile_references
 
 _CURRENT = ContextVar('otqa_document_validation', default=None)
 _PREDICATE_NAMES = ('Planning', 'PlanSummary', 'ProgressEvidence', 'ExecutionCursor',
@@ -126,10 +126,12 @@ class ReferenceReuse:
 
         if safe and base == 'urn:otqa:v2:':
             plain = _thaw_schema(definitions)
+            compiled = compile_references(base, plain, selected)
             for name in selected:
                 ref = prefix + name
                 self.targets[ref] = definitions[name]
-                self.predicates[ref] = compile_reference(base, plain, name)
+                self.predicates[ref] = (compiled[name] if compiled is not None
+                    else compile_reference(base, plain, name))
 
     def register_root(self, kind, validator):
         if kind in ('event', 'result') and type(validator.schema) is MappingProxyType:

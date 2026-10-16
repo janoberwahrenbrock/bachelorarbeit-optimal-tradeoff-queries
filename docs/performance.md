@@ -147,3 +147,23 @@ absichtlich fehlerhafte Schemas werden durch neue Vertragsfälle geprüft; die
 fehlerhaften werden unverändert abgelehnt. Der Paket-/Algorithmuscode wurde
 dabei nicht verändert. Die fehlgeschlagene Abnahme bleibt separat erhalten;
 der neue Tool-/Buildstand erhält frische installierte Kontrollen.
+
+
+Release 9 bestand sämtliche installierten Funktionskontrollen und lieferte
+84 korrekte Laufzeitergebnisse mit 42 mathematisch identischen Paaren. Zehn
+native Bedingungen bestehen, zwei Countdownbedingungen bleiben nach der
+vorgesehenen Ergänzung bei medianen Zeitquotienten 1,04566 und 1,05001 unklar.
+Es wird weder eine klare Regression noch eine Gesamtfreigabe daraus abgeleitet.
+Vier zusätzliche reine kalte Readerprofile lokalisieren verbleibende Kosten im
+einmaligen Schemaaufbau; es wurden keine weiteren Solverfälle gestartet.
+
+Zwei daraufhin isolierte Vorschläge erfüllten ihre zuvor festgelegten
+Komponentenkriterien. Ein gemeinsamer Compiler für überlappende Definitionen
+verringert die CPUzeit zweier gespeicherter kalter Reader um etwa zehn und
+12,5 Prozent; ein gemeinsamer Fehlschlag fällt vollständig auf unabhängige
+Compiler zurück. Eine redundante tiefe Kopie vor einem bereits vollständig
+kopierenden Rewrite entfällt. Die Schemaerzeugung benötigte dadurch rund
+58 Prozent weniger CPUzeit; die Reader verbesserten sich um etwa 1,3 und
+4,5 Prozent. Alle Rohdaten, vollständigen Ergebnisse und 40 Schemaressourcen
+bleiben unverändert. Diese separaten Komponentenbefunde behaupten keine
+gemessene kombinierte CLIwirkung; die neue Quelle erhält frische Gates.

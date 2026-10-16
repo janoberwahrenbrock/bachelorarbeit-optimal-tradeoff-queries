@@ -8,14 +8,14 @@ Die gesicherte Hauptzweig-Ausgangsbasis ist `3f70c16c962d01a5846659dd0bb49f32899
 
 ## Umsetzungs- und Abnahmestand
 
-Der Release-9-Kandidat von Version `0.2.0` bindet Quellinventar
-`d2ab33384bf2652999b4bcfa74a99b150b07eedc25f4b35a9c740bd938005539`. Die Runtime bereitet unveränderliche Schemametadaten einmalig vor,
+Der Release-10-Kandidat von Version `0.2.0` bindet Quellinventar
+`9339e88e7885015290ca118208e48d45ad58130af3e0058fcc2b50448a4d3b72`. Die Runtime bereitet unveränderliche Schemametadaten einmalig vor,
 prüft bekannte Planobjekte mit vollständigen positiven Strukturbelegen und
 sammelt binäre Zahlennachweise mit einem gemeinsamen Akkumulator. Der frühere
 Nutzdatencache ist entfernt. Alle 40 Schemaressourcen und die numerischen
 Verfahren bleiben unverändert.
 
-Die vollständige Testsuite im Hauptcheckout besteht mit 903 Tests in 42.32 Sekunden;
+Die vollständige Testsuite im Hauptcheckout besteht mit 927 Tests in 40.40 Sekunden;
 Ruff ist sauber. Unabhängiger Review findet keine offenen P1/P2
 im unterstützten nativen JSON-Umfang. Neuer Build sowie frische installierte
 Funktions- und Laufzeitgates folgen für diesen konkreten Payload.

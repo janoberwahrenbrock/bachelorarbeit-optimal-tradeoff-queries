@@ -15,7 +15,7 @@ def definitions():
         if isinstance(value, (list, tuple)):
             return [rewrite(v) for v in value]
         return value
-    d, all_docs = rewrite(deepcopy(old.definitions()))
+    d, all_docs = rewrite(old.definitions())
     docs = {k: v for k, v in all_docs.items() if k in KINDS}
     obj, arr, num, integer, nullable, choices = old.object_of, old.array_of, old.number, old.integer, old.nullable, old.choices
     def r(name):

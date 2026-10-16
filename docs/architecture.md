@@ -161,6 +161,12 @@ Felder mit denselben strikten Typ- und Endlichkeitsregeln. Unbekannte Formen,
 veränderte Auflösungskontexte und ungültige Daten verwenden den vollständigen
 Validator einschließlich seiner bisherigen Fehlerreihenfolge.
 
+Ein privater Compiler bereitet die gemeinsamen statischen Definitionen pro
+Schemafamilie einmal vor. Falls der gemeinsame Aufbau nicht vollständig gelingt,
+werden alle Zieldefinitionen unabhängig mit dem bisherigen Compiler vorbereitet;
+unvollständige Zwischenergebnisse werden verworfen. Diese Vorbereitung speichert
+keine geprüften Nutzdaten.
+
 Private kompilierte Schemadaten werden einmalig aus den unveränderten
 JSON-Schemaressourcen vorbereitet. Neu angelegte Mappingproxies und unveränderliche
 Tupel verhindern nachträgliche Änderungen; öffentliche Builder und exportierte

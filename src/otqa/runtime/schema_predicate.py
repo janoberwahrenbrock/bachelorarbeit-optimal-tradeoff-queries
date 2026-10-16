@@ -210,6 +210,16 @@ class _Compiler:
         return None
 
 
+def _certifier(compiled):
+    """Wrap one fully compiled target in the unchanged certificate domain."""
+    def certify(value):
+        try:
+            return sys.getrecursionlimit() >= 1000 and _plain_native(value) and compiled(value)
+        except (TypeError, ValueError, OverflowError, RecursionError):
+            return False
+    return certify
+
+
 def compile_reference(base, definitions, name):
     """Return a positive certifier, or None unless the complete closure compiles."""
     compiler = _Compiler(base, definitions)
@@ -219,9 +229,21 @@ def compile_reference(base, definitions, name):
         return None
     if compiled is None or compiler.failed:
         return None
-    def certify(value):
-        try:
-            return sys.getrecursionlimit() >= 1000 and _plain_native(value) and compiled(value)
-        except (TypeError, ValueError, OverflowError, RecursionError):
-            return False
-    return certify
+    return _certifier(compiled)
+
+
+def compile_references(base, definitions, names):
+    """Compile one trusted family's targets together, or discard the full batch.
+
+    Only static compiled definitions are shared. Each target still receives its
+    own ordinary certificate wrapper; no document or successful validation is
+    retained. Callers use independent compilation if any closure is unsupported.
+    """
+    compiler = _Compiler(base, definitions)
+    try:
+        compiled = {name: compiler.definition(name) for name in names}
+    except (TypeError, ValueError, RecursionError):
+        return None
+    if compiler.failed or any(target is None for target in compiled.values()):
+        return None
+    return {name: _certifier(target) for name, target in compiled.items()}
