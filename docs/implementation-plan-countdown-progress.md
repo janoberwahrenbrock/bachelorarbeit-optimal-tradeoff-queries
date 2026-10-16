@@ -1,10 +1,36 @@
 # Implementierungsplan für Countdown und Mindestfortschritt
 
-Stand: 16. Oktober 2026. Status: Umsetzung am 16.10.2026 autorisiert und gestartet; Abnahmearbeitspakete und Prüfkriterien bleiben verbindlich. Fortschritt und ursprünglicher Quellstand sind unter `runs/countdown-progress-integration-20261016T030055Z/` gesichert.
+Stand: 16. Oktober 2026. Status: Umsetzung autorisiert und im Integrationsbranch implementiert; die abschließende Abnahme läuft. Der normative Vertrag, die Arbeitspakete und Prüfkriterien dieses Plans bleiben verbindlich. Fortschritt und ursprünglicher Quellstand sind unter `runs/countdown-progress-integration-20261016T030055Z/` gesichert.
 
-Countdown wird ein regulärer Ausführungsmodus der festen Strategie. Eine zusätzliche Policy `min_expected_progress` begrenzt die Fortsetzung auf Pläne mit ausreichender erwarteter Verbesserung. Ihr Default ist `0.001`. Beide Funktionen werden in dieselbe Solverarchitektur, dieselben öffentlichen Schnittstellen und dieselbe nachvollziehbare Ausführung integriert.
+Countdown ist im Abnahmekandidaten ein regulärer Ausführungsmodus der festen Strategie. Eine zusätzliche Policy `min_expected_progress` begrenzt die Fortsetzung auf Pläne mit ausreichender erwarteter Verbesserung. Ihr Default ist `0.001`. Beide Funktionen sind in dieselbe Solverarchitektur, dieselben öffentlichen Schnittstellen und dieselbe nachvollziehbare Ausführung integriert.
 
-Der offizielle Hauptbranch steht bei `3f70c16c962d01a5846659dd0bb49f32899344a6`. Im Arbeitsbranch `codex/fixed-depth-countdown` liegen experimentelle, noch nicht committete Änderungen. Diese verwenden einen aus der Antwortzahl abgeleiteten Modulo-Countdown. Sie enthalten weder den hier definierten Neustart noch die neue Fortschrittsschwelle. Der experimentelle Diff ist eine zu prüfende Ausgangsbasis, kein unverändert zu übernehmender Architekturvertrag.
+Die gesicherte Hauptzweig-Ausgangsbasis ist `3f70c16c962d01a5846659dd0bb49f32899344a6`. Der ursprüngliche experimentelle Modulo-Countdown ohne Neustart und Fortschrittsschwelle wurde einschließlich seiner lokalen Änderungen separat als `codex/pre-countdown-progress-20261016` bei `d3877f2252bb8ab2c6c24d2ec52061f7b588bb4c` gesichert. Dieser Ausgangsstand ist keine unverändert übernommene Definition des neuen Vertrags. Die reguläre Integration liegt auf `codex/countdown-progress-integration`.
+
+## Umsetzungs- und Abnahmestand
+
+Der bisher funktional geprüfte Release-4-Payload von Version `0.2.0` bindet Commit
+`289fbe35929f58ce9257213a5956ba42142ac0ce` und Paket-/Quellinventar
+`b9f796c8f0150f4621749b2118f84349b89347293c198c60cd5e1a92ea8904ef`.
+Die vollständige Suite bestand 551 Tests in 32,55 Sekunden; Ruff ist sauber.
+Die frische Wheelinstallation außerhalb des Checkouts bestand die analytischen
+SDK-Kontrollen. Die quellgebundene native Betriebsqualifizierung bestand
+34 Kontrollen auf macOS und 39 auf Linux.
+
+Der unabhängige Review wies einen konkreten Fulltrace-Wirefehler nach: der
+interne Singletonbezeichner entsprach nicht dem bestehenden nativen
+Baumvertrag. Das Mapping an der Serialisierungsgrenze und sieben zusätzliche
+Regressionstestfälle sind im Release-4-Payload enthalten. Auch die zuvor
+gefundenen Fehler der Bootstrapversion und der konsistenten optionalen
+Baumprojektion sind korrigiert; ihre ursprünglichen Versuche bleiben erhalten.
+
+Die öffentlichen nativen Fortsetzungs- und Acht-Job-Workflows bestanden für
+Release 4 auf beiden Hosts. Die gepaarten Performance-/Qualitätsgates
+und die reguläre Übernahme sind nicht abgeschlossen. Die große Studie ist
+noch nicht gestartet. Dieser Zwischenstand ersetzt keines der nachfolgenden
+Abnahmekriterien. Konkrete Quellen, Prüflogs und fortschreitende Quittungen
+stehen im [Implementierungsstatus](implementation-status.md), in der
+[Releasebindung](../runs/countdown-progress-integration-20261016T030055Z/release4.json)
+und im [laufenden Abnahmenachweis](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json).
 
 ## Ziel und Umfang
 

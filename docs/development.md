@@ -107,3 +107,31 @@ version before runtime comparisons. Any later package or schema change invalidat
 source-bound qualification and requires a new wheel and fresh qualification output.
 Historical v1 archives retain their original bytes, digests and disabled progress
 threshold; conversion creates a separate current input rather than rewriting data.
+
+## Abnahmestand der Integration vom 16. Oktober 2026
+
+Der bisher funktional geprüfte Release-4-Kandidat `0.2.0` bindet Commit
+`289fbe35929f58ce9257213a5956ba42142ac0ce` und Paket-/Quellinventar
+`b9f796c8f0150f4621749b2118f84349b89347293c198c60cd5e1a92ea8904ef`.
+551 Tests bestanden in 32,55 Sekunden; Ruff ist sauber. Das gebaute Wheel wurde
+frisch außerhalb des Checkouts installiert und mit analytischen SDK-Aufrufen
+einschließlich adaptiver Tiefe drei und Stop-aware-Bewertung geprüft. Die
+quellgebundene native Qualifizierung bestand 34 Kontrollen auf macOS und 39
+auf Linux.
+
+Der unabhängige Review fand eine konkrete Inkonsistenz bei der Fulltrace-
+Serialisierung: der interne Singletonbezeichner musste in den unveränderten
+nativen Bezeichner übersetzt werden. Die Korrektur liegt an der Wiregrenze;
+sieben zusätzliche Regressionstestfälle prüfen H1-Blätter,
+H2-Fortsetzungen und H3-Singletonoptionen gegen v1/v2. Historische Schemata
+wurden dafür nicht erweitert. Weitere zuvor korrigierte Wirefehler und ihre
+ursprünglichen Fehlversuche bleiben erhalten.
+
+Die öffentlichen nativen Release-4-Fortsetzungen bestanden auf beiden Hosts.
+Je acht native Jobs wurden auf Mac und Bench korrekt beendet, auditiert,
+exportiert, ohne neue Versuche fortgesetzt und versiegelt. Die gepaarte
+Performanceabnahme und die 1.200-Job-Studie sind noch offen. Fortschreitende Ergebnisse und konkrete Quittungen stehen im
+[Implementierungsstatus](implementation-status.md) und im
+[laufenden Abnahmenachweis](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json).
+Eine weitere Änderung des Paketpayloads benötigt neue quellgebundene Gates;
+historische Qualifizierungen und Laufzeiten ersetzen diese nicht.

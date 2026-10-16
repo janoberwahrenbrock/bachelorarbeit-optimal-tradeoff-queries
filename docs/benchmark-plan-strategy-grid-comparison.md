@@ -1,8 +1,21 @@
 # Benchmarkplan für Strategien und Gridgrößen
 
-Stand: 16. Oktober 2026. Status: Umfang und Ausführung am 16.10.2026 autorisiert; Implementierung und Vorabnahmen laufen, die größere Vergleichsserie ist noch nicht gestartet. Der Nutzer hat den Vergleich von Neuplanung, Countdown und adaptiver Strategie als Gegenstand bestätigt und Grid 3, 5, 10 und 20 vorgeschlagen. Der hier konkret vorgeschlagene Umfang beträgt 100 neue Probleme und 1.200 Läufe.
+Stand: 16. Oktober 2026. Status: Umfang und Ausführung autorisiert; die Integration ist implementiert, ihre abschließenden Freigabegates laufen. Die größere Vergleichsserie ist noch nicht gestartet. Der autorisierte Umfang beträgt 100 neue Probleme und 1.200 Läufe für Neuplanung, Countdown und adaptive Strategie mit Grid 3, 5, 10 und 20.
 
 Die Umsetzung selbst folgt dem [Implementierungsplan für Countdown und Mindestfortschritt](implementation-plan-countdown-progress.md). Die dortigen Funktions-, Integrations- und Qualifizierungsprüfungen bleiben Voraussetzung dieser Studie. Dieser Benchmarkplan definiert die anschließende inhaltliche Untersuchung der Varianten.
+
+Der bisher funktional geprüfte Release-4-Abnahmekandidat bindet Commit
+`289fbe35929f58ce9257213a5956ba42142ac0ce` und Paket-/Quellinventar
+`b9f796c8f0150f4621749b2118f84349b89347293c198c60cd5e1a92ea8904ef`.
+551 Tests in 32,55 Sekunden, Ruff, die frische externe Wheelprüfung sowie
+34 macOS- und 39 Linux-Betriebskontrollen sind bestanden. Der unabhängige
+Reviewbefund zur Fulltrace-Singletonserialisierung wurde korrigiert und mit
+zusätzlichen Vertragstests abgesichert. Die öffentlichen nativen
+Release-4-Fortsetzungen und Acht-Job-Workflows sind auf beiden Hosts
+bestanden; die gepaarte Laufzeitabnahme läuft. Die [Releasebindung](../runs/countdown-progress-integration-20261016T030055Z/release4.json)
+und der [fortlaufende Abnahmestand](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json)
+enthalten die konkreten Nachweise. Betriebsqualifizierung allein gibt die
+große Studie noch nicht frei.
 
 ## Fragestellungen
 
@@ -78,13 +91,13 @@ Die Reihenfolge der zwölf Konfigurationen wird vorab festgelegt und je Problem 
 
 Eine lange Laufzeit allein verändert weder Quelle noch Konfiguration und führt nicht zur Fallersetzung. Falls die verfügbare Arbeitszeit keine vollständige Serie erlaubt, bleibt der offene Umfang ausdrücklich pending und wird mit derselben eingefrorenen Quelle fortgesetzt. Begonnene Fälle werden nicht allein wegen einer Laufzeitschätzung abgebrochen.
 
-Controller und Mac-Sicherung werden beim später autorisierten Start unabhängig vom AI-Run ausgeführt. Eingaben, Rohdaten, Controllerstatus und Fortsetzungsanweisungen liegen in eigenen Studienordnern unter `inputs/` und `runs/`. Vor einer Fortsetzung werden tatsächliche Prozessidentitäten geprüft; fehlender SSH-Zugriff beweist keinen Solverabbruch. Bestehende terminale Ergebnisse werden nicht erneut versucht oder ersetzt.
+Controller und Mac-Sicherung werden beim Start nach bestandenen Freigabegates unabhängig vom AI-Run ausgeführt. Eingaben, Rohdaten, Controllerstatus und Fortsetzungsanweisungen liegen in eigenen Studienordnern unter `inputs/` und `runs/`. Vor einer Fortsetzung werden tatsächliche Prozessidentitäten geprüft; fehlender SSH-Zugriff beweist keinen Solverabbruch. Bestehende terminale Ergebnisse werden nicht erneut versucht oder ersetzt.
 
 Ein Quellfehler stoppt die weitere Zulassung neuer Jobs zur Klärung. Eine Reparatur verändert niemals die eingefrorene Quelle einer bereits gestarteten Studie. Läufe einer korrigierten Quelle erhalten eine eigene Quellenbindung und werden nicht still mit den ursprünglichen Ergebnissen zu einer einheitlichen Serie zusammengezählt.
 
 ## Gespeicherte Messwerte
 
-Jeder Lauf hält die Eingabe- und Quellenbindung, tatsächliche Queries und Antworten, Queryquellen, gewählte Planungshorizonte, tatsächliche Kandidatenfolge und die vorhandenen Erwartungswerte fest. Hinzu kommen Fortschrittswerte, Schwellenentscheidungen, Countdownresttiefen und Ersatzversuche nach dem neuen Ereignisvertrag.
+Jeder Lauf hält die Eingabe- und Quellenbindung, tatsächliche Queries und Antworten, die konfigurierten Queryquellen, gewählte Planungshorizonte, tatsächliche Kandidatenfolge und die vorhandenen Erwartungswerte fest. Hinzu kommen Fortschrittswerte, Schwellenentscheidungen, Countdownresttiefen und Ersatzversuche nach dem neuen Ereignisvertrag. Die Standardaufzeichnung behauptet keine gesonderte Generatorherkunft jeder ausgewählten Query; die Queryidentität und der Horizont bleiben nachvollziehbar.
 
 Laufzeiten umfassen mindestens die vollständige SDK-Wandzeit und die native Fall-/Controllerzeit als getrennte Größen. Kumulierte Workerzeit wird nicht als Problemlaufzeit ausgegeben. Zusätzliche Messinstrumentierung wird nicht nachträglich nur für ausgewählte Bedingungen aktiviert.
 
@@ -126,4 +139,9 @@ Die neue Fortschrittsregel, Countdownneustarts und andere Fälle können die Dau
 
 Dieser Vorschlag vertieft den gewünschten Strategien-/Gridvergleich. Er ersetzt keine ausführliche Tiefe-3-, Sieben-Ziele-, Konfidenz- oder Thresholdsensitivitätsstudie. Solche Untersuchungen erhalten eigene festgelegte Fragen und Fallgruppen.
 
-Die reguläre Integration wurde am 16.10.2026 gestartet. Die Benchmarkserie folgt erst nach bestandener Abnahme. Beim Umsetzungsstart werden der Implementierungsplan, dieser Benchmarkplan und die vorhandenen Arbeitsanweisungen zuerst gelesen. Fortschritt und Wiederaufnahmepunkte werden dann fortlaufend dokumentiert.
+Die reguläre Integration ist im Release-4-Kandidaten implementiert; noch offene
+Abnahmen und ihre Belege bleiben im fortlaufenden Implementierungsstatus
+sichtbar. Die Benchmarkserie folgt erst nach bestandener Abnahme. Vor ihrem
+Start und einer Wiederaufnahme werden der Implementierungsplan, dieser
+Benchmarkplan und die vorhandenen Arbeitsanweisungen gelesen. Fortschritt,
+Fehler und Wiederaufnahmepunkte werden fortlaufend dokumentiert.

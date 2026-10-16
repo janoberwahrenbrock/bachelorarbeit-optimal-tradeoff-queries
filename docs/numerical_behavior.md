@@ -80,7 +80,7 @@ Eine Konfidenzschwelle wird mit den vorhandenen Anteilen einschließlich geprüf
 
 ## Sessionbesitz und Speichergrenzen
 
-Jeder öffentliche Solveraufruf besitzt eine eigene Plannersession mit eigenen mathematischen States, Caches und Backendhandles. Ein Prozessworker registriert zunächst nur seine gebundenen Eingaben. Seine numerische Session und Finalisierung entstehen erst mit dem ersten tatsächlichen Task. Unbenutzte Worker erzeugen deshalb keine eager numerische Session. Innere Unterbäume bleiben seriell; es gibt keine verschachtelten Workerpool-Aufrufe.
+Jeder öffentliche Solveraufruf besitzt eine eigene Plannersession mit eigenen mathematischen States, Caches und Backendhandles. Ein eigener Prozessworker registriert seine gebundenen Eingaben und lädt die benötigten Geometrie- und Statemodule bereits im Initializer. Das vermeidet einen verspäteten NumPy-/SciPyimport erst bei einer späteren Query. Numerische Session, Backendhandles und Finalisierung entstehen weiterhin erst mit dem ersten tatsächlichen Task. Ein Importfehler wird ausschließlich in diesem Worker gespeichert und erst bei dessen erstem tatsächlichen Auftrag gemeldet; ein ungenutzter Worker erzeugt dadurch keinen künstlichen Poolfehler. Unbenutzte Worker erzeugen keine numerische Session. Innere Unterbäume bleiben seriell; es gibt keine verschachtelten Workerpool-Aufrufe.
 
 PreparedStates besitzen unveränderliche geordnete Constraint- und Analysepayloads. Beim Prozessübergang werden keine nativen LPmodelle, Cacheinhalte oder Geometrysessionhandles serialisiert. Der Worker bindet den übertragenen Zustand an seine lokalen Ressourcen. Queryhistorien behalten für Cacheidentitäten ihre Reihenfolge und Fließkommabits einschließlich `-0.0`.
 

@@ -76,3 +76,10 @@ eine einmalige feste Ergänzung für alle betroffenen Bedingungen vorgesehen.
 Ein unklarer Befund bleibt unklar. Die historischen Messwerte darüber sind kein
 Laufzeitnachweis für den neuen Quellpayload. Tatsächliche neue Nachweise werden
 im [Implementierungsstatus](implementation-status.md) ergänzt.
+
+Die Workerimport-Vorbereitung bleibt vollständig innerhalb derselben gemessenen
+Solverschleife. Weder globale Forkserverpreloads noch zusätzliche Warmaufrufe,
+Wartefristen oder geänderte Workerzahlen werden eingesetzt. Der Initializer lädt
+nur die benötigten Module; geometrische Rechnungen und native Handles entstehen
+weiterhin bei der ersten tatsächlichen Aufgabe. Ein isolierter Tuningbefund
+ersetzt keine erneute Gesamtprüfung des daraus gebauten Pakets.

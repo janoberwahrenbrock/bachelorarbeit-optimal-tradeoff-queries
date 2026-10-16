@@ -2,14 +2,48 @@
 
 ## Aktuelle Integration 0.2.0
 
-Stand: 16. Oktober 2026. Countdown, vollständige Ersatzplanung,
+Stand: 16. Oktober 2026. Countdown mit vollständiger Ersatzplanung,
 `min_expected_progress=0.001`, explizite Fortsetzungen und versionierte
-Aufzeichnung werden anhand des gespeicherten Implementierungsplans integriert.
-Der erste gemeinsame Testlauf bestand 481 Tests; die Quellabnahme läuft weiter.
-Die abschließende Paketidentität, installierte macOS-/Linuxqualifizierung,
-Fortsetzungs-End-to-End-Prüfung und gepaarte Laufzeitabnahme sind noch offen.
-Die größere100-Fall-Studie startet erst nach diesen Abnahmen. Der Arbeitsnachweis
-liegt unter `runs/countdown-progress-integration-20261016T030055Z/`.
+Aufzeichnung sind auf `codex/countdown-progress-integration` implementiert.
+Der bisher gebaute und funktional geprüfte Abnahmekandidat ist Release 4 von Version `0.2.0`:
+
+- Implementierungscommit: `289fbe35929f58ce9257213a5956ba42142ac0ce`;
+- Paket-/Quellinventar: `b9f796c8f0150f4621749b2118f84349b89347293c198c60cd5e1a92ea8904ef`;
+- Wheel-SHA256: `95f3c74553fafb2abd8d16c10ecdde73c5a8c1ce39de97b7da3b84572f82f29a`.
+
+Die [Releasebindung](../runs/countdown-progress-integration-20261016T030055Z/release4.json)
+und der [fortlaufende Abnahmestand](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json)
+halten den geprüften Payload und die noch offenen Schritte fest. Änderungen
+an Produktcode oder Paketressourcen erfordern erneut passende Prüfungen.
+
+| Bereich | Nachgewiesener Stand für die Integration |
+| --- | --- |
+| Vollständige Testsuite | 551 Tests bestanden in 32,55 Sekunden; [Testlog](../runs/countdown-progress-integration-20261016T030055Z/pytest-release4.log) |
+| Statische Prüfung | Ruff sauber |
+| Unabhängiger Review | Konkreter Fulltrace-Befund korrigiert; keine weiteren belastbaren P1/P2 im beschriebenen Prüfumfang; [Reviewbeleg](../runs/countdown-progress-integration-20261016T030055Z/review-independent.md) |
+| Frische Wheelinstallation außerhalb des Checkouts | Analytische SDK-Kontrollen bestanden, einschließlich adaptiver Tiefe 3 mit Stop-aware-Bewertung; [Quellbindung und Ergebnis](../runs/countdown-progress-integration-20261016T030055Z/external-installed-smoke-release4.json) |
+| Native Betriebsqualifizierung des Release-4-Payloads | 34 Kontrollen auf macOS und 39 auf Linux bestanden; [macOS-Zertifikat](../runs/countdown-progress-integration-20261016T030055Z/macos-qualification-release4/certification.json), hostübergreifende Belegzuordnung im fortlaufenden Abnahmestand |
+| Öffentliche native Fortsetzung und Benchmarkbedienung | CLI-Fortsetzung auf beiden Hosts bestanden; je acht native Jobs auf Mac und Bench korrekt, einschließlich Audit/Export/Resume/Seal; frühere Release-Ergebnisse werden nicht übertragen |
+| Gepaarte Laufzeit- und Qualitätskontrollen | Noch offen; deaktivierte Schwelle für Implementierungsaufwand und `None` gegen `0.001` für verändertes Abbruchverhalten getrennt prüfen |
+| Größere Strategien-/Gridstudie | Noch nicht gestartet; 100 neue Probleme × zwölf Bedingungen erst nach bestandenen Freigabegates |
+
+Die frühen Abnahmekandidaten deckten drei konkrete Wirefehler auf: eine
+unveränderte Bootstrapregistrierung erhielt fälschlich Version zwei; ein
+Fulltrace-Planungszyklus ließ die bereits bekannte Rootkandidatenzahl aus;
+interne Singletonbezeichner wurden nicht in den bestehenden nativen
+Baumbezeichner übersetzt. Die Korrekturen und Regressionstests sind im
+Release-4-Payload enthalten. Frühere Fehlversuche und Nachweise bleiben unter
+`runs/countdown-progress-integration-20261016T030055Z/` erhalten. Eine bestandene
+Betriebsqualifizierung ist noch keine Freigabe der Laufzeit oder der großen Studie.
+
+Die anschließende Workerimport-Korrektur wird als eigener Release-5-Payload
+neu gebaut und qualifiziert. Die vollständige Suite bestand dafür 554 Tests
+in 33,23 Sekunden; 118 fokussierte Tests und Ruff sind ebenfalls bestanden.
+Ihre benötigten Module werden im eigenen
+Workerinitializer geladen; numerische Handles bleiben first-task-lazy. Der
+Release-4-Laufzeitbefund und die isolierte Tuninggruppe bleiben separat erhalten.
+Die endgültige Quellenbindung und Gesamtmessung stehen im fortlaufenden
+Abnahmenachweis, bis die erneuten Gates abgeschlossen sind.
 
 Die folgenden historischen Freigaben gelten ausschließlich für ihre ursprüngliche
 Quelle und werden nicht auf den aktuellen Quellpayload übertragen.

@@ -60,6 +60,13 @@ Rootbewertungen werden verteilt, die Kindplanung bleibt seriell. Dadurch gibt
 es keine verschachtelten Pools. Die Auswahlreihenfolge folgt der fachlichen
 Ordnung und nicht der Ankunftsreihenfolge der Worker.
 
+Der eigene Workerinitializer registriert unveränderliche Eingaben und lädt die
+benötigten Geometrie- und Statemodule. Numerische Session, Backendhandles und
+Finalisierung entstehen erst bei der ersten tatsächlichen Aufgabe. Importfehler
+bleiben im betroffenen Worker gespeichert und werden erst dessen tatsächlichem
+Auftrag zugeordnet. Globale Forkserverpreloads und fremde Sessions werden dafür
+nicht verändert.
+
 Die Solverschleife analysiert den tatsächlichen Zustand und prüft Singleton,
 Konfidenz und Querybudget in dieser Reihenfolge. Erst dann wird geplant und eine
 Query an den Provider übergeben. Ein `SolveFinished`-Ereignis folgt auf den

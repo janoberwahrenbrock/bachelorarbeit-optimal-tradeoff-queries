@@ -80,12 +80,20 @@ _WORKER_FAILURE: ExecutionContextError | None = None
 
 
 def _initialize_worker(problem, policy, execution, numerical_profile, backend_factory, session_id) -> None:
-    global _WORKER_CONTEXT
+    global _WORKER_CONTEXT, _WORKER_FAILURE
     if _WORKER_CONTEXT is not None or _WORKER is not None:
         raise ExecutionContextError("root worker context is already registered")
-    # An executor can start a worker that never receives a task. Register only
-    # immutable inputs here; numerical imports and handles belong to first use.
+    # Spawn can precede the first assigned task. Import process-local modules
+    # now so a later state does not serialize cold NumPy/SciPy imports. Sessions,
+    # backends, handles and finalizers still belong to the first actual task.
     _WORKER_CONTEXT = problem, policy, execution, numerical_profile, backend_factory, session_id
+    try:
+        from otqa.geometry import GeometrySession  # noqa: F401
+        from otqa.state import StateEngine  # noqa: F401
+    except Exception as error:
+        # Preserve lazy task failure: an unused worker must not break its pool.
+        _WORKER_FAILURE = ExecutionContextError("root worker session setup failed")
+        _WORKER_FAILURE.__cause__ = error
 
 
 def _run_worker(task: _RootTask):
