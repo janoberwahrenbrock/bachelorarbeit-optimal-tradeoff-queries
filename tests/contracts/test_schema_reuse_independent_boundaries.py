@@ -1,6 +1,4 @@
 """Independent narrow adversarial contexts; no solver or external artifact."""
-from copy import deepcopy
-
 import pytest
 from jsonschema import Draft202012Validator, FormatChecker
 
@@ -53,23 +51,20 @@ def test_validator_without_factory_metadata_retains_full_admission_and_error(mon
         schema._event_validators.cache_clear()
 
 
-def test_changed_transitive_definition_uses_complete_ref_checks(monkeypatch):
+def test_transitive_definitions_cannot_mutate_and_invalid_values_use_full_reference(monkeypatch):
     validator = schema.all_validators()['event', 2]
     query = validator._resolver.lookup('urn:otqa:v2:common#/$defs/Query').contents
-    original = deepcopy(query)
-    calls = count_original_references(monkeypatch)
-    try:
+    with pytest.raises(TypeError):
         query['properties']['value']['minimum'] = 100.0
-        document = event_sample()
-        expected = outcome(document, full=True, validator=validator)
-        calls.clear()
-        assert expected[0] != 'accepted'
-        assert outcome(document) == expected
-        assert calls and all(context is None for _, context in calls)
-        assert schema_reuse._CURRENT.get() is None
-    finally:
-        query.clear()
-        query.update(original)
+    calls = count_original_references(monkeypatch)
+    document = event_sample()
+    document['payload']['attempt']['selected_plan']['selected']['query']['value'] = -1.0
+    expected = outcome(document, full=True, validator=validator)
+    calls.clear()
+    assert expected[0] != 'accepted'
+    assert outcome(document) == expected
+    assert calls and all(context is None for _, context in calls)
+    assert schema_reuse._CURRENT.get() is None
 
 
 def test_foreign_format_checker_is_not_a_factory_context(monkeypatch):
@@ -147,13 +142,13 @@ def test_early_close_and_error_never_remember_partial_reference_success():
         iterator = owner.reference(Validator(), ref, {}, {'$ref': ref})
         assert next(iterator) == 'first original error'
         iterator.close()
-        assert not context.successes
+        assert not hasattr(context, 'successes') and not hasattr(context, 'key_bytes')
         iterator = owner.reference(Validator(), ref, {}, {'$ref': ref})
         assert next(iterator) == 'first original error'
         with pytest.raises(RuntimeError) as caught:
             next(iterator)
         assert caught.value is error
-        assert not context.successes
+        assert not hasattr(context, 'successes') and not hasattr(context, 'key_bytes')
     finally:
         schema_reuse.end_call(token)
     assert schema_reuse._CURRENT.get() is None

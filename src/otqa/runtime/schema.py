@@ -1,10 +1,12 @@
 """Offline schemas addressed by document kind and immutable contract version."""
 from __future__ import annotations
 from functools import lru_cache
+from types import MappingProxyType
 from typing import Any
 from . import schema_v1, schema_v2
 from .codec import DocumentError
 from .schema_reuse import ReferenceReuse, begin_call, end_call
+from .schema_immutable import _compile_schema, _SchemaSequence
 
 # Legacy construction API remains available to readers of historical artifacts.
 BASE, DIALECT = schema_v1.BASE, schema_v1.DIALECT
@@ -30,8 +32,8 @@ def all_validators():
     from referencing import Registry, Resource
     checker = Draft202012Validator.TYPE_CHECKER.redefine('integer', lambda checker, v: type(v) is int)
     checker = checker.redefine('number', lambda checker, v: type(v) in (int, float) and schema_v1._finite(v))
-    reuse = ReferenceReuse(Draft202012Validator.VALIDATORS['$ref'])
-    strict = validators.extend(Draft202012Validator, {'$ref': reuse.reference}, type_checker=checker)
+    reuse = ReferenceReuse(Draft202012Validator.VALIDATORS['$ref'], Draft202012Validator.VALIDATORS['enum'])
+    strict = validators.extend(Draft202012Validator, {'$ref': reuse.reference, 'enum': reuse.enumeration}, type_checker=checker)
     registry = Registry()
     families = {}
     for version, module in ((1, schema_v1), (2, schema_v2)):
@@ -40,13 +42,15 @@ def all_validators():
             from .schema_v2 import continuation_schema
             docs['continuation'] = continuation_schema()
         families[version] = docs
-        reuse.register_family(module.BASE, defs)
-        registry = registry.with_resource(module.BASE + 'common', Resource.from_contents(
-            {'$schema': DIALECT, '$id': module.BASE + 'common', '$defs': defs}))
-    result = {(kind, version): strict({'$schema': DIALECT, '$id': f'urn:otqa:v{version}:' + kind, **doc},
+        common = _compile_schema({'$schema': DIALECT, '$id': module.BASE + 'common', '$defs': defs})
+        reuse.register_metadata(common)
+        reuse.register_family(module.BASE, common['$defs'])
+        registry = registry.with_resource(module.BASE + 'common', Resource.from_contents(common))
+    result = {(kind, version): strict(_compile_schema({'$schema': DIALECT, '$id': f'urn:otqa:v{version}:' + kind, **doc}),
             registry=registry, format_checker=FormatChecker())
             for version, docs in families.items() for kind, doc in docs.items()}
     for (kind, _), validator in result.items():
+        reuse.register_metadata(validator.schema)
         reuse.register_root(kind, validator)
     strict._otqa_reference_reuse = reuse
     return result
@@ -67,18 +71,27 @@ def _event_validators(version: int):
     """
     validator = all_validators()['event', version]
     schema = validator.schema
-    if not isinstance(schema, dict) or set(schema) != {'$schema', '$id', 'oneOf'}:
+    if type(schema) is MappingProxyType:
+        owner = getattr(validator, '_otqa_reference_reuse', None)
+        known = owner.roots.get(id(schema)) if owner is not None else None
+        if known is None or known[0] is not schema:
+            return {}
+    if not isinstance(schema, dict) and type(schema) is not MappingProxyType:
         return {}
-    if not isinstance(schema['oneOf'], list):
+    if set(schema) != {'$schema', '$id', 'oneOf'}:
+        return {}
+    if not isinstance(schema['oneOf'], list) and type(schema['oneOf']) is not _SchemaSequence:
         return {}
     result = {}
     for variant in schema['oneOf']:
-        if not isinstance(variant, dict) or any(
+        if (not isinstance(variant, dict) and type(variant) is not MappingProxyType) or any(
             key in variant for key in ('$id', '$schema', '$anchor', '$dynamicAnchor')
         ):
             return {}
         properties = variant.get('properties')
-        if not isinstance(properties, dict) or not isinstance(properties.get('event_type'), dict):
+        if ((not isinstance(properties, dict) and type(properties) is not MappingProxyType)
+                or (not isinstance(properties.get('event_type'), dict)
+                    and type(properties.get('event_type')) is not MappingProxyType)):
             return {}
         tag = properties['event_type'].get('const')
         if type(tag) is not str or tag in result:

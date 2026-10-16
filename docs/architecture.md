@@ -161,15 +161,23 @@ Felder mit denselben strikten Typ- und Endlichkeitsregeln. Unbekannte Formen,
 veränderte Auflösungskontexte und ungültige Daten verwenden den vollständigen
 Validator einschließlich seiner bisherigen Fehlerreihenfolge.
 
-Innerhalb genau eines Formatprüfungsaufrufs kann die Runtime erfolgreiche
-Prüfungen identischer `Planning`- und `PlanSummary`-Werte wiederverwenden. Der
-private Kontext gilt ausschließlich für die bekannten v2-Resultate und drei
-planhaltige Ereignisse. Er bindet aufgelöstes Schema, Prüfumgebung und vollständige,
-typgetreue JSON-Werte; höchstens 64 Einträge und 512 KiB Schlüsselbytes bleiben
-bis zum Aufrufende erhalten. Reentrante und parallele Aufrufe besitzen eigene
-Kontexte. Ungültige Daten, unbekannte Kontexte und erschöpfte Grenzen verwenden
-die vollständige Prüfung. Dateien, Hashes, numerische Werte und fachliche
-Übergänge werden dadurch nicht als bereits geprüft übernommen.
+Private kompilierte Schemadaten werden einmalig aus den unveränderten
+JSON-Schemaressourcen vorbereitet. Neu angelegte Mappingproxies und unveränderliche
+Tupel verhindern nachträgliche Änderungen; öffentliche Builder und exportierte
+Schemadateien bleiben gewöhnliche JSON-Dokumente. Bekannte Enumknoten verwenden
+für ursprüngliche Fehlertexte weiterhin den vollständigen ursprünglichen Handler.
+
+Für die häufigen, formatfreien Plan- und Ausführungsevidenzen kann die Runtime
+einen vollständigen positiven Strukturbeleg mit vorbereiteten Prädikaten prüfen.
+Das gilt ausschließlich für die bekannten nativen Schemata, Referenzen und
+Prüfkontexte. Der gesamte tatsächlich verwendete Schemaabschluss muss unterstützt
+sein. Unbekannte Regeln, Referenzen, Typen oder veränderte Prüfumgebungen sowie
+ein negativer Beleg führen zur vollständigen ursprünglichen Prüfung mit deren
+Fehlerreihenfolge. Es gibt keinen Cache erfolgreicher Nutzdatenprüfungen.
+Reentrante und parallele Aufrufe besitzen eigene, am Aufrufende zurückgesetzte
+Autorisierungskontexte. Dateien, Hashes, numerische Werte und fachliche Übergänge
+werden dadurch nicht als bereits geprüft übernommen. Der Schemaoptimierer
+importiert keine Numerik und enthält keine Algorithmusentscheidungen.
 
 Die versionsspezifischen Journalreader prüfen originale Bytes, Hash, Schema,
 Sequenz, Zeitstempel und binary64-Evidenz. Danach verarbeitet ein privater

@@ -98,7 +98,8 @@ def test_discriminated_ref_preserves_strict_finite_numbers(event_samples, value)
 def test_unproven_schema_shapes_use_the_complete_validator(monkeypatch, shape):
     validators = dict(schema.all_validators())
     parent = validators['event', 2]
-    changed = deepcopy(parent.schema)
+    from test_schema_reference_reuse import copy_schema
+    changed = copy_schema(parent.schema)
     if shape == 'extra_envelope_constraint':
         changed['required'] = ['additional_contract_field']
     else:

@@ -102,24 +102,38 @@ def numeric_hex(value: Any, pointer: str = "") -> dict[str, str]:
     return result
 
 
-def mathematical_hex(value: Any, pointer: str = "", *, all_numbers: bool = False) -> dict[str, str]:
-    """Typed mathematical evidence, including mathematical JSONinteger spelling."""
-    scalar_names = {"value", "probability", "expected_terminal_candidates", "expected_terminal_loss", "expected_queries",
-                    "gain", "rate", "min_expected_progress", "starting_value", "expected_terminal_value", "expected_progress", "threshold", "maximum_volume_share", "selected_candidate_volume", "selected_candidate_volume_share"}
-    containers = {"candidate_volumes", "candidate_volume_shares", "answer_probabilities", "lexicographic_expected_values"}
-    result = {}
+_MATHEMATICAL_SCALARS = frozenset({
+    "value", "probability", "expected_terminal_candidates", "expected_terminal_loss", "expected_queries",
+    "gain", "rate", "min_expected_progress", "starting_value", "expected_terminal_value", "expected_progress",
+    "threshold", "maximum_volume_share", "selected_candidate_volume", "selected_candidate_volume_share",
+})
+_MATHEMATICAL_CONTAINERS = frozenset({
+    "candidate_volumes", "candidate_volume_shares", "answer_probabilities", "lexicographic_expected_values",
+})
+_NON_MATHEMATICAL_FIELDS = ("error", "context", "telemetry_errors", "numeric_hex")
+
+
+def _collect_mathematical_hex(value, pointer, all_numbers, result):
+    """Append evidence in the original depth-first order to one owned mapping."""
     if all_numbers and type(value) in (int, float):
         binary = float(value)
         if not math.isfinite(binary):
             raise DocumentError("Non-finite mathematical number")
-        return {pointer: binary.hex()}
+        result[pointer] = binary.hex()
+        return
     if isinstance(value, dict):
         for key, child in value.items():
-            if key in ("error", "context", "telemetry_errors", "numeric_hex"):
+            if key in _NON_MATHEMATICAL_FIELDS:
                 continue
-            result.update(mathematical_hex(child, pointer + "/" + pointer_escape(key),
-                                          all_numbers=all_numbers or key in scalar_names or key in containers))
+            _collect_mathematical_hex(child, pointer + "/" + pointer_escape(key),
+                all_numbers or key in _MATHEMATICAL_SCALARS or key in _MATHEMATICAL_CONTAINERS, result)
     elif isinstance(value, (list, tuple)):
         for index, child in enumerate(value):
-            result.update(mathematical_hex(child, pointer + "/" + str(index), all_numbers=all_numbers))
+            _collect_mathematical_hex(child, pointer + "/" + str(index), all_numbers, result)
+
+
+def mathematical_hex(value: Any, pointer: str = "", *, all_numbers: bool = False) -> dict[str, str]:
+    """Typed mathematical evidence with one accumulator, preserving original rules."""
+    result = {}
+    _collect_mathematical_hex(value, pointer, all_numbers, result)
     return result

@@ -5,34 +5,33 @@
 Stand: 16. Oktober 2026. Countdown mit vollständiger Ersatzplanung,
 `min_expected_progress=0.001`, explizite Fortsetzungen und versionierte
 Aufzeichnung sind auf `codex/countdown-progress-integration` implementiert.
-Der Release-7-Kandidat bindet das Paket-/Quellinventar
-`da17a517dffd7011dcf6021ee21edd208b684ae7d5028f04a609a308a2a1db39`. Er vermeidet zusätzlich
-wiederholte erfolgreiche Planschemaprüfungen innerhalb eines einzelnen Aufrufs.
-Die numerischen Verfahren und alle 40 Schemaressourcen bleiben unverändert.
+Der neue Release-8-Kandidat bindet das Paket-/Quellinventar
+`d2ab33384bf2652999b4bcfa74a99b150b07eedc25f4b35a9c740bd938005539`.
+Er bereitet unveränderliche Schemametadaten einmalig vor, prüft die häufigen
+Planobjekte mit vollständigen positiven Strukturbelegen und sammelt binäre
+Zahlennachweise mit einem gemeinsamen Akkumulator. Der frühere Nutzdatencache
+ist entfernt. Numerische Verfahren und alle 40 Schemaressourcen bleiben erhalten.
 
 | Bereich | Nachgewiesener Stand für den aktuellen Kandidaten |
 | --- | --- |
-| Reine neue Verträge und unabhängiger Review | 87 Tests bestanden; keine offenen Befunde im bekannten nativen JSON-Umfang |
-| Vollständige Testsuite | 726 Tests bestanden in 43,10 Sekunden im tatsächlichen Hauptcheckout |
-| Statische Prüfung | Ruff für gesamten Quellcode, Tests, Werkzeuge und Buildbackend sauber |
-| Quellenprüfung | Nur zwei Runtimeproduktdateien gegenüber Release 6 geändert; numerische Quelle unverändert |
-| Installation und Betriebsqualifizierung | Neuer Build und frische Release-7-Prüfung erforderlich |
+| Reine Verträge und unabhängiger Review | Gezielte Quellprüfungen bestanden; keine offenen P1/P2 im unterstützten nativen JSON-Umfang |
+| Vollständige Testsuite | 888 Tests in 41,43 Sekunden im Hauptcheckout; acht zusätzliche unabhängige Fälle separat bestanden |
+| Statische Prüfung | Ruff für Quellcode, Tests, Werkzeuge und Buildbackend sauber |
+| Installation und Betriebsqualifizierung | Frischer Build und Mac-/Linux-Prüfungen für Release 8 erforderlich |
 | SDK-/CLI-Laufzeitkontrollen und Policyeffekte | Neue vollständige Prüfungen erforderlich |
 | Größere Strategien-/Gridstudie | Noch nicht gestartet; 100 neue Probleme × zwölf Bedingungen erst nach bestandenen Freigabegates |
 
-Release 6 bestand 662 Tests, 34 macOS- und 39 Linux-Kontrollen, öffentliche
-Fortsetzungen und Acht-Job-Workflows auf beiden Hosts. Sein natives Gate bleibt
-mit 78 korrekten Ergebnissen und 39 gleichen Paaren bei elf Regressionen und einem
-unklaren Befund gesperrt. Profile zeigen wiederholte Schemaarbeit als Hauptkosten.
-Release 5 bestand zuvor 128 SDK-Aufrufe und 20 Zeitscreens, scheiterte aber an
-allen zwölf nativen Bedingungen. Alle Versuche und Fehler bleiben erhalten.
+Die Releases 5, 6 und 7 sind trotz bestandener Funktionskontrollen am vollständigen
+nativen Laufzeitgate gesperrt geblieben. Release 7 lieferte 84 korrekte Resultate
+und 42 mathematisch gleiche Paare; zehn Bedingungen waren langsamer und zwei
+nach der festgelegten Ergänzung unklar. Keine frühere Freigabe wird auf eine
+geänderte Quelle übertragen. Verworfene Vorschläge und sämtliche Versuche
+bleiben im projektinternen Nachweis erhalten.
 
-Reine CPUproben gespeicherter Dokumente zeigen für Release 7 etwa 58 Prozent
-weniger Resultat- und 33 Prozent weniger Ereignisprüfzeit. Daraus folgt noch
-keine vollständige Laufzeitfreigabe. Neue installierte Betriebs- und Laufzeitgates
-sind erforderlich. Der [fortlaufende Abnahmestand](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json)
-bindet Quelle, Rohdaten und offene Schritte. Historische Freigaben gelten nur für
-ihre ursprünglichen Quellen.
+Komponentenmessungen beschreiben ausschließlich ihre angegebenen Prüfgrenzen;
+sie ersetzen keine vollständigen Laufzeitgates. Der
+[fortlaufende Abnahmestand](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json)
+bindet Quellen, Rohdaten, Fehler und nächste Schritte.
 
 ## Historische Freigabe 0.1.0
 

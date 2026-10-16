@@ -9,7 +9,8 @@
 - Eigene Prozessworker laden benötigte Module beim Start; numerische Sessions und Handles bleiben bis zur ersten tatsächlichen Aufgabe unangelegt. Importfehler bleiben dem betroffenen tatsächlichen Auftrag zugeordnet.
 - Versionierte Laufdokumente, sequentieller Phasenaudit, ausdrückliche Konfigurationskonvertierung und mehrversionige Exporte/Archive. Historische Bytes und Digests bleiben unverändert.
 - Eindeutige Ereignisschemaauswahl und gemeinsamer privater Journal-Fold vermeiden wiederholte Formatprüfungen; Schemaressourcen, Originalnachweise und fachliche Prüfungen bleiben erhalten.
-- Eng begrenzte Wiederverwendung erfolgreicher identischer Planschemaprüfungen innerhalb eines einzigen Formatprüfungsaufrufs; keine Dateivertrauens- oder numerischen Caches.
+- Einmalig vorbereitete unveränderliche Schemametadaten und vollständige positive Strukturprüfung häufiger Planobjekte; unbekannte oder ungültige Fälle verwenden die ursprüngliche Prüfung. Dieser Prüfpfad behält keine zuvor geprüften Dokumente oder numerischen Werte.
+- Gemeinsamer Akkumulator für unveränderte binäre Zahlennachweise statt wiederholtem Zusammenführen rekursiver Teildictionaries.
 - Aktualisierte Schnittstellen, Beispiele und Produktdokumentation. Tatsächliche sourcegebundene Prüfungen stehen im Implementierungsstatus.
 
 ## 0.1.0

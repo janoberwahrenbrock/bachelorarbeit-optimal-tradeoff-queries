@@ -110,16 +110,21 @@ threshold; conversion creates a separate current input rather than rewriting dat
 
 ## Abnahmestand der Integration vom 16. Oktober 2026
 
-Der Release-7-Kandidat bindet Quellinventar
-`da17a517dffd7011dcf6021ee21edd208b684ae7d5028f04a609a308a2a1db39`. Der neue Payload ergänzt
-aufruflokale Planschemaprüfungswiederverwendung. 87 reine Vertragsprüfungen,
-Ruff und unabhängiger Review bestehen; 40 Schemaressourcen bleiben byteidentisch.
-Die gesamte Testsuite besteht mit 726 Tests in 43,10 Sekunden; Ruff ist sauber.
-Neue installierte Mac-/Linux- sowie SDK-/CLI-Gates folgen für diesen Payload.
+Der Release-8-Kandidat von Version `0.2.0` bindet Quellinventar
+`d2ab33384bf2652999b4bcfa74a99b150b07eedc25f4b35a9c740bd938005539`. Die Runtime bereitet unveränderliche Schemametadaten einmalig vor,
+prüft bekannte Planobjekte mit vollständigen positiven Strukturbelegen und
+sammelt binäre Zahlennachweise mit einem gemeinsamen Akkumulator. Der frühere
+Nutzdatencache ist entfernt. Alle 40 Schemaressourcen und die numerischen
+Verfahren bleiben unverändert.
 
-Release 6 ist funktional qualifiziert, besitzt aber keine native Laufzeitfreigabe.
-Seine 78 korrekten Läufe mit 39 exakt gleichen Paaren zeigen elf Regressionen und
-einen unklaren Befund. Frühere Freigaben werden nicht übertragen. Fortlaufende
+Die vollständige Testsuite im Hauptcheckout besteht mit 888 Tests in 41,43 Sekunden.
+Acht anschließend ergänzte unabhängige Vertragsfälle bestehen separat in
+0,18 Sekunden; Ruff ist sauber. Unabhängiger Review findet keine offenen P1/P2
+im unterstützten nativen JSON-Umfang. Neuer Build sowie frische installierte
+Funktions- und Laufzeitgates folgen für diesen konkreten Payload.
+
+Die früheren Releases 5 bis 7 sind funktional geprüft, besitzen aber keine
+native Laufzeitfreigabe. Neue SDK-/CLI-Gates sind erforderlich. Fortlaufende
 Ergebnisse und Quittungen stehen im [Implementierungsstatus](implementation-status.md)
 und im [Abnahmenachweis](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json).
 Eine weitere Änderung des Paketpayloads benötigt neue quellgebundene Gates.

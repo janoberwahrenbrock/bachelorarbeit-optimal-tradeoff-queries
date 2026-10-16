@@ -8,15 +8,18 @@ Die gesicherte Hauptzweig-Ausgangsbasis ist `3f70c16c962d01a5846659dd0bb49f32899
 
 ## Umsetzungs- und Abnahmestand
 
-Der Release-7-Kandidat von Version `0.2.0` bindet Quellinventar
-`da17a517dffd7011dcf6021ee21edd208b684ae7d5028f04a609a308a2a1db39`. Zusätzlich zur eindeutigen
-Ereignisschemaauswahl und dem gemeinsamen Journal-Fold verwendet er eine eng
-begrenzte aufruflokale Wiederverwendung erfolgreicher identischer Planschemata.
-87 reine Vertragsprüfungen und ein unabhängiger Review sind bestanden; alle
-40 Schemaressourcen und die numerischen Verfahren bleiben unverändert.
-Die vollständige Testsuite besteht mit 726 Tests in 43,10 Sekunden; Ruff ist
-sauber. Neuer Build und frische installierte Funktions- und Laufzeitgates folgen
-für diesen konkreten Payload.
+Der Release-8-Kandidat von Version `0.2.0` bindet Quellinventar
+`d2ab33384bf2652999b4bcfa74a99b150b07eedc25f4b35a9c740bd938005539`. Die Runtime bereitet unveränderliche Schemametadaten einmalig vor,
+prüft bekannte Planobjekte mit vollständigen positiven Strukturbelegen und
+sammelt binäre Zahlennachweise mit einem gemeinsamen Akkumulator. Der frühere
+Nutzdatencache ist entfernt. Alle 40 Schemaressourcen und die numerischen
+Verfahren bleiben unverändert.
+
+Die vollständige Testsuite im Hauptcheckout besteht mit 888 Tests in 41,43 Sekunden.
+Acht anschließend ergänzte unabhängige Vertragsfälle bestehen separat in
+0,18 Sekunden; Ruff ist sauber. Unabhängiger Review findet keine offenen P1/P2
+im unterstützten nativen JSON-Umfang. Neuer Build sowie frische installierte
+Funktions- und Laufzeitgates folgen für diesen konkreten Payload.
 
 Release 6 bestand 662 Tests, 34 macOS- und 39 Linux-Kontrollen, öffentliche
 Fortsetzungen und Acht-Job-Workflows. Die native Laufzeitprüfung bleibt mit

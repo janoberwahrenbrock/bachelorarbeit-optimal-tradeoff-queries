@@ -1,7 +1,9 @@
 """Pure declarative schema checks against the complete uncached R6 reader."""
 from collections import Counter
+from collections.abc import Mapping
 from concurrent.futures import ThreadPoolExecutor
 from copy import deepcopy
+from contextvars import copy_context
 from importlib.util import module_from_spec, spec_from_file_location
 from pathlib import Path
 import math
@@ -9,6 +11,7 @@ import math
 import pytest
 
 from otqa.runtime import schema, schema_reuse
+from otqa.runtime.schema_immutable import _thaw_schema
 from test_journal_semantic_fold import v2_events
 
 
@@ -16,6 +19,15 @@ path = Path(__file__).with_name('fixtures') / 'schema_before_reference_reuse.py'
 spec = spec_from_file_location('otqa.runtime._schema_without_reference_reuse', path)
 REFERENCE = module_from_spec(spec)
 spec.loader.exec_module(REFERENCE)
+
+
+def copy_schema(value):
+    """Explicitly copy internal read-only metadata for foreign-schema fixtures."""
+    if isinstance(value, Mapping):
+        return {key: copy_schema(child) for key, child in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [copy_schema(child) for child in value]
+    return value
 
 
 def event_sample():
@@ -44,68 +56,8 @@ def observed(monkeypatch):
     return calls
 
 
-def test_equal_successful_refs_reused_only_within_each_validate(monkeypatch):
-    calls = observed(monkeypatch)
-    event = event_sample()
-    for index in range(1, 4):
-        assert schema.validate('event', event) is event
-        assert calls == {'Planning': index, 'PlanSummary': index}
-        assert schema_reuse._CURRENT.get() is None
-
-
-def test_direct_full_validator_retains_complete_validation_without_call_context(monkeypatch):
-    calls = observed(monkeypatch)
-    assert schema.all_validators()['event', 2].is_valid(event_sample())
-    assert calls['Planning'] > 1 and calls['PlanSummary'] > 1
-    assert schema_reuse._CURRENT.get() is None
-
-
-@pytest.mark.parametrize('value', [None, True, False, 0, 0., -0., 1, 1., 'a', [], {}])
-def test_plain_json_exact_types_have_distinct_keys(value):
-    encoded = schema_reuse._exact_json(value)
-    assert encoded is not None
-    assert schema_reuse._CURRENT.get() is None
-
-
-def test_integer_float_bool_and_zero_keys_do_not_alias():
-    values = [True, 1, 1., False, 0, 0., -0.]
-    assert len({schema_reuse._exact_json(value) for value in values}) == len(values)
-
-
-class DictSubclass(dict):
-    pass
-
-
-class ListSubclass(list):
-    pass
-
-
 class FloatSubclass(float):
     pass
-
-
-class StringSubclass(str):
-    pass
-
-
-@pytest.mark.parametrize('tag', [[], {}, StringSubclass('planning_attempt_completed')])
-def test_nonplain_event_tag_retains_full_reader_outcome(tag):
-    event = event_sample()
-    event['event_type'] = tag
-    assert outcome(schema.validate, event) == outcome(REFERENCE.validate, event)
-    assert schema_reuse._CURRENT.get() is None
-
-
-@pytest.mark.parametrize('value', [(1, 2), DictSubclass(a=1), ListSubclass([1]), FloatSubclass(1.),
-    StringSubclass('x'), {1: 'x'}, {StringSubclass('x'): 1}, math.nan, math.inf, -math.inf])
-def test_unsupported_types_fall_back_without_cache_keys(value):
-    assert schema_reuse._exact_json(value) is None
-
-
-def test_cyclic_nonjson_value_has_no_key():
-    value = []
-    value.append(value)
-    assert schema_reuse._exact_json(value) is None
 
 
 @pytest.mark.parametrize('change', ['bool_horizon', 'float_horizon', 'missing_query', 'nan', 'inf',
@@ -138,7 +90,48 @@ def test_invalid_or_type_distinct_duplicate_is_fully_checked(change):
     assert schema_reuse._CURRENT.get() is None
 
 
-def test_mutation_between_calls_cannot_reuse_an_earlier_success():
+def test_native_certificates_are_active_and_never_retain_user_data(monkeypatch):
+    owner = schema.all_validators()['event', 2]._otqa_reference_reuse
+    seen = []
+    original = owner.predicates['urn:otqa:v2:common#/$defs/PlanningAttempt']
+    def observe(value):
+        context = schema_reuse._CURRENT.get()
+        assert context is not None
+        assert set(vars(context)) == {'namespace', 'allowed_bases', 'active',
+            'validator_type', 'type_checker', 'format_checker'}
+        seen.append(context)
+        return original(value)
+    monkeypatch.setitem(owner.predicates, 'urn:otqa:v2:common#/$defs/PlanningAttempt', observe)
+    for _ in range(2):
+        assert schema.validate('event', event_sample())
+        assert schema_reuse._CURRENT.get() is None
+    assert len(seen) == 2 and seen[0] is not seen[1]
+    assert all(not context.active for context in seen)
+    for obsolete in ('_exact_json', '_plain_json', '_MAX_ENTRIES', '_MAX_KEY_BYTES'):
+        assert not hasattr(schema_reuse, obsolete)
+
+
+def test_captured_authorization_cannot_outlive_its_validate_call(monkeypatch):
+    validator = schema.all_validators()['event', 2]
+    owner = validator._otqa_reference_reuse
+    ref = 'urn:otqa:v2:common#/$defs/PlanningAttempt'
+    original, captured = owner.predicates[ref], []
+    def capture(value):
+        captured.append((copy_context(), schema_reuse._CURRENT.get()))
+        return original(value)
+    monkeypatch.setitem(owner.predicates, ref, capture)
+    assert schema.validate('event', event_sample())
+    saved, authorization = captured[0]
+    assert not authorization.active
+    changed = validator.TYPE_CHECKER.redefine('number', lambda checker, value: False)
+    monkeypatch.setattr(type(validator), 'TYPE_CHECKER', changed)
+    from types import MappingProxyType
+    probe = validator.evolve(schema=MappingProxyType({'$ref': ref}))
+    assert not saved.run(probe.is_valid, event_sample()['payload']['attempt'])
+    assert schema_reuse._CURRENT.get() is None
+
+
+def test_mutation_between_calls_is_revalidated_with_original_error():
     event = event_sample()
     assert outcome(schema.validate, event)[0] == 'accepted'
     del event['payload']['attempt']['selected_plan']['selected']['query']['goal_index_b']
@@ -148,45 +141,32 @@ def test_mutation_between_calls_cannot_reuse_an_earlier_success():
     assert schema_reuse._CURRENT.get() is None
 
 
-@pytest.mark.parametrize('entries,bytes_limit', [(0, 0), (1, 512), (2, 2048), (64, 512 * 1024)])
-def test_budget_exhaustion_only_returns_to_complete_validation(monkeypatch, entries, bytes_limit):
-    monkeypatch.setattr(schema_reuse, '_MAX_ENTRIES', entries)
-    monkeypatch.setattr(schema_reuse, '_MAX_KEY_BYTES', bytes_limit)
-    calls = []
-    original = schema_reuse._ValidationCall
-    class Recorded(original):
-        def __init__(self, *args):
-            super().__init__(*args)
-            calls.append(self)
-    monkeypatch.setattr(schema_reuse, '_ValidationCall', Recorded)
-    assert outcome(schema.validate, event_sample()) == ('accepted', None)
-    assert calls and all(len(call.successes) <= entries and call.key_bytes <= bytes_limit for call in calls)
+def test_reentrant_public_validation_has_fresh_authorization_and_restores_parent(monkeypatch):
+    owner = schema.all_validators()['event', 2]._otqa_reference_reuse
+    ref = 'urn:otqa:v2:common#/$defs/PlanningAttempt'
+    original = owner.predicates[ref]
+    inside, parents, children = False, [], []
+    def observe(value):
+        nonlocal inside
+        current = schema_reuse._CURRENT.get()
+        if inside:
+            children.append(current)
+        else:
+            parents.append(current)
+            inside = True
+            try:
+                assert schema.validate('event', event_sample())
+                assert schema_reuse._CURRENT.get() is current
+            finally:
+                inside = False
+        return original(value)
+    monkeypatch.setitem(owner.predicates, ref, observe)
+    assert schema.validate('event', event_sample())
+    assert parents and children and all(parent is not child for parent in parents for child in children)
     assert schema_reuse._CURRENT.get() is None
 
 
-def test_reentrant_validation_has_distinct_context_and_restores_its_caller(monkeypatch):
-    owner = schema.all_validators()['event', 2]._otqa_reference_reuse
-    original = owner.original_ref
-    inside = False
-    calls = []
-    def reentrant(validator, ref, instance, subschema):
-        nonlocal inside
-        if not inside:
-            inside = True
-            before = schema_reuse._CURRENT.get()
-            calls.append(before)
-            assert schema.validate('event', event_sample())
-            assert schema_reuse._CURRENT.get() is before
-            inside = False
-        else:
-            assert schema_reuse._CURRENT.get() is not calls[-1]
-        yield from original(validator, ref, instance, subschema)
-    monkeypatch.setattr(owner, 'original_ref', reentrant)
-    assert schema.validate('event', event_sample())
-    assert calls and schema_reuse._CURRENT.get() is None
-
-
-def test_exception_also_resets_call_context(monkeypatch):
+def test_exception_also_resets_authorization(monkeypatch):
     validator = schema.all_validators()['event', 2]
     def fail(_):
         raise RuntimeError('constructed format-check interruption')
@@ -196,7 +176,7 @@ def test_exception_also_resets_call_context(monkeypatch):
     assert schema_reuse._CURRENT.get() is None
 
 
-def test_parallel_calls_never_share_success_entries():
+def test_parallel_calls_have_no_shared_validated_user_data():
     event = event_sample()
     with ThreadPoolExecutor(max_workers=4) as pool:
         actual = list(pool.map(lambda _: outcome(schema.validate, deepcopy(event)), range(16)))
@@ -204,10 +184,10 @@ def test_parallel_calls_never_share_success_entries():
     assert schema_reuse._CURRENT.get() is None
 
 
-def test_unknown_evolved_schema_scope_falls_back_without_reuse(monkeypatch):
+def test_unknown_evolved_schema_scope_falls_back_without_certificates(monkeypatch):
     validators = dict(schema.all_validators())
     parent = validators['event', 2]
-    changed = deepcopy(parent.schema)
+    changed = _thaw_schema(parent.schema)
     changed.pop('$schema')
     changed['$id'] = 'urn:custom:untrusted-scope'
     validators['event', 2] = parent.evolve(schema=changed)

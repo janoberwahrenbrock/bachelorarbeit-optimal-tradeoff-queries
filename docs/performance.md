@@ -102,3 +102,37 @@ auf die wiederholte Planschemaprüfung innerhalb eines einzigen Aufrufs.
 bestanden. Ein CPUvergleich gespeicherter Dokumente zeigt rund 58 Prozent weniger
 Resultat- und 33 Prozent weniger Ereignisprüfzeit. Das sind keine vollständigen
 CLI-Laufzeitgewinne; Release 7 erhält neue installierte Funktions- und Laufzeitgates.
+
+
+Release 7 bestand die frischen installierten Funktionskontrollen auf beiden
+Hosts, aber noch nicht das vollständige CLIgate. Alle 84 Ergebnisse waren korrekt
+und alle 42 Paare mathematisch identisch. Zehn Bedingungen blieben langsamer,
+zwei nach der vorgesehenen Ergänzung unklar. Diese Quelle wird daher nicht für
+die Hauptstudie freigegeben.
+
+Zwei anschließend isolierte Vorschläge wurden verworfen: Ein größerer, auf eine
+Ergebnisprüfung begrenzter Schemacache verfehlte sowohl bei kalten als auch bei
+warmen gespeicherten Dokumenten die zuvor festgelegte Nutzenhürde. Ein schnellerer
+Metadatenvergleich über Marshal wurde wegen nachgewiesener unerwünschter
+Pythoncallbacks nicht in Produktcode überführt. Die verworfenen Varianten und
+sämtliche Messungen bleiben im projektinternen Abnahmenachweis erhalten.
+
+Die übernommene Akkumulatoränderung für binäre Zahlennachweise bewahrt Werte,
+Reihenfolge und Fehlerverhalten. Auf 104 gespeicherten Payloads benötigte diese
+Teilfunktion etwa 38 Prozent weniger CPUzeit; 75 reine Vergleichstests bestanden.
+Das ist kein Nachweis für die vollständige CLI-Laufzeit. Ebenso bleiben die
+Komponentenmessungen unveränderlich vorbereiteter Schemadaten (vier gespeicherte
+Readerfälle, etwa vier bis 16 Prozent weniger CPUzeit) von einer vollständigen
+Paket- und Laufzeitabnahme getrennt.
+
+
+Die neue vorbereitete positive Strukturprüfung wird ausschließlich für vollständig
+unterstützte native Schemaabschlüsse verwendet. Ein unbekannter oder negativer
+Beleg nimmt den vollständigen ursprünglichen Prüfpfad. Der alte Nutzdatencache
+ist dadurch entfernt. Vier gespeicherte warme Readerfälle benötigten in 24
+ursprünglichen Messaufrufen rund elf bis 15 Prozent weniger CPUzeit bei gleichen
+Ergebnissen. Ein Metadatenfinalisierungsfehler erfasste dabei versehentlich
+zwischenzeitlich erzeugte pyc-Dateien; sämtliche ursprünglichen Messungen wurden
+aus unveränderten Produkt- und Rohdaten ausgewertet, ohne Wiederholung oder
+Fallauswahl. Die Kombination mit unveränderlicher Metadatenvorbereitung und
+Akkumulator benötigt weiterhin neue vollständige Paket- und Laufzeitgates.
