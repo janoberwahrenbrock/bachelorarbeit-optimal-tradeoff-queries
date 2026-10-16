@@ -77,8 +77,9 @@ class Controls:
         self.problem = {"schema_version": 1, "problem_id": "native-control", "alternative_ids": ["left", "right"],
                         "objective_ids": ["g0", "g1"], "alternatives": [[1.0, 0.0], [0.0, 1.0]]}
         self.oracle = {"schema_version": 1, "problem_id": "native-control", "target_weights": [0.7, 0.3]}
-        self.config = {"schema_version": 1, "configuration_id": "native-fixed1", "algorithm": {"query_strategy": "fixed", "depth": 1,
-            "higher_depth_query_source": "both", "grid_size": 5, "planning_evaluation": "candidate_count", "stopping": {"rule": "single_candidate"}},
+        self.config = {"schema_version": 2, "configuration_id": "native-fixed1", "algorithm": {"query_strategy": "fixed", "depth": 1,
+            "higher_depth_query_source": "both", "grid_size": 5, "planning_evaluation": "candidate_count", "stopping": {"rule": "single_candidate"},
+            "horizon_execution": "receding", "min_expected_progress": 0.001},
             "budget": {"max_queries": None}, "execution": {"workers": 1, "start_method": "forkserver", "native_threads": 1, "case_timeout_seconds": None, "cache_policy_id": "bounded_v1"},
             "recording": {"durability": "per_answer", "trace_level": "full", "profile": False, "telemetry_failure_policy": "continue"}}
         for name, value, kind in (("problem", self.problem, "problem"), ("oracle", self.oracle, "oracle"), ("config", self.config, "config")):
@@ -120,11 +121,17 @@ class Controls:
             assert source == self.source and inventory["files"]
             return {"source_sha256": source["source_sha256"], "files": len(inventory["files"])}
         if case == "offline_schemas":
-            from otqa.runtime.schema import definitions, registry_and_validators
-            assert len(definitions()[1]) == len(registry_and_validators()) == 27
+            from otqa.runtime.schema import all_validators
+            validators = all_validators()
+            assert validators and ("config", 1) in validators and ("config", 2) in validators
             schemas = list((Path(otqa.__file__).parent / "schemas").glob("*.schema.json"))
-            assert len(schemas) == 28
-            return {"document_validators": 27, "schema_resources": len(schemas)}
+            schema_ids = {read_json(path)["$id"] for path in schemas}
+            for validator in validators.values():
+                assert validator.schema["$id"] in schema_ids
+                validator.check_schema(validator.schema)
+            assert len(schema_ids) == len(schemas)
+            return {"document_validators": len(validators), "schema_resources": len(schemas),
+                    "versions": sorted({version for _, version in validators})}
         versions = production_dependency_versions()
         assert versions == self.profile["packages"]
         return {"packages": versions, "python": self.profile["python_version"], "active_production_closure_verified": True}

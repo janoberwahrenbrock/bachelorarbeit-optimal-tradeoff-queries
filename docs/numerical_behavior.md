@@ -108,3 +108,20 @@ Zwei separat qualifizierte Umgebungen können für dieselben gespeicherten Matri
 Eine gleiche korrekte Endauswahl bedeutet deshalb noch keine gleiche Trajektorie. Für einen Alt-Neu-Vergleich werden beide Implementierungen auf demselben Host mit derselben tatsächlichen Python-/NumPy-/SciPyumgebung und identischen Worker-, Thread-, Input- und Aufzeichnungsbedingungen geprüft. Ergebnisse aus verschiedenen qualifizierten Profilen bleiben getrennte Beobachtungen. Das [Laufzeitverfahren](performance.md) beschreibt die weiteren Vergleichsgrenzen.
 
 Einzelne degenerierte oder hochdimensionale Zustände können explizit scheitern, auch wenn verwandte Fälle lösbar sind. Diese Fehler dürfen nicht als schnelle gelöste Fälle in eine Auswertung eingehen. Numerische Konformität und funktionale Tests sind außerdem kein allgemeiner Laufzeitnachweis; Timingvergleiche benötigen einen eigenen gleichen Ausführungs- und Aufzeichnungsscope.
+
+## Progress policy and frontier certificates
+
+`min_expected_progress` is an absolute policy threshold, not a geometry, LP or
+comparison tolerance. The final gain is computed as the stored binary64 starting
+value minus the stored terminal value and tested strictly against the threshold.
+No clamping, extra `isclose`, answer-probability cutoff or branch-local progress
+filter is introduced. Candidate expectation and stop-aware effective loss remain
+distinct.
+
+Adaptive H3 frontier pruning also carries exact binary sums of already-rounded
+weighted loss/cost products. They certify safe dominance together with the
+deterministic continuation identity; they do not replace final `fsum` scores or
+change geometric volumes. Final gain and rate are evaluated only for complete
+plans. With a disabled threshold, an all-negative rounding boundary uses raw
+options rather than assuming nonnegative gain. Exhaustive small Cartesian
+references and adjacent-float controls test this limited numerical boundary.

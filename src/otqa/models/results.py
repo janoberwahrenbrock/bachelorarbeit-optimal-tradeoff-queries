@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from typing import Literal, TypeAlias
 
 from .core import AnsweredQuery, Query
+from .execution import ExecutionCursor, PendingPlanningCycle, PlanningAttempt, PlanningCycle
 
 from .planning import PlanningDecision
 
@@ -44,13 +45,14 @@ class QueryRecord:
     planning: PlanningDecision
     before: StateAnalysis
     after: StateAnalysis
+    cycle: PlanningCycle | None = None
 
 
 @dataclass(frozen=True, slots=True)
 class SolveResult:
     solved: bool
     exactly_solved: bool
-    termination_reason: Literal['exact_single_candidate', 'volume_confidence', 'no_query', 'max_questions']
+    termination_reason: Literal['exact_single_candidate', 'volume_confidence', 'no_query', 'max_questions', 'insufficient_expected_progress']
     selected_candidate_index: int | None
     selected_candidate_volume: float | None
     selected_candidate_volume_share: float | None
@@ -58,6 +60,9 @@ class SolveResult:
     answers: tuple[AnsweredQuery, ...]
     queries: tuple[QueryRecord, ...]
     query_counts: QueryCounts
+    execution_cursor: ExecutionCursor | None = None
+    planning_cycles: tuple[PlanningCycle, ...] = ()
+    continuation_binding: tuple[str, str] | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -67,10 +72,37 @@ class PartialContext:
     queries: tuple[QueryRecord, ...]
     query_counts: QueryCounts
     open_query: Query | None
+    execution_cursor: ExecutionCursor | None = None
+    planning_cycles: tuple[PlanningCycle, ...] = ()
+    pending_cycle: PendingPlanningCycle | None = None
+    continuation_binding: tuple[str, str] | None = None
 
 
 @dataclass(frozen=True, slots=True)
 class StateAnalyzed:
+    state: StateAnalysis
+    execution_cursor: ExecutionCursor | None = None
+
+
+@dataclass(frozen=True, slots=True)
+class PlanningAttemptStarted:
+    cursor: ExecutionCursor
+    state: StateAnalysis
+    attempt_index: int
+    requested_depth: int
+
+
+@dataclass(frozen=True, slots=True)
+class PlanningAttemptCompleted:
+    cursor: ExecutionCursor
+    state: StateAnalysis
+    attempt_index: int
+    attempt: PlanningAttempt
+
+
+@dataclass(frozen=True, slots=True)
+class PlanningResolved:
+    cycle: PlanningCycle
     state: StateAnalysis
 
 
@@ -78,6 +110,7 @@ class StateAnalyzed:
 class QueryPlanned:
     planning: PlanningDecision
     state: StateAnalysis
+    cycle: PlanningCycle | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -90,6 +123,7 @@ class QueryDispatched:
 class AnswerReceived:
     answered_query: AnsweredQuery
     query_counts: QueryCounts
+    execution_cursor: ExecutionCursor | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -102,4 +136,5 @@ class SolveFinished:
     result: SolveResult
 
 
-SolverEvent: TypeAlias = StateAnalyzed | QueryPlanned | QueryDispatched | AnswerReceived | QueryCompleted | SolveFinished
+SolverEvent: TypeAlias = (StateAnalyzed | PlanningAttemptStarted | PlanningAttemptCompleted | PlanningResolved
+                         | QueryPlanned | QueryDispatched | AnswerReceived | QueryCompleted | SolveFinished)

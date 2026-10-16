@@ -26,7 +26,7 @@ def timings(*, case_elapsed=None, api_elapsed=None, partial=None, recorder=None,
 
 
 def bootstrap_result(payload, started, case_start, *, error=None, interruption=None, finalized_by="case_process"):
-    return {"schema_version": 1, "run_id": payload["run_id"], "attempt_id": payload["attempt_id"], "problem_id": payload["problem_id"],
+    return {"schema_version": 2, "run_id": payload["run_id"], "attempt_id": payload["attempt_id"], "problem_id": payload["problem_id"],
         "configuration_id": payload["configuration_id"], "execution_status": "interrupted" if interruption else "failed", "execution_stage": "bootstrap",
         "finalized_by": finalized_by, "started_at_utc": started, "finished_at_utc": utc_now(), "query_counts": empty_counts(),
         "timings": timings(case_elapsed=time.perf_counter() - case_start if case_start is not None else None), "solver_result": None,
@@ -71,6 +71,8 @@ def run_attempt(payload: dict, *, case_start: float, started_at: str, identity: 
             raise DocumentError("Loaded immutable build stamp changed between preparation and CaseProcess")
         problem = load_problem(resolve_ref(root, payload["inputs"]["problem"]), reference_root=root)
         config = load_config_document(resolve_ref(root, payload["inputs"]["configuration"]), reference_root=root)
+        if config['schema_version'] != 2:
+            raise DocumentError('Native execution requires an explicitly converted version-two configuration')
         profile = load_execution_profile(resolve_ref(root, payload["execution_profile"]), reference_root=root)
         oracle = load_oracle(resolve_ref(root, payload["inputs"]["oracle"]), problem, reference_root=root) if payload["inputs"]["oracle"] else None
         history = load_answer_history(resolve_ref(root, payload["inputs"]["initial_answers"]), problem, reference_root=root) if payload["inputs"]["initial_answers"] else None
@@ -82,18 +84,35 @@ def run_attempt(payload: dict, *, case_start: float, started_at: str, identity: 
             raise DocumentError("Actual backend capabilities differ from the qualified execution profile")
         from .serialization import domain_inputs, mathematical_input_digest, result_wire
         domain_problem, policy, budget, execution, initial = domain_inputs(problem, config, history)
-        manifest = {"schema_version": 1, "run_id": payload["run_id"], "attempt_id": payload["attempt_id"],
+        continuation_ref = payload['inputs'].get('continuation')
+        continuation_doc = None
+        continuation = None
+        if continuation_ref is not None:
+            if history is not None:
+                raise DocumentError('Continuation and initial answer history are mutually exclusive')
+            from .continuation import import_continuation
+            continuation_path = resolve_ref(root, continuation_ref)
+            continuation_doc = read_json(continuation_path)
+            continuation = import_continuation(continuation_path, reference_root=root, problem=problem,
+                configuration=config, source=source, profile=profile)
+            initial = continuation.answers
+        from .serialization import cursor_wire
+        initial_cursor = (cursor_wire(continuation.execution_cursor) if continuation is not None else
+            {'answered_total': len(initial), 'remaining_depth': policy.depth})
+        payload['inputs'] = {**payload['inputs'], 'continuation': continuation_ref}
+        manifest = {"schema_version": 2, "run_id": payload["run_id"], "attempt_id": payload["attempt_id"],
             "series_id": payload["series_id"], "job_id": payload["job_id"], "problem_id": problem["problem_id"], "configuration_id": config["configuration_id"],
-            "execution_kind": "continuation" if history is not None else "replay" if payload["answer_source"] == "replay" else "fresh",
+            "execution_kind": "continuation" if continuation is not None else "warm_start" if history is not None else "replay" if payload["answer_source"] == "replay" else "fresh",
+            "initial_execution_cursor": initial_cursor,
             "answer_source": payload["answer_source"], "created_at_utc": utc_now(), "source": source, "source_inventory": payload["source_inventory"],
             "project_binding": context.binding(root), "run_purpose": payload["run_purpose"], "materialization_receipt": payload["materialization_receipt"],
             "launch_intent": file_ref(attempt / "launch_intent.json", root), "inputs": payload["inputs"],
-            "mathematical_input_sha256": mathematical_input_digest(problem, config, payload["answer_source"], history, oracle, replay),
+            "mathematical_input_sha256": mathematical_input_digest(problem, config, payload["answer_source"], history, oracle, replay, continuation=continuation_doc),
             "effective_algorithm": config["algorithm"], "effective_budget": config["budget"], "effective_execution": config["execution"],
             "effective_recording": config["recording"], "execution_profile": payload["execution_profile"], "numerical_profile": resolved_numerical_profile(),
             "resolved_cache_policy": resolved_cache_policy(), "environment": environment_snapshot(profile["packages"], capabilities), "process": identity}
         publish_json(context, attempt / "manifest.json", manifest, kind="manifest")
-        store = RunStore(context, attempt, root, payload["run_id"], payload["attempt_id"], identity, len(initial))
+        store = RunStore(context, attempt, root, payload["run_id"], payload["attempt_id"], identity, len(initial), schema_version=2, execution_cursor=initial_cursor)
         from .recorder import WireRecorder
         recorder = WireRecorder(store, problem["alternative_ids"], stop_aware=config["algorithm"]["planning_evaluation"] == "stop_aware", trace_level=config["recording"]["trace_level"])
         start_attempted = True
@@ -140,7 +159,7 @@ def run_attempt(payload: dict, *, case_start: float, started_at: str, identity: 
             profiler.start()
         from otqa import solve
         result = solve(domain_problem, policy, measured_provider, budget=budget, execution=execution,
-                       initial_answers=initial, recorder=recorder, observer=observer)
+                       initial_answers=() if continuation is not None else initial, continuation=continuation, recorder=recorder, observer=observer)
         api_elapsed = time.perf_counter() - api_start
         complete = True
     except KeyboardInterrupt as exc:
@@ -164,7 +183,7 @@ def run_attempt(payload: dict, *, case_start: float, started_at: str, identity: 
     from .journal import verify_cursor
     from .validation import journal_policy
     confirmed_prefix = verify_cursor((attempt / "events.jsonl").read_bytes(), store.cursor, **journal_policy(manifest, root, attempt / "manifest.json"))
-    accepted_answers = list(history["answers"]) if history else []
+    accepted_answers = list(continuation_doc["answers"]) if continuation_doc is not None else list(history["answers"]) if history else []
     accepted_answers += [{**event["payload"]["query"], "answer": event["payload"]["answer"]} for event in confirmed_prefix["events"] if event["event_type"] == "answer_received"]
     quality = evaluate_quality(problem, oracle, solver_result["selected_candidate_id"] if solver_result else None,
         accepted_answers)
@@ -191,10 +210,10 @@ def run_attempt(payload: dict, *, case_start: float, started_at: str, identity: 
     if payload["answer_source"] == "replay":
         consumed = provider.consumed
         declared = len(replay["answers"])
-        publish_json(context, attempt / "replay-status.json", {"schema_version": 1, "run_id": payload["run_id"], "attempt_id": payload["attempt_id"],
+        publish_json(context, attempt / "replay-status.json", {"schema_version": 2, "run_id": payload["run_id"], "attempt_id": payload["attempt_id"],
             "script": payload["inputs"]["replay_answers"], "declared_answers": declared, "consumed_answers": consumed,
             "remaining_answers": declared - consumed, "complete_replay": consumed == declared})
-    envelope = {"schema_version": 1, "run_id": payload["run_id"], "attempt_id": payload["attempt_id"], "problem_id": problem["problem_id"],
+    envelope = {"schema_version": 2, "run_id": payload["run_id"], "attempt_id": payload["attempt_id"], "problem_id": problem["problem_id"],
         "configuration_id": config["configuration_id"], "execution_status": status, "execution_stage": "solver", "finalized_by": "case_process",
         "started_at_utc": started_at, "finished_at_utc": utc_now(), "query_counts": dict(store.cursor["query_counts"]),
         "timings": timings(case_elapsed=time.perf_counter() - case_start, api_elapsed=api_elapsed, partial=partial,
@@ -220,7 +239,7 @@ def main(argv=None):
     identity = process_identity(intent["owner_token"])
     if identity["pid"] != identity["pgid"] or identity["pid"] != identity["sid"]:
         raise DocumentError("CaseProcess was not isolated into its own session/group")
-    registration = {"schema_version": 1, "run_id": payload["run_id"], "attempt_id": payload["attempt_id"], "created_at_utc": utc_now(),
+    registration = {"schema_version": 2, "run_id": payload["run_id"], "attempt_id": payload["attempt_id"], "created_at_utc": utc_now(),
                     "intent": file_ref(intent_path, root), "nonce": intent["nonce"], "process": identity}
     publish_json(context, attempt / "child_registration.json", registration, kind="child_registration")
     try:

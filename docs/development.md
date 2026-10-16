@@ -92,3 +92,18 @@ beenden zu lassen. Es sendet keine Signale an bloß aufgezeichnete PIDs oder
 unbewiesene Casegruppen. Unklare Start- oder Cleanupzustände bleiben als
 `blocked_unknown` in `failure-cleanup.json` sichtbar; ein weiterer Solver wird
 nach einer fehlgeschlagenen Beobachtung nie gestartet.
+
+## Execution-contract changes
+
+Version `0.2.0` integrates Countdown, full-depth fallback and the default
+`min_expected_progress=0.001` contract. The schema registry is indexed by document
+kind and version. Regenerate packaged schema resources with the dependency-free
+registry writer after changing schema definitions; installed qualification checks
+the actual registry/resource IDs rather than a historical fixed count.
+
+Run targeted mathematical, phase, continuation and durability tests first, then
+the entire suite and lint. Qualify the final built payload on each host and build
+version before runtime comparisons. Any later package or schema change invalidates
+source-bound qualification and requires a new wheel and fresh qualification output.
+Historical v1 archives retain their original bytes, digests and disabled progress
+threshold; conversion creates a separate current input rather than rewriting data.

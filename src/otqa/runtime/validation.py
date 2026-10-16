@@ -8,16 +8,26 @@ from .storage import empty_counts
 
 
 def journal_policy(manifest: dict, root: Path, manifest_path: Path) -> dict:
-    """Resolve the stored actual policy inputs for every shared prefix reader."""
-    problem = load_document("problem", resolve_ref(root, manifest["inputs"]["problem"]), reference_root=root)
-    history = manifest["inputs"]["initial_answers"]
-    initial = len(load_document("answer_history", resolve_ref(root, history), reference_root=root)["answers"]) if history else 0
-    return {"manifest_sha256": file_ref(manifest_path, root)["sha256"], "initial_answers": initial, "algorithm": manifest["effective_algorithm"],
-            "budget": manifest["effective_budget"], "alternative_ids": problem["alternative_ids"]}
+    """Resolve immutable versioned policy and accepted starting-history data."""
+    problem = load_document('problem', resolve_ref(root, manifest['inputs']['problem']), reference_root=root)
+    history = manifest['inputs']['initial_answers']
+    initial = len(load_document('answer_history', resolve_ref(root, history), reference_root=root)['answers']) if history else 0
+    continuation = manifest['inputs'].get('continuation')
+    if continuation is not None:
+        initial = len(load_document('continuation', resolve_ref(root, continuation), reference_root=root)['answers'])
+    result = {'manifest_sha256': file_ref(manifest_path, root)['sha256'], 'initial_answers': initial,
+        'algorithm': manifest['effective_algorithm'], 'budget': manifest['effective_budget'], 'alternative_ids': problem['alternative_ids']}
+    if manifest['schema_version'] == 2:
+        result['initial_execution_cursor'] = manifest['initial_execution_cursor']
+    return result
 
 
 def verify_result(path: Path, root: Path, payload: dict) -> dict:
-    result = validate("result", read_json(path))
+    raw_result = read_json(path)
+    if raw_result.get('schema_version') == 1:
+        from .validation_v1 import verify_result as old_verify
+        return old_verify(path, root, payload)
+    result = validate("result", raw_result)
     for key in ("run_id", "attempt_id", "problem_id", "configuration_id"):
         if result[key] != payload[key]:
             raise DocumentError("Result identity differs from its reserved attempt")
@@ -47,13 +57,30 @@ def verify_result(path: Path, root: Path, payload: dict) -> dict:
             raise DocumentError("Manifest project binding differs from its enclosing run or series")
         problem = load_document("problem", resolve_ref(root, manifest["inputs"]["problem"]), reference_root=root)
         configuration = load_document("config", resolve_ref(root, manifest["inputs"]["configuration"]), reference_root=root)
+        if manifest['schema_version'] != 2 or configuration['schema_version'] != 2:
+            raise DocumentError('New result mixes historical and current execution contracts')
         if problem["problem_id"] != result["problem_id"] or configuration["configuration_id"] != result["configuration_id"]:
             raise DocumentError("Manifest input IDs differ from the result")
         for key, config_key in (("effective_algorithm", "algorithm"), ("effective_budget", "budget"), ("effective_execution", "execution"), ("effective_recording", "recording")):
             if manifest[key] != configuration[config_key]:
                 raise DocumentError("Manifest effective configuration differs from its input document")
         history_ref = manifest["inputs"]["initial_answers"]
-        initial_count = len(read_json(resolve_ref(root, history_ref))["answers"]) if history_ref else 0
+        initial_document = read_json(resolve_ref(root, history_ref)) if history_ref else None
+        continuation_ref = manifest['inputs']['continuation']
+        continuation_doc = load_document('continuation', resolve_ref(root, continuation_ref), reference_root=root) if continuation_ref else None
+        initial_history = continuation_doc['answers'] if continuation_doc is not None else initial_document['answers'] if initial_document else []
+        initial_count = len(initial_history)
+        expected_initial_cursor = continuation_doc['execution_cursor'] if continuation_doc else {
+            'answered_total': initial_count, 'remaining_depth': manifest['effective_algorithm']['depth']}
+        if manifest['initial_execution_cursor'] != expected_initial_cursor:
+            raise DocumentError('Manifest starting cursor differs from immutable starting input')
+        from .serialization import mathematical_input_digest
+        oracle_ref, replay_ref = manifest['inputs']['oracle'], manifest['inputs']['replay_answers']
+        oracle_doc = load_document('oracle', resolve_ref(root, oracle_ref), reference_root=root) if oracle_ref else None
+        replay_doc = load_document('answer_history', resolve_ref(root, replay_ref), reference_root=root) if replay_ref else None
+        if manifest['mathematical_input_sha256'] != mathematical_input_digest(problem, configuration, manifest['answer_source'],
+                initial_document, oracle_doc, replay_doc, continuation=continuation_doc):
+            raise DocumentError('Manifest mathematical starting identity differs')
         journal = result["journal"]
         if journal is None:
             raise DocumentError("Solver result has no confirmed journal proof")
@@ -64,7 +91,8 @@ def verify_result(path: Path, root: Path, payload: dict) -> dict:
             raise DocumentError("Journal suffix metadata differs from actual raw bytes")
         from .journal import mathematically_equal, verify_prefix
         prefix = verify_prefix(data, journal["valid_prefix_bytes"], journal["valid_prefix_sha256"], journal["last_good_sequence"],
-            initial_answers=initial_count, algorithm=manifest["effective_algorithm"], budget=manifest["effective_budget"], alternative_ids=problem["alternative_ids"])
+            initial_answers=initial_count, algorithm=manifest["effective_algorithm"], budget=manifest["effective_budget"], alternative_ids=problem["alternative_ids"],
+            initial_execution_cursor=manifest["initial_execution_cursor"])
         if prefix["events"][0]["payload"]["manifest_sha256"] != file_ref(manifest_path, root)["sha256"]:
             raise DocumentError("Journal start does not bind this manifest")
         if prefix["query_counts"] != result["query_counts"]:
@@ -79,15 +107,6 @@ def verify_result(path: Path, root: Path, payload: dict) -> dict:
                 query = event["payload"]["query"]
                 if max(query["goal_index_a"], query["goal_index_b"]) >= objective_count:
                     raise DocumentError("Journal query exceeds its problem objective dimension")
-            if event["event_type"] == "query_planned":
-                planning = event["payload"]["planning"]
-                if planning["planning_stop_aware"] != (algorithm["planning_evaluation"] == "stop_aware"):
-                    raise DocumentError("Recorded planning path differs from its effective policy")
-                if planning["selected"]["score"]["kind"] != algorithm["query_strategy"]:
-                    raise DocumentError("Recorded score kind differs from its effective strategy")
-                expected_horizons = {algorithm["depth"]} if algorithm["query_strategy"] == "fixed" else set(range(1, algorithm["depth"] + 1))
-                if {item["horizon"] for item in planning["horizons"]} != expected_horizons:
-                    raise DocumentError("Recorded horizon coverage differs from the effective policy")
         if result["execution_status"] == "completed":
             solver = result["solver_result"]
             if solver is None or not result["timings"]["complete_api_measurement"] or result["timings"]["api_call_wall_seconds"] is None or result["finalized_by"] != "case_process":
@@ -109,7 +128,7 @@ def verify_result(path: Path, root: Path, payload: dict) -> dict:
             records = [event["payload"] for event in prefix["events"] if event["event_type"] == "query_completed"]
             if not mathematically_equal(solver["query_records"], records):
                 raise DocumentError("Native query records differ from durable query completions")
-            initial = read_json(resolve_ref(root, history_ref))["answers"] if history_ref else []
+            initial = initial_history
             new_answers = [{**event["payload"]["query"], "answer": event["payload"]["answer"]} for event in prefix["events"] if event["event_type"] == "answer_received"]
             if not mathematically_equal(solver["answered_queries"], initial + new_answers):
                 raise DocumentError("Native answered history differs from durable answers")
@@ -126,7 +145,11 @@ def verify_result(path: Path, root: Path, payload: dict) -> dict:
                 raise DocumentError("Singleton result is inconsistent")
             if reason == "volume_confidence" and (not solver["solved"] or solver["exactly_solved"] or len(solver["final_state"]["candidate_ids"]) < 2):
                 raise DocumentError("Confidence result is inconsistent")
-            if reason in ("no_query", "max_questions") and (solver["solved"] or solver["selected_candidate_id"] is not None):
+            if not mathematically_equal(solver['execution_cursor'], prefix['execution_cursor']):
+                raise DocumentError('Result execution cursor differs from durable accepted answer phase')
+            if not mathematically_equal(solver['planning_cycles'], prefix['planning_cycles']):
+                raise DocumentError('Result planning cycles differ from durable decision evidence')
+            if reason in ("no_query", "max_questions", "insufficient_expected_progress") and (solver["solved"] or solver["selected_candidate_id"] is not None):
                 raise DocumentError("Unsolved result claims an accepted selection")
             if reason == "volume_confidence":
                 stopping = algorithm["stopping"]

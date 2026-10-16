@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "configuration_id": "adaptive3-confidence99",
   "algorithm": {
     "query_strategy": "reduction_per_query",
@@ -10,7 +10,9 @@
     "stopping": {
       "rule": "volume_confidence",
       "threshold": 0.99
-    }
+    },
+    "horizon_execution": "receding",
+    "min_expected_progress": 0.001
   },
   "budget": {
     "max_queries": null

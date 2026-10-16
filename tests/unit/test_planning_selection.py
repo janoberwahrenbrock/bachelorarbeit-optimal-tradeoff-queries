@@ -10,7 +10,7 @@ import otqa.state  # noqa: F401 — bind the real package before replacing its n
 
 from otqa.config import AlgorithmPolicy, SingleCandidateStop, SolverExecution, VolumeConfidenceStop
 from otqa.models.core import Query
-from otqa.models.planning import EfficiencyScore, NoQuery, QueryEvaluation
+from otqa.models.planning import EfficiencyScore, QueryEvaluation
 from otqa.planning.session import PlannerSession, _Evaluated
 
 
@@ -95,7 +95,7 @@ def test_fixed_only_refines_exactly_tied_best_queries(monkeypatch):
     queries(monkeypatch, {("root", 2): (a, b, c)})
     visited = []
     terminal_counts(monkeypatch, {("root", 1.0): 3, ("root", 2.0): 2}, visited)
-    result = planner.plan(root)
+    result = planner.plan(root, requested_depth=planner.policy.depth).selected_plan
     assert result.query == b
     assert result.score.lexicographic_profile == (2.0, 2.0)
     assert [item.lexicographic_profile for item in result.horizons[0].evaluations] == [(2, 3), (2, 2), (3,)]
@@ -108,7 +108,7 @@ def test_fixed_query_identity_breaks_exact_full_tie(monkeypatch):
     planner = session(AlgorithmPolicy("fixed", 1, "both", 5, "candidate_count", SingleCandidateStop()))
     queries(monkeypatch, {("root", 1): (second, first)})
     terminal_counts(monkeypatch, {("root", 1.0): 2, ("root", 2.0): 2}, [])
-    assert planner.plan(root).query == first
+    assert planner.plan(root, requested_depth=planner.policy.depth).selected_plan.query == first
 
 
 def test_stop_aware_keeps_actual_candidates_separate_from_absorbed_loss(monkeypatch):
@@ -118,7 +118,7 @@ def test_stop_aware_keeps_actual_candidates_separate_from_absorbed_loss(monkeypa
     planner = session(AlgorithmPolicy("fixed", 2, "both", 5, "stop_aware", VolumeConfidenceStop(.99)),
                       {("root", 1.0, "<"): child})
     queries(monkeypatch, {("root", 2): (query,)})
-    result = planner.plan(root)
+    result = planner.plan(root, requested_depth=planner.policy.depth).selected_plan
     assert result.score.expected_terminal_candidates == 3
     assert result.score.expected_terminal_loss == 1
     assert result.score.expected_queries == 1
@@ -133,7 +133,7 @@ def test_fixed_singleton_stop_aware_delegates_to_count_path(monkeypatch):
     planner = session(AlgorithmPolicy("fixed", 1, "both", 5, "stop_aware", SingleCandidateStop()))
     queries(monkeypatch, {("root", 1): (query,)})
     terminal_counts(monkeypatch, {("root", 1.0): 2}, [])
-    result = planner.plan(Node("root", (0, 1, 2)))
+    result = planner.plan(Node("root", (0, 1, 2)), requested_depth=planner.policy.depth).selected_plan
     assert result.score.expected_terminal_loss == 2
     assert result.score.expected_queries is None
     assert result.evaluation.expected_terminal_loss is None
@@ -152,7 +152,7 @@ def test_adaptive_depth_three_evaluates_all_horizons_and_uses_ratio_of_expectati
         return (_Evaluated(QueryEvaluation(query, candidates, ()), cost),)
 
     planner._evaluate_many = evaluate
-    result = planner.plan(root)
+    result = planner.plan(root, requested_depth=planner.policy.depth).selected_plan
     # H1 and H2 have rate two. Lower expected cost wins, not lower loss.
     assert evaluated == [1, 2, 3]
     assert result.horizon == 1
@@ -186,17 +186,17 @@ def test_h3_child_frontier_contains_only_complete_h2_options(monkeypatch):
 def test_no_query_horizons_remain_explicit(monkeypatch):
     planner = session(AlgorithmPolicy("reduction_per_query", 3, "both", 5, "candidate_count", SingleCandidateStop()))
     queries(monkeypatch, {})
-    result = planner.plan(Node("root", (0, 1)))
-    assert isinstance(result, NoQuery)
-    assert [item.horizon for item in result.horizons] == [1, 2, 3]
-    assert all(item.selected_query is None and item.evaluations == () for item in result.horizons)
+    result = planner.plan(Node("root", (0, 1)), requested_depth=planner.policy.depth)
+    assert result.outcome == "no_query"
+    assert result.evaluated_horizons == (1, 2, 3)
+    assert all(item.selected_plan is None and item.evaluated_query_count == 0 for item in result.horizon_evidence)
 
 
 def test_session_close_rejects_new_plan_before_touching_state():
     planner = session()
     planner._closed = True
     with pytest.raises(RuntimeError, match="closed"):
-        planner.plan(None)
+        planner.plan(None, requested_depth=2)
 
 
 def test_broken_pool_is_an_execution_failure_and_keeps_original_cause():

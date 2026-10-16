@@ -11,6 +11,10 @@ def domain_inputs(problem_doc: dict, config_doc: dict, history_doc: dict | None)
     from otqa.config import AlgorithmPolicy, QueryBudget, SingleCandidateStop, SolverExecution, VolumeConfidenceStop
     from otqa.models.core import Problem
     algorithm = dict(config_doc["algorithm"])
+    if config_doc['schema_version'] == 1:
+        # Historical adapters retain the old disabled threshold; native entry
+        # points require an explicit v2 conversion before executing anything.
+        algorithm['min_expected_progress'] = None
     stopping = algorithm.pop("stopping")
     stop = SingleCandidateStop() if stopping["rule"] == "single_candidate" else VolumeConfidenceStop(float(stopping["threshold"]))
     problem = Problem(tuple(tuple(float(value) for value in row) for row in problem_doc["alternatives"]))
@@ -126,17 +130,21 @@ def _existing_plan_tree(decision, candidate_count, stop_aware):
     return tree
 
 
-def state_wire(state, alternatives: list[str], last_query_id: str | None) -> dict:
-    return {"state_index": state.answered_total, "last_answer_query_id": last_query_id,
+def state_wire(state, alternatives: list[str], last_query_id: str | None, execution_cursor=None) -> dict:
+    result = {"state_index": state.answered_total, "last_answer_query_id": last_query_id,
         "candidate_ids": [alternatives[index] for index in state.candidate_indices],
         "candidate_volumes": {alternatives[index]: value for index, value in state.candidate_volumes},
         "candidate_volume_shares": {alternatives[index]: value for index, value in state.candidate_volume_shares}}
+    if execution_cursor is not None:
+        result['execution_cursor'] = cursor_wire(execution_cursor)
+    return result
 
 
 def record_wire(record, query_id: str, *, stop_aware: bool, trace_level: str) -> dict:
     return {"query_id": query_id, "query": query_wire(record.query), "answer": record.answer,
         "planning": planning_wire(record.planning, stop_aware=stop_aware, trace_level=trace_level, candidate_count=record.before.candidate_count),
-        "state_before_index": record.before.answered_total, "state_after_index": record.after.answered_total}
+        "state_before_index": record.before.answered_total, "state_after_index": record.after.answered_total,
+        "planning_cycle": cycle_wire(record.cycle, stop_aware=stop_aware, trace_level=trace_level)}
 
 
 def result_wire(result, alternatives: list[str], *, stop_aware: bool, trace_level: str) -> dict:
@@ -145,15 +153,67 @@ def result_wire(result, alternatives: list[str], *, stop_aware: bool, trace_leve
     return {"solved": result.solved, "exactly_solved": result.exactly_solved, "termination_reason": result.termination_reason,
         "selected_candidate_id": None if result.selected_candidate_index is None else alternatives[result.selected_candidate_index],
         "selected_candidate_volume": result.selected_candidate_volume, "selected_candidate_volume_share": result.selected_candidate_volume_share,
-        "final_state": state_wire(result.final_state, alternatives, last), "query_records": records,
+        "final_state": state_wire(result.final_state, alternatives, last, result.execution_cursor), "query_records": records,
+        "execution_cursor": cursor_wire(result.execution_cursor),
+        "planning_cycles": [cycle_wire(c, stop_aware=stop_aware, trace_level=trace_level) for c in result.planning_cycles],
         "answered_queries": [answered_wire(answer) for answer in result.answers]}
 
 
 def mathematical_input_digest(problem: dict, config: dict, answer_source: str,
-                              initial: dict | None, oracle: dict | None, replay: dict | None) -> str:
+                              initial: dict | None, oracle: dict | None, replay: dict | None, *, continuation=None) -> str:
     effective_config = typed_projection("config", config)
     value = {"problem": typed_projection("problem", problem), "algorithm": effective_config["algorithm"], "budget": effective_config["budget"],
         "answer_source": answer_source, "initial_answers": [] if initial is None else typed_projection("answer_history", initial)["answers"],
         "oracle": None if oracle is None else typed_projection("oracle", oracle),
         "replay_answers": None if replay is None else typed_projection("answer_history", replay)["answers"]}
+    if config['schema_version'] >= 2:
+        answers = value['initial_answers'] if continuation is None else continuation['answers']
+        cursor = ({'answered_total': len(answers), 'remaining_depth': config['algorithm']['depth']}
+                  if continuation is None else continuation['execution_cursor'])
+        value['initial_answers'] = answers
+        value['execution_start'] = {'kind': 'continuation' if continuation is not None else 'warm_start' if initial is not None else 'fresh',
+            'algorithm_contract': 'otqa-execution-v2', 'execution_cursor': cursor}
     return canonical_digest(float_projection(value))
+
+
+def cursor_wire(cursor):
+    if isinstance(cursor, dict):
+        return dict(cursor)
+    return {'answered_total': cursor.answered_total, 'remaining_depth': cursor.remaining_depth}
+
+def progress_wire(progress):
+    if progress is None:
+        return None
+    return {key: getattr(progress, key) for key in ('basis', 'starting_value', 'expected_terminal_value',
+        'expected_progress', 'threshold', 'comparison', 'admissible')}
+
+def attempt_wire(attempt, *, stop_aware, trace_level):
+    def plan(value, *, witness=False):
+        if value is None:
+            return None
+        result = planning_wire(value, stop_aware=stop_aware, trace_level=trace_level)
+        if witness:
+            # A maximum-gain witness may lose the rate comparison even within
+            # its own horizon. Its enclosing field supplies the witness role;
+            # do not attach the unrelated eligible rate-winner summaries.
+            result['horizons'] = [{'horizon': value.horizon, 'status': 'available', 'plan': plan_summary(value)}]
+        return result
+    horizons = []
+    for item in attempt.horizon_evidence:
+        horizons.append({'horizon': item.horizon, 'generated_query_count': item.generated_query_count,
+            'evaluated_query_count': item.evaluated_query_count, 'outcome': item.outcome,
+            'selected_plan': plan(item.selected_plan), 'selected_progress': progress_wire(item.selected_progress),
+            'best_progress_witness': plan(item.best_progress_witness, witness=True), 'best_progress': progress_wire(item.best_progress)})
+    return {'requested_depth': attempt.requested_depth, 'evaluated_horizons': list(attempt.evaluated_horizons),
+        'outcome': attempt.outcome, 'selected_plan': plan(attempt.selected_plan),
+        'selected_progress': progress_wire(attempt.selected_progress), 'best_progress_witness': plan(attempt.best_progress_witness, witness=True),
+        'horizon_evidence': horizons}
+
+def cycle_wire(cycle, *, stop_aware, trace_level):
+    if cycle is None:
+        raise DocumentError('Version-two query record lacks its planning cycle')
+    return {'cursor_before': cursor_wire(cycle.cursor_before),
+        'attempts': [attempt_wire(a, stop_aware=stop_aware, trace_level=trace_level) for a in cycle.attempts],
+        'selected_plan': None if cycle.selected_plan is None else planning_wire(cycle.selected_plan, stop_aware=stop_aware, trace_level=trace_level),
+        'outcome': cycle.outcome, 'restart_reason': cycle.restart_reason,
+        'proposed_cursor_after_answer': None if cycle.proposed_cursor_after_answer is None else cursor_wire(cycle.proposed_cursor_after_answer)}

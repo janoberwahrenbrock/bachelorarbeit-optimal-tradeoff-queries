@@ -16,7 +16,7 @@ from otqa.runtime.codec import DocumentError, canonical_digest, decode, digest, 
 from otqa.runtime.processes import group_status, identity_status
 from otqa.runtime.ownership import verified_process_chain
 from otqa.runtime.project import ProjectContext, bound_directory, portable_path, verify_binding
-from otqa.runtime.schema import definitions, registry_and_validators, validate
+from otqa.runtime.schema import all_validators, versioned_definitions, validate
 from otqa.runtime.validation import verify_result
 
 _INVENTORY = "archive_inventory.json"
@@ -140,7 +140,10 @@ def _payload_reference(reference):
 def _declared_references(schema, value, common):
     """Follow declared schema edges, never arbitrary free metadata objects."""
     if "$ref" in schema:
-        name = schema["$ref"].rsplit("/", 1)[-1]
+        ref = schema['$ref']
+        name = ref.rsplit('/', 1)[-1]
+        version = int(ref.split(':v', 1)[1].split(':', 1)[0])
+        common, _ = versioned_definitions(version)
         if name in {"FileRef", "JournalProof"}:
             if isinstance(value, dict):
                 yield value
@@ -168,8 +171,7 @@ def _declared_references(schema, value, common):
 
 
 def _check_native_references(directory, snapshots):
-    common, schemas = definitions()
-    validators = registry_and_validators()
+    validators = all_validators()
     for relative, stamp in snapshots.items():
         # Original input provenance retains its former source-root addresses;
         # those documents are bytes, not native SeriesRoot reference edges.
@@ -180,11 +182,19 @@ def _check_native_references(directory, snapshots):
             document = decode(raw)
         except DocumentError:
             continue  # Unrelated JSON-named blobs are still archived byte-for-byte.
-        if not isinstance(document, dict) or document.get("schema_version") != 1:
+        if not isinstance(document, dict) or type(document.get('schema_version')) is not int:
             continue
-        for kind, validator in validators.items():
+        for (kind, version), validator in validators.items():
+            if version != document['schema_version']:
+                continue
             if validator.is_valid(document):
-                for reference in _declared_references(schemas[kind], document, common):
+                common, schemas = versioned_definitions(version)
+                if kind == 'continuation':
+                    from otqa.runtime.schema_v2 import continuation_schema
+                    schema = continuation_schema()
+                else:
+                    schema = schemas[kind]
+                for reference in _declared_references(schema, document, common):
                     _payload_reference(reference)
                 break
 

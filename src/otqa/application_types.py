@@ -20,6 +20,22 @@ class RunRequest:
     oracle_path: Path | None = None
     replay_path: Path | None = None
     initial_answers_path: Path | None = None
+    continuation_path: Path | None = None
+
+
+@dataclass(frozen=True)
+class ContinuationExportRequest:
+    context: ProjectContext
+    reference_root: Path
+    result_path: Path
+    output_dir: Path
+
+
+@dataclass(frozen=True)
+class ContinuationExportOutcome:
+    continuation_path: Path
+    continuation: dict
+    reference_root: Path
 
 
 @dataclass(frozen=True)

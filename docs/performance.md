@@ -57,3 +57,22 @@ Produktrepository aufbewahrt. Neue native Eingaben und Laufdaten bleiben
 projektintern unter `inputs/` und `runs/`. Für die Bachelorarbeit werden weitere
 Datensätze über den [Benchmarkworkflow](benchmarks.md) erzeugt und sämtliche
 gelösten, ungelösten, fehlerhaften und unterbrochenen Fälle gemeinsam ausgewiesen.
+
+## Abnahme der Integration 0.2.0
+
+Die Integration wird in zwei getrennten Gruppen geprüft. Ein Alt-Neu-Vergleich
+mit ausdrücklich deaktivierter Fortschrittsschwelle misst den Implementierungs-
+aufwand bei gleichen vollständigen Rechnungen. Eine zweite Gruppe vergleicht
+die neue Quelle mit `None` und `0.001` und beschreibt die fachlich veränderten
+Stopps. Zusätzliche volle Countdownersatzplanung ist gewollter Suchaufwand und
+wird separat gezählt. Die Hauptstudie mit100neuenFällen×12Bedingungen misst
+Strategie und Grid bei überall gleicher Schwelle, nicht einen isolierten
+Codegeschwindigkeitsgewinn.
+
+Die vorab festgelegte kurze Matrix und drei gepaarten Blöcke stehen im
+[Implementierungsplan](implementation-plan-countdown-progress.md). Ein medianer
+neuer/alter Zeitquotient über1.05 wird untersucht; bei unklarem Screening ist
+eine einmalige feste Ergänzung für alle betroffenen Bedingungen vorgesehen.
+Ein unklarer Befund bleibt unklar. Die historischen Messwerte darüber sind kein
+Laufzeitnachweis für den neuen Quellpayload. Tatsächliche neue Nachweise werden
+im [Implementierungsstatus](implementation-status.md) ergänzt.

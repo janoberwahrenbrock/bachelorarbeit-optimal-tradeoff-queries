@@ -4,9 +4,9 @@ Pythonprojekt zur Untersuchung des Optimal Tradeoff Query Algorithmus mit reprod
 
 ## Projektstand
 
-Der Solver unterstützt feste und adaptive Planung bis Tiefe drei, geometrische Antwortwahrscheinlichkeiten ohne Sampling, Singleton- und Volumenkonfidenzabbruch sowie die Berücksichtigung des Abbruchs in der Planung. Die adaptive Strategie maximiert die erwartete Kandidatenverringerung pro erwarteter Query.
+Der Solver unterstützt feste und adaptive Planung bis Tiefe drei, geometrische Antwortwahrscheinlichkeiten ohne Sampling, Singleton- und Volumenkonfidenzabbruch sowie die Berücksichtigung des Abbruchs in der Planung. Die adaptive Strategie maximiert die erwartete Kandidatenverringerung pro erwarteter Query. Feste Planung unterstützt Neuplanung und Countdown mit einmaliger voller Ersatzplanung. Der Mindestfortschritt pro vollständigem Planungshorizont ist standardmäßig `0.001` und lässt sich ausdrücklich deaktivieren.
 
-Die Implementierung ist in den dokumentierten Umfängen funktional und auf Laufzeit geprüft. Berechnungen und Queryfolgen stimmen dort mit dem bisherigen optimierten Stand überein. Den geprüften Umfang und die Grenzen beschreibt [der Implementierungsstatus](docs/implementation-status.md); die [Laufzeitprüfung](docs/performance.md) trennt diese Ergebnisse von einer allgemeinen Laufzeitgarantie.
+Die Prüfnachweise sind an die jeweilige Paketquelle gebunden. Historische Vergleiche belegen weder automatisch die neue Fortschrittsschwelle noch die neue Countdown-Fallbacksemantik. Den geprüften Umfang und die Grenzen beschreibt [der Implementierungsstatus](docs/implementation-status.md); die [Laufzeitprüfung](docs/performance.md) trennt diese Ergebnisse von einer allgemeinen Laufzeitgarantie.
 
 ## Einstieg
 

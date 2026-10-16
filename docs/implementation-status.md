@@ -1,5 +1,21 @@
 # Implementierungsstatus
 
+## Aktuelle Integration 0.2.0
+
+Stand: 16. Oktober 2026. Countdown, vollständige Ersatzplanung,
+`min_expected_progress=0.001`, explizite Fortsetzungen und versionierte
+Aufzeichnung werden anhand des gespeicherten Implementierungsplans integriert.
+Der erste gemeinsame Testlauf bestand 481 Tests; die Quellabnahme läuft weiter.
+Die abschließende Paketidentität, installierte macOS-/Linuxqualifizierung,
+Fortsetzungs-End-to-End-Prüfung und gepaarte Laufzeitabnahme sind noch offen.
+Die größere100-Fall-Studie startet erst nach diesen Abnahmen. Der Arbeitsnachweis
+liegt unter `runs/countdown-progress-integration-20261016T030055Z/`.
+
+Die folgenden historischen Freigaben gelten ausschließlich für ihre ursprüngliche
+Quelle und werden nicht auf den aktuellen Quellpayload übertragen.
+
+## Historische Freigabe 0.1.0
+
 Stand: 15. Oktober 2026. Die Paketidentität
 `c75783a7c62d03c5aeb4f9d78ce3eee85a7dfeb4d3d6ac5f6984b1c7b67a1ba1`
 bindet den tatsächlich geprüften Algorithmuscode und seine Schemadateien.

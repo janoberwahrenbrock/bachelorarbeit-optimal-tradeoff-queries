@@ -18,13 +18,14 @@ import uuid
 
 from otqa.config import VolumeConfidenceStop
 from otqa.errors import ExecutionContextError
-from otqa.models.core import AnsweredQuery
+from otqa.models.core import AnsweredQuery, integer
+from otqa.models.execution import HorizonSelectionEvidence, PlanningAttempt, ProgressEvidence
 
 from .capture import EvaluationCaptureError, EvaluationCaptureOptions, TaskCapture, deliver
-from .frontier import combine_frontiers, pareto_options
+from .frontier import select_frontiers
 from .models import (
     BranchEvaluation, Continuation, EfficiencyScore, FixedScore, HorizonEvidence,
-    NoQuery, PlanningDecision, PolicyOption, QueryEvaluation, query_identity,
+    PlanningDecision, PolicyOption, QueryEvaluation, query_identity,
 )
 
 if TYPE_CHECKING:
@@ -46,6 +47,7 @@ class _StatePlan:
     evaluations: tuple[QueryEvaluation, ...] = ()
     expected_queries: float | None = None
     continuations: tuple[Continuation, ...] = ()
+    generated_query_count: int = 0
 
 
 @dataclass(frozen=True, slots=True)
@@ -53,6 +55,8 @@ class _Evaluated:
     evaluation: QueryEvaluation
     expected_queries: float | None = None
     continuations: tuple[Continuation, ...] = ()
+    admissible: bool = True
+    progress_witness: _Evaluated | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -153,7 +157,7 @@ class PlannerSession:
         self._plan_index = 0
         self._plan_address: tuple | None = None
         self._task_counter = 0
-        self._plan_cache: OrderedDict[tuple, PlanningDecision | NoQuery] = OrderedDict()
+        self._plan_cache: OrderedDict[tuple, PlanningAttempt] = OrderedDict()
         self._captured_plans = {} if evaluation_capture is not None else None
 
     def _check_open(self) -> None:
@@ -361,7 +365,8 @@ class PlannerSession:
         if self._capturing:
             self._observe("combination_choice", state, depth, ("fixed_selection", chosen), query=chosen.query)
         return _StatePlan(count, True, chosen.expected_terminal_candidates,
-                          chosen.expected_terminal_candidates, chosen, refined)
+                          chosen.expected_terminal_candidates, chosen, refined,
+                          generated_query_count=len(data.query_candidates))
 
     def _fixed_stop(self, state: PreparedState, depth: int, *, root: bool = False) -> _StatePlan:
         state = self.states.ensure_analysis(state, ratios=True, volumes=self._need_planning_volumes)
@@ -384,7 +389,7 @@ class PlannerSession:
         return _StatePlan(count, True, evaluation.expected_terminal_candidates,
                           evaluation.expected_terminal_loss, evaluation,
                           tuple(item.evaluation for item in results), selected.expected_queries,
-                          selected.continuations)
+                          selected.continuations, len(data.query_candidates))
 
     def _child_frontier(self, state: PreparedState) -> tuple[PolicyOption, ...]:
         count = len(state.analysis.candidates)
@@ -402,14 +407,10 @@ class PlannerSession:
         options = tuple(PolicyOption(item.evaluation, item.evaluation.expected_terminal_candidates,
             item.evaluation.expected_terminal_loss if self._stop_aware else item.evaluation.expected_terminal_candidates,
             item.expected_queries, item.continuations, maximum_volume_share=maximum) for item in results)
-        if self._capturing:
-            frontier = pareto_options(options, lambda kind, value: self._observe(kind, state, 2, value))
-        else:
-            frontier = pareto_options(options)
+        # Preserve raw complete H2 options until global gain-sign admission is
+        # known. Child pruning cannot run first on the all-negative path.
         self._observe("child_options", state, 2, options)
-        if self._capturing:
-            self._observe("frontier_projection", state, 2, (options, frontier))
-        return frontier
+        return options
 
     def _evaluate_h3(self, state: PreparedState, query: Query, source: str) -> _Evaluated:
         probabilities = self.geometry.probabilities(state.weight_space, query)
@@ -428,7 +429,20 @@ class PlannerSession:
             children.append((answer, probability, child))
             frontiers.append(self._child_frontier(child))
         observe = (lambda kind, value: self._observe(kind, state, 3, value, query=query)) if self._capture else None
-        chosen = combine_frontiers(len(state.analysis.candidates), tuple(item[1] for item in children), tuple(frontiers), observe)
+        child_observers = tuple(
+            (lambda kind, value, child=child: self._observe(kind, child, 2, value))
+            for _, _, child in children) if self._capturing else None
+        selection = select_frontiers(len(state.analysis.candidates), tuple(item[1] for item in children),
+            tuple(frontiers), minimum=self.policy.min_expected_progress, observe=observe,
+            child_observers=child_observers)
+        witness = self._assemble_h3(state, query, source, probabilities, children, selection.best_progress_witness)
+        if selection.selected is None:
+            return replace(witness, admissible=False, progress_witness=witness)
+        selected = (witness if selection.selected == selection.best_progress_witness else
+                    self._assemble_h3(state, query, source, probabilities, children, selection.selected))
+        return replace(selected, progress_witness=witness)
+
+    def _assemble_h3(self, state, query, source, probabilities, children, chosen):
         by_answer = {item[0]: (item[2], option) for item, option in zip(children, chosen, strict=True)}
         branches, continuations = [], []
         for answer in ANSWERS:
@@ -690,17 +704,50 @@ class PlannerSession:
             raise
         return tuple(results)
 
-    def plan(self, state: PreparedState) -> PlanningDecision | NoQuery:
+    def _progress(self, count: int, evaluation: QueryEvaluation) -> ProgressEvidence:
+        terminal = (evaluation.expected_terminal_loss if self._stop_aware and
+                    evaluation.expected_terminal_loss is not None else evaluation.expected_terminal_candidates)
+        gain = float(count) - terminal
+        threshold = self.policy.min_expected_progress
+        return ProgressEvidence(
+            basis="effective_loss" if self._stop_aware else "candidate_count",
+            starting_value=float(count), expected_terminal_value=terminal,
+            expected_progress=gain, threshold=threshold,
+            admissible=threshold is None or gain > threshold)
+
+    def _efficiency_decision(self, depth: int, result: _Evaluated, count: int) -> PlanningDecision:
+        evaluation = result.evaluation
+        loss = (evaluation.expected_terminal_loss if evaluation.expected_terminal_loss is not None
+                else evaluation.expected_terminal_candidates)
+        gain, cost = float(count) - loss, result.expected_queries
+        if cost is None or not math.isfinite(cost) or cost <= 0 or not math.isfinite(gain) or not math.isfinite(gain / cost):
+            raise RuntimeError("nonfinite query-efficiency score or invalid query cost")
+        if loss < 1.0 - 1e-9 or gain < -1e-9:
+            raise RuntimeError("terminal candidate expectation is outside feasible query-efficiency bounds")
+        score = EfficiencyScore(evaluation.expected_terminal_candidates, loss, cost, gain, gain / cost)
+        return PlanningDecision(evaluation.query, depth, score,
+            tuple((item.answer, item.probability) for item in evaluation.branches),
+            evaluation, result.continuations)
+
+    def plan(self, state: PreparedState, *, requested_depth: int) -> PlanningAttempt:
+        """Evaluate an explicit mathematical request, without execution phase.
+
+        Policy and threshold are immutable session inputs; history and requested
+        depth identify the reusable result. Countdown cursors stay in the caller.
+        """
         from otqa.state import history_key
         self._check_open()
+        requested_depth = integer(requested_depth, name="requested_depth", minimum=1)
+        if requested_depth > self.policy.depth:
+            raise ValueError("requested depth exceeds the configured maximum")
         state = self.states.bind(state)
         state = self.states.ensure_analysis(state, ratios=True, volumes=self._need_planning_volumes)
         self._task_counter = 0
         if self._capture_options is not None:
             self._plan_index += 1
             self._plan_address = (self._session_id, self._plan_index)
-            self._parent_observation("begin", state, (state.analysis, self.policy.query_strategy, self.policy.depth))
-        key = history_key(state.history)
+            self._parent_observation("begin", state, (state.analysis, self.policy.query_strategy, requested_depth))
+        key = (history_key(state.history), requested_depth)
         if key in self._plan_cache:
             choice = self._plan_cache[key]
             self._plan_cache.move_to_end(key)
@@ -709,62 +756,90 @@ class PlannerSession:
             self._parent_observation("end", state, choice)
             return choice
         count = len(state.analysis.candidates) if state.analysis else 0
-        if not state.is_feasible or count <= 1:
-            choice = NoQuery(count, state.is_feasible)
+        depths = ((requested_depth,) if self.policy.query_strategy == "fixed" else
+                  tuple(range(1, requested_depth + 1)))
+        horizon_selections, mathematical_horizons = [], []
+        candidates, witnesses = [], []
+        if not state.is_feasible or count <= 1 or (self._stop_aware and self._status(state)[0] is not None):
+            horizon_selections = [HorizonSelectionEvidence(depth, 0, 0, "no_query") for depth in depths]
         elif self.policy.query_strategy == "fixed":
-            # Singleton stop-aware Fixed explicitly delegates to ordinary Fixed.
-            use_stop = self._need_planning_volumes
-            planned = (self._fixed_stop(state, self.policy.depth, root=True) if use_stop else
-                       self._fixed(state, self.policy.depth, root=True))
-            if planned.evaluation is None:
-                choice = NoQuery(count, planned.is_feasible)
+            # Fixed singleton stop-aware planning retains its ordinary route.
+            planned = (self._fixed_stop(state, requested_depth, root=True) if self._need_planning_volumes else
+                       self._fixed(state, requested_depth, root=True))
+            evaluation = planned.evaluation
+            if evaluation is None:
+                horizon_selections.append(HorizonSelectionEvidence(requested_depth,
+                    planned.generated_query_count, len(planned.evaluations), "no_query"))
             else:
-                evaluation = planned.evaluation
                 score = FixedScore(planned.value, planned.loss,
-                    evaluation.lexicographic_profile or (evaluation.expected_terminal_candidates,),
-                    planned.expected_queries)
-                choice = PlanningDecision(evaluation.query, self.policy.depth, score,
-                    tuple((branch.answer, branch.probability) for branch in evaluation.branches), evaluation,
-                    planned.continuations, (HorizonEvidence(self.policy.depth, planned.evaluations, evaluation.query,
-                        score, tuple((branch.answer, branch.probability) for branch in evaluation.branches), planned.continuations),))
-        elif self._stop_aware and self._status(state)[0] is not None:
-            choice = NoQuery(count)
+                    evaluation.lexicographic_profile or (evaluation.expected_terminal_candidates,), planned.expected_queries)
+                probabilities = tuple((branch.answer, branch.probability) for branch in evaluation.branches)
+                mathematical = HorizonEvidence(requested_depth, planned.evaluations, evaluation.query,
+                    score, probabilities, planned.continuations)
+                decision = PlanningDecision(evaluation.query, requested_depth, score, probabilities, evaluation,
+                    planned.continuations, (mathematical,))
+                progress = self._progress(count, evaluation)
+                witnesses.append(decision)
+                if progress.admissible:
+                    candidates.append(decision)
+                horizon_selections.append(HorizonSelectionEvidence(requested_depth,
+                    planned.generated_query_count, len(planned.evaluations),
+                    "available" if progress.admissible else "insufficient_expected_progress",
+                    decision if progress.admissible else None, progress if progress.admissible else None,
+                    decision, progress))
         else:
-            horizons, alternatives = [], []
-            for depth in range(1, self.policy.depth + 1):
+            for depth in depths:
                 data = self._queries(state, depth)
                 results = self._evaluate_many(state, data, depth, "efficiency", root=True)
-                scores = {}
+                plans, progress_plans = [], []
                 for result in results:
-                    evaluation = result.evaluation
-                    loss = evaluation.expected_terminal_loss if evaluation.expected_terminal_loss is not None else evaluation.expected_terminal_candidates
-                    gain, cost = float(count) - loss, result.expected_queries
-                    if not math.isfinite(gain) or not math.isfinite(gain / cost):
-                        raise RuntimeError("nonfinite query-efficiency score")
-                    if loss < 1.0 - 1e-9 or gain < -1e-9:
-                        raise RuntimeError("terminal candidate expectation is outside feasible query-efficiency bounds")
-                    scores[evaluation.query] = EfficiencyScore(evaluation.expected_terminal_candidates, loss, cost, gain, gain / cost)
+                    decision = self._efficiency_decision(depth, result, count)
+                    progress = self._progress(count, decision.evaluation)
+                    if result.admissible and progress.admissible:
+                        plans.append((result, decision))
+                    witness_result = result.progress_witness or result
+                    witness = (decision if witness_result is result else
+                               self._efficiency_decision(depth, witness_result, count))
+                    progress_plans.append((witness_result, witness))
                     if self._capture_options is not None:
                         self._observe("root_evaluation", state, depth,
-                            ("efficiency_score", evaluation.query, scores[evaluation.query]), query=evaluation.query)
-                selected = min(results, key=lambda result: efficiency_key((depth, result), count)) if results else None
-                horizons.append(HorizonEvidence(depth, tuple(item.evaluation for item in results), selected.evaluation.query if selected else None,
-                    scores[selected.evaluation.query] if selected else None,
-                    tuple((branch.answer, branch.probability) for branch in selected.evaluation.branches) if selected else (),
-                    selected.continuations if selected else ()))
+                            ("efficiency_score", decision.query, decision.score), query=decision.query)
+                selected = min(plans, key=lambda item: efficiency_key((depth, item[0]), count)) if plans else None
+                best = min(progress_plans, key=lambda item: (
+                    -self._progress(count, item[1].evaluation).expected_progress,
+                    efficiency_key((depth, item[0]), count))) if progress_plans else None
+                mathematical_horizons.append(HorizonEvidence(depth, tuple(item.evaluation for item in results),
+                    selected[1].query if selected else None, selected[1].score if selected else None,
+                    selected[1].answer_probabilities if selected else (), selected[1].continuations if selected else ()))
                 if selected:
-                    alternatives.append((depth, selected))
-            if not alternatives:
-                choice = NoQuery(count, horizons=tuple(horizons))
-            else:
-                depth, selected = min(alternatives, key=lambda pair: efficiency_key(pair, count))
-                evaluation = selected.evaluation
-                loss = evaluation.expected_terminal_loss if evaluation.expected_terminal_loss is not None else evaluation.expected_terminal_candidates
-                gain, cost = float(count) - loss, selected.expected_queries
-                score = EfficiencyScore(evaluation.expected_terminal_candidates, loss, cost, gain, gain / cost)
-                choice = PlanningDecision(evaluation.query, depth, score,
-                    tuple((item.answer, item.probability) for item in evaluation.branches), evaluation,
-                    selected.continuations, tuple(horizons))
+                    candidates.append(selected[1])
+                if best:
+                    witnesses.append(best[1])
+                outcome = "available" if selected else "insufficient_expected_progress" if best else "no_query"
+                horizon_selections.append(HorizonSelectionEvidence(depth, len(data.query_candidates), len(results), outcome,
+                    selected[1] if selected else None,
+                    self._progress(count, selected[1].evaluation) if selected else None,
+                    best[1] if best else None,
+                    self._progress(count, best[1].evaluation) if best else None))
+            if mathematical_horizons:
+                candidates = [replace(item, horizons=tuple(mathematical_horizons)) for item in candidates]
+                witnesses = [replace(item, horizons=tuple(mathematical_horizons)) for item in witnesses]
+                horizon_selections = [replace(item,
+                    selected_plan=replace(item.selected_plan, horizons=tuple(mathematical_horizons)) if item.selected_plan else None,
+                    best_progress_witness=replace(item.best_progress_witness, horizons=tuple(mathematical_horizons))
+                        if item.best_progress_witness else None) for item in horizon_selections]
+        def decision_key(item):
+            if isinstance(item.score, EfficiencyScore):
+                return (-item.score.rate, item.score.expected_queries, item.horizon, *query_identity(item.query))
+            return (*item.score.lexicographic_profile, *query_identity(item.query))
+        selected = min(candidates, key=decision_key) if candidates else None
+        witness = min(witnesses, key=lambda item: (
+            -self._progress(count, item.evaluation).expected_progress,
+            decision_key(item) if isinstance(item.score, EfficiencyScore) else query_identity(item.query))) if witnesses else None
+        outcome = "available" if selected else "insufficient_expected_progress" if witness else "no_query"
+        choice = PlanningAttempt(requested_depth, depths, outcome, selected,
+            self._progress(count, selected.evaluation) if selected else None,
+            witness, tuple(horizon_selections))
         self._plan_cache[key] = choice
         if self._capture_options is not None:
             self._captured_plans[key] = self._plan_address

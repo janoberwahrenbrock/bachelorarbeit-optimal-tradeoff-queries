@@ -18,19 +18,21 @@ from otqa.runtime.storage import RunStore, create_directory, publish_json
 from otqa.runtime.validation import verify_result
 
 
-def recorded_result(tmp_path, *, matrix=((1., 0.), (0., 1.)), threshold=None):
+def recorded_result(tmp_path, *, matrix=((1., 0.), (0., 1.)), threshold=None, depth=1, horizon_execution=None, min_progress=None, planning='candidate_count'):
     case_started = time.perf_counter()
     (tmp_path / 'otqa-project.json').write_bytes(encode({'schema_version': 1, 'project_kind': 'otqa_project', 'project_id': str(uuid4())}))
     context = load_project_context(tmp_path)
     root = tmp_path / 'runs' / 'case'
     create_directory(context, root)
     stopping = {'rule': 'single_candidate'} if threshold is None else {'rule': 'volume_confidence', 'threshold': threshold}
-    config = {'schema_version': 1, 'configuration_id': 'actual-reader-control',
-        'algorithm': {'query_strategy': 'fixed', 'depth': 1, 'grid_size': 5, 'higher_depth_query_source': 'both',
-                      'planning_evaluation': 'candidate_count', 'stopping': stopping},
+    config = {'schema_version': 2, 'configuration_id': 'actual-reader-control',
+        'algorithm': {'query_strategy': 'fixed', 'depth': depth, 'grid_size': 5, 'higher_depth_query_source': 'both',
+                      'planning_evaluation': planning, 'stopping': stopping, 'horizon_execution': 'receding', 'min_expected_progress': min_progress},
         'budget': {'max_queries': 5},
         'execution': {'workers': 1, 'native_threads': 1, 'start_method': 'forkserver', 'cache_policy_id': 'bounded_v1', 'case_timeout_seconds': None},
         'recording': {'durability': 'per_answer', 'trace_level': 'standard', 'profile': False, 'telemetry_failure_policy': 'continue'}}
+    if horizon_execution is not None:
+        config['algorithm']['horizon_execution'] = horizon_execution
     problem = {'schema_version': 1, 'problem_id': 'reader-control', 'alternative_ids': ['z-first', 'a-second'],
                'objective_ids': ['x', 'y'], 'alternatives': [list(row) for row in matrix]}
     oracle = {'schema_version': 1, 'problem_id': problem['problem_id'], 'target_weights': [.7, .3]}
@@ -41,23 +43,24 @@ def recorded_result(tmp_path, *, matrix=((1., 0.), (0., 1.)), threshold=None):
         'boot_id': None, 'start_ticks': None, 'pgid': os.getpid(), 'sid': os.getpid(), 'owner_token': 'constructed'}
     dummy = {'path': 'unused-control-reference.json', 'sha256': '0' * 64}
     run_id = str(uuid4())
-    manifest = {'schema_version': 1, 'run_id': run_id, 'attempt_id': 'attempt0001', 'series_id': None, 'job_id': None,
+    manifest = {'schema_version': 2, 'run_id': run_id, 'attempt_id': 'attempt0001', 'series_id': None, 'job_id': None,
         'problem_id': problem['problem_id'], 'configuration_id': config['configuration_id'],
         'execution_kind': 'fresh', 'answer_source': 'simulated', 'created_at_utc': utc_now(),
         'source': {'inventory_format': 'otqa-source-v1', 'version': 'constructed-control', 'git_commit': None, 'dirty': False, 'source_sha256': 'a' * 64},
         'source_inventory': dummy, 'project_binding': context.binding(root), 'run_purpose': 'qualification',
         'materialization_receipt': dummy, 'launch_intent': dummy,
         'inputs': {'problem': file_ref(root / 'problem.json', root), 'configuration': file_ref(root / 'config.json', root),
-                   'oracle': file_ref(root / 'oracle.json', root), 'initial_answers': None, 'replay_answers': None},
-        'mathematical_input_sha256': '0' * 64, 'effective_algorithm': config['algorithm'], 'effective_budget': config['budget'],
+                   'oracle': file_ref(root / 'oracle.json', root), 'initial_answers': None, 'replay_answers': None, 'continuation': None},
+        'initial_execution_cursor': {'answered_total': 0, 'remaining_depth': depth},
+        'mathematical_input_sha256': __import__('otqa.runtime.serialization', fromlist=['mathematical_input_digest']).mathematical_input_digest(problem, config, 'simulated', None, oracle, None), 'effective_algorithm': config['algorithm'], 'effective_budget': config['budget'],
         'effective_execution': config['execution'], 'effective_recording': config['recording'], 'execution_profile': dummy,
         'numerical_profile': resolved_numerical_profile(), 'resolved_cache_policy': resolved_cache_policy(),
         'environment': {'hostname': 'constructed-sdk-reader-control', 'platform_family': 'linux', 'platform': 'constructed', 'python': 'constructed',
                         'packages': {}, 'cpu_model': None, 'physical_cores': None, 'logical_cpus': None, 'native_thread_environment': {}, 'backend_capabilities': {}},
         'process': process}
     publish_json(context, root / 'manifest.json', manifest, kind='manifest')
-    store = RunStore(context, root, root, run_id, 'attempt0001', process, 0)
-    recorder = WireRecorder(store, problem['alternative_ids'], stop_aware=False, trace_level='standard')
+    store = RunStore(context, root, root, run_id, 'attempt0001', process, 0, schema_version=2, execution_cursor=manifest['initial_execution_cursor'])
+    recorder = WireRecorder(store, problem['alternative_ids'], stop_aware=planning == 'stop_aware', trace_level='standard')
     recorder.event('run_started', {'manifest_sha256': file_ref(root / 'manifest.json', root)['sha256']}, commit=True)
     domain, policy, budget, execution, initial = domain_inputs(problem, config, None)
     api_started = time.perf_counter()
@@ -65,9 +68,9 @@ def recorded_result(tmp_path, *, matrix=((1., 0.), (0., 1.)), threshold=None):
     elapsed = time.perf_counter() - api_started
     recorder.event('run_finished', {'termination_reason': result.termination_reason, 'solved': result.solved, 'query_counts': dict(store.counts)}, commit=True)
     proof = store.journal_proof()
-    solver = result_wire(result, problem['alternative_ids'], stop_aware=False, trace_level='standard')
+    solver = result_wire(result, problem['alternative_ids'], stop_aware=planning == 'stop_aware', trace_level='standard')
     from otqa.analysis.quality import evaluate_quality
-    envelope = {'schema_version': 1, 'run_id': run_id, 'attempt_id': 'attempt0001', 'problem_id': problem['problem_id'], 'configuration_id': config['configuration_id'],
+    envelope = {'schema_version': 2, 'run_id': run_id, 'attempt_id': 'attempt0001', 'problem_id': problem['problem_id'], 'configuration_id': config['configuration_id'],
         'execution_status': 'completed', 'execution_stage': 'solver', 'finalized_by': 'case_process', 'started_at_utc': utc_now(), 'finished_at_utc': utc_now(),
         'query_counts': dict(store.counts), 'timings': timings(case_elapsed=time.perf_counter() - case_started, api_elapsed=elapsed, complete=True),
         'solver_result': solver, 'quality': evaluate_quality(problem, oracle, solver['selected_candidate_id'], solver['answered_queries']),
@@ -85,6 +88,17 @@ def test_real_sdk_journal_and_result_satisfy_shared_policy_reader(tmp_path):
     prefix = verify_cursor((root / 'events.jsonl').read_bytes(), cursor,
         algorithm=manifest['effective_algorithm'], budget=manifest['effective_budget'], alternative_ids=['z-first', 'a-second'])
     assert prefix['query_phase'] == 'completed' and prefix['active_query_id'] is None
+
+
+def test_real_countdown_sdk_result_and_cursor_bind_explicit_execution_mode(tmp_path):
+    _, root, manifest, payload, envelope = recorded_result(tmp_path, depth=2, horizon_execution='countdown')
+    assert manifest['effective_algorithm']['horizon_execution'] == 'countdown'
+    assert verify_result(root / 'result.json', root, payload) == envelope
+    cursor = read_json(root / 'progress.json')
+    prefix = verify_cursor((root / 'events.jsonl').read_bytes(), cursor,
+        algorithm=manifest['effective_algorithm'], budget=manifest['effective_budget'], alternative_ids=['z-first', 'a-second'])
+    assert prefix['query_phase'] == 'completed'
+    assert envelope['solver_result']['query_records'][0]['planning']['selected']['horizon'] == 2
 
 
 @pytest.mark.parametrize('field,value', [('query_phase', 'started'), ('query_phase', 'awaiting_answer'), ('active_query_id', 'foreign')])
@@ -179,7 +193,7 @@ def test_shared_cursor_reader_matches_real_writer_at_every_event_including_compl
     target = tmp_path / 'runs' / 'event-prefixes'
     create_directory(context, target)
     process = read_json(root / 'progress.json')['process']
-    store = RunStore(context, target, target, events[0]['run_id'], events[0]['attempt_id'], process, 0)
+    store = RunStore(context, target, target, events[0]['run_id'], events[0]['attempt_id'], process, 0, schema_version=2, execution_cursor=events[0]['payload']['execution_cursor'])
     observed = []
     try:
         for event in events:

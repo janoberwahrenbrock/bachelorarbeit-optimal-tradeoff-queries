@@ -111,3 +111,38 @@ appears in `result.json.telemetry_errors`. `continue` disables the failed displa
 and continues the same solve; `abort` propagates an observer failure. Failure to
 publish the required diagnostic remains fatal under either policy. The display
 never handles required recorder errors.
+
+## Execution contracts and explicit continuation
+
+New native configuration, manifest, event, result, progress, partial snapshot,
+summary and series documents use version two where their execution contract
+changed. Problem, oracle, dataset, project, source inventory and profile formats
+retain their existing versions. The offline registry resolves each document
+kind and version explicitly; a missing v1 progress threshold means disabled.
+A current run requires explicit v2 configuration, rather than silently applying
+the SDK default to historical input.
+
+Each actual planning attempt has started/completed records. `planning_resolved`
+binds one or two attempts, horizon coverage, selected progress and maximal-gain
+witnesses, rejected short plans and the proposed next execution cursor. Only an
+accepted answer advances that cursor. Attempt events use the following existing
+dispatch, answer or terminal barrier; they add no required fsync per attempt.
+A failed full retry may leave a started attempt without a completed cycle;
+readers never invent completion from that tail.
+
+`insufficient_expected_progress` is a regular unresolved completion. Summary
+rows and CSV/JSON exports retain mode, depth, threshold, end reason, actual
+queries, confirmed planning attempts, fallback selections and terminal progress.
+Solution-time distributions exclude unresolved calls; costs of those calls stay
+visible separately and all planned rows remain in quality denominators.
+
+The first explicit continuation document format is version one and binds the
+`otqa-execution-v2` algorithm contract. Its immutable origin manifest and journal
+prefix are copied as raw bytes. A mapping from original artifact paths to copied
+FileRefs preserves the original hash chain when the new bundle is materialized;
+rewriting the origin manifest would invalidate its journal start hash. Only the
+new input references are rewritten. The importer rederives accepted answers and
+phase from the verified prefix and checks matching source/environment. Dispatch
+without an accepted answer is rejected. A confirmed answer before successor
+analysis remains exportable. An offline proof check does not recertify geometry
+or authenticate against replacement of the entire bundle and its hashes.

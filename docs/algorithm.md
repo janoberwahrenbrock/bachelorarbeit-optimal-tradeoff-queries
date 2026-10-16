@@ -29,7 +29,7 @@ Bei verbleibender Planungstiefe `1` entstehen Ratioqueries aus den berechneten I
 
 Das Grid reicht im aktiven Profil von `0.001` bis `100`. Quellzuordnung, Reihenfolge, Spiegelbereinigung und Filter bereits beantworteter Fragen gehören zur Methode. Die Ratioanalyse bleibt auch im Grid-only-Modus für die vorhandene Vorfilterung verfügbar, ohne dadurch zusätzliche Ratioqueries zu erzeugen.
 
-Weniger zulässige Fragen bedeuten eine andere Suche. Grid-only oder ein anderes `grid_size` können Laufzeit, gewählte Fragen und erreichbare Endzustände verändern. Ebenso ist eine größere Tiefe keine Garantie für weniger tatsächlich gestellte Fragen: optimiert wird ein endlicher Erwartungshorizont, der nach der nächsten tatsächlichen Antwort erneut geplant wird.
+Weniger zulässige Fragen bedeuten eine andere Suche. Grid-only oder ein anderes `grid_size` können Laufzeit, gewählte Fragen und erreichbare Endzustände verändern. Ebenso ist eine größere Tiefe keine Garantie für weniger tatsächlich gestellte Fragen: optimiert wird ein endlicher Erwartungshorizont. Nach jeder tatsächlichen Antwort wird erneut geplant; der Ausführungsmodus legt fest, mit welcher Resttiefe.
 
 ## Geometrische Antwortwahrscheinlichkeiten
 
@@ -46,7 +46,7 @@ Die tatsächliche Prüfung nach jeder akzeptierten Antwort lautet:
 1. Genau ein Kandidat: Ende mit `exact_single_candidate`.
 2. Bei `VolumeConfidenceStop(threshold)`: maximaler Kandidatenvolumenanteil mindestens `threshold` ergibt `volume_confidence`.
 3. Erreichtes Gesamtantwortbudget ergibt `max_questions`.
-4. Andernfalls wird eine nächste Query geplant; fehlt diese, folgt `no_query`.
+4. Andernfalls wird geplant. Fehlende Query ergibt `no_query`, kein ausreichend fortschrittlicher vollständiger Plan `insufficient_expected_progress`. Ein verkürzter Countdownversuch wird zuvor einmal mit voller Tiefe ersetzt.
 
 Konfidenzanteile werden nicht nachträglich über eine kleinere zurückgegebene Kandidatenmenge neu normalisiert. Ein exakter Gleichstand maximaler Anteile wird durch den ursprünglichen Zeilenindex entschieden. Konfidenz ist hier ein geometrischer Volumenanteil, kein statistisches Konfidenzintervall einer Stichprobe.
 
@@ -56,11 +56,52 @@ Konfidenzanteile werden nicht nachträglich über eine kleinere zurückgegebene 
 
 ## Feste Planung
 
-`query_strategy="fixed"` verwendet bei jedem tatsächlichen Schritt erneut `depth`.
+`query_strategy="fixed"` verwendet mit dem bisherigen Standard
+`horizon_execution="receding"` bei jedem tatsächlichen Schritt erneut `depth`.
 
 Ohne hypothetische Konfidenzabsorption wird die erwartete Kandidatenanzahl nach der festen Tiefe minimiert. Bei exakt gleichem besten Wert vergleicht der Planer flachere Erwartungswerte lexikographisch: erst `depth`, dann bei Bedarf `depth-1` und so weiter. Flachere Werte werden nur für die noch gebundenen besten Queries berechnet. Danach entscheidet die numerische Queryidentität `(goal_index_a, goal_index_b, value)`.
 
 Mit `stop_aware` und einer Volumenkonfidenzregel minimiert Fixed stattdessen den erwarteten terminalen Loss. Bei gleichem Loss entscheidet direkt die Queryidentität. Dieser Pfad fügt nicht den gewöhnlichen flacheren lexikographischen Vergleich hinzu. Die tatsächliche Kandidatenerwartung bleibt im Ergebnis sichtbar. Fixed mit `SingleCandidateStop()` verwendet weiterhin den gewöhnlichen Kandidatenpfad.
+
+### Countdown-Ausführung
+
+Mit `horizon_execution="countdown"` plant Fixed mit einer expliziten Resttiefe.
+Reguläre Folgen sind `2 → 1 → 2` oder `3 → 2 → 1 → 3`. Nach jeder Antwort
+wird derselbe mathematische Planer am eingeschränkten Gewichtsraum erneut mit
+der nächsten Resttiefe aufgerufen. Ein bereits berechneter Baum wird nicht als
+ausführbarer Plan zwischengespeichert.
+
+Findet eine verkürzte Planung keine Query oder keinen Plan über der
+Fortschrittsschwelle, wird derselbe Zustand genau einmal mit voller Tiefe
+bewertet. Erst eine akzeptierte Antwort auf diesen Ersatzplan setzt den nächsten
+Horizont auf `depth-1`. Ein Fehler wird nicht als fachlicher Fehlschlag behandelt.
+Ist die angefragte Tiefe bereits maximal, gibt es keinen doppelten Versuch.
+
+Eine Anfangshistorie beginnt einen neuen Block bei voller Tiefe. Eine gebundene
+Continuation erhält dagegen ihren geprüften Cursor. Der Verlauf kann deshalb
+nicht allgemein aus der Antwortzahl modulo Tiefe berechnet werden. Tatsächliche
+Singleton-/Konfidenz- und Budgetprüfungen bleiben nach jeder Antwort aktiv.
+Adaptive Planung unterstützt ausschließlich `receding`.
+
+Countdown verändert den tatsächlichen Verlauf und garantiert weder weniger
+Fragen noch kürzere Laufzeit. Historische experimentelle Vergleichsläufe wurden
+mit einer älteren Moduloausführung ohne volle Ersatzplanung gemessen und sind
+keine Messung dieses neuen Vertrags.
+
+## Zulässiger vollständiger Horizontgewinn
+
+Standardmäßig verlangt die Policy `min_expected_progress=0.001`. Ein vollständiger
+Plan ist zulässig, wenn `float(C) - terminal_value > threshold` gilt.
+`terminal_value` ist die Kandidatenerwartung beziehungsweise bei `stop_aware` der
+effektive Loss. Der strikte Vergleich verwendet die berechneten Binary64werte
+nach der Subtraktion. `None` deaktiviert die Prüfung; null als Zahlenwert verlangt
+strikt positiven Gewinn.
+
+Kein einzelner hypothetischer Ast und keine vorbereitende Query wird lokal an
+dieser Schranke gefiltert. Die adaptive Rate wird erst unter zulässigen
+vollständigen Plänen maximiert. Die Fortschrittsschranke ist eine fachliche
+Abbruchstrategie und verändert möglicherweise die Lösungsquote. Sie ist keine
+numerische Toleranz oder reine Implementierungsoptimierung.
 
 ## Adaptive erwartete Verringerung pro Query
 
@@ -88,7 +129,7 @@ Endet beispielsweise ein Pfad mit Wahrscheinlichkeit `0.05` nach einer Frage und
 
 Nach jeder positiven Rootantwort werden zulässige **vollständige H2-Kindpläne** aufgebaut. Gibt es eine vorgeschriebene Fortsetzung, darf das Kind weder freiwillig stoppen noch durch eine zusätzlich erfundene H1-Option ersetzt werden. Tatsächlich terminale oder nicht fortsetzbare Zustände haben dagegen ihre festgelegte Nullkostenoption.
 
-Die H2-Optionen können unterschiedliche erwartete Kosten haben. Deshalb reicht es nicht, pro Kind dessen beste lokale Rate auszuwählen. Der Planer bildet Loss-/Kostenfrontiers vollständiger Kindpläne, entfernt exakt dominierte Optionen und wählt die global beste geordnete Kombination. Erwartete Loss- und Kostenwerte werden mit den Rootantwortwahrscheinlichkeiten gewichtet. Diese Kombination erhält den vollständigen zulässigen Optionsraum; eine heuristische Queryshortlist gehört nicht zur Methode.
+Die H2-Optionen können unterschiedliche erwartete Kosten haben. Deshalb reicht es nicht, pro Kind dessen beste lokale Rate auszuwählen. Der Planer bildet Loss-/Kostenfrontiers vollständiger Kindpläne und entfernt nur zertifiziert dominierte Optionen mit geschützter deterministischer Identität. Exakte binäre Summen bereits gerundeter Produkte begründen das partielle Pruning; die finalen Scores verwenden weiterhin die festgelegte `fsum`-Arithmetik. Die finale Kombination berücksichtigt die globale Fortschrittsschranke vor der Rate. Erwartete Loss- und Kostenwerte werden mit den Rootantwortwahrscheinlichkeiten gewichtet. Diese Kombination erhält den vollständigen zulässigen Optionsraum; eine heuristische Queryshortlist gehört nicht zur Methode.
 
 Nach einer tatsächlichen Antwort wird erneut über alle erlaubten Root-Horizonte geplant. Ein ausgewählter H3-Plan ist somit eine Bewertung der aktuellen nächsten Frage und ihrer hypothetischen Fortsetzungen, keine Verpflichtung, anschließend drei Fragen ungeprüft abzuspulen.
 
@@ -108,6 +149,6 @@ Ein anderer Loss kann absichtlich eine andere Queryauswahl ergeben. Das ist eine
 
 ## Grenzen der Aussage
 
-`no_query` und `max_questions` sind reguläre ungelöste Ergebnisse. Numerische Fehler, widersprüchliche Antworten oder verletzte Invarianten sind Fehler mit Partialkontext. Es gibt keine Garantie, dass eine endliche zulässige Querymenge jedes Problem zu einem Singleton führt, dass größere Horizonte immer bessere tatsächliche Verläufe ergeben oder dass jede degenerierte Geometrie numerisch lösbar ist.
+`no_query`, `insufficient_expected_progress` und `max_questions` sind reguläre ungelöste Ergebnisse. Keiner dieser Gründe ist ein mathematischer Unlösbarkeitsbeweis. Numerische Fehler, widersprüchliche Antworten oder verletzte Invarianten sind Fehler mit Partialkontext. Es gibt keine Garantie, dass eine endliche zulässige Querymenge jedes Problem zu einem Singleton führt, dass größere Horizonte immer bessere tatsächliche Verläufe ergeben oder dass jede degenerierte Geometrie numerisch lösbar ist.
 
 Die Planung kann unabhängige Rootbewertungen parallel ausführen. Unterbäume bleiben seriell; Workeranzahl und Cachepolicy begrenzen die Ausführung und ändern keine erlaubte Querymenge, Tiefe oder Konfidenzschwelle. Der [API-Vertrag](python_api.md) beschreibt tatsächliche Antworten, Zähler und Fehler; [Konfiguration](configuration.md) trennt diese fachlichen Entscheidungen vom Laufzeitrahmen.

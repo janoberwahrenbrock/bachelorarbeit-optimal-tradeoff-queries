@@ -22,7 +22,7 @@ python3 -m venv .venv-runtime
 
 Die folgenden beiden Installationsblöcke sind Alternativen. Verwende genau den
 Block für deinen Host und eine neue Laufzeitumgebung. Der Wheelpfad bezeichnet
-die aktuelle Projektversion 0.1.0; bei einer anderen Version wähle ausdrücklich
+die aktuelle Projektversion 0.2.0; bei einer anderen Version wähle ausdrücklich
 das tatsächlich gebaute Wheel.
 
 **macOS mit Python 3.13:**
@@ -30,7 +30,7 @@ das tatsächlich gebaute Wheel.
 ```sh
 .venv-runtime/bin/python -m pip install \
   -r requirements/runtime-macos-py313.txt \
-  dist/bachelorarbeit_optimal_tradeoff_queries-0.1.0-py3-none-any.whl
+  dist/bachelorarbeit_optimal_tradeoff_queries-0.2.0-py3-none-any.whl
 .venv-runtime/bin/python tools/qualification/qualify.py --project-root "$PWD" \
   --output "$PWD/runs/quickstart-qualification" --scope standalone
 ```
@@ -40,7 +40,7 @@ das tatsächlich gebaute Wheel.
 ```sh
 .venv-runtime/bin/python -m pip install \
   -r requirements/runtime-linux-py314.txt \
-  dist/bachelorarbeit_optimal_tradeoff_queries-0.1.0-py3-none-any.whl
+  dist/bachelorarbeit_optimal_tradeoff_queries-0.2.0-py3-none-any.whl
 .venv-runtime/bin/python tools/qualification/qualify.py --project-root "$PWD" \
   --output "$PWD/runs/quickstart-qualification" --scope series_linux_recovery
 ```

@@ -80,3 +80,13 @@ archive contains whatever code/environment artifacts were actually stored in
 the source series; it does not claim to contain a complete installed wheel or
 all external dependencies. An outer ZIP/tar file and its external archive hash
 are separate operations.
+
+## Multiple document versions
+
+Reference validation dispatches by document kind and schema version. V2 execution
+documents and their continuations are not skipped merely because an old reader
+recognized only version one. Unchanged v1 input/source/profile records may share
+the same closure. Raw copied continuation origin documents remain byte-identical
+proof artifacts and are independently checked through their declared mapping.
+Sealing preserves historical modulo/countdown semantics and original v1 digests;
+it does not convert an old execution into the current algorithm contract.

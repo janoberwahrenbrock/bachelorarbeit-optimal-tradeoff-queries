@@ -345,9 +345,10 @@ def main():
     problem = {'schema_version': 1, 'problem_id': 'interactive-pty-two-alternatives',
                'objective_ids': ['goal0', 'goal1'], 'alternative_ids': ['alternative0', 'alternative1'],
                'alternatives': [[1., 0.], [0., 1.]]}
-    config = {'schema_version': 1, 'configuration_id': 'interactive-pty-fixed1-budget1',
+    config = {'schema_version': 2, 'configuration_id': 'interactive-pty-fixed1-budget1',
               'algorithm': {'query_strategy': 'fixed', 'depth': 1, 'higher_depth_query_source': 'both',
-                  'grid_size': 5, 'planning_evaluation': 'candidate_count', 'stopping': {'rule': 'single_candidate'}},
+                  'grid_size': 5, 'planning_evaluation': 'candidate_count', 'stopping': {'rule': 'single_candidate'},
+                  'horizon_execution': 'receding', 'min_expected_progress': 0.001},
               'budget': {'max_queries': 1}, 'execution': {'workers': 1, 'start_method': 'forkserver',
                   'native_threads': 1, 'case_timeout_seconds': 15, 'cache_policy_id': 'bounded_v1'},
               'recording': {'durability': 'per_answer', 'trace_level': 'standard', 'profile': False, 'telemetry_failure_policy': 'continue'}}

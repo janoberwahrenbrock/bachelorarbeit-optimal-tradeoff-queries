@@ -25,6 +25,13 @@ def error_wire(error: BaseException, stage="controller") -> dict:
     if partial is not None:
         context["memory_query_counts"] = asdict(partial.query_counts)
         context["memory_answer_count"] = len(partial.answers)
+        if getattr(partial, 'execution_cursor', None) is not None:
+            context['memory_execution_cursor'] = asdict(partial.execution_cursor)
+        pending = getattr(partial, 'pending_cycle', None)
+        if pending is not None:
+            context['memory_pending_planning'] = {'cursor_before': asdict(pending.cursor_before),
+                'completed_attempts': len(pending.attempts), 'active_attempt_index': pending.active_attempt_index,
+                'requested_depth': pending.requested_depth}
     if getattr(error, "cleanup_errors", None):
         context["cleanup_errors"] = list(error.cleanup_errors)
     return {"code": code, "type": type(error).__name__, "message": str(error) or type(error).__name__,

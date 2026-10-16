@@ -16,6 +16,7 @@ from otqa.runtime.profiles import production_resolver
 from otqa.runtime.project import bound_directory, verify_binding
 from otqa.runtime.source import loaded_source, same_source
 from otqa.runtime.storage import create_directory, publish_json
+from otqa.runtime.schema import latest_version
 from otqa.runtime.supervisor import RecoveryBlockedError, finalize_ended_attempt, supervise_attempt, verify_result
 from otqa.runtime.validation import journal_policy
 
@@ -39,6 +40,8 @@ def plan_suite(request, *, resolver=production_resolver):
     # Check configuration identity and every selected case before reserving output.
     for ref in suite["configurations"]:
         document = load_document("config", resolve_ref(root, {key: ref[key] for key in ("path", "sha256")}), reference_root=root)
+        if document["schema_version"] != latest_version("config"):
+            raise DocumentError("New series require explicitly converted current configurations")
         if document["configuration_id"] != ref["configuration_id"]:
             raise DocumentError("Suite configuration ID differs from referenced document")
     for case in dataset["cases"]:
@@ -60,12 +63,12 @@ def plan_suite(request, *, resolver=production_resolver):
     jobs = ordered_jobs(native_suite, native_dataset, output)
     frozen = {path.relative_to(output).as_posix(): digest(path.read_bytes()) for path in sorted(output.rglob("*")) if path.is_file()}
     series_id = str(uuid4())
-    plan = {"schema_version": 1, "series_id": series_id, "suite_id": suite["suite_id"], "created_at_utc": utc_now(),
+    plan = {"schema_version": latest_version("series_plan"), "series_id": series_id, "suite_id": suite["suite_id"], "created_at_utc": utc_now(),
         "source": source, "project_binding": context.binding(output), "execution_profile": receipt["entrypoints"]["execution_profile"],
         "suite": suite_ref, "dataset": native_suite["dataset"], "frozen_files": frozen, "jobs": jobs,
         "run_purpose": verified.run_purpose, "materialization_receipt": file_ref(output / "materialization_receipt.json", output)}
     publish_json(context, output / "plan.json", plan, kind="series_plan")
-    state = {"schema_version": 1, "series_id": series_id, "plan_sha256": file_ref(output / "plan.json", output)["sha256"], "revision": 1,
+    state = {"schema_version": latest_version("series_state"), "series_id": series_id, "plan_sha256": file_ref(output / "plan.json", output)["sha256"], "revision": 1,
         "updated_at_utc": utc_now(), "status": "planned", "controller": None, "active_job_id": None,
         "jobs": [{"job_id": job["job_id"], "status": "pending", "attempts": []} for job in jobs]}
     publish_json(context, output / "state.json", state, kind="series_state")
@@ -131,7 +134,7 @@ def _attempt_payload(root, plan, job, attempt, source):
         "reference_root": str(root), "attempt_dir": str(root / attempt["directory"]), "run_id": attempt["run_id"], "attempt_id": attempt["attempt_id"],
         "series_id": plan["series_id"], "job_id": job["job_id"], "problem_id": job["problem_id"], "configuration_id": job["configuration_id"], "source": source,
         "source_inventory": file_ref(root / "source" / "inventory.json", root), "run_purpose": plan["run_purpose"], "materialization_receipt": plan["materialization_receipt"],
-        "inputs": {"problem": job["problem"], "configuration": job["configuration"], "oracle": job["oracle"], "initial_answers": None, "replay_answers": None},
+        "inputs": {"problem": job["problem"], "configuration": job["configuration"], "oracle": job["oracle"], "initial_answers": None, "replay_answers": None, "continuation": None},
         "execution_profile": plan["execution_profile"], "answer_source": "simulated", "case_timeout_seconds": config["execution"]["case_timeout_seconds"], "native_threads": config["execution"]["native_threads"]}
 
 

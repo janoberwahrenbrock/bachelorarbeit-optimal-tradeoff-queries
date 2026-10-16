@@ -90,9 +90,11 @@ def capture_prefix(root: Path, attempt: dict, destination: Path, *, context) -> 
     verified = verify_cursor(data, cursor, **journal_policy(manifest, root, manifest_path))
     if verified["query_counts"] != cursor["query_counts"] or verified["run_id"] != attempt["run_id"]:
         raise DocumentError("Live cursor counts do not match its exact journal prefix")
-    snapshot = {"schema_version": 1, "snapshot_id": str(uuid4()), "created_at_utc": utc_now(), "run_id": cursor["run_id"], "attempt_id": cursor["attempt_id"],
+    snapshot = {"schema_version": cursor["schema_version"], "snapshot_id": str(uuid4()), "created_at_utc": utc_now(), "run_id": cursor["run_id"], "attempt_id": cursor["attempt_id"],
         "manifest": file_ref(manifest_path, root), "journal_path": (directory / "events.jsonl").relative_to(root).as_posix(),
         **{key: cursor[key] for key in ("valid_prefix_bytes", "valid_prefix_sha256", "last_good_sequence", "query_counts", "query_phase", "active_query_id", "partial_api_elapsed_seconds")}}
+    if cursor['schema_version'] == 2:
+        snapshot['execution_cursor'] = cursor['execution_cursor']
     publish_json(context, destination, snapshot, kind="partial_snapshot")
     return file_ref(destination, root)
 

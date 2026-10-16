@@ -6,16 +6,55 @@ Die Python-API verwendet unveränderliche Konfigurationsobjekte. Native JSON-Dat
 
 ## Fachliche Policy
 
-`AlgorithmPolicy` hat sechs erforderliche Argumente und keine impliziten fachlichen Defaults:
+`AlgorithmPolicy` hat sechs erforderliche Argumente. `horizon_execution` ist optional mit Default `"receding"`; das ausschließlich per Schlüsselwort übergebbare `min_expected_progress` hat den Default `0.001`.
 
 | Parameter | Zulässige Werte | Bedeutung |
 | --- | --- | --- |
 | `query_strategy` | `"fixed"`, `"reduction_per_query"` | Feste Planungstiefe oder adaptive erwartete Verringerung pro Query. |
-| `depth` | Ganzzahl `1`, `2`, `3` | Bei `fixed` die verwendete Tiefe; adaptiv werden alle Horizonte von `1` bis `depth` ausgewertet. |
+| `depth` | Ganzzahl `1`, `2`, `3` | Bei `fixed` die Tiefe der Neuplanung beziehungsweise die Blocklänge beim Countdown; adaptiv werden alle Horizonte von `1` bis `depth` ausgewertet. |
 | `higher_depth_query_source` | `"grid"`, `"both"` | Oberhalb der letzten Planungsebene nur Grid oder Grid plus Ratioqueries. |
 | `grid_size` | Ganzzahl mindestens `1` | Anzahl logarithmischer Gridwerte; bestimmt keine Obergrenze der insgesamt gestellten Fragen. |
 | `planning_evaluation` | `"candidate_count"`, `"stop_aware"` | Kandidatenbewertung oder Bewertung mit der aktiven Stopregel; die festgelegten Singleton-Rechenpfade bleiben erhalten. |
 | `stopping` | `SingleCandidateStop()` oder `VolumeConfidenceStop(threshold)` | Tatsächliches Ende bei einem Kandidaten beziehungsweise zusätzlich bei ausreichendem Volumenanteil. |
+| `min_expected_progress` | Endliche reelle Zahl `>=0` oder `None`; Default `0.001` | Absoluter Mindestgewinn über den vollständigen Planungshorizont; strikter Vergleich. |
+| `horizon_execution` | `"receding"` (Default), `"countdown"` | `receding` verwendet nach jeder tatsächlichen Antwort wieder die konfigurierte Tiefe. `countdown` ist ausschließlich für `query_strategy="fixed"` zulässig und zählt die Resttiefe innerhalb eines Blocks herunter. |
+
+Bei fester Tiefe zwei verwendet Countdown regulär `2 → 1 → 2`, bei Tiefe drei
+`3 → 2 → 1 → 3`. Ein unveränderlicher `ExecutionCursor` hält die nächste
+Resttiefe und die Anzahl akzeptierter Antworten. Eine gültige Antwort auf Horizont
+`h>1` setzt die Resttiefe auf `h-1`, auf Horizont eins wieder auf `depth`.
+Planungsaufrufe und Dispatches allein verändern die Phase nicht.
+
+Findet ein verkürzter Versuch keine Query oder keinen ausreichenden vollständigen
+Plan, folgt im selben tatsächlichen Zustand genau ein Ersatzversuch mit voller
+Tiefe. Erst dessen gültig beantwortete Query beginnt einen neuen Block. Fehlschlag
+bei voller Tiefe beendet den Lauf regulär mit dem jeweiligen Grund; es gibt keinen
+identischen zweiten Versuch. Tatsächliches Ziel und Budget haben vor jeder Planung
+Vorrang. Numerik-, Provider- und Recorderfehler sind keine Fallbackauslöser.
+
+Eine Anfangshistorie ist ein Warmstart und beginnt bei voller Tiefe. Nur eine
+explizite gebundene Continuation erhält eine vorherige Restphase. Countdown ist
+ausschließlich für `fixed` zulässig; adaptive Planung verwendet `receding`.
+
+### Mindestfortschritt
+
+| `min_expected_progress` | Bedeutung |
+| --- | --- |
+| Nicht angegeben im SDK | `0.001` |
+| Endliche reelle Zahl `>=0` | Vollständiger Horizontgewinn muss strikt größer sein. |
+| `None` im SDK / `null` in JSON | Fortschrittsprüfung ausdrücklich deaktiviert. |
+| `0.0` | Strikt positiven berechneten Gewinn verlangen. |
+
+Negative Werte, Bool, Strings, NaN und Unendlich sind ungültig. Der Gewinn ist
+`float(C) - expected_terminal_candidates`, bei abbruchbewusster Bewertung
+`float(C) - expected_terminal_loss`. Subtraktion erfolgt vor dem strikten
+Vergleich. Genau gleich der Schwelle genügt nicht; es gibt kein `isclose`.
+Die Schwelle ist absolut im verwendeten Lossmaß, kein Prozentwert und keine
+Rate pro Frage. Sie gilt für den gesamten Plan, nicht separat pro Ast oder
+vorbereitendem Schritt. Adaptive Auswahl filtert vollständige Pläne vor der
+Ratenwahl; ein verworfener Ratensieger darf einen anderen zulässigen Plan nicht
+verbergen. Fehlender ausreichender Fortschritt ergibt
+`insufficient_expected_progress`, `solved=False`.
 
 `threshold` ist eine endliche Zahl mit `0 < threshold <= 1`. Ein Wert von `.95` bedeutet einen Anteil von mindestens 95 Prozent, nicht die Zahl `95`. Die Grenze ist einschließlich. Auch bei `VolumeConfidenceStop(1.0)` bleibt die Stopregel semantisch eine Volumenregel; `SingleCandidateStop()` bezeichnet ausdrücklich genau einen verbleibenden Kandidaten.
 
@@ -58,11 +97,15 @@ execution = SolverExecution(workers=1)
 
 ## Native Dateikonfiguration
 
-Ein `ConfigDoc` benötigt `schema_version`, `configuration_id` und alle vier Bereiche `algorithm`, `budget`, `execution`, `recording`. Sämtliche unten gezeigten Felder sind erforderlich. Es gibt beim Einlesen keine automatische Ergänzung fehlender Werte; unbekannte Felder werden abgelehnt.
+Neue native Ausführungen verlangen eine Konfiguration der Version zwei. Alle
+gezeigten Felder, einschließlich `horizon_execution` und
+`min_expected_progress`, sind ausdrücklich gespeichert. Historische v1-Dateien
+bleiben lesbar, starten aber keinen neuen Lauf ohne ausdrückliche Konvertierung.
+Unbekannte Felder werden abgelehnt.
 
 ```json
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "configuration_id": "adaptive-h3-confidence99",
   "algorithm": {
     "query_strategy": "reduction_per_query",
@@ -70,7 +113,9 @@ Ein `ConfigDoc` benötigt `schema_version`, `configuration_id` und alle vier Ber
     "higher_depth_query_source": "both",
     "grid_size": 5,
     "planning_evaluation": "stop_aware",
-    "stopping": {"rule": "volume_confidence", "threshold": 0.99}
+    "stopping": {"rule": "volume_confidence", "threshold": 0.99},
+    "horizon_execution": "receding",
+    "min_expected_progress": 0.001
   },
   "budget": {"max_queries": null},
   "execution": {
@@ -90,6 +135,12 @@ Ein `ConfigDoc` benötigt `schema_version`, `configuration_id` und alle vier Ber
 ```
 
 Für Singletonstopp lautet das komplette Stopobjekt `{"rule": "single_candidate"}`; es enthält dann kein `threshold`.
+
+Für eine feste Countdown-Konfiguration ergänze im `algorithm`-Objekt ausdrücklich
+`"horizon_execution": "countdown"`. Eine vollständige Vorlage liegt unter
+[`examples/configurations/fixed2-countdown-singleton.json`](../examples/configurations/fixed2-countdown-singleton.json).
+Der bestehende Fixed-Modus und sämtliche adaptiven Beispiele verwenden weiterhin
+`receding`. Adaptiv plus `countdown` wird als ungültige Konfiguration abgelehnt.
 
 ### Zusätzliche Ausführungsfelder der Dateilaufzeit
 
@@ -115,3 +166,17 @@ Die Dateilaufzeit prüft Quelle, numerisches Profil, Bibliotheken, Backendfähig
 Bei `continue` wird ein optionaler Anzeigefehler dokumentiert und die Anzeige abgeschaltet. Kann die erforderliche Fehlerdokumentation selbst nicht veröffentlicht werden, propagiert der Fehler. Recorder- und Persistenzfehler werden unabhängig von dieser Option nicht verschluckt.
 
 Im direkten SDK-Aufruf gibt es kein `recording`-Argument. Dort werden `recorder` und `observer` ausdrücklich übergeben; ohne diese schreibt der mathematische Solver keine Laufdateien. Persistente Läufe beschreibt der [Benchmarkworkflow](benchmarks.md), die Callbackverträge die [Python-API](python_api.md).
+
+## Historische Konfiguration ausdrücklich konvertieren
+
+```sh
+otqa --project-root "$PWD" config convert \
+  --input inputs/old-config.json --output inputs/new-config.json
+```
+
+Ohne ausdrückliche Schwellenwahl bleibt die historische Deaktivierung als
+`null` erhalten. `--min-expected-progress 0.001` wählt den neuen Default bewusst.
+Alte experimentelle Countdownkonfigurationen verlangen zusätzlich
+`--accept-countdown-block-semantics`, da die neuen Warmstart- und Neustartregeln
+eine andere Ausführungssemantik haben. Die Konvertierung schreibt eine neue
+Datei und überschreibt weder Eingaben noch alte Resultate.

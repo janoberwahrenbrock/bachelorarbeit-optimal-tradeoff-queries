@@ -1,7 +1,7 @@
 """Explicit algorithm policy, actual answer budget, and execution ownership."""
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from multiprocessing.context import BaseContext
 from typing import Literal
 
@@ -33,10 +33,16 @@ class AlgorithmPolicy:
     grid_size: int
     planning_evaluation: Literal['candidate_count', 'stop_aware']
     stopping: SingleCandidateStop | VolumeConfidenceStop
+    horizon_execution: Literal['receding', 'countdown'] = 'receding'
+    min_expected_progress: float | None = field(default=0.001, kw_only=True)
 
     def __post_init__(self) -> None:
         if self.query_strategy not in ('fixed', 'reduction_per_query'):
             raise InputValidationError('unknown query strategy')
+        if self.horizon_execution not in ('receding', 'countdown'):
+            raise InputValidationError('unknown horizon execution')
+        if self.horizon_execution == 'countdown' and self.query_strategy != 'fixed':
+            raise InputValidationError('countdown requires the fixed query strategy')
         depth = integer(self.depth, name='depth', minimum=1)
         grid_size = integer(self.grid_size, name='grid_size', minimum=1)
         if depth > 3:
@@ -49,6 +55,11 @@ class AlgorithmPolicy:
             raise InputValidationError('stopping must be an explicit stop variant')
         object.__setattr__(self, 'depth', depth)
         object.__setattr__(self, 'grid_size', grid_size)
+        if self.min_expected_progress is not None:
+            minimum = finite_float(self.min_expected_progress, name='min_expected_progress')
+            if minimum < 0.0:
+                raise InputValidationError('min_expected_progress must be nonnegative or None')
+            object.__setattr__(self, 'min_expected_progress', minimum)
 
 
 @dataclass(frozen=True, slots=True)

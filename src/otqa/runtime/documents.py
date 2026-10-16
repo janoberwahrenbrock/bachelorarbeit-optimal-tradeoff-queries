@@ -9,7 +9,7 @@ from uuid import uuid4
 
 from .codec import DocumentError, canonical_digest, decode, digest, encode, float_projection, utc_now
 from .project import ProjectContext, portable_path
-from .schema import validate
+from .schema import latest_version, validate
 from .storage import publish_bytes, publish_json
 
 
@@ -122,7 +122,10 @@ def typed_projection(kind: str, document: dict) -> dict:
         for answer in value["answers"]:
             answer["value"] = float(answer["value"])
     elif kind == "config":
-        stopping = value["algorithm"]["stopping"]
+        algorithm = value["algorithm"]
+        if "min_expected_progress" in algorithm and algorithm["min_expected_progress"] is not None:
+            algorithm["min_expected_progress"] = float(algorithm["min_expected_progress"])
+        stopping = algorithm["stopping"]
         if stopping["rule"] == "volume_confidence":
             stopping["threshold"] = float(stopping["threshold"])
     return value
@@ -167,6 +170,13 @@ def references(kind: str, document: dict):
         yield "/dataset", "dataset", document["dataset"]
         for index, config in enumerate(document["configurations"]):
             yield f"/configurations/{index}", "config", {key: config[key] for key in ("path", "sha256")}
+    elif kind == "continuation":
+        yield "/problem", "problem", document["problem"]
+        yield "/configuration", "config", document["configuration"]
+        for name in ("manifest", "journal_prefix"):
+            yield f"/origin_proof/{name}", "raw_report", document["origin_proof"][name]
+        for index, item in enumerate(document["origin_proof"]["artifacts"]):
+            yield f"/origin_proof/artifacts/{index}/artifact", "raw_report", item["artifact"]
     elif kind == "execution_profile":
         yield "/environment_lock", "environment_lock", document["environment_lock"]
         if document["certification"]["evidence"] is not None:
@@ -246,7 +256,26 @@ def materialize_inputs(source_root: Path, entries: dict[str, tuple[str, Path]], 
         receipts.append({"document_kind": "blob" if node["kind"] in ("environment_lock", "raw_report") else node["kind"], "source_relative_path": relative,
             "original": file_ref(original, target_root), "materialized": native_ref,
             "transformation": "reference_rewrite" if node["edges"] else "byte_copy", "semantic_sha256": semantic_hash, "reference_map": mapping})
-    receipt = {"schema_version": 1, "materialization_id": str(uuid4()), "created_at_utc": utc_now(),
+    receipt = {"schema_version": latest_version("materialization_receipt"), "materialization_id": str(uuid4()), "created_at_utc": utc_now(),
         "entrypoints": {key: mapped[_entry(path, root).relative_to(root).as_posix()] for key, (_, path) in entries.items()}, "entries": receipts}
     publish_json(context, target_root / "materialization_receipt.json", receipt, kind="materialization_receipt")
     return receipt
+
+
+_UNSPECIFIED = object()
+
+def convert_config_document(document, *, min_expected_progress=_UNSPECIFIED, countdown_semantics_confirmed=False):
+    """Explicit conversion produces new bytes; no historical input is changed."""
+    validate('config', document)
+    result = copy.deepcopy(document)
+    algorithm = result['algorithm']
+    if document['schema_version'] == 1:
+        if algorithm.get('horizon_execution', 'receding') == 'countdown' and not countdown_semantics_confirmed:
+            raise DocumentError('Old countdown configuration requires explicit acceptance of the new block semantics')
+        algorithm.setdefault('horizon_execution', 'receding')
+        algorithm['min_expected_progress'] = None
+        result['schema_version'] = 2
+    if min_expected_progress is not _UNSPECIFIED:
+        algorithm['min_expected_progress'] = min_expected_progress
+    validate('config', result)
+    return typed_projection('config', result)

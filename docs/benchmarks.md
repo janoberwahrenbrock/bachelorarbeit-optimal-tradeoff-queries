@@ -64,6 +64,30 @@ depth, changed threshold or excluded hard case is a different method, not a code
 performance optimization. Profiled runs are diagnostics and are not pooled with
 unprofiled runtime measurements.
 
+### Strategy, countdown and progress comparisons
+
+`horizon_execution` distinguishes full receding replanning from regular fixed
+countdown. Countdown normally repeats `2, 1` or `3, 2, 1`; a rejected shortened
+attempt receives exactly one full-depth replacement before a planning stop.
+Adaptive configurations use receding execution only. No mode executes a retained
+decision tree without checking the actual state after each answer.
+
+For a paired comparison, use distinct configuration IDs and identical stored
+problem/oracle files. Hold `min_expected_progress` equal, along with worker count,
+native threads and all other nonstudied parameters. Countdown and receding are
+different methods, not timing repetitions. Compare queries, end reason and
+correctness together with runtime; a quick unresolved stop is not an improvement
+in solution time. The default progress threshold is `0.001`; use explicit `null`
+for a compatibility comparison with disabled progress admission.
+
+The historical 50-case Grid3/5 experiment and fresh25-case Grid3/5/9 experiment
+used the previous experimental modulo countdown without the new full retry.
+Their completed results are in the original study folders. They do not measure
+this new execution contract. The current100-case, twelve-condition study is
+specified in [the strategy/grid benchmark plan](benchmark-plan-strategy-grid-comparison.md).
+New configuration and execution contracts require source-specific qualification;
+historical evidence cannot be relabeled as a current-source result.
+
 ## Progress, interruptions and analysis
 
 ```sh
@@ -75,13 +99,13 @@ otqa benchmark export --series runs/pilot --format csv --output runs/pilot/expor
 
 Live progress counts only the verified durable cursor. A partially evaluated query
 is not a completed problem. Resume skips completed outcomes, including regular
-no-query results, and terminal failures. It creates a fresh attempt for an
+no-query and insufficient-progress results, and terminal failures. It creates a fresh attempt for an
 interrupted job only after group ownership and end are proven. Unknown starts
 block rather than start a duplicate solver. All old attempts remain visible.
 
 Reports separate the number of unique problems from repetitions and jobs. They
 retain unsuccessful, incorrect, failed, pending and interrupted outcomes. A fast
-regular no-query return contributes to completed-call time, not solution time.
+regular no-query or insufficient-progress return contributes to completed-call time, not solution time.
 Incorrect confidence selections contribute to solution time and their separate
 incorrect count, not correct-solution time. All measured controller attempt costs
 remain available, including failed attempts; unknown times are counted explicitly.

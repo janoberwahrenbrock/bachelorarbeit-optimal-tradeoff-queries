@@ -84,10 +84,12 @@ class RunStore:
     the writer, retaining the last returned cursor as its only confirmed state.
     """
     def __init__(self, context: ProjectContext, attempt_dir: Path, reference_root: Path,
-                 run_id: str, attempt_id: str, process: dict, initial_answers: int):
+                 run_id: str, attempt_id: str, process: dict, initial_answers: int, *, schema_version=1, execution_cursor=None):
         self.context, self.attempt_dir, self.reference_root = context, attempt_dir, reference_root
         self.run_id, self.attempt_id, self.process = run_id, attempt_id, process
         self.initial_answers = initial_answers
+        self.schema_version = schema_version
+        self.execution_cursor = execution_cursor
         self.counts = empty_counts()
         self.sequence = 0
         self.phase = "started"
@@ -123,11 +125,17 @@ class RunStore:
             self._bytes += len(data)
             self.sequence += 1
             kind = event["event_type"]
+            if event['schema_version'] != self.schema_version:
+                raise PersistenceError('Writer event version differs from its run contract')
+            if self.schema_version == 2 and kind in ('run_started', 'answer_received'):
+                self.execution_cursor = event['payload']['execution_cursor']
             if kind == "run_started":
                 self.counts = empty_counts(self.initial_answers)
                 self.phase = "started"
             elif kind == "state_analyzed":
                 self.phase = "analyzing"
+            elif kind in ("planning_attempt_started", "planning_attempt_completed", "planning_resolved"):
+                self.phase = "planning"
             elif kind == "query_planned":
                 self.active_query_id = event["query_id"]
                 self.phase = "planning"
@@ -151,11 +159,13 @@ class RunStore:
 
     def commit(self, partial_api_elapsed_seconds: float | None = None) -> dict:
         self._assert_writer()
-        cursor = {"schema_version": 1, "run_id": self.run_id, "attempt_id": self.attempt_id,
+        cursor = {"schema_version": self.schema_version, "run_id": self.run_id, "attempt_id": self.attempt_id,
             "updated_at_utc": utc_now(), "last_good_sequence": self.sequence,
             "valid_prefix_bytes": self._bytes, "valid_prefix_sha256": self._hash.hexdigest(),
             "query_counts": dict(self.counts), "partial_api_elapsed_seconds": partial_api_elapsed_seconds,
             "query_phase": self.phase, "active_query_id": self.active_query_id, "process": self.process}
+        if self.schema_version == 2:
+            cursor['execution_cursor'] = self.execution_cursor
         try:
             os.fsync(self._fd)
             publish_json(self.context, self.attempt_dir / "progress.json", cursor,

@@ -28,6 +28,7 @@ flowchart TD
 | Modul | Verantwortung |
 |---|---|
 | `models`, `config`, `errors` | Fachliche Werte, getrennte Policy-/Budget-/Ausführungsparameter, Resultate, Ereignisse und Fehlerkontext |
+| `execution`, `continuation`, `models.execution` | Reine Phasenübergänge, gebundene SDK-Fortsetzung und unveränderliche Cursor-/Versuchsevidenz |
 | `api`, `solver`, `answers` | Öffentlicher Einstieg, genau eine tatsächliche Solverschleife und externe Antwortprovider |
 | `planning` | Feste/adaptive Bewertung, lexikographische Auswahl, vollständige H3-Frontiers und Rootworker |
 | `state`, `queries` | Gebundene Zustandsanalyse und geordnete Querymengen aus Ratiointervallen und Grid |
@@ -110,3 +111,43 @@ Die numerischen Verfahren und ihre Grenzen erklärt
 [Numerik](numerical_behavior.md). Betriebsqualifizierung, mathematische
 Vergleichsprüfung und Laufzeitabnahme sind getrennte Nachweise; die
 [Laufzeitdokumentation](performance.md) beschreibt ihre Aussagegrenzen.
+
+## Planung, Fortschritt und Ausführungsphase
+
+`PlannerSession.plan(state, requested_depth=...)` beantwortet eine mathematische
+Anfrage. Die Session bindet die unveränderliche Policy und speichert Ergebnisse
+nach geordneter Historie und angefragtem Horizont. Ihr Cache enthält weder Cursor
+noch Countdownneustartgründe. Fortschrittsprüfung und maximale Gewinnzeugen
+entstehen während derselben vollständigen Bewertung ohne zusätzliche Geometrie.
+
+Die Solverschleife hält den expliziten Cursor. Reine Funktionen in `execution`
+bestimmen die angefragte Tiefe, die Berechtigung eines einmaligen vollen
+Ersatzversuchs und die nächste Phase nach einer akzeptierten Antwort. Ein
+`PlanningCycle` bindet die tatsächlichen Versuche und ihre Auswahl an den Cursor.
+Numerik- oder Aufzeichnungsfehler können keinen fachlichen Ersatzversuch auslösen.
+
+`SolveContinuation` bindet eine geordnete Historie und Phase an Problem und Policy.
+Ein Warmstart beginnt dagegen bei voller Tiefe. Die native Fortsetzung ergänzt
+den mathematischen Wert um einen unveränderlichen geprüften Herkunftspräfix und
+passende Quellen-/Umgebungsbindung. Die native Serienwiederaufnahme beginnt
+weiterhin einen neuen Versuch aus Originaleingaben.
+
+## Versionierte Dokumentgrenzen
+
+Die Registry adressiert `(Dokumenttyp, Version)`. Neue Konfigurationen und
+Laufdokumente verwenden v2; unveränderte Problem-, Dataset-, Oracle- und
+Umgebungsformate bleiben v1. Historische v1-Reader behalten ursprüngliche Digests,
+fehlende deaktivierte Fortschrittsschwellen und die frühere Moduloausführung.
+Ein ausdrücklicher Konverter schreibt neue Konfigurationen. Es gibt keinen
+historischen zweiten Solver im Rechenkern.
+
+Die neue mathematische Eingabeidentität bindet zusätzlich Startart, semantischen
+Ausführungsvertrag und initialen Cursor. Ein abweichender nächster Horizont kann
+damit nicht dieselbe Startidentität erhalten. Die Aufzeichnung bestätigt den
+Cursor zusammen mit der Antwort; der algorithmische In-Memory-Cursor allein
+behauptet keine Dauerhaftigkeit. Audit und Seal prüfen auch gemischte v1/v2-
+Referenzketten.
+
+Der [Implementierungsplan](implementation-plan-countdown-progress.md) enthält die
+Abnahmematrix; der [Implementierungsstatus](implementation-status.md) hält die
+an die konkrete Quelle gebundenen tatsächlich bestandenen Nachweise fest.

@@ -84,13 +84,14 @@ def test_child_pruning_capture_reports_actual_ties_and_existing_witnesses(monkey
     decisions = [value for _, value in events]
     assert [item[3] for item in decisions] == [a, b, same, nearer, worse]
     assert [item[4:6] for item in decisions] == [
-        (True, "strict_loss_improvement"), (True, "strict_loss_improvement"),
-        (False, "dominated_or_equal_loss"), (True, "strict_loss_improvement"),
-        (False, "dominated_or_equal_loss"),
+        (True, "certified_nondominated"), (True, "certified_nondominated"),
+        (False, "certified_dominance"), (True, "certified_nondominated"),
+        (False, "certified_dominance"),
     ]
     assert all(item[:3] == ("pruning_decision", "child_options", None) for item in decisions)
     assert decisions[2][3] is same and decisions[2][6] is b
-    assert decisions[4][3] is worse and decisions[4][6] is nearer
+    # The nearer loss cannot witness identity four: its identity is five.
+    assert decisions[4][3] is worse and decisions[4][6] is b
     assert all(item[6] is None for item in decisions if item[4])
 
 
@@ -124,13 +125,11 @@ def test_weighted_pruning_capture_adds_no_identity_or_sum_calculations(monkeypat
     assert actual == expected
     assert (tuple(identities), tuple(summands)) == ordinary_calls
     decisions = [value for kind, value in events
-                 if kind == "frontier_projection" and value[0] == "pruning_decision"]
+                 if kind == "frontier_projection" and value[:2] == ("pruning_decision", "weighted_combinations")]
     assert all(item[:2] == ("pruning_decision", "weighted_combinations") for item in decisions)
-    assert [item[2] for item in decisions] == [0, 0, 0, 0, 1, 1]
-    assert [item[3] for item in decisions[:4]] == [(a,), (b,), (same,), (worse,)]
-    assert decisions[2][4:6] == (False, "dominated_or_equal_loss")
-    assert decisions[3][4:6] == (False, "dominated_or_equal_loss")
-    assert decisions[2][3][0] is same and decisions[2][6][0] is b
-    assert decisions[3][3][0] is worse and decisions[3][6][0] is b
+    # Child projection already removes the two certified dominated options;
+    # the final branch is scored directly rather than projected once more.
+    assert [item[2] for item in decisions] == [0, 0]
+    assert [item[3] for item in decisions] == [(a,), (b,)]
     assert all(item[6] is None for item in decisions if item[4])
     assert any(kind == "combination_choice" for kind, _ in events)

@@ -4,7 +4,7 @@ from __future__ import annotations
 import time
 
 from .codec import mathematical_hex, utc_now
-from .serialization import planning_wire, query_wire, record_wire, state_wire
+from .serialization import attempt_wire, cursor_wire, cycle_wire, planning_wire, query_wire, record_wire, state_wire
 
 
 class WireRecorder:
@@ -20,7 +20,9 @@ class WireRecorder:
 
     def event(self, kind, payload, query_id=None, *, commit=False):
         start = time.perf_counter()
-        event = {"schema_version": 1, "run_id": self.store.run_id, "attempt_id": self.store.attempt_id,
+        if self.store.schema_version == 2 and kind in ('run_started', 'run_finished'):
+            payload = {**payload, 'execution_cursor': self.store.execution_cursor}
+        event = {"schema_version": self.store.schema_version, "run_id": self.store.run_id, "attempt_id": self.store.attempt_id,
             "sequence": self.store.sequence + 1, "occurred_at_utc": utc_now(), "monotonic_ns": time.monotonic_ns(),
             "event_type": kind, "query_id": query_id, "payload": payload, "numeric_hex": mathematical_hex(payload, "/payload")}
         self.store.append(event)
@@ -31,10 +33,22 @@ class WireRecorder:
 
     def __call__(self, event):
         # Imports are deliberately here, after the CaseProcess release barrier.
-        from otqa.models.results import AnswerReceived, QueryCompleted, QueryDispatched, QueryPlanned, SolveFinished, StateAnalyzed
+        from otqa.models.results import (AnswerReceived, PlanningAttemptStarted, PlanningAttemptCompleted, PlanningResolved,
+            QueryCompleted, QueryDispatched, QueryPlanned, SolveFinished, StateAnalyzed)
         if isinstance(event, StateAnalyzed):
-            payload = state_wire(event.state, self.alternative_ids, self.last_answer_query_id)
+            payload = state_wire(event.state, self.alternative_ids, self.last_answer_query_id, event.execution_cursor if self.store.schema_version == 2 else None)
             self.event("state_analyzed", payload, self.last_answer_query_id)
+        elif isinstance(event, PlanningAttemptStarted):
+            self.event('planning_attempt_started', {'state_before_index': event.state.answered_total,
+                'execution_cursor': cursor_wire(event.cursor), 'attempt_index': event.attempt_index,
+                'requested_depth': event.requested_depth})
+        elif isinstance(event, PlanningAttemptCompleted):
+            self.event('planning_attempt_completed', {'state_before_index': event.state.answered_total,
+                'execution_cursor': cursor_wire(event.cursor), 'attempt_index': event.attempt_index,
+                'attempt': attempt_wire(event.attempt, stop_aware=self.stop_aware, trace_level=self.trace_level)})
+        elif isinstance(event, PlanningResolved):
+            self.event('planning_resolved', {'state_before_index': event.state.answered_total,
+                'cycle': cycle_wire(event.cycle, stop_aware=self.stop_aware, trace_level=self.trace_level)})
         elif isinstance(event, QueryPlanned):
             self.active_query_id = f"q{self.next_query:06d}"
             self.event("query_planned", {"state_before_index": event.state.answered_total,
@@ -43,7 +57,8 @@ class WireRecorder:
             self.event("query_dispatched", {"query": query_wire(event.query), "dispatched_new": event.query_counts.dispatched_new}, self.active_query_id, commit=True)
         elif isinstance(event, AnswerReceived):
             self.event("answer_received", {"query": query_wire(event.answered_query.query), "answer": event.answered_query.answer,
-                "answered_new": event.query_counts.answered_new, "answered_total": event.query_counts.answered_total}, self.active_query_id, commit=True)
+                "answered_new": event.query_counts.answered_new, "answered_total": event.query_counts.answered_total,
+                **({"execution_cursor": cursor_wire(event.execution_cursor)} if self.store.schema_version == 2 else {})}, self.active_query_id, commit=True)
             self.last_answer_query_id = self.active_query_id
         elif isinstance(event, QueryCompleted):
             self.event("query_completed", record_wire(event.record, self.active_query_id, stop_aware=self.stop_aware, trace_level=self.trace_level), self.active_query_id)

@@ -31,7 +31,9 @@ def test_depth_is_a_strict_bounded_integer(value):
 
 def test_all_native_schemas_have_offline_validators():
     assert len(definitions()[1]) == 27
-    assert len(registry_and_validators()) == 27
+    from otqa.runtime.schema import all_validators
+    assert len(registry_and_validators()) == len(definitions()[1]) + 1  # native continuation v1
+    assert ('config', 1) in all_validators() and ('config', 2) in all_validators()
 
 
 def project(tmp_path):

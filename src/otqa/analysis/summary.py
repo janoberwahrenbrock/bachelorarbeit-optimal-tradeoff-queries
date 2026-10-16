@@ -45,6 +45,7 @@ def build_summary(root: Path, audit: dict, audit_ref: dict) -> dict:
             raise DocumentError("Immutable partial snapshot counts differ")
         prefixes[(snapshot["run_id"], snapshot["attempt_id"])] = snapshot
     rows, group_members, attempt_results = [], defaultdict(list), {}
+    current_contract = False
     for job in plan["jobs"]:
         job_state = state_jobs[job["job_id"]]
         problem = load_document("problem", resolve_ref(root, job["problem"]), reference_root=root)
@@ -56,6 +57,7 @@ def build_summary(root: Path, audit: dict, audit_ref: dict) -> dict:
                 result_refs.append(attempt["result"])
                 results.append((attempt, document))
         terminal = results[-1] if results and job_state["status"] in ("completed", "failed", "interrupted") else None
+        snapshot = None
         accepted = terminal[1] if terminal else None
         solver = accepted["solver_result"] if accepted else None
         counts = accepted["query_counts"] if accepted else None
@@ -70,6 +72,35 @@ def build_summary(root: Path, audit: dict, audit_ref: dict) -> dict:
             "selected_candidate_id": solver["selected_candidate_id"] if solver else None, "quality_status": accepted["quality"]["status"] if accepted else "unknown",
             "query_counts": counts, "api_call_wall_seconds": accepted["timings"]["api_call_wall_seconds"] if accepted and accepted["timings"]["complete_api_measurement"] else None,
             "attempt_results": result_refs}
+        configuration = load_document('config', resolve_ref(root, job['configuration']), reference_root=root)
+        if configuration['schema_version'] == 2:
+            current_contract = True
+            algorithm = configuration['algorithm']
+            row.update({key: algorithm[key] for key in ('query_strategy', 'horizon_execution', 'depth', 'min_expected_progress')})
+            evidence = None
+            if accepted is not None and accepted['journal'] is not None:
+                from otqa.runtime.journal import verify_prefix
+                manifest_path = resolve_ref(root, result_refs[-1]).parent / 'manifest.json'
+                manifest = load_document('manifest', manifest_path, reference_root=root)
+                proof = accepted['journal']
+                data = resolve_ref(root, {'path': proof['path'], 'sha256': proof['sha256']}).read_bytes()
+                evidence = verify_prefix(data, proof['valid_prefix_bytes'], proof['valid_prefix_sha256'],
+                    proof['last_good_sequence'], **journal_policy(manifest, root, manifest_path))
+            elif snapshot is not None and accepted is None:
+                manifest_path = resolve_ref(root, snapshot['manifest'])
+                manifest = load_document('manifest', manifest_path, reference_root=root)
+                evidence = verify_cursor((root / snapshot['journal_path']).read_bytes(), snapshot,
+                    **journal_policy(manifest, root, manifest_path))
+            row.update({key: evidence[key] if evidence is not None else None for key in (
+                'planning_attempts_started', 'planning_attempts_completed', 'fallback_selections')})
+            row['terminal_expected_progress'] = None
+            row['terminal_planning_depth'] = None
+            if solver is not None and solver['termination_reason'] == 'insufficient_expected_progress':
+                cycle = solver['planning_cycles'][-1]
+                attempt = cycle['attempts'][-1]
+                row['terminal_planning_depth'] = attempt['requested_depth']
+                row['terminal_expected_progress'] = max(h['best_progress']['expected_progress']
+                    for h in attempt['horizon_evidence'] if h['best_progress'] is not None)
         rows.append(row)
         key = (row["configuration_id"], row["objective_count"], row["alternative_count"])
         group_members[key].append((row, job_state))
@@ -100,7 +131,10 @@ def build_summary(root: Path, audit: dict, audit_ref: dict) -> dict:
             "failed_api_call_time": distribution(failed_times), "answered_new_solved": distribution(queries(solved)), "answered_new_correct": distribution(queries(correct)),
             "answered_new_completed": distribution(queries(completed)), "solution_sample_job_ids": [row["job_id"] for row in solved],
             "correct_sample_job_ids": [row["job_id"] for row in correct], "completed_sample_job_ids": [row["job_id"] for row in completed]}
+        if 'query_strategy' in group_rows[0]:
+            group.update({key: group_rows[0][key] for key in ('query_strategy', 'horizon_execution', 'depth', 'min_expected_progress')})
+            group['insufficient_expected_progress'] = sum(row['termination_reason'] == 'insufficient_expected_progress' for row in completed)
         groups.append(group)
-    return {"schema_version": 1, "series_id": plan["series_id"], "generated_at_utc": audit["created_at_utc"],
+    return {"schema_version": 2 if current_contract else 1, "series_id": plan["series_id"], "generated_at_utc": audit["created_at_utc"],
         "scope": "partial" if audit["status"] == "partial" else "complete", "basis": "verified_raw_attempts",
         "plan": audit["plan"], "state": audit["state"], "audit": audit_ref, "prefix_snapshots": audit["prefix_snapshots"], "rows": rows, "groups": groups}

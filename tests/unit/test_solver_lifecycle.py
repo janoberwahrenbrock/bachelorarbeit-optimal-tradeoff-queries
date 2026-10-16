@@ -6,6 +6,7 @@ import pytest
 from otqa import AlgorithmPolicy, AnsweredQuery, Problem, Query, QueryBudget, SingleCandidateStop, VolumeConfidenceStop
 from otqa.errors import AnswerProviderError, ExecutionContextError, InvalidAnswerError, ObserverError, PlanningInvariantError, RecorderError
 from otqa.models import QueryCounts, StateAnalysis
+from otqa.models.execution import PlanningAttempt, ProgressEvidence
 from otqa.models.planning import FixedScore, NoQuery, PlanningDecision, QueryEvaluation
 from otqa.solver import _drive
 
@@ -37,9 +38,12 @@ class Planner:
         self.position += 1
         return state + (answer,)
 
-    def plan(self, state):
+    def plan(self, state, *, requested_depth):
         self.planned += 1
-        return self.decision
+        if isinstance(self.decision, NoQuery):
+            return PlanningAttempt(requested_depth, (requested_depth,), 'no_query')
+        progress = ProgressEvidence('candidate_count', 2., 1., 1., .001)
+        return PlanningAttempt(requested_depth, (requested_depth,), 'available', self.decision, progress)
 
     def close(self):
         self.closed = True
@@ -62,7 +66,8 @@ def test_callbacks_are_ordered_and_success_is_emitted_after_close():
     def observe(event):
         events.append(('observe', type(event).__name__))
     result = drive(planner, recorder=record, observer=observe)
-    names = ['StateAnalyzed', 'QueryPlanned', 'QueryDispatched', 'AnswerReceived',
+    names = ['StateAnalyzed', 'PlanningAttemptStarted', 'PlanningAttemptCompleted', 'PlanningResolved',
+             'QueryPlanned', 'QueryDispatched', 'AnswerReceived',
              'StateAnalyzed', 'QueryCompleted', 'SolveFinished']
     assert events == [(kind, name) for name in names for kind in ('record', 'observe')]
     assert result.query_counts == QueryCounts(0, 1, 1, 1)
@@ -138,7 +143,7 @@ def test_observer_failure_after_answer_preserves_accepted_memory_context():
 def test_cleanup_failure_never_emits_success():
     events = []
     with pytest.raises(ExecutionContextError):
-        drive(Planner((AFTER,), close_error=RuntimeError('close failed')), recorder=events.append)
+        drive(Planner((replace(AFTER, answered_total=0),), close_error=RuntimeError('close failed')), recorder=events.append)
     assert all(type(event).__name__ != 'SolveFinished' for event in events)
 
 
@@ -151,7 +156,7 @@ def test_cleanup_keeps_original_provider_exception_primary():
 
 
 def test_final_recorder_failure_is_not_a_normal_return():
-    planner = Planner((AFTER,))
+    planner = Planner((replace(AFTER, answered_total=0),))
     def recorder(event):
         if type(event).__name__ == 'SolveFinished':
             raise OSError('terminal callback failed')

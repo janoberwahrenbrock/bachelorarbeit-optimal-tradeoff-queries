@@ -17,7 +17,9 @@ from .application_types import (
     AuditRequest,
     AuditOutcome,
     ExportRequest,
-    ExportReceipt
+    ExportReceipt,
+    ContinuationExportRequest,
+    ContinuationExportOutcome,
 )
 from .runtime.project import ProjectContext, load_project_context
 
@@ -33,6 +35,12 @@ def create_suite(request: CreateSuiteRequest) -> SuiteOutcome:
 
 def run_problem(request: RunRequest) -> RunOutcome:
     from .runtime.supervisor import run_problem as implementation
+    return implementation(request)
+
+
+def export_continuation(request: ContinuationExportRequest) -> ContinuationExportOutcome:
+    """Export a verified durable answer boundary without modifying its origin."""
+    from .runtime.continuation import export_continuation as implementation
     return implementation(request)
 
 
@@ -72,4 +80,4 @@ def seal_series(series_dir: Path, output_path: Path, *, context: ProjectContext)
     return seal_inventory(context, series_dir, output_path)
 
 
-__all__ = ['RunRequest', 'RunOutcome', 'GenerateDatasetRequest', 'DatasetOutcome', 'CreateSuiteRequest', 'SuiteOutcome', 'PlanRequest', 'PlanOutcome', 'SeriesOutcome', 'SeriesStatus', 'AuditRequest', 'AuditOutcome', 'ExportRequest', 'ExportReceipt', 'ProjectContext', 'load_project_context', 'generate_dataset', 'create_suite', 'run_problem', 'plan_suite', 'run_suite', 'resume_suite', 'inspect_series', 'audit_series', 'export_series', 'seal_series']
+__all__ = ['RunRequest', 'RunOutcome', 'GenerateDatasetRequest', 'DatasetOutcome', 'CreateSuiteRequest', 'SuiteOutcome', 'PlanRequest', 'PlanOutcome', 'SeriesOutcome', 'SeriesStatus', 'AuditRequest', 'AuditOutcome', 'ExportRequest', 'ExportReceipt', 'ContinuationExportRequest', 'ContinuationExportOutcome', 'ProjectContext', 'load_project_context', 'generate_dataset', 'create_suite', 'run_problem', 'export_continuation', 'plan_suite', 'run_suite', 'resume_suite', 'inspect_series', 'audit_series', 'export_series', 'seal_series']

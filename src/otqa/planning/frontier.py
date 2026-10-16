@@ -1,116 +1,108 @@
-"""Exact loss/cost frontiers for complete horizon-three child policies."""
-
+"""Certified complete-policy selection, with root-only progress admission."""
 from __future__ import annotations
 
+from dataclasses import dataclass
+from itertools import product
 import math
 from collections.abc import Callable
 
+from .dominance import binary_integer, certified_projection
 from .models import PolicyOption, option_identity
 
 
-def pareto_options(
-    options: tuple[PolicyOption, ...] | list[PolicyOption],
-    observe: Callable[[str, object], None] | None = None,
-) -> tuple[PolicyOption, ...]:
-    """Keep strictly improving loss and optionally observe the actual branches.
+@dataclass(frozen=True, slots=True)
+class CombinationSelection:
+    selected: tuple[PolicyOption, ...] | None
+    best_progress_witness: tuple[PolicyOption, ...]
 
-    Pruning records retain the already available option and, for a discarded
-    option, the preceding retained witness. They compute no additional keys.
+
+def pareto_options(options, observe: Callable[[str, object], None] | None = None):
+    """Retain coordinate/identity nondominance, without local admission."""
+    records = [(binary_integer(item.expected_queries), binary_integer(item.expected_terminal_loss),
+                option_identity(item), item) for item in options]
+
+    def report(record, keep, witness):
+        observe("frontier_projection", ("pruning_decision", "child_options", None, record[3], keep,
+            "certified_nondominated" if keep else "certified_dominance", witness[3] if witness else None))
+
+    return tuple(item[3] for item in certified_projection(records, report if observe else None))
+
+
+def select_frontiers(candidate_count, probabilities, raw_options, *, minimum=None,
+                     observe=None, child_observers=None) -> CombinationSelection:
+    """Select complete admitted plans and retain a maximum-gain witness.
+
+    Raw child options survive until the all-negative test. Negative native gains
+    with disabled admission cannot use cost/loss dominance. That exceptional path
+    enumerates the unpruned product, without clamping any score.
     """
-    retained: list[PolicyOption] = []
-    lowest = math.inf
-    if observe is None:
-        for option in sorted(options, key=lambda item: (
-            item.expected_queries, item.expected_terminal_loss, option_identity(item),
-        )):
-            if option.expected_terminal_loss < lowest:
-                retained.append(option)
-                lowest = option.expected_terminal_loss
-        return tuple(retained)
-    for option in sorted(options, key=lambda item: (
-        item.expected_queries, item.expected_terminal_loss, option_identity(item),
-    )):
-        if option.expected_terminal_loss < lowest:
-            retained.append(option)
-            lowest = option.expected_terminal_loss
-            observe("frontier_projection", (
-                "pruning_decision", "child_options", None, option, True,
-                "strict_loss_improvement", None,
-            ))
-        else:
-            observe("frontier_projection", (
-                "pruning_decision", "child_options", None, option, False,
-                "dominated_or_equal_loss", retained[-1] if retained else None,
-            ))
-    return tuple(retained)
-
-
-def combine_frontiers(
-    candidate_count: int,
-    probabilities: tuple[float, ...],
-    frontiers: tuple[tuple[PolicyOption, ...], ...],
-    observe: Callable[[str, object], None] | None = None,
-) -> tuple[PolicyOption, ...]:
-    """Choose the ratio of expectations, preserving ordered product reductions.
-
-    A locally maximal child rate is insufficient. Dominance is valid only for
-    the weighted loss/cost pairs of complete policies. Positive answer slots
-    retain their original ordering at every accumulation.
-    """
-    if len(probabilities) != len(frontiers):
-        raise ValueError("probability and frontier counts differ")
-    combinations: list[tuple[PolicyOption, ...]] = [()]
-    for index, frontier in enumerate(frontiers):
-        if not frontier:
+    if len(probabilities) != len(raw_options) or not raw_options:
+        raise ValueError("probability and frontier counts differ or are empty")
+    for probability, options in zip(probabilities, raw_options, strict=True):
+        if not math.isfinite(probability) or not 0.0 < probability <= 1.0:
+            raise ValueError("frontiers require positive finite probabilities")
+        if not options:
             raise RuntimeError("missing positive-probability child policy frontier")
-        expanded = [prefix + (option,) for prefix in combinations for option in frontier]
-        weighted = [(
-            math.fsum(probabilities[i] * item.expected_queries for i, item in enumerate(chosen)),
-            math.fsum(probabilities[i] * item.expected_terminal_loss for i, item in enumerate(chosen)),
-            tuple(option_identity(item) for item in chosen),
-            chosen,
-        ) for chosen in expanded]
-        combinations = []
-        lowest = math.inf
-        if observe is None:
-            for _, loss, _, chosen in sorted(weighted, key=lambda item: item[:3]):
-                if loss < lowest:
-                    combinations.append(chosen)
-                    lowest = loss
-        else:
-            for _, loss, _, chosen in sorted(weighted, key=lambda item: item[:3]):
-                if loss < lowest:
-                    combinations.append(chosen)
-                    lowest = loss
-                    observe("frontier_projection", (
-                        "pruning_decision", "weighted_combinations", index, chosen, True,
-                        "strict_loss_improvement", None,
-                    ))
-                else:
-                    observe("frontier_projection", (
-                        "pruning_decision", "weighted_combinations", index, chosen, False,
-                        "dominated_or_equal_loss", combinations[-1] if combinations else None,
-                    ))
-        if observe is not None:
-            observe("frontier_projection", (index, tuple(weighted), tuple(combinations)))
+        for option in options:
+            if not math.isfinite(option.expected_terminal_loss) or option.expected_terminal_loss < 0.0 or (
+                not math.isfinite(option.expected_queries) or option.expected_queries < 0.0
+            ):
+                raise ValueError("invalid child policy coordinates")
+    if minimum is not None and (isinstance(minimum, bool) or not math.isfinite(minimum) or minimum < 0.0):
+        raise ValueError("minimum progress must be finite and nonnegative or None")
 
-    def key(chosen: tuple[PolicyOption, ...]) -> tuple:
+    minimum_loss = math.fsum(p * min(option.expected_terminal_loss for option in options)
+                            for p, options in zip(probabilities, raw_options, strict=True))
+    negative_only = minimum is None and float(candidate_count) - minimum_loss < 0.0
+    if negative_only:
+        combinations = product(*raw_options)
+        if observe:
+            observe("frontier_projection", ("negative_gain_exhaustive",))
+    else:
+        frontiers = tuple(pareto_options(options,
+            child_observers[index] if child_observers else observe)
+            for index, options in enumerate(raw_options))
+        # Prefix certificates sum the native rounded products exactly.
+        prefixes = [(0, 0, (), ())]
+        for index, options in enumerate(frontiers[:-1]):
+            terms = [(binary_integer(probabilities[index] * item.expected_queries),
+                      binary_integer(probabilities[index] * item.expected_terminal_loss),
+                      option_identity(item), item) for item in options]
+            expanded = [(prefix[0] + term[0], prefix[1] + term[1],
+                         prefix[2] + (term[2],), prefix[3] + (term[3],))
+                        for prefix in prefixes for term in terms]
+
+            def report(record, keep, witness, index=index):
+                observe("frontier_projection", ("pruning_decision", "weighted_combinations", index,
+                    record[3], keep, "certified_nondominated" if keep else "certified_dominance",
+                    witness[3] if witness else None))
+
+            prefixes = certified_projection(expanded, report if observe else None)
+        combinations = (prefix[3] + (last,) for prefix in prefixes for last in frontiers[-1])
+
+    selected = witness = None
+    selected_key = witness_key = None
+    for chosen in combinations:
         loss = math.fsum(p * item.expected_terminal_loss for p, item in zip(probabilities, chosen, strict=True))
         cost = 1.0 + math.fsum(p * item.expected_queries for p, item in zip(probabilities, chosen, strict=True))
-        return (-(float(candidate_count) - loss) / cost, cost,
-                tuple(option_identity(item) for item in chosen))
+        gain = float(candidate_count) - loss
+        key = (-gain / cost, cost, tuple(option_identity(item) for item in chosen))
+        # A maximum-progress witness is tied by policy identity, not by rate.
+        # Cost/loss dominance is unsafe for negative-rate tie selection, even
+        # when such a witness will correctly fail an active threshold.
+        progress_key = (-gain, key[2])
+        if witness_key is None or progress_key < witness_key:
+            witness, witness_key = chosen, progress_key
+        if (minimum is None or gain > minimum) and (selected_key is None or key < selected_key):
+            selected, selected_key = chosen, key
+    if observe:
+        observe("combination_choice", (probabilities, selected, selected_key, witness, witness_key))
+    assert witness is not None
+    return CombinationSelection(selected, witness)
 
-    if observe is None:
-        chosen = min(combinations, key=key)
-    else:
-        # Keep the very key used by selection. Recomputing it for a trace
-        # would manufacture another floating-point observation.
-        iterator = iter(combinations)
-        chosen = next(iterator)
-        selected_key = key(chosen)
-        for alternative in iterator:
-            alternative_key = key(alternative)
-            if alternative_key < selected_key:
-                chosen, selected_key = alternative, alternative_key
-        observe("combination_choice", (probabilities, chosen, selected_key))
-    return chosen
+
+def combine_frontiers(candidate_count, probabilities, frontiers, observe=None):
+    """Threshold-disabled pure API retained for analytical callers."""
+    result = select_frontiers(candidate_count, probabilities, frontiers, observe=observe)
+    assert result.selected is not None
+    return result.selected

@@ -39,6 +39,7 @@ solve(
     budget=QueryBudget(),
     execution=SolverExecution(),
     initial_answers=(),
+    continuation=None,
     recorder=None,
     observer=None,
 ) -> SolveResult
@@ -85,6 +86,32 @@ history = (AnsweredQuery(Query(0, 1, .91), ">"),)
 
 Es gilt `answered_new <= dispatched_new`. Bei einem Providerfehler kann eine dispatchte Frage ohne akzeptierte Antwort offen sein. Nach einer akzeptierten Antwort können außerdem die Folgeanalyse oder die Aufzeichnung scheitern; der Partialkontext unterscheidet deshalb Antworten, abgeschlossene Queryrecords und eine offene Query.
 
+Bei Countdown beginnt `initial_answers` einen frischen vollständigen Block.
+Die nächste Phase folgt aus einem expliziten `ExecutionCursor`, nicht aus der
+Antwortzahl modulo Tiefe.
+
+Eine echte algorithmische Fortsetzung übernimmt geordnete Antworten und Cursor
+mit unveränderter Problem-/Policybindung:
+
+```python
+continuation = otqa.continuation_from_result(problem, policy, result)
+continued = otqa.solve(problem, policy, SimulatedAnswers((.9, .1)),
+                       continuation=continuation)
+```
+
+`SolveContinuation(problem, policy, answers, execution_cursor)` kann auch explizit
+konstruiert werden. Strukturell gültige SDK-Eingaben sind Erklärungen des
+Aufrufers, kein historischer Ereignisbeweis. Der Ergebnishelper prüft die Bindung
+an das tatsächlich gelöste Problem und die verwendete Policy. Eine Continuation
+und eine nichtleere zusätzliche Anfangshistorie schließen einander aus.
+Unpassende Policy, Problem, Cursor oder Historienlänge werden abgewiesen.
+
+Ein unbeantworteter Dispatch ist nicht fortsetzbar. Eine akzeptierte Antwort kann
+auch vor abgeschlossener Folgeanalyse oder Queryrecordfertigstellung fortgesetzt
+werden. Der SDK-Kontext ist dabei kein Dauerhaftigkeitsnachweis. Die native
+Continuation verlangt zusätzlich einen geprüften unveränderlichen Journalpräfix
+sowie passende Quell- und Umgebungsbindung; siehe [CLI](cli.md).
+
 ## Ergebnisse und Planungsevidenz
 
 `SolveResult` ist unveränderlich und enthält:
@@ -92,9 +119,15 @@ Es gilt `answered_new <= dispatched_new`. Bei einem Providerfehler kann eine dis
 - `solved`, `exactly_solved`, `termination_reason` sowie die ausgewählte Originalzeile und deren Volumen/Anteil;
 - `final_state` mit Originalkandidaten, Kandidatenvolumen und unveränderten Anteilen;
 - `answers` einschließlich Anfangshistorie und `queries` mit den neu abgeschlossenen `QueryRecord`-Werten;
-- `query_counts` mit den vier getrennten Zählern.
+- `query_counts` mit den vier getrennten Zählern;
+- `execution_cursor` und `planning_cycles` mit tatsächlichen Versuchen, Fortschrittswerten, verworfenen Restplänen und gegebenenfalls voller Ersatzplanung.
 
-Jeder neue Queryrecord bindet `query`, `answer`, `before`, `after` und `planning`. Die Planung enthält die gewählte Query, den Horizont, Score, Antwortwahrscheinlichkeiten und die tatsächlich aufbewahrte Horizont-/Fortsetzungsevidenz. `FixedScore` hält Kandidatenerwartung, bewerteten Loss und das tatsächlich berechnete lexikographische Profil. `FixedScore.expected_queries` kann im Stop-aware-Pfad zusätzlich als diagnostischer Wert vorliegen; Fixed verwendet ihn nicht als Ratenkriterium. `EfficiencyScore` enthält die erforderliche erwartete Queryzahl, Gewinn und Rate. Nicht berechnete flachere Werte werden nicht als Nullwerte erfunden.
+Jeder neue Queryrecord bindet `query`, `answer`, `before`, `after`, `planning` und seinen `planning_cycle`. Die Planung enthält die gewählte Query, den Horizont, Score, Antwortwahrscheinlichkeiten und die tatsächlich aufbewahrte Horizont-/Fortsetzungsevidenz. `FixedScore` hält Kandidatenerwartung, bewerteten Loss und das tatsächlich berechnete lexikographische Profil. `FixedScore.expected_queries` kann im Stop-aware-Pfad zusätzlich als diagnostischer Wert vorliegen; Fixed verwendet ihn nicht als Ratenkriterium. `EfficiencyScore` enthält die erforderliche erwartete Queryzahl, Gewinn und Rate. Nicht berechnete flachere Werte werden nicht als Nullwerte erfunden.
+
+Der gespeicherte Planungshorizont ist der für diese Query tatsächlich verwendete
+Horizont. Bei Countdown kann er deshalb kleiner als `policy.depth` sein. Die
+Queryrecords erlauben es, die Folge `2 → 1 → …` beziehungsweise `3 → 2 → 1 → …`
+nachzuvollziehen, ohne einen gespeicherten Entscheidungsbaum vorauszusetzen.
 
 Diese Rückgabe ist kein vollständiger Suchbaum. Der gewöhnliche Fixed-Pfad behält keine expliziten Childfortsetzungen für jede Rootquery. Adaptive Horizonte enthalten ihre Rootbewertungen und den besten Score je Horizont, aber nicht automatisch Kosten und Rate jeder verworfenen Rootoption. Eine vollständige interne Berechnungserfassung hat einen getrennten begrenzten Diagnosevertrag; `solve` bietet dafür keinen zusätzlichen öffentlichen Parameter.
 
@@ -103,6 +136,7 @@ Diese Rückgabe ist kein vollständiger Suchbaum. Der gewöhnliche Fixed-Pfad be
 | `exact_single_candidate` | `solved=True`, `exactly_solved=True`, genau ein Kandidat. |
 | `volume_confidence` | `solved=True`; weitere Kandidaten können verbleiben. |
 | `no_query` | Regulär ungelöst: keine zulässige nächste Query vorhanden. |
+| `insufficient_expected_progress` | Regulär ungelöst: kein vollständiger bewerteter Plan überschreitet die aktive Fortschrittsschwelle. |
 | `max_questions` | Regulär ungelöst: Gesamtantwortbudget erreicht. |
 
 Die tatsächliche Prüfungsreihenfolge ist Singleton, Konfidenz, Budget, nächste Planung. Bei gleichen maximalen Konfidenzanteilen gewinnt der kleinere ursprüngliche Zeilenindex. Der SDK kennt keine Simulationswahrheit: `solved=True` ist keine unabhängige Qualitätsprüfung gegen verborgene Zielgewichte.
@@ -113,6 +147,10 @@ Beide optionalen Callables erhalten `SolverEvent`-Werte synchron. Für jedes Ere
 
 ```text
 StateAnalyzed(initial)
+  PlanningAttemptStarted
+  PlanningAttemptCompleted
+  ... gegebenenfalls einmaliger voller Ersatzversuch ...
+  PlanningResolved
   QueryPlanned
   QueryDispatched
   AnswerReceived
@@ -138,7 +176,7 @@ Der SDK schreibt selbst keine Dateien. Ein Recorder muss benötigte Persistenz i
 | `RecorderError`, `ObserverError` | Fehler im entsprechenden synchronen Callback. |
 | `ExecutionContextError` | Fehler beim eigenen Worker-/Sessionlebenszyklus. |
 
-`SolverError.context` beziehungsweise `partial_context` enthält nach Laufbeginn den akzeptierten unveränderlichen In-Memory-Partialkontext: letzten Zustand, Antworten, Queryrecords, Zähler und offene Query. Bei früher Eingabevalidierung kann er fehlen. Er ist kein Resumecheckpoint und kein Nachweis dauerhafter Dateipersistenz.
+`SolverError.context` beziehungsweise `partial_context` enthält nach Laufbeginn den akzeptierten unveränderlichen In-Memory-Partialkontext: letzten Zustand, Antworten, Queryrecords, Zähler, offene Query, algorithmischen Cursor und den gegebenenfalls begonnenen Planungszyklus. Bei früher Eingabevalidierung kann er fehlen. Er ist kein Nachweis dauerhafter Dateipersistenz. Aus einer gültigen akzeptierten Antwortgrenze kann die ausdrückliche SDK-Continuation gebildet werden.
 
 Der Solver schließt seine eigenen Ressourcen auch auf Fehlerpfaden. Zusätzliche Cleanupfehler verdrängen die ursprüngliche Ursache nicht. `KeyboardInterrupt` und `SystemExit` bleiben Kontrollabbrüche und werden nicht in gewöhnliche Provider-/Callbackfehler umgewandelt. Eine Fortsetzung mit gespeicherten Artefakten gehört zum [Benchmarkworkflow](benchmarks.md), nicht zu einer versteckten automatischen Wiederholung des SDK.
 

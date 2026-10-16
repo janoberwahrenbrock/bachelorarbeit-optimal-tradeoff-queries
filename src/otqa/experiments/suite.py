@@ -6,7 +6,7 @@ from pathlib import Path
 from otqa.runtime.codec import DocumentError
 from otqa.runtime.documents import file_ref, load_document, resolve_ref, verified_closure
 from otqa.runtime.project import identifier
-from otqa.runtime.schema import validate
+from otqa.runtime.schema import latest_version, validate
 from otqa.runtime.storage import create_directory, publish_json
 
 
@@ -29,6 +29,8 @@ def create_suite(request):
     configurations = []
     for path in request.configuration_paths:
         config = load_document("config", path, reference_root=root)
+        if config["schema_version"] != latest_version("config"):
+            raise DocumentError("New suites require explicitly converted current configurations")
         configurations.append({"configuration_id": config["configuration_id"], **file_ref(path, root)})
     suite = {"schema_version": 1, "suite_id": suite_id, "dataset": file_ref(request.dataset_path, root), "configurations": configurations,
         "selection": list(request.selection), "repetitions": request.repetitions,

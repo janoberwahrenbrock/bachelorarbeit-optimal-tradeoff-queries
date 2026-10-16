@@ -59,9 +59,11 @@ replay --answers-file inputs/replay.json` consumes exact ordered query identitie
 A changed value, objective order or exhausted script fails visibly. The full
 script remains stored, including any suffix unused because the solver stopped.
 
-`--initial-answers inputs/initial.json` declares a separate continuation run. Its
-answers count toward the query budget and are never queried again. A benchmark
-retry instead starts a fresh attempt from the original problem.
+`--initial-answers inputs/initial.json` declares a warm start. Its answers count
+toward the query budget and are never queried again; Countdown starts a fresh
+full block. `--continuation` is the mutually exclusive input for an actual
+phase-preserving continuation. A benchmark retry instead starts a fresh attempt
+from the original problem.
 
 The complete configuration is supplied through `--config`. There are no scalar
 depth, grid, worker or confidence flags that override its contents. Answer
@@ -130,7 +132,7 @@ distinction from executable project relocation.
 | Code | Meaning |
 |---:|---|
 | 0 | `solve` or benchmark `run`/`resume`: regular solved outcome(s); setup, status, audit, export and seal: command success |
-| 3 | `solve` or benchmark `run`/`resume`: at least one regular unresolved outcome, including no-query and query-budget returns |
+| 3 | `solve` or benchmark `run`/`resume`: at least one regular unresolved outcome, including no-query, insufficient-expected-progress and query-budget returns |
 | 2 | Invalid input, unsupported document, argument combination or output conflict |
 | 1 | Runtime, replay, watchdog, integrity or process-ownership failure |
 | 130 | User interruption |
@@ -144,3 +146,37 @@ The optional case watchdog changes no algorithm parameter and returns no partial
 plan as a completed solution. Complete API time includes synchronous callbacks
 and worker lifetime. Case bootstrap and controller costs are separately scoped;
 after a crash, unknown complete API time remains null.
+
+## Current configurations and explicit continuations
+
+Native runs require configuration version two with explicit `horizon_execution`
+and `min_expected_progress`. The new SDK default is `0.001`; the converter
+preserves the disabled historical threshold as `null` unless explicitly changed:
+
+```sh
+otqa config convert --input inputs/old.json --output inputs/current.json
+otqa config convert --input inputs/old-countdown.json --output inputs/current-countdown.json \
+  --accept-countdown-block-semantics --min-expected-progress 0.001
+```
+
+The output is a new file under `inputs/`; existing inputs are never overwritten.
+Mode and threshold remain part of the configuration, not additional solve flags.
+
+Export a durable accepted-answer boundary as a new input bundle:
+
+```sh
+otqa continuation export --result runs/first-problem/result.json \
+  --output inputs/first-problem-continuation
+otqa solve --source-root . --problem inputs/problem.json \
+  --config inputs/current.json --execution-profile runs/native-qualification/profile.json \
+  --continuation inputs/first-problem-continuation/continuation.json \
+  --answers simulated --oracle inputs/oracle.json --output runs/continued-problem
+```
+
+The declared origin root normally follows the manifest project binding;
+`--source-root` on export supplies it explicitly for a different artifact layout.
+Import requires the exact bound problem/configuration and matching numerical
+source/environment. An unanswered dispatch or an unconfirmed answer cannot be
+exported. A confirmed answer remains eligible if its successor analysis failed.
+The new invocation reconstructs the mathematical state and starts its provider
+only for subsequent questions; it does not repeat an open provider call.

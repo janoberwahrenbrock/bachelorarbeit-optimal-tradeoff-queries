@@ -36,11 +36,11 @@ def policy(strategy="fixed", depth=2, *, stop_aware=False):
 def test_capture_on_off_preserves_full_decision(strategy, stop_aware):
     config = policy(strategy, stop_aware=stop_aware)
     with PlannerSession(Problem(MATRIX), config, SolverExecution()) as ordinary:
-        expected = ordinary.plan(ordinary.initial_state())
+        expected = ordinary.plan(ordinary.initial_state(), requested_depth=ordinary.policy.depth)
     sink = Sink()
     capture = EvaluationCaptureOptions(sink, 1_000_000, 10_000_000, 40_000_000, 40_000_000)
     with PlannerSession(Problem(MATRIX), config, SolverExecution(), evaluation_capture=capture) as diagnostic:
-        actual = diagnostic.plan(diagnostic.initial_state())
+        actual = diagnostic.plan(diagnostic.initial_state(), requested_depth=diagnostic.policy.depth)
     assert actual == expected
     assert sink.blocks
     tasks = {}
@@ -59,15 +59,15 @@ def test_capture_h3_contains_full_child_options_frontiers_and_combination():
     capture = EvaluationCaptureOptions(sink, 2_000_000, 40_000_000, 160_000_000, 160_000_000)
     with PlannerSession(Problem(MATRIX), policy("reduction_per_query", 3), SolverExecution(),
                         evaluation_capture=capture) as planner:
-        result = planner.plan(planner.initial_state())
-    assert len(result.horizons) == 3
+        result = planner.plan(planner.initial_state(), requested_depth=planner.policy.depth)
+    assert result.evaluated_horizons == (1, 2, 3)
     kinds = {item.kind for block in sink.blocks for item in block.observations}
     assert {"child_options", "frontier_projection", "combination_choice"} <= kinds
     decisions = [item for block in sink.blocks for item in block.observations
                  if item.kind == "frontier_projection" and item.value.value[0] == "pruning_decision"]
     assert {item.value.value[1] for item in decisions} == {"child_options", "weighted_combinations"}
     assert {item.value.value[5] for item in decisions} == {
-        "strict_loss_improvement", "dominated_or_equal_loss",
+        "certified_nondominated", "certified_dominance",
     }
     assert all(item.mathematical_address[2] in (2, 3) for item in decisions)
 
@@ -76,19 +76,19 @@ def test_capture_h3_contains_full_child_options_frontiers_and_combination():
 def test_own_process_pool_reuses_workers_and_preserves_decision(capture_enabled):
     config = policy("reduction_per_query", 2)
     with PlannerSession(Problem(MATRIX), config, SolverExecution()) as ordinary:
-        expected = ordinary.plan(ordinary.initial_state())
+        expected = ordinary.plan(ordinary.initial_state(), requested_depth=ordinary.policy.depth)
     sink = Sink()
     capture = EvaluationCaptureOptions(sink, 1_000_000, 10_000_000, 80_000_000, 80_000_000)
     execution = SolverExecution(2, multiprocessing.get_context("spawn"))
     with PlannerSession(Problem(MATRIX), config, execution,
                         evaluation_capture=capture if capture_enabled else None) as parallel:
         state = parallel.initial_state()
-        actual = parallel.plan(state)
+        actual = parallel.plan(state, requested_depth=parallel.policy.depth)
         pool = parallel._executor
         assert pool is not None
         assert actual == expected
-        child = parallel.advance(state, AnsweredQuery(actual.query, "<"))
-        parallel.plan(child)
+        child = parallel.advance(state, AnsweredQuery(actual.selected_plan.query, "<"))
+        parallel.plan(child, requested_depth=parallel.policy.depth)
         assert parallel._executor is pool
     assert parallel._closed
     assert all(block.task_address[0] in ("parent", "parent_observation", "root") for block in sink.blocks)
@@ -113,7 +113,7 @@ def test_foreign_session_state_is_rejected():
     with PlannerSession(Problem(MATRIX), policy(), SolverExecution()) as a, PlannerSession(
         Problem(MATRIX), policy(), SolverExecution()) as b:
         with pytest.raises(ValueError, match="another solver session"):
-            b.plan(a.initial_state())
+            b.plan(a.initial_state(), requested_depth=b.policy.depth)
 
 
 def test_planning_cache_preserves_signed_zero_in_initial_history_identity():
@@ -122,7 +122,7 @@ def test_planning_cache_preserves_signed_zero_in_initial_history_identity():
         negative = planner.initial_state((AnsweredQuery(Query(0, 1, -0.0), ">"),))
         assert positive.history[0].query.value.hex() == "0x0.0p+0"
         assert negative.history[0].query.value.hex() == "-0x0.0p+0"
-        a, b = planner.plan(positive), planner.plan(negative)
+        a, b = planner.plan(positive, requested_depth=planner.policy.depth), planner.plan(negative, requested_depth=planner.policy.depth)
         assert a == b
         assert a is not b
         assert len(planner._plan_cache) == 2
@@ -134,7 +134,7 @@ def test_capture_budget_failure_closes_session_via_context_manager():
     planner = PlannerSession(Problem(MATRIX), policy(), SolverExecution(), evaluation_capture=options)
     with pytest.raises(EvaluationCaptureError):
         with planner:
-            planner.plan(planner.initial_state())
+            planner.plan(planner.initial_state(), requested_depth=planner.policy.depth)
     assert planner._closed
 
 
@@ -156,7 +156,7 @@ def test_capture_failure_retains_mathematical_error_and_completed_observations()
 
         planner.geometry.probabilities = fail
         with pytest.raises(RuntimeError, match="analytical backend failure") as caught:
-            planner.plan(state)
+            planner.plan(state, requested_depth=planner.policy.depth)
         assert caught.value is cause
         assert cause.evaluation_capture_complete is False
         assert cause.evaluation_capture_blocks
@@ -170,9 +170,9 @@ def test_capture_cache_reuse_links_the_original_plan_and_completes_new_plan():
     options = EvaluationCaptureOptions(sink, 1_000_000, 10_000_000, 40_000_000, 40_000_000)
     with PlannerSession(Problem(MATRIX), policy(depth=1), SolverExecution(), evaluation_capture=options) as planner:
         state = planner.initial_state()
-        first = planner.plan(state)
+        first = planner.plan(state, requested_depth=planner.policy.depth)
         count = len(sink.blocks)
-        second = planner.plan(state)
+        second = planner.plan(state, requested_depth=planner.policy.depth)
         assert second is first
         later = sink.blocks[count:]
         observations = [item for block in later for item in block.observations]
@@ -190,7 +190,7 @@ def test_disabled_capture_never_instantiates_diagnostic_collectors(monkeypatch):
 
     monkeypatch.setattr(module, "TaskCapture", fail)
     with PlannerSession(Problem(MATRIX), policy(depth=1), SolverExecution()) as planner:
-        planner.plan(planner.initial_state())
+        planner.plan(planner.initial_state(), requested_depth=planner.policy.depth)
         assert planner._captured_plans is None
         assert planner._plan_address is None
 
@@ -207,7 +207,7 @@ def test_pool_startup_failure_has_typed_cause_and_cleans_parent(monkeypatch):
     planner = PlannerSession(Problem(MATRIX), policy(), SolverExecution(2))
     with pytest.raises(ExecutionContextError) as caught:
         with planner:
-            planner.plan(planner.initial_state())
+            planner.plan(planner.initial_state(), requested_depth=planner.policy.depth)
     assert caught.value.__cause__ is cause
     assert planner._closed
     assert planner.geometry.closed
@@ -228,7 +228,7 @@ def test_real_worker_initializer_failure_does_not_leave_owned_processes():
         SolverExecution(2, multiprocessing.get_context("spawn")), backend_factory=_fail_worker_initialization)
     with pytest.raises(ExecutionContextError):
         with planner:
-            planner.plan(planner.initial_state())
+            planner.plan(planner.initial_state(), requested_depth=planner.policy.depth)
     assert planner._closed
     assert not ({child.pid for child in multiprocessing.active_children()} - existing)
 
@@ -244,7 +244,7 @@ def test_unpicklable_worker_bootstrap_fails_typed_and_cleans_pool():
         backend_factory=lambda: LinearProgramBackend())
     with pytest.raises(ExecutionContextError):
         with planner:
-            planner.plan(planner.initial_state())
+            planner.plan(planner.initial_state(), requested_depth=planner.policy.depth)
     assert planner._closed
     assert not ({child.pid for child in multiprocessing.active_children()} - existing)
 
@@ -286,7 +286,7 @@ def test_close_releases_own_prepared_state_cache_without_touching_other_session(
         assert second.states.cache.info().entries == other_entries
         assert not second.geometry.closed
         assert second.initial_state() is second_state
-        assert second.plan(second_state).query is not None
+        assert second.plan(second_state, requested_depth=second.policy.depth).selected_plan.query is not None
     finally:
         first.close()
         second.close()

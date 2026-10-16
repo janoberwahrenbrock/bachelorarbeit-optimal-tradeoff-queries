@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "configuration_id": "adaptive2-singleton",
   "algorithm": {
     "query_strategy": "reduction_per_query",
@@ -9,7 +9,9 @@
     "planning_evaluation": "candidate_count",
     "stopping": {
       "rule": "single_candidate"
-    }
+    },
+    "horizon_execution": "receding",
+    "min_expected_progress": 0.001
   },
   "budget": {
     "max_queries": null

@@ -105,7 +105,7 @@ def numeric_hex(value: Any, pointer: str = "") -> dict[str, str]:
 def mathematical_hex(value: Any, pointer: str = "", *, all_numbers: bool = False) -> dict[str, str]:
     """Typed mathematical evidence, including mathematical JSONinteger spelling."""
     scalar_names = {"value", "probability", "expected_terminal_candidates", "expected_terminal_loss", "expected_queries",
-                    "gain", "rate", "maximum_volume_share", "selected_candidate_volume", "selected_candidate_volume_share"}
+                    "gain", "rate", "min_expected_progress", "starting_value", "expected_terminal_value", "expected_progress", "threshold", "maximum_volume_share", "selected_candidate_volume", "selected_candidate_volume_share"}
     containers = {"candidate_volumes", "candidate_volume_shares", "answer_probabilities", "lexicographic_expected_values"}
     result = {}
     if all_numbers and type(value) in (int, float):

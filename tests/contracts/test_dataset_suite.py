@@ -101,9 +101,10 @@ def _suite_request(context):
     from otqa.runtime.storage import publish_json
     dataset = generate_dataset(GenerateDatasetRequest(context, 'suite-data', 3, (2,), (2,), 1, context.project_root / 'inputs/datasets/suite-data'))
     config_path = context.project_root / 'inputs/config.json'
-    config = {'schema_version': 1, 'configuration_id': 'fixed',
+    config = {'schema_version': 2, 'configuration_id': 'fixed',
               'algorithm': {'query_strategy': 'fixed', 'depth': 1, 'higher_depth_query_source': 'both', 'grid_size': 5,
-                            'planning_evaluation': 'candidate_count', 'stopping': {'rule': 'single_candidate'}},
+                            'planning_evaluation': 'candidate_count', 'stopping': {'rule': 'single_candidate'},
+                            'horizon_execution': 'receding', 'min_expected_progress': 0.001},
               'budget': {'max_queries': None},
               'execution': {'workers': 1, 'native_threads': 1, 'start_method': 'forkserver', 'cache_policy_id': 'bounded_v1', 'case_timeout_seconds': None},
               'recording': {'durability': 'per_answer', 'trace_level': 'standard', 'profile': False, 'telemetry_failure_policy': 'continue'}}

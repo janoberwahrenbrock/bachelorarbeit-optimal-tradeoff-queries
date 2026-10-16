@@ -60,10 +60,11 @@ def main():
         configurations.mkdir(parents=True, exist_ok=False)
         paths, selection = [], []
         for name, strategy in [('fixed2-profile', 'fixed'), ('adaptive2', 'reduction_per_query')]:
-            configuration = {'schema_version': 1, 'configuration_id': name,
+            configuration = {'schema_version': 2, 'configuration_id': name,
                 'algorithm': {'query_strategy': strategy, 'depth': 2, 'higher_depth_query_source': 'both',
                               'grid_size': 5, 'planning_evaluation': 'candidate_count',
-                              'stopping': {'rule': 'single_candidate'}},
+                              'stopping': {'rule': 'single_candidate'}, 'horizon_execution': 'receding',
+                              'min_expected_progress': 0.001},
                 'budget': {'max_queries': None},
                 'execution': {'workers': 8, 'native_threads': 1, 'start_method': 'forkserver',
                               'cache_policy_id': 'bounded_v1', 'case_timeout_seconds': None},

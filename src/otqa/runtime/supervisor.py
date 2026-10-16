@@ -50,6 +50,8 @@ def _validate_answer_selection(request, problem):
         load_oracle(request.oracle_path, problem, reference_root=root)
     if request.replay_path:
         load_answer_history(request.replay_path, problem, reference_root=root)
+    if getattr(request, 'continuation_path', None) is not None and request.initial_answers_path is not None:
+        raise DocumentError('Continuation and initial answer history are mutually exclusive')
     if request.initial_answers_path:
         load_answer_history(request.initial_answers_path, problem, reference_root=root)
 
@@ -63,6 +65,8 @@ def prepare_standalone(request, *, resolver=production_resolver) -> dict:
         raise DocumentError("Attempt output already exists")
     problem = load_problem(request.problem_path, reference_root=source_root)
     config = load_config_document(request.config_path, reference_root=source_root)
+    if config['schema_version'] != 2:
+        raise DocumentError('Native execution requires an explicit version-two configuration; convert it first')
     _validate_answer_selection(request, problem)
     profile = load_execution_profile(request.execution_profile_path, reference_root=source_root)
     verified = resolver(source_root, profile, "standalone")
@@ -70,6 +74,12 @@ def prepare_standalone(request, *, resolver=production_resolver) -> dict:
     for key, path in (("oracle", request.oracle_path), ("initial_answers", request.initial_answers_path), ("replay_answers", request.replay_path)):
         if path is not None:
             entries[key] = ("oracle" if key == "oracle" else "answer_history", path)
+    if getattr(request, 'continuation_path', None) is not None:
+        from .continuation import import_continuation
+        source_for_continuation, _, _ = loaded_source()
+        import_continuation(request.continuation_path, reference_root=source_root, problem=problem,
+            configuration=config, source=source_for_continuation, profile=profile)
+        entries['continuation'] = ('continuation', request.continuation_path)
     verified_closure(source_root, entries)
     source, inventory, provenance = loaded_source()
     create_directory(context, output)
@@ -83,7 +93,7 @@ def prepare_standalone(request, *, resolver=production_resolver) -> dict:
         "problem_id": problem["problem_id"], "configuration_id": config["configuration_id"], "source": source,
         "source_inventory": file_ref(output / "source" / "inventory.json", output), "run_purpose": verified.run_purpose,
         "materialization_receipt": file_ref(output / "materialization_receipt.json", output),
-        "inputs": {key: refs.get(key) for key in ("problem", "configuration", "oracle", "initial_answers", "replay_answers")},
+        "inputs": {key: refs.get(key) for key in ("problem", "configuration", "oracle", "initial_answers", "replay_answers", "continuation")},
         "execution_profile": refs["execution_profile"], "answer_source": request.answer_source,
         "case_timeout_seconds": config["execution"]["case_timeout_seconds"], "native_threads": config["execution"]["native_threads"]}
 
@@ -241,7 +251,7 @@ def finalize_ended_attempt(payload, *, context, interruption=None):
     verified = verify_cursor(data, cursor, **journal_policy(manifest, root, attempt / "manifest.json"))
     if verified["query_counts"] != cursor["query_counts"] or cursor["run_id"] != payload["run_id"] or cursor["attempt_id"] != payload["attempt_id"]:
         raise RecoveryBlockedError("Stored cursor is not a valid binding for this run")
-    result = {"schema_version": 1, "run_id": payload["run_id"], "attempt_id": payload["attempt_id"], "problem_id": payload["problem_id"], "configuration_id": payload["configuration_id"],
+    result = {"schema_version": 2, "run_id": payload["run_id"], "attempt_id": payload["attempt_id"], "problem_id": payload["problem_id"], "configuration_id": payload["configuration_id"],
         "execution_status": "interrupted", "execution_stage": "solver", "finalized_by": "controller", "started_at_utc": verified["started_at_utc"], "finished_at_utc": utc_now(),
         "query_counts": cursor["query_counts"], "timings": timings(partial=cursor["partial_api_elapsed_seconds"]), "solver_result": None,
         "quality": {"status": "not_selected", "audit_status": "not_available", "true_winner_ids": [], "regret_fraction": None, "findings": []},
