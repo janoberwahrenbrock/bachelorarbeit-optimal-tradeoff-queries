@@ -239,7 +239,7 @@ def main(argv=None):
     identity = process_identity(intent["owner_token"])
     if identity["pid"] != identity["pgid"] or identity["pid"] != identity["sid"]:
         raise DocumentError("CaseProcess was not isolated into its own session/group")
-    registration = {"schema_version": 2, "run_id": payload["run_id"], "attempt_id": payload["attempt_id"], "created_at_utc": utc_now(),
+    registration = {"schema_version": 1, "run_id": payload["run_id"], "attempt_id": payload["attempt_id"], "created_at_utc": utc_now(),
                     "intent": file_ref(intent_path, root), "nonce": intent["nonce"], "process": identity}
     publish_json(context, attempt / "child_registration.json", registration, kind="child_registration")
     try:
