@@ -20,8 +20,8 @@ erhalten. Die abschließende Validierung bleibt in beiden Fällen verpflichtend.
 | Reine Verträge und unabhängiger Review | Gezielte Quellprüfungen bestanden; keine offenen P1/P2 im unterstützten nativen JSON-Umfang |
 | Vollständige Testsuite | 942 Tests in 43.52 Sekunden im tatsächlichen Hauptcheckout |
 | Statische Prüfung | Ruff für Quellcode, Tests, Werkzeuge und Buildbackend sauber |
-| Installation und Betriebsqualifizierung | Frischer Build und Mac-/Linux-Prüfungen für Release 11 erforderlich |
-| SDK-/CLI-Laufzeitkontrollen und Policyeffekte | Neue vollständige Prüfungen erforderlich |
+| Installation und Betriebsqualifizierung | Release 11: 34 Mac- und 39 Linux-Kontrollen, öffentliche Fortsetzung und je acht korrekte CLI-Fälle bestanden; zusätzlich drei Mac-Terminalabläufe und externe SDK-Installation geprüft |
+| SDK-/CLI-Laufzeitkontrollen und Policyeffekte | Ursprünglicher CLI-Vergleich beendet: 84 korrekte Läufe, 42 mathematisch gleiche Paare, zehn klare Bestehen und zwei unklare Bedingungen. SDK- und Policykontrollen laufen; getrennte statistische CLI-Nachprüfung wird vorbereitet |
 | Größere Strategien-/Gridstudie | Noch nicht gestartet; 100 neue Probleme × zwölf Bedingungen erst nach bestandenen Freigabegates |
 
 Die Releases 5, 6 und 7 sind trotz bestandener Funktionskontrollen am vollständigen
@@ -36,7 +36,16 @@ Elf native Bedingungen bestehen, eine bleibt nach der vorgesehenen Ergänzung
 bei einem medianen Zeitquotienten von 1,04785 unklar. Drei isolierte Vorschläge
 am Zahlenvergleich verfehlten ihre vorab festgelegten Nutzenhürden und wurden
 verworfen. Release 11 enthält ausschließlich den zusätzlich geprüften
-Supervisorumbau; dessen Laufzeitwirkung ist noch nicht freigegeben.
+Supervisorumbau. Sein ursprünglicher nativer Vergleich ist ohne klare
+Regression beendet, aber nicht insgesamt freigegeben.
+
+Die implementierte Max-/Min-Screeningregel enthält einen Prüfdesignfehler:
+Sobald Werte auf beiden Seiten der Grenze liegen, kann eine Ergänzung diesen
+Zustand nicht mehr auflösen. Alle ursprünglichen Einstufungen bleiben erhalten.
+Eine neue, getrennte Nachprüfung fixiert ihre vollständige Stichprobe und
+Auswertung vor dem ersten neuen Lauf; die Grenze von fünf Prozent bleibt
+unverändert. Die dabei erforderlichen statistischen Annahmen werden ausdrücklich
+ausgewiesen. Sie ist keine nachträgliche Umwertung der bisherigen Messungen.
 
 Komponentenmessungen beschreiben ausschließlich ihre angegebenen Prüfgrenzen;
 sie ersetzen keine vollständigen Laufzeitgates. Der

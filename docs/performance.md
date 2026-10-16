@@ -186,6 +186,18 @@ keine Watchdogentscheidung und entfällt. Die vollständige verpflichtende Prüf
 nach bewiesenem Gruppenende bleibt immer erhalten; mit Zeitlimit bleibt auch
 die frühe Prüfung erhalten. Elf neue Ablaufkontrollen und vier unabhängige
 Kontrollen prüfen diese Grenzen einschließlich fehlerhafter Resultate. Die
-Laufzeitwirkung muss das unveränderte vollständige Gate erst nach frischer
-Paketqualifizierung bestätigen. Aus der Anzahl vermiedener Readeraufrufe wird
-keine vorweggenommene Zeitfreigabe abgeleitet.
+Paketqualifizierung bestand auf beiden Hosts. Der ursprüngliche vollständige
+CLI-Vergleich lieferte 84 korrekte Resultate und 42 mathematisch gleiche Paare.
+Zehn Bedingungen bestehen; zwei bleiben nach der festgelegten Ergänzung unklar.
+Aus der Anzahl vermiedener Readeraufrufe wird keine Zeitfreigabe abgeleitet.
+
+Die ursprüngliche Screeningimplementierung fordert zum Bestehen, dass sämtliche
+Zeitquotienten höchstens 1,05 sind, und klassifiziert nur dann eine Regression,
+wenn sämtliche Quotienten darüber liegen. Ein gekreuzter Befund bleibt daher
+unter jeder Ergänzung weiterer Werte zwangsläufig unklar. Das entspricht nicht
+dem vorgesehenen Zweck einer zusätzlichen Unsicherheitsprüfung. Die vorhandenen
+Pläne, Rohdaten, Werkzeuge und Einstufungen bleiben unverändert erhalten.
+Eine gesonderte Nachprüfung wird mit festen neuen Paarzahlen, derselben Grenze
+und vollständiger Auswertungsregel vor ihrem ersten Lauf festgelegt. Ihr
+statistisches Screening gilt nur unter den dokumentierten Annahmen und für die
+untersuchten Kontrollen; es ist keine allgemeine Laufzeitgarantie.

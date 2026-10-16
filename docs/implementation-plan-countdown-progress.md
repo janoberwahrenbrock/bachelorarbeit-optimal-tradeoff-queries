@@ -463,6 +463,15 @@ Nach bestandener numerischer Prüfung werden pro Bedingung drei gepaarte ungepro
 
 Als Screening gilt: medianer Quotient neuer zu bisheriger Laufzeit höchstens `1.05`, ohne systematisch erhöhten Aufwand der Zustandsanalyse, numerischen Aufrufe oder Rootdispatches. Reicht die Streuung für eine Aussage nicht aus, folgt eine vorab einmalig festgelegte Ergänzung um drei Blöcke für alle betroffenen Vergleichsbedingungen. Ein weiterhin unklarer Befund bleibt unklar; drei Wiederholungen ergeben keine allgemeine statistische Laufzeitgarantie. Unerklärte Regressionen werden vor Freigabe behoben.
 
+Die erste CLI-Screeningimplementierung wich hiervon ab: Ihre Max-/Min-Regel
+kann einen bereits gekreuzten Befund durch ergänzte Blöcke niemals auflösen.
+Die ursprünglichen Messungen und Einstufungen bleiben als solche erhalten.
+Eine getrennte prospektive Nachprüfung verwendet vor ihrem ersten Lauf eine
+vollständig fixierte Stichprobe und Auswertung bei unveränderter
+Fünf-Prozent-Grenze. Annahmen, Aussagegrenzen und ein erneut unklarer Ausgang
+werden ausdrücklich dokumentiert; weder Verlängerung bis zum Bestehen noch
+nachträgliche Neuwertung der alten Daten sind zulässig.
+
 Zusätzliche vollständige Planung nach einem nachgewiesenen Countdownfehlschlag ist gewollter Aufwand. Sie wird als Fallback separat gezählt und nicht als Verwaltungsregression eines identischen mathematischen Aufrufs bewertet. Ein neuer Pool oder eine erneute geometrische Rootinitialisierung für diesen Fallback wäre dagegen zu vermeiden und gezielt zu prüfen.
 
 ### Prüfung der neuen Abbruchstrategie
