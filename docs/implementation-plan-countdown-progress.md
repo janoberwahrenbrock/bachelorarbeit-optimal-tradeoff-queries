@@ -1,20 +1,21 @@
 # Implementierungsplan für Countdown und Mindestfortschritt
 
-Stand: 16. Oktober 2026. Status: Umsetzung autorisiert und im Integrationsbranch implementiert; die abschließende Abnahme läuft. Der normative Vertrag, die Arbeitspakete und Prüfkriterien dieses Plans bleiben verbindlich. Fortschritt und ursprünglicher Quellstand sind unter `runs/countdown-progress-integration-20261016T030055Z/` gesichert.
+Stand: 16. Oktober 2026. Status: Implementierung und Abnahme abgeschlossen; der reguläre Stand ist auf `main` übernommen. Dieser Plan erhält den ursprünglich festgelegten Vertrag, die Arbeitspakete und Prüfkriterien. Die Entwicklungs- und Fehlerhistorie bleibt projektintern unter `runs/countdown-progress-integration-20261016T030055Z/` gesichert. Die anschließende 100-Probleme-Studie ist abgeschlossen und veröffentlicht.
 
-Countdown ist im Abnahmekandidaten ein regulärer Ausführungsmodus der festen Strategie. Eine zusätzliche Policy `min_expected_progress` begrenzt die Fortsetzung auf Pläne mit ausreichender erwarteter Verbesserung. Ihr Default ist `0.001`. Beide Funktionen sind in dieselbe Solverarchitektur, dieselben öffentlichen Schnittstellen und dieselbe nachvollziehbare Ausführung integriert.
+Countdown ist seit Version 0.2.0 ein regulärer Ausführungsmodus der festen Strategie. Eine zusätzliche Policy `min_expected_progress` begrenzt die Fortsetzung auf Pläne mit ausreichender erwarteter Verbesserung. Ihr Default ist `0.001`. Beide Funktionen sind in dieselbe Solverarchitektur, dieselben öffentlichen Schnittstellen und dieselbe nachvollziehbare Ausführung integriert.
 
-Die gesicherte Hauptzweig-Ausgangsbasis ist `3f70c16c962d01a5846659dd0bb49f32899344a6`. Der ursprüngliche experimentelle Modulo-Countdown ohne Neustart und Fortschrittsschwelle wurde einschließlich seiner lokalen Änderungen separat als `codex/pre-countdown-progress-20261016` bei `d3877f2252bb8ab2c6c24d2ec52061f7b588bb4c` gesichert. Dieser Ausgangsstand ist keine unverändert übernommene Definition des neuen Vertrags. Die reguläre Integration liegt auf `codex/countdown-progress-integration`.
+Die gesicherte Hauptzweig-Ausgangsbasis ist `3f70c16c962d01a5846659dd0bb49f32899344a6`. Der ursprüngliche experimentelle Modulo-Countdown ohne Neustart und Fortschrittsschwelle wurde einschließlich seiner lokalen Änderungen separat als `codex/pre-countdown-progress-20261016` bei `d3877f2252bb8ab2c6c24d2ec52061f7b588bb4c` gesichert. Dieser Ausgangsstand ist keine unverändert übernommene Definition des neuen Vertrags. Die reguläre Integration wurde über `codex/countdown-progress-integration` vorbereitet und als `a5ba67b56d7214153535a3927cc04e76b3f5b274` auf `main` übernommen.
 
 ## Umsetzungs- und Abnahmestand
 
-Die aktuellen Quellen, vollständigen Testzahlen, installierten Kontrollen und
-noch offenen Laufzeitgates stehen zentral im
-[Implementierungsstatus](implementation-status.md). Der
-[laufende Abnahmenachweis](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json)
-erhält zusätzlich sämtliche fehlgeschlagenen und verworfenen Versuche.
-Kein früherer Nachweis wird auf geänderte Quellen übertragen. Dieser Status
-ersetzt keines der nachfolgenden verbindlichen Abnahmekriterien.
+Die Quellen, vollständigen Testzahlen und abgeschlossenen installierten Kontrollen
+stehen zentral im [Implementierungsstatus](implementation-status.md). Die
+[öffentliche Hauptstudie](../studies/strategy-grid100-progress001-20261016T030055Z/README.md) bindet ihre Ergebnisse an das
+tatsächlich ausgeführte Wheel. Fehlgeschlagene und verworfene Entwicklungsversuche
+bleiben im getrennten projektinternen Abnahmenachweis erhalten; sie sind nicht
+Teil der Qualitätsstichprobe. Kein früherer Nachweis wird auf geänderte Quellen
+übertragen. Die folgenden Abschnitte dokumentieren die ursprünglichen
+verbindlichen Abnahmekriterien.
 
 ## Ziel und Umfang
 
@@ -30,7 +31,7 @@ Nach der Umsetzung stehen drei Ausführungsvarianten zur Verfügung:
 
 Die Integration umfasst Fachtypen, Policy, mathematische Auswahl, Ablaufsteuerung, SDK, native Aufzeichnung, Audit, Export, Konfigurationsbeispiele und Produktdokumentation. Es entsteht keine eigene Solverschleife für Countdown und keine Sonderimplementierung im Benchmarkcontroller.
 
-Der anschließend gewünschte größere Vergleich von Neuplanung, Countdown und adaptiver Strategie bei verschiedenen Grids wird im separaten [Benchmarkplan für Strategien und Gridgrößen](benchmark-plan-strategy-grid-comparison.md) konkretisiert. Er folgt nach der Implementierung und deren Abnahme; sein vorgeschlagener Umfang sind 100 neue Probleme mit zwölf Bedingungen aus drei Strategien und Grid 3, 5, 10 und 20.
+Der anschließende Vergleich von Neuplanung, Countdown und adaptiver Strategie bei Grid 3, 5, 10 und 20 wurde mit 100 neuen Problemen und zwölf Bedingungen durchgeführt. Der [Benchmarkplan](benchmark-plan-strategy-grid-comparison.md) dokumentiert die ursprüngliche Festlegung; die [Studienseite](../studies/strategy-grid100-progress001-20261016T030055Z/README.md) enthält die abgeschlossenen Ergebnisse und Rohdatenreferenzen.
 
 Geometrische Antwortwahrscheinlichkeiten, Querygeneratoren, numerische Toleranzen und zulässige Planungstiefen bleiben dieselben fachlichen Verfahren. Die Fortschrittsschwelle ist eine neue Abbruchstrategie. Laufzeitgewinne durch frühere ungelöste Abschlüsse werden deshalb getrennt von reinen Implementierungsverbesserungen ausgewiesen.
 
@@ -499,7 +500,7 @@ Ein beabsichtigter früherer ungelöster Stopp kann fachlich korrekt sein. Er wi
 
 Die Arbeitspakete ergeben kleine zusammenhängende Commits: Fachvertrag, mathematische Auswahl, Ablauf/Continuation, versionierte Persistenz, Auswertung/Dokumentation und Freigabenachweise. Dokumentation und Tests des jeweiligen Vertrags werden nicht bis zum letzten Commit zurückgestellt. Der fertige Hauptzweig enthält einen konsistenten aktuellen Algorithmus, keine Kette ungeklärter Kompatibilitätsflags im Rechenkern. Änderungen am Codepayload oder seinen Versionsbytes nach H machen die betroffenen Qualifizierungs- und Laufzeitnachweise ungültig und erfordern einen neuen Build mit erneuter Prüfung.
 
-Für den Implementierungsbranch ist `codex/countdown-progress-integration` vorgesehen. Die vorhandenen lokalen Änderungen werden vor jedem Branch-/Worktreewechsel gesichert und gezielt übernommen; ein Reset des experimentellen Arbeitsstands ist kein Teil des Plans. Historische Studien werden weder committed noch in neue Konfigurationssemantik umgeschrieben.
+Die Umsetzung verwendete `codex/countdown-progress-integration`. Der ursprüngliche Plan verlangte, lokale Änderungen vor Branch-/Worktreewechseln zu sichern und gezielt zu übernehmen. Historische Studien behalten ihre ursprünglichen Bytes und ihre Konfigurationssemantik; ausgewählte abgeschlossene Studien werden nun separat nach dem [Veröffentlichungsverfahren](publication.md) publiziert.
 
 ## Endgültige Abnahmekriterien
 

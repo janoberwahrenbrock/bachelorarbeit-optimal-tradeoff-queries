@@ -11,3 +11,7 @@ verwendeten Eingaben; bestehende Generierungsausgaben werden nicht überschriebe
 Das [Benchmarkverfahren](../docs/benchmarks.md) und der
 [Quickstart](../docs/quickstart.md) zeigen die Befehle. Tatsächliche Eingaben
 werden nicht automatisch auf GitHub veröffentlicht oder in Wheel/Sdist verpackt.
+Ausgewählte abgeschlossene Studien erhalten unveränderte Veröffentlichungskopien
+unter `studies/<study-id>/inputs/` und vollständige Release-Downloads; der
+[Studienkatalog](../studies/README.md) ist der öffentliche Einstieg. Die
+ursprünglichen Arbeitsdateien und ihre Identitäten bleiben erhalten.

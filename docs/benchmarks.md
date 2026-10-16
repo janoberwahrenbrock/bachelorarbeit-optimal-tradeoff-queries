@@ -83,8 +83,10 @@ for a compatibility comparison with disabled progress admission.
 The historical 50-case Grid3/5 experiment and fresh25-case Grid3/5/9 experiment
 used the previous experimental modulo countdown without the new full retry.
 Their completed results are in the original study folders. They do not measure
-this new execution contract. The current100-case, twelve-condition study is
-specified in [the strategy/grid benchmark plan](benchmark-plan-strategy-grid-comparison.md).
+this new execution contract. The completed 100-case, twelve-condition study is
+[published with its results and raw downloads](../studies/strategy-grid100-progress001-20261016T030055Z/README.md);
+[the strategy/grid benchmark plan](benchmark-plan-strategy-grid-comparison.md)
+retains its original design.
 New configuration and execution contracts require source-specific qualification;
 historical evidence cannot be relabeled as a current-source result.
 
@@ -126,3 +128,13 @@ is never replaced. The final `dataset.json` or `suite.json` is the commit marker
 published only after its payload files and directories are durable. A failed
 creation may retain forensic payload files without that final entrypoint; it is
 not a usable dataset/suite and is not silently retried or overwritten.
+
+## Publishing completed studies
+
+Working inputs and native runs remain under `inputs/` and `runs/`. Publication
+creates a separate reviewed study under `studies/<study-id>/`, with exact input
+copies, compact results, source binding and a release download for original
+raw records. A common study mapping may reference multiple native series; it
+does not merge or rewrite their IDs, audits or sealed inventories. Follow
+[the publication workflow](publication.md) and keep all original attempts and
+quality denominators visible.

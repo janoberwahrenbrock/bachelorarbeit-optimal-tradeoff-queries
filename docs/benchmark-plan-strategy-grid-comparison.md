@@ -1,13 +1,15 @@
 # Benchmarkplan für Strategien und Gridgrößen
 
-Stand: 16. Oktober 2026. Status: Umfang und Ausführung autorisiert; die Integration ist implementiert, ihre abschließenden Freigabegates laufen. Die größere Vergleichsserie ist noch nicht gestartet. Der autorisierte Umfang beträgt 100 neue Probleme und 1.200 Läufe für Neuplanung, Countdown und adaptive Strategie mit Grid 3, 5, 10 und 20.
+Stand: 16. Oktober 2026. Status: vollständig abgeschlossen. Alle 1.200 Läufe auf 100 neuen Problemen endeten korrekt beim Singleton. Die [gemeinsame Studienseite](../studies/strategy-grid100-progress001-20261016T030055Z/README.md) veröffentlicht die 100-Zeilen-Tabelle, Auswertung und Rohdaten. Dieser Plan erhält die vorab festgelegte Methode und die damaligen Aufwandsschätzungen; die folgenden Zukunftsformulierungen beschreiben diese ursprüngliche Festlegung.
 
 Die Umsetzung selbst folgt dem [Implementierungsplan für Countdown und Mindestfortschritt](implementation-plan-countdown-progress.md). Die dortigen Funktions-, Integrations- und Qualifizierungsprüfungen bleiben Voraussetzung dieser Studie. Dieser Benchmarkplan definiert die anschließende inhaltliche Untersuchung der Varianten.
 
-Quellenbindung, Testzahlen und Freigabegates werden zentral im
-[Implementierungsstatus](implementation-status.md) geführt. Der
-[fortlaufende Abnahmenachweis](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json)
-erhält die Fehlerhistorie und konkreten Belege. Frühere SDK- und
+Quellenbindung, Testzahlen und abgeschlossene Freigabegates stehen im
+[Implementierungsstatus](implementation-status.md). Die öffentliche
+[Studienquellenbindung](../studies/strategy-grid100-progress001-20261016T030055Z/provenance/source.json)
+und das [Veröffentlichungsmanifest](../studies/strategy-grid100-progress001-20261016T030055Z/publication-manifest.json)
+binden die Messungen und Downloads. Die separate lokale Entwicklungs- und
+Fehlerhistorie gehört nicht zur Primärstichprobe. Frühere SDK- und
 Funktionsprüfungen werden nicht auf geänderte Quellen übertragen.
 
 ## Fragestellungen
@@ -29,7 +31,7 @@ Vorhandene Projektbelege:
 
 ## Feste Konfiguration
 
-| Größe | Vorgeschlagene Festlegung |
+| Größe | Vorab festgelegte und ausgeführte Konfiguration |
 | --- | --- |
 | Unabhängige Probleme | 100 neue ungefilterte Probleme; identische Matrizen und Zielgewichte; jede Antwort wird aus der tatsächlich gestellten Query simuliert |
 | Ziele | 5 |
@@ -108,7 +110,7 @@ Lange Endphasen werden gesondert beschrieben: Queries bei unveränderter tatsäc
 
 Die Quellenbindung, Resultat-/Journalhashes, akzeptierten Antworten und wahren Gewinner werden unabhängig geprüft. Native Audits und JSON-/CSV-Exporte verwenden denselben Auditstand. Anschließend werden Rohdaten, Auswertung und Prüfnachweise versiegelt und auf Bench und Mac mit Hashvergleich gesichert. Dieser Audit behauptet keine erneute geometrische Zertifizierung aller hypothetischen Bewertungen.
 
-## Zeitliche Orientierung
+## Historische zeitliche Orientierung vor dem Start
 
 Die frühere reine Neuplanungsstudie hat genau diese vier Gridgrößen auf 100 Problemen gemessen. Ihre primären Controller-Wandzeiten einschließlich Start-/Speicheraufwand betrugen:
 
@@ -128,13 +130,25 @@ Die zentrale Orientierung beträgt damit rund vier Stunden für die 1.200 seriel
 
 Die neue Fortschrittsregel, Countdownneustarts und andere Fälle können die Dauer ändern. Nach den ersten 36 neuen Jobs wird eine aktualisierte Schätzung aus tatsächlichen vollständigen Messungen erstellt. Die hier genannten historischen Zeiten beschreiben nicht die noch ungemessene neue Quelle.
 
-## Abgrenzung und noch nicht gestartete Schritte
+## Tatsächlicher Abschluss und Abgrenzung
 
-Dieser Vorschlag vertieft den gewünschten Strategien-/Gridvergleich. Er ersetzt keine ausführliche Tiefe-3-, Sieben-Ziele-, Konfidenz- oder Thresholdsensitivitätsstudie. Solche Untersuchungen erhalten eigene festgelegte Fragen und Fallgruppen.
+Die Studie umfasst genau 100 unabhängige Probleme und 1.200 Läufe mit jeweils
+einem Versuch. Alle Auswahlen waren richtige Singletonlösungen. 11.797
+tatsächlich akzeptierte Antworten wurden unabhängig geprüft; alle 58
+Countdownersatzplanungen waren erfolgreich. Es gab keine Anfangssingletons,
+ungelösten Abschlüsse, Fehler oder Unterbrechungen. Die beiden vorab
+festgelegten nativen Phasen mit 36 und 1.164 Jobs sind über das ursprüngliche
+Mapping zu einer gemeinsamen Studie verbunden.
 
-Die reguläre Integration ist im aktuellen Abnahmekandidaten implementiert; noch offene
-Abnahmen und ihre Belege bleiben im fortlaufenden Implementierungsstatus
-sichtbar. Die Benchmarkserie folgt erst nach bestandener Abnahme. Vor ihrem
-Start und einer Wiederaufnahme werden der Implementierungsplan, dieser
-Benchmarkplan und die vorhandenen Arbeitsanweisungen gelesen. Fortschritt,
-Fehler und Wiederaufnahmepunkte werden fortlaufend dokumentiert.
+Vom ersten Fallstart bis zum letzten Fallende vergingen 4 Stunden, 8 Minuten
+und 7 Sekunden. Der anschließende native Abschluss benötigte rund 58 Minuten;
+er ist gesonderter Prüf-/Archivaufwand und keine Solverlaufzeit. Die endgültige
+Sicherung folgte danach. Die historischen Schätzungen oben werden nicht
+nachträglich auf diese gemessenen Zeiten umgeschrieben. Einzelzeiten und
+genaue Messgrenzen stehen auf der [Studienseite](../studies/strategy-grid100-progress001-20261016T030055Z/README.md).
+
+Die Studie vertieft den Strategien-/Gridvergleich. Sie ersetzt keine
+ausführliche Tiefe-3-, Sieben-Ziele-, Konfidenz- oder
+Thresholdsensitivitätsstudie. Solche Untersuchungen erhalten eigene
+festgelegte Fragen und Fallgruppen. Die unabhängige Rohprüfung ist keine
+geometrische Neuzertifizierung aller hypothetischen Planbewertungen.

@@ -110,8 +110,17 @@ threshold; conversion creates a separate current input rather than rewriting dat
 
 ## Abnahmestand der Integration vom 16. Oktober 2026
 
-Quellenbindung, vollständige Testzahlen und noch offene Freigabegates stehen
-zentral im [Implementierungsstatus](implementation-status.md). Der
-[Abnahmenachweis](../runs/countdown-progress-integration-20261016T030055Z/implementation-state.json)
-erhält auch fehlgeschlagene Abnahmen und verworfene Kandidaten. Jede Änderung
-des Paketpayloads benötigt neue quellgebundene Kontrollen und Laufzeitgates.
+Die Integration ist auf `main` übernommen. Quellenbindung, vollständige
+Testzahlen und abgeschlossene Freigabegates stehen zentral im
+[Implementierungsstatus](implementation-status.md). Die
+[anschließende Hauptstudie](../studies/strategy-grid100-progress001-20261016T030055Z/README.md) veröffentlicht ihre
+eigenständigen Mess- und Prüfnachweise. Fehlgeschlagene Entwicklungsabnahmen
+und verworfene Kandidaten bleiben getrennt im lokalen Abnahmenachweis
+erhalten. Jede Änderung des Paketpayloads benötigt neue quellgebundene
+Kontrollen und Laufzeitgates.
+
+Abgeschlossene Studien erhalten eine ausdrücklich geprüfte Veröffentlichung
+unter `studies/` und einen passenden Release mit Rohdaten. Das
+[Veröffentlichungsverfahren](publication.md) beschreibt die Ablage und
+Paketprüfung; neue Arbeitsdaten werden weiter ausschließlich projektintern
+unter `inputs/` und `runs/` erzeugt.

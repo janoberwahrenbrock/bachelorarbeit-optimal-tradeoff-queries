@@ -11,5 +11,10 @@ Inputs oder terminalen Resultate von Hand. Ein portables Archiv besitzt ein
 eigenes überprüfbares Inventar; siehe [Archive](../docs/seal.md).
 
 Tatsächliche Laufdaten bleiben im Projekt. Sie werden nicht automatisch auf
-GitHub geladen und nicht in Wheel/Sdist verpackt. Eine spätere Versionierung
-ausgewählter Daten ist eine ausdrückliche separate Entscheidung.
+GitHub geladen und nicht in Wheel/Sdist verpackt. Ausdrücklich veröffentlichte
+Studien liegen im [Studienkatalog](../studies/README.md). Ihre kompakten
+Ergebnisse und Quellenbelege sind reguläre Repositorydateien; die vollständigen
+Originalaufzeichnungen liegen beim zugehörigen GitHub-Release. Das
+[Veröffentlichungsverfahren](../docs/publication.md) erhält die ursprünglichen
+Serien- und Versuchsdaten unverändert und dokumentiert gemeinsam ausgewertete
+Teilserien über ein festes Mapping.
