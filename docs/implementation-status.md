@@ -1,6 +1,24 @@
 # Implementierungsstatus
 
-## Aktuelle Integration 0.2.0
+## Aktueller Entwicklungsstand: logarithmische Gridinnenpunkte
+
+Stand: 17. Oktober 2026. Der Arbeitsstand verwendet das numerische Profil
+`otqa-exact-v3` mit Gridgrenzen `0.05` bis `20` und logarithmisch gleichmäßig
+verteilten Innenpunkten für jede konfigurierte Gridgröße. Leere und gemäß den
+bestehenden Toleranzen zusammenfallende Intervalle erzeugen keine Gridqueries.
+Die gemeinsame Gridfunktion gilt für `grid` und `both`; Ratioerzeugung und
+ausschließliche Ratioverwendung auf der letzten Planungsebene bleiben erhalten.
+Formel und Sonderfälle stehen in [Algorithmus](algorithm.md) und
+[Numerische Berechnung](numerical_behavior.md).
+
+Die zusätzliche Partitionsrecovery des vorherigen Profils `otqa-exact-v2`
+bleibt enthalten. Der neue Gridvertrag verändert die Querymenge und kann
+Verläufe und Laufzeiten ändern. Die endgültige neue Wheel-/Quellenbindung und
+ihre vollständige Abnahme sind gesondert festzuhalten; die unten beschriebenen
+historischen Freigaben gelten dafür nicht. Bestehende Studien und ihre
+Rohdaten behalten ihre ursprüngliche Methode und Quellenbindung.
+
+## Abgenommene Integration 0.2.0 vom 16. Oktober 2026
 
 Stand: 16. Oktober 2026. Countdown mit vollständiger Ersatzplanung,
 `min_expected_progress=0.001`, explizite Fortsetzungen und versionierte

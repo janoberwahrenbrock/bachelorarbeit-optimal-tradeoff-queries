@@ -1,9 +1,12 @@
 """Resolved, active method constants; no user policy or inactive modes."""
 from copy import deepcopy
 
+GRID_MINIMUM = 0.05
+GRID_MAXIMUM = 20.0
+
 _VALUES = {
     "query_generation": {
-        "min_grid_value": 1e-3, "max_grid_value": 100.0, "grid_spacing": "log",
+        "min_grid_value": GRID_MINIMUM, "max_grid_value": GRID_MAXIMUM, "grid_spacing": "log",
         "ratio_query_epsilon": 1e-3, "raw_query_tolerance": 1e-12,
         "dedup_abs_tolerance": 1e-12, "dedup_rel_tolerance": 1e-9,
         "answered_abs_tolerance": 1e-12, "answered_rel_tolerance": 1e-9,
@@ -47,7 +50,7 @@ def resolved_numerical_profile() -> dict:
     numeric_hex = {f"/values/{group}/{key}": value.hex()
                    for group, settings in values.items()
                    for key, value in settings.items() if type(value) is float}
-    return {"profile_id": "otqa-exact-v2", "values": values, "numeric_hex": numeric_hex}
+    return {"profile_id": "otqa-exact-v3", "values": values, "numeric_hex": numeric_hex}
 
 
 def resolved_cache_policy() -> dict:

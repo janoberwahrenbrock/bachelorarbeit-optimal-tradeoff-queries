@@ -10,7 +10,7 @@ Die Profile sind getrennt:
 
 | Profil | Zweck |
 | --- | --- |
-| Numerisches Profil `otqa-exact-v2` | Aktive feste Query-, LP-, Geometrie- und Recoverywerte. |
+| Numerisches Profil `otqa-exact-v3` | Aktive feste Query-, LP-, Geometrie- und Recoverywerte einschließlich des logarithmischen Innengridvertrags. |
 | Cachepolicy `bounded_v1` | Sessionbesitz und unabhängige Entry-/Payloadbytegrenzen. |
 | Ausführungsprofil der Dateilaufzeit | Qualifizierte Plattform-, Python-, Bibliotheks- und Backendkombination; konkrete Ausführungssettings werden gesondert gebunden. |
 | Nutzerpolicy | Strategie, Horizonte, Queryquelle und Stopregel. |
@@ -21,7 +21,7 @@ Wichtige feste Werte sind:
 
 | Bereich | Aktiver Wert |
 | --- | --- |
-| Logarithmisches Grid | Grenzen `0.001` bis `100`; Anzahl aus `grid_size`. |
+| Logarithmisches Grid | Grenzen `0.05` bis `20`; logarithmische Innenpunkte, Anzahl aus `grid_size`. |
 | Ratioqueryepsilon | `0.001`. |
 | HiGHS primale/duale Machbarkeitstoleranz | Je `1e-10`. |
 | Geometrietoleranz | `1e-10`. |
@@ -32,6 +32,37 @@ Wichtige feste Werte sind:
 | Zusätzliche exakte Wahrscheinlichkeits-Recovery | Expliziter Gewichtssimplex mit höchstens `7` Zielen, ohne weitere unabhängige Gleichheiten; gemeinsame rationale Partition bis Dimension `6`. |
 
 Der Resolver ist die maßgebliche vollständige Liste. Änderungen an einem aktiven Wert sind Änderungen der numerischen Methode und müssen gesondert geprüft werden.
+
+### Innengridvertrag des Profils v3
+
+Die Modulkonstanten `GRID_MINIMUM=0.05` und `GRID_MAXIMUM=20.0` in
+`otqa.numerics.profile` liefern sowohl die Standardgrenzen der gemeinsamen
+Gridfunktion als auch die gespeicherten Profilwerte. `grid_spacing="log"`
+bleibt erhalten. Die Profil-ID `otqa-exact-v3` bindet zusätzlich die Platzierung
+als Innenpunkte und die Behandlung degenerierter Intervalle; es gibt keinen
+Nutzerumschalter auf die frühere Platzierung.
+
+Nach dem Schnitt der bereits bestimmten zustandsabhängigen Verhältnisgrenzen
+mit diesen Grenzen verwendet jede Gridgröße `g >= 1` für `0 < lower < upper`
+die Werte `lower * (upper / lower) ** (r / (g + 1))`, `r=1,...,g`, umgesetzt mit
+`geomspace(lower, upper, g + 2)[1:-1]`. Die logarithmischen Abstände einschließlich
+der äußeren Abstände sind gleich. Gridgröße eins liefert die geometrische Mitte.
+Leere oder gemäß den vorhandenen absoluten/relativen Gridgleichheitstoleranzen
+zusammenfallende Intervalle liefern keine Gridquery. Durch Binary64rundung auf
+eine Grenze fallende Punkte werden verworfen. Numerische LP-Fehler werden nicht
+als leeres Intervall umgedeutet; Toleranzen bleiben unverändert.
+
+Die Grenzen gelten ausschließlich für Gridqueries. Ratioepsilon, Ratioqueries
+einschließlich Werten außerhalb dieses Bereichs, Quellen-/Spiegelbereinigung,
+Antwortfilter und die ausschließliche Ratioverwendung auf der letzten
+Planungsebene behalten ihren bestehenden Vertrag. Die Punktplatzierung fügt
+keine LP- oder Geometrieberechnungen hinzu.
+
+Das zuvor aktive Profil `otqa-exact-v2` bindet die zusätzliche
+Simplex-Partitionsrecovery mit der früheren Gridmethode. Historische Profile,
+Studien und Quellenbindungen behalten ihre ursprünglichen Bytes. Eine alte
+Qualifizierung bestätigt weder die v3-Gridmethode noch das geänderte Paket;
+das endgültige neue Wheel benötigt eigene quellgebundene Prüfungen.
 
 ## LPs und native Vorbereitung
 
@@ -77,7 +108,10 @@ Ein gemeinsames Budget umfasst Eingangsprüfung, Elternregion und beide Kinder: 
 
 Bei endgültigem Partitionsfehler behält `NumericalError` den angenommenen Antwortpräfix und seinen Cursor. Die Dateilaufzeit speichert zusätzlich unter `error.context.geometry_failure` Query, Dimensions-/Constraintzahlen sowie verfügbaren Recoverygrund und Arbeitszähler. Bis 1.024 Koeffizienten wird auch der vollständige ursprüngliche Constraint-Key zur Reproduktion gespeichert; größere Diagnosen werden ausdrücklich als begrenzt markiert. Die ursprüngliche Exceptionkette bleibt erhalten.
 
-`otqa-exact-v2` bindet diesen zusätzlichen Rechenpfad und seine Grenzen. Historische Profile bleiben lesbar; eine frühere Betriebsqualifizierung wird dadurch nicht zu einer Qualifizierung des geänderten Pakets.
+Seit `otqa-exact-v2` sind dieser zusätzliche Rechenpfad und seine Grenzen im
+Profil gebunden; das aktive Profil `otqa-exact-v3` behält sie bei. Historische
+Profile bleiben lesbar; eine frühere Betriebsqualifizierung wird dadurch nicht
+zu einer Qualifizierung des geänderten Pakets.
 
 Diese Pfade behandeln festgelegte mehrdeutige Null-/Fehlerfälle. Rationale Antwortpartitionen prüfen gemeinsam, ob die Childmaße den Parent exakt aufteilen. Eine positive Wahrscheinlichkeit darf bei der anschließenden Binary64darstellung nicht unbemerkt zu null unterlaufen. Die Reparatur eines leeren positiven Kandidatenzweigs verlangt einen tatsächlichen strikten Singletonbeweis; sie wählt keinen beliebigen Parentkandidaten und erzwingt keine Tieauflösung.
 
