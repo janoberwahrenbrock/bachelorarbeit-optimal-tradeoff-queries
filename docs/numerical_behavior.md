@@ -10,7 +10,7 @@ Die Profile sind getrennt:
 
 | Profil | Zweck |
 | --- | --- |
-| Numerisches Profil `otqa-exact-v1` | Aktive feste Query-, LP-, Geometrie- und Recoverywerte. |
+| Numerisches Profil `otqa-exact-v2` | Aktive feste Query-, LP-, Geometrie- und Recoverywerte. |
 | Cachepolicy `bounded_v1` | Sessionbesitz und unabhängige Entry-/Payloadbytegrenzen. |
 | Ausführungsprofil der Dateilaufzeit | Qualifizierte Plattform-, Python-, Bibliotheks- und Backendkombination; konkrete Ausführungssettings werden gesondert gebunden. |
 | Nutzerpolicy | Strategie, Horizonte, Queryquelle und Stopregel. |
@@ -29,6 +29,7 @@ Wichtige feste Werte sind:
 | Konservativer Supportabstand | Skalierter Abstand mit Faktor `100` und Untergrenze `1e-8`. |
 | Rationale LP-Recovery | Höchstens `5` Variablen und `20_000` vollständige aktive Punkt-/Strahlkombinationen. |
 | Rationale Geometrie-Recovery | Explizite affine Dimension höchstens `2`; Intrinsikfaktor mit Decimalpräzision `80`. |
+| Zusätzliche exakte Wahrscheinlichkeits-Recovery | Expliziter Gewichtssimplex mit höchstens `7` Zielen, ohne weitere unabhängige Gleichheiten; gemeinsame rationale Partition bis Dimension `6`. |
 
 Der Resolver ist die maßgebliche vollständige Liste. Änderungen an einem aktiven Wert sind Änderungen der numerischen Methode und müssen gesondert geprüft werden.
 
@@ -67,6 +68,16 @@ Die Sicherheitsmarge skaliert mit Geometrie- und Objektivgröße. Dadurch ist ei
 Die rationale LP-Recovery arbeitet auf den **exakten Binary64eingaben** mittels `Fraction`, nicht auf einer Interpretation der eingegebenen Dezimalzeichenfolge. Sie benötigt explizite homogene Nichtnegativitätsconstraints und eine vollständig innerhalb der Grenzen aufzählbare Punkt-/Rezessionsgeometrie. Bei überschrittenem Limit wird keine unvollständige Enumeration als Zertifikat ausgegeben. Nichtendliche oder nicht positiv darstellbare Ergebnisse werden abgelehnt.
 
 Die rationale Geometrie-Recovery benötigt explizite Simplex-/Nichtnegativitätsbedingungen und einen nach exakter Gleichheitselimination höchstens zweidimensionalen affinen Raum. Ein Problem mit vielen Zielen kann darunter fallen, wenn genügend **explizite** Gleichheiten vorliegen. Ein allgemeiner höherdimensionaler oder nur durch Ungleichungen dünner Raum erhält dadurch keine universelle Reparaturgarantie.
+
+Nach einem erforderlichen, gescheiterten Volumen-/Partitionspfad wird zunächst diese vorhandene Reparatur versucht. Ist ihre affine Dimension nicht unterstützt, kann die zusätzliche Simplex-Partitionsrechnung einspringen. Sie verlangt in den ursprünglichen Constraints explizit `sum(w)=1` und jedes `w_i>=0`, höchstens sieben Gewichte und keine weitere unabhängige explizite Gleichheit. Fehlende Voraussetzungen werden nicht still ergänzt. Erfolgreiche gewöhnliche Geometrie bleibt auf dem bisherigen Pfad.
+
+Die Ersatzrechnung übernimmt jeden Binary64-Koeffizienten als dessen exakten `Fraction`-Wert. Vollständiges inkrementelles Clipping beginnt mit dem Gewichtssimplex. Gekreuzte Kanten werden über den exakten Rang ihrer gemeinsamen aktiven Nebenbedingungen bestimmt; neue Punkte müssen alle bereits verarbeiteten Bedingungen erfüllen. Echte Facetten werden anhand ihrer Vertexmengen dedupliziert. Eine vollständige Pulling-Triangulation liefert rationale Koordinatenvolumina. Elternregion und beide Antwortzweige verwenden dieselben freien Koordinaten; der gemeinsame intrinsische Faktor kürzt sich. Erst nach **exakter** Prüfung `V(<)+V(>)=V(parent)>0` werden Wahrscheinlichkeiten in Binary64 umgewandelt. Ein positiver Wert darf dabei nicht auf null unterlaufen.
+
+Ein gemeinsames Budget umfasst Eingangsprüfung, Elternregion und beide Kinder: höchstens 96 Constraints, 1.024 Vertices pro Region, 200.000 Paarprüfungen, 100.000 Rangprüfungen, 30.000 Faces, 100.000 Triangulationssimplexe, 3.000.000 rationale Rechenoperationen, 8.192 Bits pro Zähler/Nenner und 45 Sekunden. Die aktiven Grenzen stehen im numerischen Profil. Jede Grenzüberschreitung oder verletzte Invariante bricht die Ersatzrechnung mit einem typisierten Grund ab; eine unvollständige Menge liefert keinen Erfolgswert. Das Verfahren ist eine begrenzte Wahrscheinlichkeits-Recovery, kein allgemeiner Ersatz sämtlicher LP-, Kandidaten- oder Volumenpfade.
+
+Bei endgültigem Partitionsfehler behält `NumericalError` den angenommenen Antwortpräfix und seinen Cursor. Die Dateilaufzeit speichert zusätzlich unter `error.context.geometry_failure` Query, Dimensions-/Constraintzahlen sowie verfügbaren Recoverygrund und Arbeitszähler. Bis 1.024 Koeffizienten wird auch der vollständige ursprüngliche Constraint-Key zur Reproduktion gespeichert; größere Diagnosen werden ausdrücklich als begrenzt markiert. Die ursprüngliche Exceptionkette bleibt erhalten.
+
+`otqa-exact-v2` bindet diesen zusätzlichen Rechenpfad und seine Grenzen. Historische Profile bleiben lesbar; eine frühere Betriebsqualifizierung wird dadurch nicht zu einer Qualifizierung des geänderten Pakets.
 
 Diese Pfade behandeln festgelegte mehrdeutige Null-/Fehlerfälle. Rationale Antwortpartitionen prüfen gemeinsam, ob die Childmaße den Parent exakt aufteilen. Eine positive Wahrscheinlichkeit darf bei der anschließenden Binary64darstellung nicht unbemerkt zu null unterlaufen. Die Reparatur eines leeren positiven Kandidatenzweigs verlangt einen tatsächlichen strikten Singletonbeweis; sie wählt keinen beliebigen Parentkandidaten und erzwingt keine Tieauflösung.
 

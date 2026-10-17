@@ -12,6 +12,7 @@ from .affine import AffineCache
 from .constraints import ConstraintSystem, optimality_region, weight_space
 from .rational import RecoveryNotApplicable, RecoveryGeometryError, recover_volume, recover_probabilities
 from .vertices import PolytopeVertices, enumerate_vertices
+from .simplex_recovery import recover_probabilities as recover_simplex_probabilities
 
 
 class _CorrectedVolume(float):
@@ -147,12 +148,39 @@ class GeometrySession:
         self.support_hits += 1
         return lower, upper
 
+    def _recover_partition(self, system, query):
+        """Keep the existing small-affine repair before the bounded simplex path."""
+        try:
+            try:
+                return recover_probabilities(system, query)
+            except RecoveryNotApplicable:
+                return recover_simplex_probabilities(system, query)
+        except (RecoveryNotApplicable, RecoveryGeometryError) as error:
+            key = system.key
+            evidence = {
+                "variables": system.variable_count,
+                "inequality_count": len(key[0]), "equality_count": len(key[2]),
+                "query": {"goal_index_a": query.goal_index_a,
+                          "goal_index_b": query.goal_index_b, "value": query.value},
+                "recovery": getattr(error, "diagnostics", None),
+            }
+            # A bounded reproduction payload travels with the exception across
+            # workers; the numerical core itself never writes a run artifact.
+            if sum(len(row) for rows in (key[0], key[2]) for row in rows) <= 1024:
+                evidence["constraint_key"] = key
+            else:
+                evidence["constraint_key_omitted"] = "diagnostic coefficient bound exceeded"
+            error.geometry_failure_context = evidence
+            raise
+
     def _recover_probability_failure(self, system, query, message):
         """Keep the original probability failure and its exact-recovery cause."""
         try:
-            return recover_probabilities(system, query)
+            return self._recover_partition(system, query)
         except (RecoveryNotApplicable, RecoveryGeometryError) as error:
-            raise RuntimeError(message) from error
+            failure = RuntimeError(message)
+            failure.geometry_failure_context = error.geometry_failure_context
+            raise failure from error
 
     def probabilities(self, system, query, tolerance=1e-10):
         self._check_open()
@@ -195,8 +223,9 @@ class GeometrySession:
             if not getattr(error, "native_geometry_volume_error", False):
                 raise
             try:
-                return recover_probabilities(system, query)
+                return self._recover_partition(system, query)
             except (RecoveryNotApplicable, RecoveryGeometryError) as recovery_error:
+                error.geometry_failure_context = recovery_error.geometry_failure_context
                 raise error from recovery_error
         if any(getattr(value, "exact_positive_correction", False) or
                getattr(value, "exact_exception_recovery", False)

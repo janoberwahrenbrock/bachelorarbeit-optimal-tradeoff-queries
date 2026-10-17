@@ -32,6 +32,13 @@ _VALUES = {
         "max_lp_variables": 5, "max_active_sets": 20_000,
         "max_explicit_affine_dimension": 2, "decimal_precision": 80,
     },
+    "simplex_partition_recovery": {
+        "max_goals": 7, "max_constraints": 96, "max_vertices": 1024,
+        "max_pair_checks": 200_000, "max_rank_calls": 100_000,
+        "max_faces": 30_000, "max_simplices": 100_000,
+        "max_operations": 3_000_000, "max_bits": 8192,
+        "max_wall_seconds": 45.0,
+    },
 }
 
 
@@ -40,7 +47,7 @@ def resolved_numerical_profile() -> dict:
     numeric_hex = {f"/values/{group}/{key}": value.hex()
                    for group, settings in values.items()
                    for key, value in settings.items() if type(value) is float}
-    return {"profile_id": "otqa-exact-v1", "values": values, "numeric_hex": numeric_hex}
+    return {"profile_id": "otqa-exact-v2", "values": values, "numeric_hex": numeric_hex}
 
 
 def resolved_cache_policy() -> dict:

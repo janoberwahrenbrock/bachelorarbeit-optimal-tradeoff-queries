@@ -62,7 +62,12 @@ def test_session_backends_are_independent_across_threads():
 
 def test_profile_contains_only_active_constants_and_separate_cache_policy():
     profile = resolved_numerical_profile()
-    assert sum(map(len, profile["values"].values())) == 42
+    from dataclasses import asdict
+    from otqa.geometry.simplex_recovery import Limits
+
+    assert profile["profile_id"] == "otqa-exact-v2"
+    assert sum(map(len, profile["values"].values())) == 52
+    assert profile["values"]["simplex_partition_recovery"] == asdict(Limits())
     assert profile["values"]["query_generation"]["answer_order"] == ["<", "=", ">"]
     assert profile["numeric_hex"]["/values/geometry/tolerance"] == (1e-10).hex()
     profile["values"]["geometry"]["tolerance"] = 123
