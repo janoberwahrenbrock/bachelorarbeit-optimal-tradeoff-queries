@@ -32,6 +32,14 @@ def error_wire(error: BaseException, stage="controller") -> dict:
             context['memory_pending_planning'] = {'cursor_before': asdict(pending.cursor_before),
                 'completed_attempts': len(pending.attempts), 'active_attempt_index': pending.active_attempt_index,
                 'requested_depth': pending.requested_depth}
+    current, seen = error, set()
+    while current is not None and id(current) not in seen:
+        seen.add(id(current))
+        geometry = getattr(current, "geometry_failure_context", None)
+        if isinstance(geometry, dict):
+            context["geometry_failure"] = geometry
+            break
+        current = current.__cause__
     if getattr(error, "cleanup_errors", None):
         context["cleanup_errors"] = list(error.cleanup_errors)
     return {"code": code, "type": type(error).__name__, "message": str(error) or type(error).__name__,

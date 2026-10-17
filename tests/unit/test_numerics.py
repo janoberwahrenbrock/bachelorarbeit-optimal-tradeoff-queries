@@ -6,7 +6,9 @@ import pytest
 from otqa.geometry import ConstraintSystem
 from otqa.numerics.lp import LinearProgramBackend
 from otqa.numerics.rational_lp import recover_minimum
-from otqa.numerics.profile import resolved_numerical_profile, resolved_cache_policy
+from otqa.numerics.profile import (
+    GRID_MINIMUM, GRID_MAXIMUM, resolved_numerical_profile, resolved_cache_policy,
+)
 
 
 def test_native_cold_solve_matches_public_lp():
@@ -62,8 +64,17 @@ def test_session_backends_are_independent_across_threads():
 
 def test_profile_contains_only_active_constants_and_separate_cache_policy():
     profile = resolved_numerical_profile()
-    assert sum(map(len, profile["values"].values())) == 42
+    from dataclasses import asdict
+    from otqa.geometry.simplex_recovery import Limits
+
+    assert profile["profile_id"] == "otqa-exact-v3"
+    assert sum(map(len, profile["values"].values())) == 52
+    assert profile["values"]["simplex_partition_recovery"] == asdict(Limits())
     assert profile["values"]["query_generation"]["answer_order"] == ["<", "=", ">"]
+    assert profile["values"]["query_generation"]["min_grid_value"] == GRID_MINIMUM == 0.05
+    assert profile["values"]["query_generation"]["max_grid_value"] == GRID_MAXIMUM == 20.0
+    assert profile["numeric_hex"]["/values/query_generation/min_grid_value"] == GRID_MINIMUM.hex()
+    assert profile["numeric_hex"]["/values/query_generation/max_grid_value"] == GRID_MAXIMUM.hex()
     assert profile["numeric_hex"]["/values/geometry/tolerance"] == (1e-10).hex()
     profile["values"]["geometry"]["tolerance"] = 123
     assert resolved_numerical_profile()["values"]["geometry"]["tolerance"] == 1e-10

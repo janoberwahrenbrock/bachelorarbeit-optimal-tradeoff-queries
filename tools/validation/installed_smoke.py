@@ -18,8 +18,11 @@ def main() -> None:
     from otqa.answers import SimulatedAnswers
     from otqa.geometry import GeometrySession
     from otqa.numerics.lp import LinearProgramBackend
-    from otqa.numerics.profile import actual_backend_capabilities
+    from otqa.models.numerical import LinearResult
+    from otqa.numerics.profile import actual_backend_capabilities, resolved_numerical_profile
+    from otqa.queries import grid_values
     from otqa.runtime.source import loaded_source
+    from otqa.state.types import RatioInterval
 
     package = Path(otqa.__file__).resolve().parent
     installed_roots = {Path(sysconfig.get_path(name)).resolve() for name in ('purelib', 'platlib')}
@@ -29,6 +32,16 @@ def main() -> None:
     source_before = loaded_source()
     capabilities = actual_backend_capabilities()
     assert capabilities['scipy_highs'] and capabilities['scipy_qhull']
+    numerical_profile = resolved_numerical_profile()
+    assert numerical_profile['profile_id'] == 'otqa-exact-v3'
+    grid_settings = numerical_profile['values']['query_generation']
+    assert (grid_settings['min_grid_value'], grid_settings['max_grid_value']) == (.05, 20.)
+    interval = RatioInterval(LinearResult('optimal', 'min', 0.), LinearResult('unbounded', 'max'))
+    grid5 = grid_values(interval, 5)
+    expected_grid5 = [.1357208808, .3684031499, 1., 2.7144176166, 7.3680629973]
+    assert len(grid5) == 5 and all(.05 < value < 20. for value in grid5)
+    assert all(math.isclose(value, expected, abs_tol=5e-11, rel_tol=0.)
+               for value, expected in zip(grid5, expected_grid5, strict=True))
 
     backend = LinearProgramBackend()
     try:
@@ -67,6 +80,7 @@ def main() -> None:
     assert loaded_source() == source_before, 'Installed source changed during the checks'
     print(json.dumps({'status': 'passed', 'scope': 'installed analytical functional smoke',
                       'version': otqa.__version__, 'package': str(package), 'source': source_before[0],
+                      'numerical_profile_id': numerical_profile['profile_id'], 'grid5': grid5,
                       'backend_capabilities': capabilities, 'solves': results,
                       'elapsed_seconds': time.perf_counter() - started}, sort_keys=True))
 
