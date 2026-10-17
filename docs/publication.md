@@ -116,7 +116,7 @@ müssen nicht mit den ursprünglichen Messungen identisch sein.
 
 Nach bestandener lokaler Prüfung werden Studienseite, ausgewählte kompakte
 Dateien, Manifest und aktuelle Dokumentation gemeinsam auf Main übernommen.
-Ein Studien-Tag bindet den Veröffentlichungscommit. Für diese Studie lautet er
+Ein Studien-Tag bindet den Veröffentlichungscommit. Für die erste veröffentlichte Studie lautet er
 `study/strategy-grid100-progress001-20261016T030055Z/v1`.
 
 Der zugehörige Release bietet folgende Downloads:
@@ -149,6 +149,18 @@ werden nicht allein anhand eines erfolgreich abgeschlossenen Uploads als
 öffentlich reproduzierbar bezeichnet.
 
 ## Spätere Studien und Korrekturen
+
+Die [Folgestudie zu Grid und Ratio bei Countdown und adaptiver Planung](../studies/query-source-grid100-ca-20261016T205019Z/README.md)
+veröffentlicht 800 frische Grid-Zellen und bindet 800 ausgewählte historische
+Both-Zellen aus dem vollständigen alten Bestand von 1.200. Ihr Tag lautet
+`study/query-source-grid100-ca-20261016T205019Z/v1`. Das neue Rohdatenpaket ist
+für die unveränderte neue Offlineanalyse vollständig; die festen kompakten
+Baseline-Referenzen sind enthalten. Eine zusätzliche vollständige Rohprüfung
+der alten Both-Studie verwendet deren bereits veröffentlichtes Paket statt
+einer doppelten Veröffentlichung. Die ausgeschlossene frühere Grid-Vorserie
+und ihre Versuchskosten bleiben historischer Anhang, ohne Primärübernahme.
+Die [neue Reproduktionsanleitung](../studies/query-source-grid100-ca-20261016T205019Z/reproduction/README.md)
+trennt Paketprüfung, vollständigen Analysevergleich und optionale Baseline-Rohprüfung.
 
 Jede neue Studie erhält einen eigenen Eintrag im Studienkatalog und eine neue
 Studienkennung. Sie übernimmt weder stillschweigend Fallzahlen noch

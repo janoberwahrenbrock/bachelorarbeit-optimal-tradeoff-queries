@@ -8,6 +8,8 @@ Der Solver unterstützt feste und adaptive Planung bis Tiefe drei, geometrische 
 
 Die [veröffentlichte Strategien-/Gridstudie](studies/strategy-grid100-progress001-20261016T030055Z/README.md) umfasst 100 gemeinsame Probleme, zwölf Bedingungen und 1.200 korrekte Singletonlösungen. Die [Studienübersicht](studies/README.md) verlinkt Ergebnisse, Eingaben und vollständige Rohdaten.
 
+Der [Vergleich von Grid und Grid plus Ratio](studies/query-source-grid100-ca-20261016T205019Z/README.md) ergänzt 800 frische Countdown-/Adaptiv-Läufe auf denselben 100 Problemen. Alle endeten korrekt beim Singleton; die historische Vergleichsgruppe umfasst 800 passende Zellen. Queryzahl und beobachtete Rechenzeit ergeben keine universell beste Queryquelle oder Gridgröße.
+
 Die Prüfnachweise sind an die jeweilige Paketquelle gebunden. Historische Vergleiche belegen weder automatisch die neue Fortschrittsschwelle noch die neue Countdown-Fallbacksemantik. Den geprüften Umfang und die Grenzen beschreibt [der Implementierungsstatus](docs/implementation-status.md); die [Laufzeitprüfung](docs/performance.md) trennt diese Ergebnisse von einer allgemeinen Laufzeitgarantie.
 
 ## Einstieg

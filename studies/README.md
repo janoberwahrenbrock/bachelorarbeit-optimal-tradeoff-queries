@@ -11,6 +11,7 @@ nachvollziehbar.
 | Studie | Umfang | Veröffentlichungsstand |
 | --- | --- | --- |
 | [Strategien und Gridgrößen mit Mindestfortschritt 0.001](strategy-grid100-progress001-20261016T030055Z/README.md) | 100 neue Probleme, fünf Ziele/fünf Alternativen, Tiefe zwei; Neuplanung/Countdown/adaptiv × Grid 3/5/10/20; 1.200 Läufe | Version 1; alle 1.200 Auswahlen korrekte Singletonlösungen |
+| [Grid und Ratio bei Countdown und adaptiver Planung](query-source-grid100-ca-20261016T205019Z/README.md) | Dieselben 100 Probleme; Countdown/adaptiv × Grid 3/5/10/20; 800 frische Grid-Läufe und 800 historische Both-Vergleichszellen, kein Carryover | Version 1; alle 800 neuen Auswahlen korrekte Singletonlösungen; nachträglich eingegrenzte Folgestudie |
 
 Der Katalog zählt unabhängige Probleme getrennt von Bedingungen und
 Wiederholungen. Die vollständige Rohprüfung umfasst gespeicherte Antworten,
