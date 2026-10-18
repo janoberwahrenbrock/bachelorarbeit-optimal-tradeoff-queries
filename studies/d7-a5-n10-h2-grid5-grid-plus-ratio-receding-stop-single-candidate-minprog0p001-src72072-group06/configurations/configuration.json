@@ -1,0 +1,32 @@
+{
+  "algorithm": {
+    "depth": 2,
+    "grid_size": 5,
+    "higher_depth_query_source": "both",
+    "horizon_execution": "receding",
+    "min_expected_progress": 0.001,
+    "planning_evaluation": "candidate_count",
+    "query_strategy": "fixed",
+    "stopping": {
+      "rule": "single_candidate"
+    }
+  },
+  "budget": {
+    "max_queries": null
+  },
+  "configuration_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group06-config",
+  "execution": {
+    "cache_policy_id": "bounded_v1",
+    "case_timeout_seconds": null,
+    "native_threads": 1,
+    "start_method": "forkserver",
+    "workers": 16
+  },
+  "recording": {
+    "durability": "per_answer",
+    "profile": false,
+    "telemetry_failure_policy": "continue",
+    "trace_level": "standard"
+  },
+  "schema_version": 2
+}
