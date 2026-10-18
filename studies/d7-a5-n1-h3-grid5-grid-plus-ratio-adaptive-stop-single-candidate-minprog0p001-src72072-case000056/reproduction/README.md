@@ -1,0 +1,3 @@
+# Stored-data offline reproduction
+
+Python3.13/3.14 and stdlib only. Run `python3 -I -S -B studies/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/reproduction/reproduce.py --project-root /ABS/EXTRACTED --output /ABS/FRESH`. The exact frozen reporter, raw checker and own contract module are included unchanged. Only generated report timestamp, raw creation/duration and the semantically checked single-study @prepared_input_contract reference are excluded from equality. Every other report/raw value, all CSV and Markdown bytes, all outcomes, costs and technical-history nulls must match. No network, algorithm install or solver execution is required.
