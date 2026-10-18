@@ -1,0 +1,148 @@
+"""Frozen seven-subject H3/Grid5 local-analysis contract; no numerical code."""
+from copy import deepcopy
+from pathlib import PurePosixPath
+
+RUN = 'runs/seven-h3-grid5-followups-20261018T011350Z'
+SCOPE_SHA256 = '4dbca0964c03476cb38a40681d9c9798228eac39b3aeb4aa4f68a9d56c7235cf'
+SOURCE = '720726607ae451b319e59e01453b6ba69b9950ef42420e700ed6b4eaa5b34d0e'
+COMMIT = '62d1d01339f91802e2916b63660a4e640d99c9cc'
+MAX_DEPTH = 3
+SUBJECTS = {'d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000038': {'case_id': 'd7-m5-c000038',
+                                                                                                       'configuration': {'bytes': 839,
+                                                                                                                         'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000038/configuration.json',
+                                                                                                                         'sha256': '44ea3b20395bc5fc4c8fe4e67234edafedb9f04af01408c6bd829191a51cb855'},
+                                                                                                       'dataset': {'bytes': 819,
+                                                                                                                   'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000038/dataset.json',
+                                                                                                                   'sha256': 'bc55b4775cbfb543d4cda7f5d67004be40fb7939e008d5f7f5ec0dbbcc029aea'},
+                                                                                                       'host': '177',
+                                                                                                       'mode': 'adaptive',
+                                                                                                       'oracle': {'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000038/oracle.json',
+                                                                                                                  'sha256': 'dc4504437f6dd4cc80612ad8b5cead4ab691011ec70fe79f3495e0600f30d8dd'},
+                                                                                                       'problem': {'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000038/problem.json',
+                                                                                                                   'sha256': '3b6df5dc839c2c33f69f510b1cdec538edbb9bdee515f8ed0a27ecf8954a63be'},
+                                                                                                       'suite': {'bytes': 1209,
+                                                                                                                 'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000038/suite.json',
+                                                                                                                 'sha256': '0310f27a996f7a78f4ac094a9b2169f1d565229b82306f78d602a3e30568f01b'}},
+ 'd7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056': {'case_id': 'd7-m5-c000056',
+                                                                                                       'configuration': {'bytes': 839,
+                                                                                                                         'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/configuration.json',
+                                                                                                                         'sha256': 'd7b54d5ec8b17f68d581f5ddaea3edfac281db78aab4882d88c81d1200bd4a40'},
+                                                                                                       'dataset': {'bytes': 819,
+                                                                                                                   'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/dataset.json',
+                                                                                                                   'sha256': '005304994da421900350b2e173daa86d3720c6b3301ec533c9df90f43af3cb1b'},
+                                                                                                       'host': '178',
+                                                                                                       'mode': 'adaptive',
+                                                                                                       'oracle': {'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/oracle.json',
+                                                                                                                  'sha256': '45d78e5cf86ad97b049c9d8d7465ab00de702bf79c9b04ecc1a9b5d8a49d366c'},
+                                                                                                       'problem': {'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/problem.json',
+                                                                                                                   'sha256': '6adea841faf43d8939a52e6429b5a27c18b6e7be7352e675d323261f31647b41'},
+                                                                                                       'suite': {'bytes': 1209,
+                                                                                                                 'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/suite.json',
+                                                                                                                 'sha256': 'dd78cf8cf101dac29a2c1fdc784a5f14e3b685fc2f6b5b6e29cc4ecf10b77647'}},
+ 'd7-a5-n1-h3-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-case000056': {'case_id': 'd7-m5-c000056',
+                                                                                                        'configuration': {'bytes': 827,
+                                                                                                                          'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-case000056/configuration.json',
+                                                                                                                          'sha256': '3dd21a7b99ebded9fefa7224e1bfd7c68499bca88586fdbf93d964750595f631'},
+                                                                                                        'dataset': {'bytes': 822,
+                                                                                                                    'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-case000056/dataset.json',
+                                                                                                                    'sha256': '879625a26391f0e979c501e21510548d63c46cdac2c3d10a331d2fec45511d3b'},
+                                                                                                        'host': '179',
+                                                                                                        'mode': 'countdown',
+                                                                                                        'oracle': {'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-case000056/oracle.json',
+                                                                                                                   'sha256': '45d78e5cf86ad97b049c9d8d7465ab00de702bf79c9b04ecc1a9b5d8a49d366c'},
+                                                                                                        'problem': {'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-case000056/problem.json',
+                                                                                                                    'sha256': '6adea841faf43d8939a52e6429b5a27c18b6e7be7352e675d323261f31647b41'},
+                                                                                                        'suite': {'bytes': 1214,
+                                                                                                                  'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-case000056/suite.json',
+                                                                                                                  'sha256': '283f9faf7ef41ef853a7eaa020b19730711cd5d2822213c96f979c14f50d9485'}},
+ 'd7-a5-n1-h3-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-case000084': {'case_id': 'd7-m5-c000084',
+                                                                                                        'configuration': {'bytes': 827,
+                                                                                                                          'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-case000084/configuration.json',
+                                                                                                                          'sha256': '01c0435792d8220bc8c511d3283b31a8abc11b78ea75ba10b92b5ce983d6e2a1'},
+                                                                                                        'dataset': {'bytes': 822,
+                                                                                                                    'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-case000084/dataset.json',
+                                                                                                                    'sha256': 'b41e58ef80041676b0af1c267dfb26bdd67d7433fe35d65eb1d997d03ae33b11'},
+                                                                                                        'host': '181',
+                                                                                                        'mode': 'countdown',
+                                                                                                        'oracle': {'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-case000084/oracle.json',
+                                                                                                                   'sha256': '32c4893ef53591d8b5d02febdbbf1b58acbbb9465aa0c2865b1ae9d2bf2508c1'},
+                                                                                                        'problem': {'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-case000084/problem.json',
+                                                                                                                    'sha256': '8895b5d7b8e4a8cf9cfa6b140a2c7f64e4cb3af7e26ceecfd7fb878a8817a564'},
+                                                                                                        'suite': {'bytes': 1214,
+                                                                                                                  'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-case000084/suite.json',
+                                                                                                                  'sha256': '7771ac1764a7973ad8d46f48469eb9ceb7d57ee26db61c4550acf842825db4e7'}},
+ 'd7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024': {'case_id': 'd7-m5-c000024',
+                                                                                                       'configuration': {'bytes': 825,
+                                                                                                                         'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/configuration.json',
+                                                                                                                         'sha256': '69da087385986d29e27a84aa6af7b5f237a10cad1fc862e0ad8b38a8a252bbca'},
+                                                                                                       'dataset': {'bytes': 819,
+                                                                                                                   'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/dataset.json',
+                                                                                                                   'sha256': 'c3a8103bdddd1a97433fe0b9789aff43df508f88905473c5217096e53f5c3c9d'},
+                                                                                                       'host': '170',
+                                                                                                       'mode': 'receding',
+                                                                                                       'oracle': {'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/oracle.json',
+                                                                                                                  'sha256': '621c9bad39515eece8d31a37cdc00770cc9ff163110c07557455d7140760da31'},
+                                                                                                       'problem': {'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/problem.json',
+                                                                                                                   'sha256': '96737c02286c3079e6877a02faa611edf7dcdeecfd24f45fb747b8c4281d7d63'},
+                                                                                                       'suite': {'bytes': 1209,
+                                                                                                                 'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/suite.json',
+                                                                                                                 'sha256': 'c85a3fffe739534e9b0f57ea5be9698dcb984673758d6794a090a37815781cff'}},
+ 'd7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000083': {'case_id': 'd7-m5-c000083',
+                                                                                                       'configuration': {'bytes': 825,
+                                                                                                                         'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000083/configuration.json',
+                                                                                                                         'sha256': '0ee6e588347357d4eaeebfb2ee5eb2280f47c9bde99e6d9877c56b8e9ab65534'},
+                                                                                                       'dataset': {'bytes': 819,
+                                                                                                                   'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000083/dataset.json',
+                                                                                                                   'sha256': '73ff4771057ee387fc260bd70f3f10c4f67da7813a25eea5b913f722906a3732'},
+                                                                                                       'host': '180',
+                                                                                                       'mode': 'receding',
+                                                                                                       'oracle': {'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000083/oracle.json',
+                                                                                                                  'sha256': '1d77c9fe2dfd5a7fd630f3b448e5907ec1e19ece77dc83bad392316ed70b7f86'},
+                                                                                                       'problem': {'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000083/problem.json',
+                                                                                                                   'sha256': '138351dc4624dca9bf7d6cec8777323dcf9953d4d657fc02599adb53484dec9a'},
+                                                                                                       'suite': {'bytes': 1209,
+                                                                                                                 'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000083/suite.json',
+                                                                                                                 'sha256': '49c13e899185b964a9d2cb5f968bf3419c13445c72ee00346062eb7d0283e11c'}},
+ 'd7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000084': {'case_id': 'd7-m5-c000084',
+                                                                                                       'configuration': {'bytes': 825,
+                                                                                                                         'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000084/configuration.json',
+                                                                                                                         'sha256': 'b3e6e4cc7d1d5e3365fbf7e2f48c8965f26e2ac1b620ea9e1d9f0eafcd324919'},
+                                                                                                       'dataset': {'bytes': 819,
+                                                                                                                   'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000084/dataset.json',
+                                                                                                                   'sha256': '49c8947de122fa42ae783ae8f2a80957cbb5d27d2adf87fba6abc2f44455e23f'},
+                                                                                                       'host': '182',
+                                                                                                       'mode': 'receding',
+                                                                                                       'oracle': {'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000084/oracle.json',
+                                                                                                                  'sha256': '32c4893ef53591d8b5d02febdbbf1b58acbbb9465aa0c2865b1ae9d2bf2508c1'},
+                                                                                                       'problem': {'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000084/problem.json',
+                                                                                                                   'sha256': '8895b5d7b8e4a8cf9cfa6b140a2c7f64e4cb3af7e26ceecfd7fb878a8817a564'},
+                                                                                                       'suite': {'bytes': 1209,
+                                                                                                                 'path': 'runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000084/suite.json',
+                                                                                                                 'sha256': '67db3d711e8706ca2e9853812973ef47f32b9e6400b11690590288c41e861dd1'}}}
+
+def study_contract(study_id):
+    if study_id not in SUBJECTS:
+        raise ValueError('Study is outside the exact seven authorized H3 subjects')
+    row = deepcopy(SUBJECTS[study_id])
+    mode = row['mode']
+    row.update(study_id=study_id, dimension=7, count=1, grid=5, configuration={
+        'schema_version': 2, 'configuration_id': study_id + '-config',
+        'algorithm': {'query_strategy': 'reduction_per_query' if mode == 'adaptive' else 'fixed',
+            'depth': 3, 'higher_depth_query_source': 'both', 'grid_size': 5,
+            'planning_evaluation': 'candidate_count', 'stopping': {'rule': 'single_candidate'},
+            'horizon_execution': 'countdown' if mode == 'countdown' else 'receding',
+            'min_expected_progress': .001}, 'budget': {'max_queries': None},
+        'execution': {'workers': 16, 'start_method': 'forkserver', 'native_threads': 1,
+                      'case_timeout_seconds': None, 'cache_policy_id': 'bounded_v1'},
+        'recording': {'durability': 'per_answer', 'trace_level': 'standard', 'profile': False,
+                      'telemetry_failure_policy': 'continue'}})
+    return row
+
+def require_series(series_path):
+    relative = PurePosixPath(series_path)
+    if relative.as_posix() != series_path or relative.is_absolute() or '..' in relative.parts:
+        raise ValueError('Unsafe H3 native series path')
+    contract = study_contract(relative.name)
+    if series_path != RUN + '/native/' + contract['study_id']:
+        raise ValueError('Wrong H3 native series namespace')
+    return relative, contract
