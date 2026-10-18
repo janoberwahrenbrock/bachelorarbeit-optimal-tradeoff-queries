@@ -1,0 +1,3809 @@
+{
+  "all_attempts": [
+    {
+      "attempt_id": "attempt0001",
+      "case_id": "d7-m5-c000040",
+      "controller_elapsed_seconds": 5.595797410000159,
+      "error": null,
+      "evidence": {
+        "actual_horizons": [
+          2,
+          1,
+          1,
+          1,
+          2,
+          1
+        ],
+        "answers_checked": 6,
+        "api_seconds": 5.00562560400067,
+        "attempt_id": "attempt0001",
+        "attempts_completed": 6,
+        "attempts_started": 6,
+        "candidate_count_path": [
+          5,
+          4,
+          3,
+          3,
+          2,
+          2,
+          1
+        ],
+        "case_id": "d7-m5-c000040",
+        "case_seconds": 5.351835325000138,
+        "configuration_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05-config",
+        "controller_seconds": 5.595797410000159,
+        "error": null,
+        "error_code": null,
+        "expected_candidates": [
+          3.669264338315547,
+          3.245969072466681,
+          2.4564119562483135,
+          2.1396032243482095,
+          1.2237761689334086,
+          1.0436087065829664
+        ],
+        "fallback_attempts_completed": 0,
+        "fallback_attempts_started": 0,
+        "fallbacks": 0,
+        "final_execution_cursor": {
+          "answered_total": 6,
+          "remaining_depth": 2
+        },
+        "finished_at_utc": "2026-10-17T22:43:03.962441Z",
+        "grid": 5,
+        "initial_candidate_count": 5,
+        "initial_singleton": false,
+        "interruption": null,
+        "job_id": "job000001",
+        "journal_ref": {
+          "path": "jobs/job000001/attempts/attempt0001/events.jsonl",
+          "sha256": "3278b2bf7ed4545302df18981aa950f8228d813356419c1f61ec10c8a48c8190"
+        },
+        "last_good_sequence": 51,
+        "manifest_ref": {
+          "path": "jobs/job000001/attempts/attempt0001/manifest.json",
+          "sha256": "0899cd572fca1866a7a66973734c5ae6609668f33aa7c941f26b1530c7f1eee1"
+        },
+        "mode": "adaptive",
+        "objectives": 7,
+        "partial_api_seconds": null,
+        "progress_matches_full_result_prefix": true,
+        "progress_ref": {
+          "bytes": 754,
+          "path": "jobs/job000001/attempts/attempt0001/progress.json",
+          "sha256": "97a20b727252e66f3c1f6c6f21b575078031a8d7538bdfb3b7dc74cfa1cd6283"
+        },
+        "quality": "correct",
+        "queries": 6,
+        "result_ref": {
+          "path": "jobs/job000001/attempts/attempt0001/result.json",
+          "sha256": "9c5ab0d4863373992db8b9f0188234db8f0457b377d0a35ccc83639215327e01"
+        },
+        "selected_candidate_id": "a0",
+        "solved": true,
+        "stagnant_answer_steps": 2,
+        "started_at_utc": "2026-10-17T22:42:58.610623Z",
+        "state_winner_lost_indices": [],
+        "status": "completed",
+        "successful_fallbacks": 0,
+        "termination_reason": "exact_single_candidate",
+        "uncommitted_recorded_answers_checked_no_credit": 0,
+        "unsuccessful_fallbacks": 0,
+        "winner_ids": [
+          "a0"
+        ]
+      },
+      "execution_status": "completed",
+      "interruption": null,
+      "job_id": "job000001",
+      "result": {
+        "path": "jobs/job000001/attempts/attempt0001/result.json",
+        "sha256": "9c5ab0d4863373992db8b9f0188234db8f0457b377d0a35ccc83639215327e01"
+      },
+      "run_id": "60f065f0-4840-4ccd-82b8-c5e5663da39a",
+      "timings": {
+        "answer_wait_wall_seconds": 2.564100213930942e-05,
+        "api_call_wall_seconds": 5.00562560400067,
+        "case_elapsed_seconds": 5.351835325000138,
+        "complete_api_measurement": true,
+        "observer_wall_seconds": 0.0,
+        "partial_api_elapsed_seconds": null,
+        "persistence_in_call_wall_seconds": null,
+        "planning_wall_seconds": null,
+        "recorder_wall_seconds": 0.13406813800429518,
+        "scope_version": 1,
+        "state_analysis_wall_seconds": null,
+        "unattributed_wall_seconds": null,
+        "worker_cpu_seconds": null,
+        "worker_shutdown_wall_seconds": null,
+        "worker_startup_wall_seconds": null
+      },
+      "verified": true
+    },
+    {
+      "attempt_id": "attempt0001",
+      "case_id": "d7-m5-c000041",
+      "controller_elapsed_seconds": 7.64969156799998,
+      "error": null,
+      "evidence": {
+        "actual_horizons": [
+          2,
+          1,
+          2,
+          1,
+          2,
+          1,
+          2,
+          1,
+          1
+        ],
+        "answers_checked": 9,
+        "api_seconds": 7.01524278099987,
+        "attempt_id": "attempt0001",
+        "attempts_completed": 9,
+        "attempts_started": 9,
+        "candidate_count_path": [
+          4,
+          4,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          1
+        ],
+        "case_id": "d7-m5-c000041",
+        "case_seconds": 7.38740130899987,
+        "configuration_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05-config",
+        "controller_seconds": 7.64969156799998,
+        "error": null,
+        "error_code": null,
+        "expected_candidates": [
+          3.6806994751392508,
+          3.3613989502785007,
+          2.6068515669873267,
+          2.3629166595457,
+          2.6555693307602186,
+          2.595644803634391,
+          2.6252341236693346,
+          2.563813017892941,
+          1.6978822683559118
+        ],
+        "fallback_attempts_completed": 0,
+        "fallback_attempts_started": 0,
+        "fallbacks": 0,
+        "final_execution_cursor": {
+          "answered_total": 9,
+          "remaining_depth": 2
+        },
+        "finished_at_utc": "2026-10-17T22:43:11.602154Z",
+        "grid": 5,
+        "initial_candidate_count": 4,
+        "initial_singleton": false,
+        "interruption": null,
+        "job_id": "job000002",
+        "journal_ref": {
+          "path": "jobs/job000002/attempts/attempt0001/events.jsonl",
+          "sha256": "316bed301c3a2dec84b5707b6878a464aaaceb60c5050447d76e4f2c6fb35d3e"
+        },
+        "last_good_sequence": 75,
+        "manifest_ref": {
+          "path": "jobs/job000002/attempts/attempt0001/manifest.json",
+          "sha256": "ce6229bfc23d2ee8d575f5ff23dab42e01e616cd6ffe9179fb93494258032a34"
+        },
+        "mode": "adaptive",
+        "objectives": 7,
+        "partial_api_seconds": null,
+        "progress_matches_full_result_prefix": true,
+        "progress_ref": {
+          "bytes": 755,
+          "path": "jobs/job000002/attempts/attempt0001/progress.json",
+          "sha256": "44a565e541fb4d98b814b560587058640174abd401f072fb0b5ee665806cb4e4"
+        },
+        "quality": "correct",
+        "queries": 9,
+        "result_ref": {
+          "path": "jobs/job000002/attempts/attempt0001/result.json",
+          "sha256": "3fbaa07582b37f17c2beafcc30f885e3ce64d31208334c8012164be3811cb002"
+        },
+        "selected_candidate_id": "a2",
+        "solved": true,
+        "stagnant_answer_steps": 6,
+        "started_at_utc": "2026-10-17T22:43:04.214770Z",
+        "state_winner_lost_indices": [],
+        "status": "completed",
+        "successful_fallbacks": 0,
+        "termination_reason": "exact_single_candidate",
+        "uncommitted_recorded_answers_checked_no_credit": 0,
+        "unsuccessful_fallbacks": 0,
+        "winner_ids": [
+          "a2"
+        ]
+      },
+      "execution_status": "completed",
+      "interruption": null,
+      "job_id": "job000002",
+      "result": {
+        "path": "jobs/job000002/attempts/attempt0001/result.json",
+        "sha256": "3fbaa07582b37f17c2beafcc30f885e3ce64d31208334c8012164be3811cb002"
+      },
+      "run_id": "f567c03a-8246-4d0e-971b-cd831c3829c6",
+      "timings": {
+        "answer_wait_wall_seconds": 3.304799975012429e-05,
+        "api_call_wall_seconds": 7.01524278099987,
+        "case_elapsed_seconds": 7.38740130899987,
+        "complete_api_measurement": true,
+        "observer_wall_seconds": 0.0,
+        "partial_api_elapsed_seconds": null,
+        "persistence_in_call_wall_seconds": null,
+        "planning_wall_seconds": null,
+        "recorder_wall_seconds": 0.1947390669993183,
+        "scope_version": 1,
+        "state_analysis_wall_seconds": null,
+        "unattributed_wall_seconds": null,
+        "worker_cpu_seconds": null,
+        "worker_shutdown_wall_seconds": null,
+        "worker_startup_wall_seconds": null
+      },
+      "verified": true
+    },
+    {
+      "attempt_id": "attempt0001",
+      "case_id": "d7-m5-c000042",
+      "controller_elapsed_seconds": 4.547631115000513,
+      "error": null,
+      "evidence": {
+        "actual_horizons": [
+          2,
+          1,
+          1,
+          2,
+          1
+        ],
+        "answers_checked": 5,
+        "api_seconds": 3.991374877999988,
+        "attempt_id": "attempt0001",
+        "attempts_completed": 5,
+        "attempts_started": 5,
+        "candidate_count_path": [
+          5,
+          4,
+          3,
+          2,
+          2,
+          1
+        ],
+        "case_id": "d7-m5-c000042",
+        "case_seconds": 4.340124088000266,
+        "configuration_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05-config",
+        "controller_seconds": 4.547631115000513,
+        "error": null,
+        "error_code": null,
+        "expected_candidates": [
+          3.2538524422761883,
+          3.0,
+          2.323807493615245,
+          1.3158595171455914,
+          1.0638200083125235
+        ],
+        "fallback_attempts_completed": 0,
+        "fallback_attempts_started": 0,
+        "fallbacks": 0,
+        "final_execution_cursor": {
+          "answered_total": 5,
+          "remaining_depth": 2
+        },
+        "finished_at_utc": "2026-10-17T22:43:16.216480Z",
+        "grid": 5,
+        "initial_candidate_count": 5,
+        "initial_singleton": false,
+        "interruption": null,
+        "job_id": "job000003",
+        "journal_ref": {
+          "path": "jobs/job000003/attempts/attempt0001/events.jsonl",
+          "sha256": "c3877b1c36620822de3587084c17b96ae91d4e928ddeb4889319764691723f60"
+        },
+        "last_good_sequence": 43,
+        "manifest_ref": {
+          "path": "jobs/job000003/attempts/attempt0001/manifest.json",
+          "sha256": "dcfc1c3c7bccca0b3e217e86402cd4bc1935d9c528ff3d046cc33d997ad1d76e"
+        },
+        "mode": "adaptive",
+        "objectives": 7,
+        "partial_api_seconds": null,
+        "progress_matches_full_result_prefix": true,
+        "progress_ref": {
+          "bytes": 753,
+          "path": "jobs/job000003/attempts/attempt0001/progress.json",
+          "sha256": "60f809634de156944206630a427224a89151abe74cd38be049da749e731fe10d"
+        },
+        "quality": "correct",
+        "queries": 5,
+        "result_ref": {
+          "path": "jobs/job000003/attempts/attempt0001/result.json",
+          "sha256": "c94fb05c1d08d596a28223aa1d0f07feeb2ef90ad1082c7d2b4d0b83e363f6d9"
+        },
+        "selected_candidate_id": "a4",
+        "solved": true,
+        "stagnant_answer_steps": 1,
+        "started_at_utc": "2026-10-17T22:43:11.876374Z",
+        "state_winner_lost_indices": [],
+        "status": "completed",
+        "successful_fallbacks": 0,
+        "termination_reason": "exact_single_candidate",
+        "uncommitted_recorded_answers_checked_no_credit": 0,
+        "unsuccessful_fallbacks": 0,
+        "winner_ids": [
+          "a4"
+        ]
+      },
+      "execution_status": "completed",
+      "interruption": null,
+      "job_id": "job000003",
+      "result": {
+        "path": "jobs/job000003/attempts/attempt0001/result.json",
+        "sha256": "c94fb05c1d08d596a28223aa1d0f07feeb2ef90ad1082c7d2b4d0b83e363f6d9"
+      },
+      "run_id": "287dee49-f1eb-4be4-882e-c5aca32d4877",
+      "timings": {
+        "answer_wait_wall_seconds": 2.1328999537217896e-05,
+        "api_call_wall_seconds": 3.991374877999988,
+        "case_elapsed_seconds": 4.340124088000266,
+        "complete_api_measurement": true,
+        "observer_wall_seconds": 0.0,
+        "partial_api_elapsed_seconds": null,
+        "persistence_in_call_wall_seconds": null,
+        "planning_wall_seconds": null,
+        "recorder_wall_seconds": 0.10961469800258783,
+        "scope_version": 1,
+        "state_analysis_wall_seconds": null,
+        "unattributed_wall_seconds": null,
+        "worker_cpu_seconds": null,
+        "worker_shutdown_wall_seconds": null,
+        "worker_startup_wall_seconds": null
+      },
+      "verified": true
+    },
+    {
+      "attempt_id": "attempt0001",
+      "case_id": "d7-m5-c000043",
+      "controller_elapsed_seconds": 140.9483296770004,
+      "error": null,
+      "evidence": {
+        "actual_horizons": [
+          1,
+          2,
+          1,
+          2,
+          1,
+          2,
+          1,
+          2,
+          1,
+          2,
+          2,
+          2,
+          1,
+          2,
+          2,
+          1,
+          2,
+          1,
+          2,
+          1,
+          1,
+          2,
+          1,
+          2,
+          2,
+          1,
+          2,
+          1
+        ],
+        "answers_checked": 28,
+        "api_seconds": 139.87993397799983,
+        "attempt_id": "attempt0001",
+        "attempts_completed": 28,
+        "attempts_started": 28,
+        "candidate_count_path": [
+          5,
+          4,
+          4,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1
+        ],
+        "case_id": "d7-m5-c000043",
+        "case_seconds": 140.41296385900023,
+        "configuration_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05-config",
+        "controller_seconds": 140.9483296770004,
+        "error": null,
+        "error_code": null,
+        "expected_candidates": [
+          4.076328808716954,
+          3.504685570004857,
+          3.3880651626636213,
+          2.636757021008693,
+          2.568206633189298,
+          2.718550366373105,
+          2.62267320629556,
+          2.7224573781805446,
+          2.595090817953249,
+          2.663896710204889,
+          2.616868970159766,
+          2.6598884462857884,
+          2.597149527009678,
+          2.7263903233333413,
+          2.7030017144976446,
+          2.7966466818927627,
+          2.754451597195421,
+          2.866912984501129,
+          2.8069965863438813,
+          2.7404405039486566,
+          2.8619554401404743,
+          1.8140212589842912,
+          1.767410143458182,
+          1.7876434722397752,
+          1.8147491747648006,
+          1.7482844697479005,
+          1.7902442556879907,
+          1.7066016248060194
+        ],
+        "fallback_attempts_completed": 0,
+        "fallback_attempts_started": 0,
+        "fallbacks": 0,
+        "final_execution_cursor": {
+          "answered_total": 28,
+          "remaining_depth": 2
+        },
+        "finished_at_utc": "2026-10-17T22:45:36.849401Z",
+        "grid": 5,
+        "initial_candidate_count": 5,
+        "initial_singleton": false,
+        "interruption": null,
+        "job_id": "job000004",
+        "journal_ref": {
+          "path": "jobs/job000004/attempts/attempt0001/events.jsonl",
+          "sha256": "b95ad4dcc9b96e78398bc07a2c3a2d1b555565146cf049944fbf9737b3d36865"
+        },
+        "last_good_sequence": 227,
+        "manifest_ref": {
+          "path": "jobs/job000004/attempts/attempt0001/manifest.json",
+          "sha256": "a2959aa1856008e83681baf5cab4804e3d4515558f56e82db9ae07e5aa1d42af"
+        },
+        "mode": "adaptive",
+        "objectives": 7,
+        "partial_api_seconds": null,
+        "progress_matches_full_result_prefix": true,
+        "progress_ref": {
+          "bytes": 761,
+          "path": "jobs/job000004/attempts/attempt0001/progress.json",
+          "sha256": "ab712de7892de0ce163e0c986da80c4e349dad32230455d96987639bc731bf54"
+        },
+        "quality": "correct",
+        "queries": 28,
+        "result_ref": {
+          "path": "jobs/job000004/attempts/attempt0001/result.json",
+          "sha256": "bd7d154b74cb1894ef02f6b2f95aa68ae73e2b203d9e41ff4aabfd13098ff169"
+        },
+        "selected_candidate_id": "a2",
+        "solved": true,
+        "stagnant_answer_steps": 24,
+        "started_at_utc": "2026-10-17T22:43:16.436457Z",
+        "state_winner_lost_indices": [],
+        "status": "completed",
+        "successful_fallbacks": 0,
+        "termination_reason": "exact_single_candidate",
+        "uncommitted_recorded_answers_checked_no_credit": 0,
+        "unsuccessful_fallbacks": 0,
+        "winner_ids": [
+          "a2"
+        ]
+      },
+      "execution_status": "completed",
+      "interruption": null,
+      "job_id": "job000004",
+      "result": {
+        "path": "jobs/job000004/attempts/attempt0001/result.json",
+        "sha256": "bd7d154b74cb1894ef02f6b2f95aa68ae73e2b203d9e41ff4aabfd13098ff169"
+      },
+      "run_id": "e0b90e1c-94fd-4883-90fe-90b5e3269997",
+      "timings": {
+        "answer_wait_wall_seconds": 0.00010474400278326357,
+        "api_call_wall_seconds": 139.87993397799983,
+        "case_elapsed_seconds": 140.41296385900023,
+        "complete_api_measurement": true,
+        "observer_wall_seconds": 0.0,
+        "partial_api_elapsed_seconds": null,
+        "persistence_in_call_wall_seconds": null,
+        "planning_wall_seconds": null,
+        "recorder_wall_seconds": 1.139188491002642,
+        "scope_version": 1,
+        "state_analysis_wall_seconds": null,
+        "unattributed_wall_seconds": null,
+        "worker_cpu_seconds": null,
+        "worker_shutdown_wall_seconds": null,
+        "worker_startup_wall_seconds": null
+      },
+      "verified": true
+    },
+    {
+      "attempt_id": "attempt0001",
+      "case_id": "d7-m5-c000044",
+      "controller_elapsed_seconds": 3.4504425220002304,
+      "error": null,
+      "evidence": {
+        "actual_horizons": [
+          1,
+          1,
+          2,
+          1
+        ],
+        "answers_checked": 4,
+        "api_seconds": 2.895386744999996,
+        "attempt_id": "attempt0001",
+        "attempts_completed": 4,
+        "attempts_started": 4,
+        "candidate_count_path": [
+          4,
+          4,
+          2,
+          2,
+          1
+        ],
+        "case_id": "d7-m5-c000044",
+        "case_seconds": 3.2385285689997545,
+        "configuration_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05-config",
+        "controller_seconds": 3.4504425220002304,
+        "error": null,
+        "error_code": null,
+        "expected_candidates": [
+          3.169716281756469,
+          3.20535183809458,
+          1.5125053013354706,
+          1.0250106026709414
+        ],
+        "fallback_attempts_completed": 0,
+        "fallback_attempts_started": 0,
+        "fallbacks": 0,
+        "final_execution_cursor": {
+          "answered_total": 4,
+          "remaining_depth": 2
+        },
+        "finished_at_utc": "2026-10-17T22:45:40.645804Z",
+        "grid": 5,
+        "initial_candidate_count": 4,
+        "initial_singleton": false,
+        "interruption": null,
+        "job_id": "job000005",
+        "journal_ref": {
+          "path": "jobs/job000005/attempts/attempt0001/events.jsonl",
+          "sha256": "08855b79f904622a03b590919bfff4d6890f6fa72ef3f7ef1caabdab93be8e57"
+        },
+        "last_good_sequence": 35,
+        "manifest_ref": {
+          "path": "jobs/job000005/attempts/attempt0001/manifest.json",
+          "sha256": "4bd5961dcb85d3352520777d7268e4b92fea20d5549d3749e5444fb200e9e245"
+        },
+        "mode": "adaptive",
+        "objectives": 7,
+        "partial_api_seconds": null,
+        "progress_matches_full_result_prefix": true,
+        "progress_ref": {
+          "bytes": 755,
+          "path": "jobs/job000005/attempts/attempt0001/progress.json",
+          "sha256": "d2ee14e9e8da81cd4b1f984a7acb3a9f236d220c5f9cc9bbbf70337bc9c2001b"
+        },
+        "quality": "correct",
+        "queries": 4,
+        "result_ref": {
+          "path": "jobs/job000005/attempts/attempt0001/result.json",
+          "sha256": "a2e108bc19c038e0a3e0a50dca9dc561bd84fd6ed39fd0629ca257e9d30da325"
+        },
+        "selected_candidate_id": "a0",
+        "solved": true,
+        "stagnant_answer_steps": 2,
+        "started_at_utc": "2026-10-17T22:45:37.407294Z",
+        "state_winner_lost_indices": [],
+        "status": "completed",
+        "successful_fallbacks": 0,
+        "termination_reason": "exact_single_candidate",
+        "uncommitted_recorded_answers_checked_no_credit": 0,
+        "unsuccessful_fallbacks": 0,
+        "winner_ids": [
+          "a0"
+        ]
+      },
+      "execution_status": "completed",
+      "interruption": null,
+      "job_id": "job000005",
+      "result": {
+        "path": "jobs/job000005/attempts/attempt0001/result.json",
+        "sha256": "a2e108bc19c038e0a3e0a50dca9dc561bd84fd6ed39fd0629ca257e9d30da325"
+      },
+      "run_id": "bc8aee0b-f374-468d-bb5d-652aaa696a42",
+      "timings": {
+        "answer_wait_wall_seconds": 2.6782001441461034e-05,
+        "api_call_wall_seconds": 2.895386744999996,
+        "case_elapsed_seconds": 3.2385285689997545,
+        "complete_api_measurement": true,
+        "observer_wall_seconds": 0.0,
+        "partial_api_elapsed_seconds": null,
+        "persistence_in_call_wall_seconds": null,
+        "planning_wall_seconds": null,
+        "recorder_wall_seconds": 0.08670266599801835,
+        "scope_version": 1,
+        "state_analysis_wall_seconds": null,
+        "unattributed_wall_seconds": null,
+        "worker_cpu_seconds": null,
+        "worker_shutdown_wall_seconds": null,
+        "worker_startup_wall_seconds": null
+      },
+      "verified": true
+    },
+    {
+      "attempt_id": "attempt0001",
+      "case_id": "d7-m5-c000045",
+      "controller_elapsed_seconds": 194.92203782099932,
+      "error": null,
+      "evidence": {
+        "actual_horizons": [
+          1,
+          2,
+          2,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          2,
+          2,
+          2,
+          1,
+          2,
+          1,
+          2,
+          2,
+          1,
+          2,
+          1,
+          2,
+          2,
+          2,
+          1,
+          2,
+          1,
+          2,
+          2,
+          2,
+          2,
+          1,
+          2,
+          1,
+          2,
+          1,
+          2,
+          1,
+          2,
+          2,
+          1,
+          2,
+          2,
+          1,
+          2,
+          2,
+          1,
+          2,
+          1,
+          2,
+          1,
+          2,
+          1,
+          2,
+          1,
+          2,
+          1,
+          2,
+          1,
+          2,
+          1,
+          2,
+          1,
+          2,
+          1,
+          2,
+          1,
+          2,
+          1
+        ],
+        "answers_checked": 68,
+        "api_seconds": 193.046279657,
+        "attempt_id": "attempt0001",
+        "attempts_completed": 68,
+        "attempts_started": 68,
+        "candidate_count_path": [
+          5,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1
+        ],
+        "case_id": "d7-m5-c000045",
+        "case_seconds": 193.8516735080002,
+        "configuration_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05-config",
+        "controller_seconds": 194.92203782099932,
+        "error": null,
+        "error_code": null,
+        "expected_candidates": [
+          3.73522470226452,
+          2.3494646948099147,
+          2.4844376485812627,
+          2.581321525845114,
+          2.816761500724083,
+          2.7770095542863826,
+          2.8107428644937906,
+          2.6306944935987384,
+          2.5611715975992584,
+          1.7990470324047267,
+          1.8730815103489697,
+          1.889350676603601,
+          1.890695415406899,
+          1.8616983372618423,
+          1.8170522891400958,
+          1.8427288652014369,
+          1.9151714902377006,
+          1.900813831447652,
+          1.8799434540983753,
+          1.954234128514327,
+          1.964293413260236,
+          1.9274518055674212,
+          1.947276920427866,
+          1.8735994280963266,
+          1.927892433139883,
+          1.6600576944762044,
+          1.8408942852171783,
+          1.8565537634711586,
+          1.8655760567663362,
+          1.9124032086860672,
+          1.8366049548667915,
+          1.9198746045998338,
+          1.8355338347125476,
+          1.9154504056243704,
+          1.8111537890237335,
+          1.9207097430268414,
+          1.816445380594791,
+          1.9215826080955032,
+          1.9321212218938721,
+          1.8557356552061042,
+          1.925216858710251,
+          1.899859625970019,
+          1.8626707915844523,
+          1.9232389926824611,
+          1.8339247979933642,
+          1.8263460796136162,
+          1.8683920961354639,
+          1.8703757637955478,
+          1.8496358025585804,
+          1.8585214747442902,
+          1.8745248640221694,
+          1.863024976559576,
+          1.857299537415486,
+          1.8463559946315828,
+          1.8785088202995381,
+          1.8794869127082432,
+          1.8620758420217092,
+          1.855055585766859,
+          1.8704361892288444,
+          1.8820745252660789,
+          1.8802292428331226,
+          1.878542370603939,
+          1.8654689617826161,
+          1.8705207963141532,
+          1.8771047420236442,
+          1.8739316066620224,
+          1.8626479577649295,
+          1.8621529185620718
+        ],
+        "fallback_attempts_completed": 0,
+        "fallback_attempts_started": 0,
+        "fallbacks": 0,
+        "final_execution_cursor": {
+          "answered_total": 68,
+          "remaining_depth": 2
+        },
+        "finished_at_utc": "2026-10-17T22:48:54.725029Z",
+        "grid": 5,
+        "initial_candidate_count": 5,
+        "initial_singleton": false,
+        "interruption": null,
+        "job_id": "job000006",
+        "journal_ref": {
+          "path": "jobs/job000006/attempts/attempt0001/events.jsonl",
+          "sha256": "6de5dd29d002113bd83002f4acc9cb4ae735dfadf65750e0a32f799f36f00c9b"
+        },
+        "last_good_sequence": 547,
+        "manifest_ref": {
+          "path": "jobs/job000006/attempts/attempt0001/manifest.json",
+          "sha256": "1990a9cff774571164795d1767949c8aeac6e1aa05cf5b4ca64a0c3904b8a784"
+        },
+        "mode": "adaptive",
+        "objectives": 7,
+        "partial_api_seconds": null,
+        "progress_matches_full_result_prefix": true,
+        "progress_ref": {
+          "bytes": 761,
+          "path": "jobs/job000006/attempts/attempt0001/progress.json",
+          "sha256": "0bd9e4c17aa607a7f9e76cbbfa15ed6c757dc1fa8ba6264066aed80e73b20e16"
+        },
+        "quality": "correct",
+        "queries": 68,
+        "result_ref": {
+          "path": "jobs/job000006/attempts/attempt0001/result.json",
+          "sha256": "00fbb61c02d0eef5ce7ce20d61295706c8b64e1d7cba4884fe33fac6a4becbd8"
+        },
+        "selected_candidate_id": "a1",
+        "solved": true,
+        "stagnant_answer_steps": 65,
+        "started_at_utc": "2026-10-17T22:45:40.873374Z",
+        "state_winner_lost_indices": [],
+        "status": "completed",
+        "successful_fallbacks": 0,
+        "termination_reason": "exact_single_candidate",
+        "uncommitted_recorded_answers_checked_no_credit": 0,
+        "unsuccessful_fallbacks": 0,
+        "winner_ids": [
+          "a1"
+        ]
+      },
+      "execution_status": "completed",
+      "interruption": null,
+      "job_id": "job000006",
+      "result": {
+        "path": "jobs/job000006/attempts/attempt0001/result.json",
+        "sha256": "00fbb61c02d0eef5ce7ce20d61295706c8b64e1d7cba4884fe33fac6a4becbd8"
+      },
+      "run_id": "852136f7-c47a-4419-b291-ac9ba5686dfa",
+      "timings": {
+        "answer_wait_wall_seconds": 0.0002132319959855522,
+        "api_call_wall_seconds": 193.046279657,
+        "case_elapsed_seconds": 193.8516735080002,
+        "complete_api_measurement": true,
+        "observer_wall_seconds": 0.0,
+        "partial_api_elapsed_seconds": null,
+        "persistence_in_call_wall_seconds": null,
+        "planning_wall_seconds": null,
+        "recorder_wall_seconds": 3.5111019549940465,
+        "scope_version": 1,
+        "state_analysis_wall_seconds": null,
+        "unattributed_wall_seconds": null,
+        "worker_cpu_seconds": null,
+        "worker_shutdown_wall_seconds": null,
+        "worker_startup_wall_seconds": null
+      },
+      "verified": true
+    },
+    {
+      "attempt_id": "attempt0001",
+      "case_id": "d7-m5-c000046",
+      "controller_elapsed_seconds": 63.59376919799979,
+      "error": null,
+      "evidence": {
+        "actual_horizons": [
+          2,
+          1,
+          2,
+          1,
+          2,
+          1,
+          2,
+          2,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          2,
+          2,
+          2,
+          2,
+          1,
+          2,
+          2,
+          2,
+          2,
+          1,
+          2,
+          1
+        ],
+        "answers_checked": 26,
+        "api_seconds": 62.579417344999456,
+        "attempt_id": "attempt0001",
+        "attempts_completed": 26,
+        "attempts_started": 26,
+        "candidate_count_path": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1
+        ],
+        "case_id": "d7-m5-c000046",
+        "case_seconds": 63.097196718000305,
+        "configuration_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05-config",
+        "controller_seconds": 63.59376919799979,
+        "error": null,
+        "error_code": null,
+        "expected_candidates": [
+          2.8558604455122056,
+          2.8558604455122056,
+          2.8586296707688668,
+          2.9506171573758837,
+          2.9282618803704112,
+          2.9676695956975263,
+          2.951076254680208,
+          2.5554828494927997,
+          2.8446038897926877,
+          2.9282373328078166,
+          2.8306185094124747,
+          2.8732871942643614,
+          2.643279826584785,
+          2.3763273510521037,
+          1.897205094484796,
+          1.9249897595966567,
+          1.940966369037703,
+          1.843230288215568,
+          1.942837306947897,
+          1.927434313868171,
+          1.7880693233396059,
+          1.8972988367473027,
+          1.887284912393362,
+          1.7359862663426677,
+          1.8565721291901822,
+          1.8621060668124776
+        ],
+        "fallback_attempts_completed": 0,
+        "fallback_attempts_started": 0,
+        "fallbacks": 0,
+        "final_execution_cursor": {
+          "answered_total": 26,
+          "remaining_depth": 2
+        },
+        "finished_at_utc": "2026-10-17T22:49:58.923001Z",
+        "grid": 5,
+        "initial_candidate_count": 3,
+        "initial_singleton": false,
+        "interruption": null,
+        "job_id": "job000007",
+        "journal_ref": {
+          "path": "jobs/job000007/attempts/attempt0001/events.jsonl",
+          "sha256": "c5d6d7938199897721116f3edba5af9aa2d639327246c35c6d9430313c13d13e"
+        },
+        "last_good_sequence": 211,
+        "manifest_ref": {
+          "path": "jobs/job000007/attempts/attempt0001/manifest.json",
+          "sha256": "d35b3c3ca86a245d6693c148304d93b17d03a1dab54040dc88e31292afdba7fb"
+        },
+        "mode": "adaptive",
+        "objectives": 7,
+        "partial_api_seconds": null,
+        "progress_matches_full_result_prefix": true,
+        "progress_ref": {
+          "bytes": 760,
+          "path": "jobs/job000007/attempts/attempt0001/progress.json",
+          "sha256": "931f44424f154b08a7b87b4bf087a7d6b3a2e463e97e8944a0c2db80b64844cd"
+        },
+        "quality": "correct",
+        "queries": 26,
+        "result_ref": {
+          "path": "jobs/job000007/attempts/attempt0001/result.json",
+          "sha256": "113d29a470812498d851fab3c9488ba4deac6f276fe8089900efbfb7eb348758"
+        },
+        "selected_candidate_id": "a3",
+        "solved": true,
+        "stagnant_answer_steps": 24,
+        "started_at_utc": "2026-10-17T22:48:55.825826Z",
+        "state_winner_lost_indices": [],
+        "status": "completed",
+        "successful_fallbacks": 0,
+        "termination_reason": "exact_single_candidate",
+        "uncommitted_recorded_answers_checked_no_credit": 0,
+        "unsuccessful_fallbacks": 0,
+        "winner_ids": [
+          "a3"
+        ]
+      },
+      "execution_status": "completed",
+      "interruption": null,
+      "job_id": "job000007",
+      "result": {
+        "path": "jobs/job000007/attempts/attempt0001/result.json",
+        "sha256": "113d29a470812498d851fab3c9488ba4deac6f276fe8089900efbfb7eb348758"
+      },
+      "run_id": "0e9e0f61-2113-4d8b-b9bd-f1a90362c3be",
+      "timings": {
+        "answer_wait_wall_seconds": 0.00010358699819335015,
+        "api_call_wall_seconds": 62.579417344999456,
+        "case_elapsed_seconds": 63.097196718000305,
+        "complete_api_measurement": true,
+        "observer_wall_seconds": 0.0,
+        "partial_api_elapsed_seconds": null,
+        "persistence_in_call_wall_seconds": null,
+        "planning_wall_seconds": null,
+        "recorder_wall_seconds": 0.9730427930053338,
+        "scope_version": 1,
+        "state_analysis_wall_seconds": null,
+        "unattributed_wall_seconds": null,
+        "worker_cpu_seconds": null,
+        "worker_shutdown_wall_seconds": null,
+        "worker_startup_wall_seconds": null
+      },
+      "verified": true
+    },
+    {
+      "attempt_id": "attempt0001",
+      "case_id": "d7-m5-c000047",
+      "controller_elapsed_seconds": 35.382958127000165,
+      "error": null,
+      "evidence": {
+        "actual_horizons": [
+          1,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          2,
+          2,
+          1,
+          2,
+          2,
+          1,
+          2,
+          2,
+          2,
+          1,
+          1,
+          2,
+          1
+        ],
+        "answers_checked": 20,
+        "api_seconds": 34.49425518699991,
+        "attempt_id": "attempt0001",
+        "attempts_completed": 20,
+        "attempts_started": 20,
+        "candidate_count_path": [
+          5,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1
+        ],
+        "case_id": "d7-m5-c000047",
+        "case_seconds": 34.95685018200038,
+        "configuration_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05-config",
+        "controller_seconds": 35.382958127000165,
+        "error": null,
+        "error_code": null,
+        "expected_candidates": [
+          4.3593908470909515,
+          3.445384980710033,
+          2.580903085971012,
+          3.3568262581028505,
+          3.6172936040894967,
+          3.1968349440129686,
+          3.6366141682019197,
+          1.814824107827377,
+          1.8426558269985316,
+          1.871041928482371,
+          1.9055232483845372,
+          1.9020875948787035,
+          1.88393648341372,
+          1.9336820386981526,
+          1.322201589571288,
+          1.5514876846463799,
+          1.225737499882943,
+          1.6285639606599496,
+          1.5459473213311723,
+          1.5038921698215153
+        ],
+        "fallback_attempts_completed": 0,
+        "fallback_attempts_started": 0,
+        "fallbacks": 0,
+        "final_execution_cursor": {
+          "answered_total": 20,
+          "remaining_depth": 2
+        },
+        "finished_at_utc": "2026-10-17T22:50:34.401059Z",
+        "grid": 5,
+        "initial_candidate_count": 5,
+        "initial_singleton": false,
+        "interruption": null,
+        "job_id": "job000008",
+        "journal_ref": {
+          "path": "jobs/job000008/attempts/attempt0001/events.jsonl",
+          "sha256": "65a4b7f1ec3699c2b907699244b903c07a48a3aa5cbfee5727a2bd25d3b2bbc9"
+        },
+        "last_good_sequence": 163,
+        "manifest_ref": {
+          "path": "jobs/job000008/attempts/attempt0001/manifest.json",
+          "sha256": "667891240a68e9720ac4a36acc3d1a63a1e8db34a1bcea1d960e1091067ffde8"
+        },
+        "mode": "adaptive",
+        "objectives": 7,
+        "partial_api_seconds": null,
+        "progress_matches_full_result_prefix": true,
+        "progress_ref": {
+          "bytes": 760,
+          "path": "jobs/job000008/attempts/attempt0001/progress.json",
+          "sha256": "16e23f3848c98df6b2159074c4061d89eb730d07ecaba10c4f1183ee44b77b46"
+        },
+        "quality": "correct",
+        "queries": 20,
+        "result_ref": {
+          "path": "jobs/job000008/attempts/attempt0001/result.json",
+          "sha256": "089efc7bfc0ff4ec922e3490589de569c8dd2f09fe36dcc282422686d76c6d8b"
+        },
+        "selected_candidate_id": "a2",
+        "solved": true,
+        "stagnant_answer_steps": 17,
+        "started_at_utc": "2026-10-17T22:49:59.444229Z",
+        "state_winner_lost_indices": [],
+        "status": "completed",
+        "successful_fallbacks": 0,
+        "termination_reason": "exact_single_candidate",
+        "uncommitted_recorded_answers_checked_no_credit": 0,
+        "unsuccessful_fallbacks": 0,
+        "winner_ids": [
+          "a2"
+        ]
+      },
+      "execution_status": "completed",
+      "interruption": null,
+      "job_id": "job000008",
+      "result": {
+        "path": "jobs/job000008/attempts/attempt0001/result.json",
+        "sha256": "089efc7bfc0ff4ec922e3490589de569c8dd2f09fe36dcc282422686d76c6d8b"
+      },
+      "run_id": "6d43613a-ff04-41f2-a5c7-8fc3e0148b81",
+      "timings": {
+        "answer_wait_wall_seconds": 6.827700235589873e-05,
+        "api_call_wall_seconds": 34.49425518699991,
+        "case_elapsed_seconds": 34.95685018200038,
+        "complete_api_measurement": true,
+        "observer_wall_seconds": 0.0,
+        "partial_api_elapsed_seconds": null,
+        "persistence_in_call_wall_seconds": null,
+        "planning_wall_seconds": null,
+        "recorder_wall_seconds": 0.6236300639975525,
+        "scope_version": 1,
+        "state_analysis_wall_seconds": null,
+        "unattributed_wall_seconds": null,
+        "worker_cpu_seconds": null,
+        "worker_shutdown_wall_seconds": null,
+        "worker_startup_wall_seconds": null
+      },
+      "verified": true
+    },
+    {
+      "attempt_id": "attempt0001",
+      "case_id": "d7-m5-c000048",
+      "controller_elapsed_seconds": 9.863695824000388,
+      "error": null,
+      "evidence": {
+        "actual_horizons": [
+          2,
+          2,
+          2,
+          1,
+          2,
+          1,
+          2,
+          1,
+          2,
+          1
+        ],
+        "answers_checked": 10,
+        "api_seconds": 9.162107334000211,
+        "attempt_id": "attempt0001",
+        "attempts_completed": 10,
+        "attempts_started": 10,
+        "candidate_count_path": [
+          4,
+          4,
+          4,
+          4,
+          3,
+          3,
+          2,
+          2,
+          2,
+          2,
+          1
+        ],
+        "case_id": "d7-m5-c000048",
+        "case_seconds": 9.586898973000643,
+        "configuration_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05-config",
+        "controller_seconds": 9.863695824000388,
+        "error": null,
+        "error_code": null,
+        "expected_candidates": [
+          3.3972920761376244,
+          3.5744360924592744,
+          3.1085588082761566,
+          3.0670978141017717,
+          2.44654546391801,
+          2.449504789218836,
+          1.3775177840928945,
+          1.2226646934407461,
+          1.4214575721840177,
+          1.2942881080075517
+        ],
+        "fallback_attempts_completed": 0,
+        "fallback_attempts_started": 0,
+        "fallbacks": 0,
+        "final_execution_cursor": {
+          "answered_total": 10,
+          "remaining_depth": 2
+        },
+        "finished_at_utc": "2026-10-17T22:50:44.437318Z",
+        "grid": 5,
+        "initial_candidate_count": 4,
+        "initial_singleton": false,
+        "interruption": null,
+        "job_id": "job000009",
+        "journal_ref": {
+          "path": "jobs/job000009/attempts/attempt0001/events.jsonl",
+          "sha256": "e82342a14e0de6510b154b464cbb43f97af802ddef2d1aa2ceaa116513a9295d"
+        },
+        "last_good_sequence": 83,
+        "manifest_ref": {
+          "path": "jobs/job000009/attempts/attempt0001/manifest.json",
+          "sha256": "818d9c058116a7185139cde6aa57247b334a3d680be1da08d2f608d6d98cf88f"
+        },
+        "mode": "adaptive",
+        "objectives": 7,
+        "partial_api_seconds": null,
+        "progress_matches_full_result_prefix": true,
+        "progress_ref": {
+          "bytes": 758,
+          "path": "jobs/job000009/attempts/attempt0001/progress.json",
+          "sha256": "5882d7a46598e0a6e05858f7af0e0768b3294aa8cbf5f1153b6e7d4a40746546"
+        },
+        "quality": "correct",
+        "queries": 10,
+        "result_ref": {
+          "path": "jobs/job000009/attempts/attempt0001/result.json",
+          "sha256": "0e9032dc9d94cb1deb9b9e06ef591a19a91a9915e72166ecfa59a0f9c804a990"
+        },
+        "selected_candidate_id": "a1",
+        "solved": true,
+        "stagnant_answer_steps": 7,
+        "started_at_utc": "2026-10-17T22:50:34.850437Z",
+        "state_winner_lost_indices": [],
+        "status": "completed",
+        "successful_fallbacks": 0,
+        "termination_reason": "exact_single_candidate",
+        "uncommitted_recorded_answers_checked_no_credit": 0,
+        "unsuccessful_fallbacks": 0,
+        "winner_ids": [
+          "a1"
+        ]
+      },
+      "execution_status": "completed",
+      "interruption": null,
+      "job_id": "job000009",
+      "result": {
+        "path": "jobs/job000009/attempts/attempt0001/result.json",
+        "sha256": "0e9032dc9d94cb1deb9b9e06ef591a19a91a9915e72166ecfa59a0f9c804a990"
+      },
+      "run_id": "761f5e97-26bd-4b93-913b-6750114ccb5b",
+      "timings": {
+        "answer_wait_wall_seconds": 3.4891001632786356e-05,
+        "api_call_wall_seconds": 9.162107334000211,
+        "case_elapsed_seconds": 9.586898973000643,
+        "complete_api_measurement": true,
+        "observer_wall_seconds": 0.0,
+        "partial_api_elapsed_seconds": null,
+        "persistence_in_call_wall_seconds": null,
+        "planning_wall_seconds": null,
+        "recorder_wall_seconds": 0.21195507399897906,
+        "scope_version": 1,
+        "state_analysis_wall_seconds": null,
+        "unattributed_wall_seconds": null,
+        "worker_cpu_seconds": null,
+        "worker_shutdown_wall_seconds": null,
+        "worker_startup_wall_seconds": null
+      },
+      "verified": true
+    },
+    {
+      "attempt_id": "attempt0001",
+      "case_id": "d7-m5-c000049",
+      "controller_elapsed_seconds": 4.123897323999699,
+      "error": null,
+      "evidence": {
+        "actual_horizons": [
+          1,
+          1,
+          2,
+          1
+        ],
+        "answers_checked": 4,
+        "api_seconds": 3.58234594500027,
+        "attempt_id": "attempt0001",
+        "attempts_completed": 4,
+        "attempts_started": 4,
+        "candidate_count_path": [
+          5,
+          4,
+          2,
+          2,
+          1
+        ],
+        "case_id": "d7-m5-c000049",
+        "case_seconds": 3.9160818370000925,
+        "configuration_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05-config",
+        "controller_seconds": 4.123897323999699,
+        "error": null,
+        "error_code": null,
+        "expected_candidates": [
+          3.458496648959834,
+          2.990851193558683,
+          1.4779585435424003,
+          1.1269822184473464
+        ],
+        "fallback_attempts_completed": 0,
+        "fallback_attempts_started": 0,
+        "fallbacks": 0,
+        "final_execution_cursor": {
+          "answered_total": 4,
+          "remaining_depth": 2
+        },
+        "finished_at_utc": "2026-10-17T22:50:48.655357Z",
+        "grid": 5,
+        "initial_candidate_count": 5,
+        "initial_singleton": false,
+        "interruption": null,
+        "job_id": "job000010",
+        "journal_ref": {
+          "path": "jobs/job000010/attempts/attempt0001/events.jsonl",
+          "sha256": "95295f0e5b3815b86e5b24387a9f160c8eeb4344fb935980bca6b0368d91c37b"
+        },
+        "last_good_sequence": 35,
+        "manifest_ref": {
+          "path": "jobs/job000010/attempts/attempt0001/manifest.json",
+          "sha256": "df838e35c0e1060b5f714f21b519b2c257b2e441eec02d8bef795acf5ef16cbf"
+        },
+        "mode": "adaptive",
+        "objectives": 7,
+        "partial_api_seconds": null,
+        "progress_matches_full_result_prefix": true,
+        "progress_ref": {
+          "bytes": 754,
+          "path": "jobs/job000010/attempts/attempt0001/progress.json",
+          "sha256": "23d46da42e2108472148e6cbd3677f54ad88772c0def7b825f2fccb529d70d51"
+        },
+        "quality": "correct",
+        "queries": 4,
+        "result_ref": {
+          "path": "jobs/job000010/attempts/attempt0001/result.json",
+          "sha256": "b57bb90180a2ebe4c0683a65666d220c3d94da32ca427b8b23aa62039ccad89f"
+        },
+        "selected_candidate_id": "a4",
+        "solved": true,
+        "stagnant_answer_steps": 1,
+        "started_at_utc": "2026-10-17T22:50:44.739294Z",
+        "state_winner_lost_indices": [],
+        "status": "completed",
+        "successful_fallbacks": 0,
+        "termination_reason": "exact_single_candidate",
+        "uncommitted_recorded_answers_checked_no_credit": 0,
+        "unsuccessful_fallbacks": 0,
+        "winner_ids": [
+          "a4"
+        ]
+      },
+      "execution_status": "completed",
+      "interruption": null,
+      "job_id": "job000010",
+      "result": {
+        "path": "jobs/job000010/attempts/attempt0001/result.json",
+        "sha256": "b57bb90180a2ebe4c0683a65666d220c3d94da32ca427b8b23aa62039ccad89f"
+      },
+      "run_id": "ae6e0e1d-d7c4-42c2-bb5d-c64aaa080cfc",
+      "timings": {
+        "answer_wait_wall_seconds": 1.8116999854100868e-05,
+        "api_call_wall_seconds": 3.58234594500027,
+        "case_elapsed_seconds": 3.9160818370000925,
+        "complete_api_measurement": true,
+        "observer_wall_seconds": 0.0,
+        "partial_api_elapsed_seconds": null,
+        "persistence_in_call_wall_seconds": null,
+        "planning_wall_seconds": null,
+        "recorder_wall_seconds": 0.08584794199850876,
+        "scope_version": 1,
+        "state_analysis_wall_seconds": null,
+        "unattributed_wall_seconds": null,
+        "worker_cpu_seconds": null,
+        "worker_shutdown_wall_seconds": null,
+        "worker_startup_wall_seconds": null
+      },
+      "verified": true
+    }
+  ],
+  "configuration": {
+    "algorithm": {
+      "depth": 2,
+      "grid_size": 5,
+      "higher_depth_query_source": "both",
+      "horizon_execution": "receding",
+      "min_expected_progress": 0.001,
+      "planning_evaluation": "candidate_count",
+      "query_strategy": "reduction_per_query",
+      "stopping": {
+        "rule": "single_candidate"
+      }
+    },
+    "budget": {
+      "max_queries": null
+    },
+    "configuration_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05-config",
+    "execution": {
+      "cache_policy_id": "bounded_v1",
+      "case_timeout_seconds": null,
+      "native_threads": 1,
+      "start_method": "forkserver",
+      "workers": 16
+    },
+    "recording": {
+      "durability": "per_answer",
+      "profile": false,
+      "telemetry_failure_policy": "continue",
+      "trace_level": "standard"
+    },
+    "schema_version": 2
+  },
+  "counts": {
+    "all_attempts": 10,
+    "answers_checked_exact_fraction": 180,
+    "attempts_verified": 10,
+    "correct": 10,
+    "failed": 0,
+    "incorrect": 0,
+    "interrupted_attempts": 0,
+    "primary_rows": 10,
+    "regular_unsolved": 0,
+    "solved": 10,
+    "uncommitted_recorded_answers_checked_no_credit": 0,
+    "unknown_controller_costs": 0,
+    "winner_sets_checked_exact_fraction": 10
+  },
+  "created_at_utc": "2026-10-17T23:51:46.625433+00:00",
+  "elapsed_seconds": 1.3376115829742048,
+  "expected_original_case_ids": [
+    "d7-m5-c000040",
+    "d7-m5-c000041",
+    "d7-m5-c000042",
+    "d7-m5-c000043",
+    "d7-m5-c000044",
+    "d7-m5-c000045",
+    "d7-m5-c000046",
+    "d7-m5-c000047",
+    "d7-m5-c000048",
+    "d7-m5-c000049"
+  ],
+  "expected_original_inputs": {
+    "configuration": {
+      "path": "inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/configuration.json",
+      "sha256": "5304fe97d2e48e05f8083caadb84a9150c0b03fcfa40fe84931251d73eafb243"
+    },
+    "dataset": {
+      "path": "inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/dataset.json",
+      "sha256": "6b26b6d2da9f39f49df5e80d843deaed0f184c7243759a1bcbeebe26d0230d3d"
+    },
+    "suite": {
+      "path": "runs/four-host-readiness-20261017T2140Z/prepared-suites/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/suite.json",
+      "sha256": "677d8bb3b76ae4bfdf3902e74f948cd950e2a493153a34136e3b6d76d8664ba6"
+    }
+  },
+  "exports": {
+    "aggregate_rounding_tolerance": "32ULP for aggregate floating values only; individual costs retained unchanged",
+    "audit": {
+      "bytes": 3348,
+      "path": "reports/3ceeb4a4-90de-51a6-a4c4-bdac6de04c65/audit.json",
+      "sha256": "681c3226ac7248f393ee45ea37bbbf6e5aa6d982d6e846efa598a9f01e0f9f6f"
+    },
+    "csv": {
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/exports/fleet-final.csv",
+      "sha256": "5aa28bb5f8a08aba7c0700a52a42b83ed69da9782364cada5a2ecc4743f4fe3d"
+    },
+    "group_count": 1,
+    "json": {
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/exports/fleet-final.json",
+      "sha256": "e1035668ba743b1fb45f35af88fd150bec13cf10670e46cff9cc824ab6e47d63"
+    },
+    "row_count": 10,
+    "state_snapshot": {
+      "path": "reports/3ceeb4a4-90de-51a6-a4c4-bdac6de04c65/state-snapshot.json",
+      "sha256": "d55d98425788fd584124d16a27dcb5ff53486b7510ad033aa07a575266bc2b6d"
+    }
+  },
+  "findings": [],
+  "finish_proof_sha256": "949822ca5120fa7281c53cbda22570f56b6214a26ce337eafbb12932a089e7a3",
+  "independent_problems": 10,
+  "limitations": [
+    "Provisional independent evidence only; root and peer review, final cross-host hash proof, packaging and download verification remain separate.",
+    "No geometric region, LP feasibility, hypothetical branch probability, alternative plan inventory or global score optimum was recomputed or certified.",
+    "Stored generated/evaluated inventory counts, horizon decisions and progress threshold arithmetic were checked against recorded evidence.",
+    "Exact Fraction comparisons interpret the preserved binary64 matrix, preferences and actual query thresholds; they do not prove other-weight region geometry.",
+    "Historical process-group end is bound to the native finish evidence; this offline checker makes no fresh Linux process-liveness claim.",
+    "Intermediate progress phase labels are not independently reconstructed beyond durable identities, prefix, counts/cursor, and terminal/answer phase barriers.",
+    "Native aggregate floating values permit32ULP rounding difference across Python summation implementations; every individual original timing and attempt cost is retained.",
+    "UTC format and observed ordering are checked only as a clock-anomaly review gate; operating-system wall clocks can step, and no performance duration is calculated from UTC timestamps."
+  ],
+  "ordered_problem_oracle_sha256": "9e14aa399cc060c5e33d9a8199354ffbb2b129fb55fde61ed650d6d09b6894ad",
+  "plan": {
+    "bytes": 26316,
+    "path": "plan.json",
+    "sha256": "6b6211822735a8095bf84aac4bd69a4a6b92fe72aeb26de403f7f8d85c50d748"
+  },
+  "primary_cells": 10,
+  "primary_rows_verified": 10,
+  "publication_completion": false,
+  "repetitions": 1,
+  "rows": [
+    {
+      "actual_horizons": [
+        2,
+        1,
+        1,
+        1,
+        2,
+        1
+      ],
+      "answers_checked": 6,
+      "api_seconds": 5.00562560400067,
+      "attempt_id": "attempt0001",
+      "attempts_completed": 6,
+      "attempts_started": 6,
+      "candidate_count_path": [
+        5,
+        4,
+        3,
+        3,
+        2,
+        2,
+        1
+      ],
+      "case_id": "d7-m5-c000040",
+      "case_seconds": 5.351835325000138,
+      "configuration_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05-config",
+      "controller_seconds": 5.595797410000159,
+      "error": null,
+      "error_code": null,
+      "expected_candidates": [
+        3.669264338315547,
+        3.245969072466681,
+        2.4564119562483135,
+        2.1396032243482095,
+        1.2237761689334086,
+        1.0436087065829664
+      ],
+      "fallback_attempts_completed": 0,
+      "fallback_attempts_started": 0,
+      "fallbacks": 0,
+      "final_execution_cursor": {
+        "answered_total": 6,
+        "remaining_depth": 2
+      },
+      "finished_at_utc": "2026-10-17T22:43:03.962441Z",
+      "grid": 5,
+      "initial_candidate_count": 5,
+      "initial_singleton": false,
+      "interruption": null,
+      "job_id": "job000001",
+      "journal_ref": {
+        "path": "jobs/job000001/attempts/attempt0001/events.jsonl",
+        "sha256": "3278b2bf7ed4545302df18981aa950f8228d813356419c1f61ec10c8a48c8190"
+      },
+      "last_good_sequence": 51,
+      "manifest_ref": {
+        "path": "jobs/job000001/attempts/attempt0001/manifest.json",
+        "sha256": "0899cd572fca1866a7a66973734c5ae6609668f33aa7c941f26b1530c7f1eee1"
+      },
+      "mode": "adaptive",
+      "objectives": 7,
+      "partial_api_seconds": null,
+      "progress_matches_full_result_prefix": true,
+      "progress_ref": {
+        "bytes": 754,
+        "path": "jobs/job000001/attempts/attempt0001/progress.json",
+        "sha256": "97a20b727252e66f3c1f6c6f21b575078031a8d7538bdfb3b7dc74cfa1cd6283"
+      },
+      "quality": "correct",
+      "queries": 6,
+      "result_ref": {
+        "path": "jobs/job000001/attempts/attempt0001/result.json",
+        "sha256": "9c5ab0d4863373992db8b9f0188234db8f0457b377d0a35ccc83639215327e01"
+      },
+      "selected_candidate_id": "a0",
+      "solved": true,
+      "stagnant_answer_steps": 2,
+      "started_at_utc": "2026-10-17T22:42:58.610623Z",
+      "state_winner_lost_indices": [],
+      "status": "completed",
+      "successful_fallbacks": 0,
+      "termination_reason": "exact_single_candidate",
+      "uncommitted_recorded_answers_checked_no_credit": 0,
+      "unsuccessful_fallbacks": 0,
+      "winner_ids": [
+        "a0"
+      ]
+    },
+    {
+      "actual_horizons": [
+        2,
+        1,
+        2,
+        1,
+        2,
+        1,
+        2,
+        1,
+        1
+      ],
+      "answers_checked": 9,
+      "api_seconds": 7.01524278099987,
+      "attempt_id": "attempt0001",
+      "attempts_completed": 9,
+      "attempts_started": 9,
+      "candidate_count_path": [
+        4,
+        4,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        2,
+        1
+      ],
+      "case_id": "d7-m5-c000041",
+      "case_seconds": 7.38740130899987,
+      "configuration_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05-config",
+      "controller_seconds": 7.64969156799998,
+      "error": null,
+      "error_code": null,
+      "expected_candidates": [
+        3.6806994751392508,
+        3.3613989502785007,
+        2.6068515669873267,
+        2.3629166595457,
+        2.6555693307602186,
+        2.595644803634391,
+        2.6252341236693346,
+        2.563813017892941,
+        1.6978822683559118
+      ],
+      "fallback_attempts_completed": 0,
+      "fallback_attempts_started": 0,
+      "fallbacks": 0,
+      "final_execution_cursor": {
+        "answered_total": 9,
+        "remaining_depth": 2
+      },
+      "finished_at_utc": "2026-10-17T22:43:11.602154Z",
+      "grid": 5,
+      "initial_candidate_count": 4,
+      "initial_singleton": false,
+      "interruption": null,
+      "job_id": "job000002",
+      "journal_ref": {
+        "path": "jobs/job000002/attempts/attempt0001/events.jsonl",
+        "sha256": "316bed301c3a2dec84b5707b6878a464aaaceb60c5050447d76e4f2c6fb35d3e"
+      },
+      "last_good_sequence": 75,
+      "manifest_ref": {
+        "path": "jobs/job000002/attempts/attempt0001/manifest.json",
+        "sha256": "ce6229bfc23d2ee8d575f5ff23dab42e01e616cd6ffe9179fb93494258032a34"
+      },
+      "mode": "adaptive",
+      "objectives": 7,
+      "partial_api_seconds": null,
+      "progress_matches_full_result_prefix": true,
+      "progress_ref": {
+        "bytes": 755,
+        "path": "jobs/job000002/attempts/attempt0001/progress.json",
+        "sha256": "44a565e541fb4d98b814b560587058640174abd401f072fb0b5ee665806cb4e4"
+      },
+      "quality": "correct",
+      "queries": 9,
+      "result_ref": {
+        "path": "jobs/job000002/attempts/attempt0001/result.json",
+        "sha256": "3fbaa07582b37f17c2beafcc30f885e3ce64d31208334c8012164be3811cb002"
+      },
+      "selected_candidate_id": "a2",
+      "solved": true,
+      "stagnant_answer_steps": 6,
+      "started_at_utc": "2026-10-17T22:43:04.214770Z",
+      "state_winner_lost_indices": [],
+      "status": "completed",
+      "successful_fallbacks": 0,
+      "termination_reason": "exact_single_candidate",
+      "uncommitted_recorded_answers_checked_no_credit": 0,
+      "unsuccessful_fallbacks": 0,
+      "winner_ids": [
+        "a2"
+      ]
+    },
+    {
+      "actual_horizons": [
+        2,
+        1,
+        1,
+        2,
+        1
+      ],
+      "answers_checked": 5,
+      "api_seconds": 3.991374877999988,
+      "attempt_id": "attempt0001",
+      "attempts_completed": 5,
+      "attempts_started": 5,
+      "candidate_count_path": [
+        5,
+        4,
+        3,
+        2,
+        2,
+        1
+      ],
+      "case_id": "d7-m5-c000042",
+      "case_seconds": 4.340124088000266,
+      "configuration_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05-config",
+      "controller_seconds": 4.547631115000513,
+      "error": null,
+      "error_code": null,
+      "expected_candidates": [
+        3.2538524422761883,
+        3.0,
+        2.323807493615245,
+        1.3158595171455914,
+        1.0638200083125235
+      ],
+      "fallback_attempts_completed": 0,
+      "fallback_attempts_started": 0,
+      "fallbacks": 0,
+      "final_execution_cursor": {
+        "answered_total": 5,
+        "remaining_depth": 2
+      },
+      "finished_at_utc": "2026-10-17T22:43:16.216480Z",
+      "grid": 5,
+      "initial_candidate_count": 5,
+      "initial_singleton": false,
+      "interruption": null,
+      "job_id": "job000003",
+      "journal_ref": {
+        "path": "jobs/job000003/attempts/attempt0001/events.jsonl",
+        "sha256": "c3877b1c36620822de3587084c17b96ae91d4e928ddeb4889319764691723f60"
+      },
+      "last_good_sequence": 43,
+      "manifest_ref": {
+        "path": "jobs/job000003/attempts/attempt0001/manifest.json",
+        "sha256": "dcfc1c3c7bccca0b3e217e86402cd4bc1935d9c528ff3d046cc33d997ad1d76e"
+      },
+      "mode": "adaptive",
+      "objectives": 7,
+      "partial_api_seconds": null,
+      "progress_matches_full_result_prefix": true,
+      "progress_ref": {
+        "bytes": 753,
+        "path": "jobs/job000003/attempts/attempt0001/progress.json",
+        "sha256": "60f809634de156944206630a427224a89151abe74cd38be049da749e731fe10d"
+      },
+      "quality": "correct",
+      "queries": 5,
+      "result_ref": {
+        "path": "jobs/job000003/attempts/attempt0001/result.json",
+        "sha256": "c94fb05c1d08d596a28223aa1d0f07feeb2ef90ad1082c7d2b4d0b83e363f6d9"
+      },
+      "selected_candidate_id": "a4",
+      "solved": true,
+      "stagnant_answer_steps": 1,
+      "started_at_utc": "2026-10-17T22:43:11.876374Z",
+      "state_winner_lost_indices": [],
+      "status": "completed",
+      "successful_fallbacks": 0,
+      "termination_reason": "exact_single_candidate",
+      "uncommitted_recorded_answers_checked_no_credit": 0,
+      "unsuccessful_fallbacks": 0,
+      "winner_ids": [
+        "a4"
+      ]
+    },
+    {
+      "actual_horizons": [
+        1,
+        2,
+        1,
+        2,
+        1,
+        2,
+        1,
+        2,
+        1,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        2,
+        1,
+        2,
+        1,
+        1,
+        2,
+        1,
+        2,
+        2,
+        1,
+        2,
+        1
+      ],
+      "answers_checked": 28,
+      "api_seconds": 139.87993397799983,
+      "attempt_id": "attempt0001",
+      "attempts_completed": 28,
+      "attempts_started": 28,
+      "candidate_count_path": [
+        5,
+        4,
+        4,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      "case_id": "d7-m5-c000043",
+      "case_seconds": 140.41296385900023,
+      "configuration_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05-config",
+      "controller_seconds": 140.9483296770004,
+      "error": null,
+      "error_code": null,
+      "expected_candidates": [
+        4.076328808716954,
+        3.504685570004857,
+        3.3880651626636213,
+        2.636757021008693,
+        2.568206633189298,
+        2.718550366373105,
+        2.62267320629556,
+        2.7224573781805446,
+        2.595090817953249,
+        2.663896710204889,
+        2.616868970159766,
+        2.6598884462857884,
+        2.597149527009678,
+        2.7263903233333413,
+        2.7030017144976446,
+        2.7966466818927627,
+        2.754451597195421,
+        2.866912984501129,
+        2.8069965863438813,
+        2.7404405039486566,
+        2.8619554401404743,
+        1.8140212589842912,
+        1.767410143458182,
+        1.7876434722397752,
+        1.8147491747648006,
+        1.7482844697479005,
+        1.7902442556879907,
+        1.7066016248060194
+      ],
+      "fallback_attempts_completed": 0,
+      "fallback_attempts_started": 0,
+      "fallbacks": 0,
+      "final_execution_cursor": {
+        "answered_total": 28,
+        "remaining_depth": 2
+      },
+      "finished_at_utc": "2026-10-17T22:45:36.849401Z",
+      "grid": 5,
+      "initial_candidate_count": 5,
+      "initial_singleton": false,
+      "interruption": null,
+      "job_id": "job000004",
+      "journal_ref": {
+        "path": "jobs/job000004/attempts/attempt0001/events.jsonl",
+        "sha256": "b95ad4dcc9b96e78398bc07a2c3a2d1b555565146cf049944fbf9737b3d36865"
+      },
+      "last_good_sequence": 227,
+      "manifest_ref": {
+        "path": "jobs/job000004/attempts/attempt0001/manifest.json",
+        "sha256": "a2959aa1856008e83681baf5cab4804e3d4515558f56e82db9ae07e5aa1d42af"
+      },
+      "mode": "adaptive",
+      "objectives": 7,
+      "partial_api_seconds": null,
+      "progress_matches_full_result_prefix": true,
+      "progress_ref": {
+        "bytes": 761,
+        "path": "jobs/job000004/attempts/attempt0001/progress.json",
+        "sha256": "ab712de7892de0ce163e0c986da80c4e349dad32230455d96987639bc731bf54"
+      },
+      "quality": "correct",
+      "queries": 28,
+      "result_ref": {
+        "path": "jobs/job000004/attempts/attempt0001/result.json",
+        "sha256": "bd7d154b74cb1894ef02f6b2f95aa68ae73e2b203d9e41ff4aabfd13098ff169"
+      },
+      "selected_candidate_id": "a2",
+      "solved": true,
+      "stagnant_answer_steps": 24,
+      "started_at_utc": "2026-10-17T22:43:16.436457Z",
+      "state_winner_lost_indices": [],
+      "status": "completed",
+      "successful_fallbacks": 0,
+      "termination_reason": "exact_single_candidate",
+      "uncommitted_recorded_answers_checked_no_credit": 0,
+      "unsuccessful_fallbacks": 0,
+      "winner_ids": [
+        "a2"
+      ]
+    },
+    {
+      "actual_horizons": [
+        1,
+        1,
+        2,
+        1
+      ],
+      "answers_checked": 4,
+      "api_seconds": 2.895386744999996,
+      "attempt_id": "attempt0001",
+      "attempts_completed": 4,
+      "attempts_started": 4,
+      "candidate_count_path": [
+        4,
+        4,
+        2,
+        2,
+        1
+      ],
+      "case_id": "d7-m5-c000044",
+      "case_seconds": 3.2385285689997545,
+      "configuration_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05-config",
+      "controller_seconds": 3.4504425220002304,
+      "error": null,
+      "error_code": null,
+      "expected_candidates": [
+        3.169716281756469,
+        3.20535183809458,
+        1.5125053013354706,
+        1.0250106026709414
+      ],
+      "fallback_attempts_completed": 0,
+      "fallback_attempts_started": 0,
+      "fallbacks": 0,
+      "final_execution_cursor": {
+        "answered_total": 4,
+        "remaining_depth": 2
+      },
+      "finished_at_utc": "2026-10-17T22:45:40.645804Z",
+      "grid": 5,
+      "initial_candidate_count": 4,
+      "initial_singleton": false,
+      "interruption": null,
+      "job_id": "job000005",
+      "journal_ref": {
+        "path": "jobs/job000005/attempts/attempt0001/events.jsonl",
+        "sha256": "08855b79f904622a03b590919bfff4d6890f6fa72ef3f7ef1caabdab93be8e57"
+      },
+      "last_good_sequence": 35,
+      "manifest_ref": {
+        "path": "jobs/job000005/attempts/attempt0001/manifest.json",
+        "sha256": "4bd5961dcb85d3352520777d7268e4b92fea20d5549d3749e5444fb200e9e245"
+      },
+      "mode": "adaptive",
+      "objectives": 7,
+      "partial_api_seconds": null,
+      "progress_matches_full_result_prefix": true,
+      "progress_ref": {
+        "bytes": 755,
+        "path": "jobs/job000005/attempts/attempt0001/progress.json",
+        "sha256": "d2ee14e9e8da81cd4b1f984a7acb3a9f236d220c5f9cc9bbbf70337bc9c2001b"
+      },
+      "quality": "correct",
+      "queries": 4,
+      "result_ref": {
+        "path": "jobs/job000005/attempts/attempt0001/result.json",
+        "sha256": "a2e108bc19c038e0a3e0a50dca9dc561bd84fd6ed39fd0629ca257e9d30da325"
+      },
+      "selected_candidate_id": "a0",
+      "solved": true,
+      "stagnant_answer_steps": 2,
+      "started_at_utc": "2026-10-17T22:45:37.407294Z",
+      "state_winner_lost_indices": [],
+      "status": "completed",
+      "successful_fallbacks": 0,
+      "termination_reason": "exact_single_candidate",
+      "uncommitted_recorded_answers_checked_no_credit": 0,
+      "unsuccessful_fallbacks": 0,
+      "winner_ids": [
+        "a0"
+      ]
+    },
+    {
+      "actual_horizons": [
+        1,
+        2,
+        2,
+        1,
+        1,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        1,
+        2,
+        1,
+        2,
+        2,
+        1,
+        2,
+        1,
+        2,
+        2,
+        2,
+        1,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        1,
+        2,
+        1,
+        2,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        2,
+        1,
+        2,
+        1,
+        2,
+        1,
+        2,
+        1,
+        2,
+        1,
+        2,
+        1,
+        2,
+        1,
+        2,
+        1,
+        2,
+        1,
+        2,
+        1,
+        2,
+        1
+      ],
+      "answers_checked": 68,
+      "api_seconds": 193.046279657,
+      "attempt_id": "attempt0001",
+      "attempts_completed": 68,
+      "attempts_started": 68,
+      "candidate_count_path": [
+        5,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      "case_id": "d7-m5-c000045",
+      "case_seconds": 193.8516735080002,
+      "configuration_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05-config",
+      "controller_seconds": 194.92203782099932,
+      "error": null,
+      "error_code": null,
+      "expected_candidates": [
+        3.73522470226452,
+        2.3494646948099147,
+        2.4844376485812627,
+        2.581321525845114,
+        2.816761500724083,
+        2.7770095542863826,
+        2.8107428644937906,
+        2.6306944935987384,
+        2.5611715975992584,
+        1.7990470324047267,
+        1.8730815103489697,
+        1.889350676603601,
+        1.890695415406899,
+        1.8616983372618423,
+        1.8170522891400958,
+        1.8427288652014369,
+        1.9151714902377006,
+        1.900813831447652,
+        1.8799434540983753,
+        1.954234128514327,
+        1.964293413260236,
+        1.9274518055674212,
+        1.947276920427866,
+        1.8735994280963266,
+        1.927892433139883,
+        1.6600576944762044,
+        1.8408942852171783,
+        1.8565537634711586,
+        1.8655760567663362,
+        1.9124032086860672,
+        1.8366049548667915,
+        1.9198746045998338,
+        1.8355338347125476,
+        1.9154504056243704,
+        1.8111537890237335,
+        1.9207097430268414,
+        1.816445380594791,
+        1.9215826080955032,
+        1.9321212218938721,
+        1.8557356552061042,
+        1.925216858710251,
+        1.899859625970019,
+        1.8626707915844523,
+        1.9232389926824611,
+        1.8339247979933642,
+        1.8263460796136162,
+        1.8683920961354639,
+        1.8703757637955478,
+        1.8496358025585804,
+        1.8585214747442902,
+        1.8745248640221694,
+        1.863024976559576,
+        1.857299537415486,
+        1.8463559946315828,
+        1.8785088202995381,
+        1.8794869127082432,
+        1.8620758420217092,
+        1.855055585766859,
+        1.8704361892288444,
+        1.8820745252660789,
+        1.8802292428331226,
+        1.878542370603939,
+        1.8654689617826161,
+        1.8705207963141532,
+        1.8771047420236442,
+        1.8739316066620224,
+        1.8626479577649295,
+        1.8621529185620718
+      ],
+      "fallback_attempts_completed": 0,
+      "fallback_attempts_started": 0,
+      "fallbacks": 0,
+      "final_execution_cursor": {
+        "answered_total": 68,
+        "remaining_depth": 2
+      },
+      "finished_at_utc": "2026-10-17T22:48:54.725029Z",
+      "grid": 5,
+      "initial_candidate_count": 5,
+      "initial_singleton": false,
+      "interruption": null,
+      "job_id": "job000006",
+      "journal_ref": {
+        "path": "jobs/job000006/attempts/attempt0001/events.jsonl",
+        "sha256": "6de5dd29d002113bd83002f4acc9cb4ae735dfadf65750e0a32f799f36f00c9b"
+      },
+      "last_good_sequence": 547,
+      "manifest_ref": {
+        "path": "jobs/job000006/attempts/attempt0001/manifest.json",
+        "sha256": "1990a9cff774571164795d1767949c8aeac6e1aa05cf5b4ca64a0c3904b8a784"
+      },
+      "mode": "adaptive",
+      "objectives": 7,
+      "partial_api_seconds": null,
+      "progress_matches_full_result_prefix": true,
+      "progress_ref": {
+        "bytes": 761,
+        "path": "jobs/job000006/attempts/attempt0001/progress.json",
+        "sha256": "0bd9e4c17aa607a7f9e76cbbfa15ed6c757dc1fa8ba6264066aed80e73b20e16"
+      },
+      "quality": "correct",
+      "queries": 68,
+      "result_ref": {
+        "path": "jobs/job000006/attempts/attempt0001/result.json",
+        "sha256": "00fbb61c02d0eef5ce7ce20d61295706c8b64e1d7cba4884fe33fac6a4becbd8"
+      },
+      "selected_candidate_id": "a1",
+      "solved": true,
+      "stagnant_answer_steps": 65,
+      "started_at_utc": "2026-10-17T22:45:40.873374Z",
+      "state_winner_lost_indices": [],
+      "status": "completed",
+      "successful_fallbacks": 0,
+      "termination_reason": "exact_single_candidate",
+      "uncommitted_recorded_answers_checked_no_credit": 0,
+      "unsuccessful_fallbacks": 0,
+      "winner_ids": [
+        "a1"
+      ]
+    },
+    {
+      "actual_horizons": [
+        2,
+        1,
+        2,
+        1,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        1
+      ],
+      "answers_checked": 26,
+      "api_seconds": 62.579417344999456,
+      "attempt_id": "attempt0001",
+      "attempts_completed": 26,
+      "attempts_started": 26,
+      "candidate_count_path": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      "case_id": "d7-m5-c000046",
+      "case_seconds": 63.097196718000305,
+      "configuration_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05-config",
+      "controller_seconds": 63.59376919799979,
+      "error": null,
+      "error_code": null,
+      "expected_candidates": [
+        2.8558604455122056,
+        2.8558604455122056,
+        2.8586296707688668,
+        2.9506171573758837,
+        2.9282618803704112,
+        2.9676695956975263,
+        2.951076254680208,
+        2.5554828494927997,
+        2.8446038897926877,
+        2.9282373328078166,
+        2.8306185094124747,
+        2.8732871942643614,
+        2.643279826584785,
+        2.3763273510521037,
+        1.897205094484796,
+        1.9249897595966567,
+        1.940966369037703,
+        1.843230288215568,
+        1.942837306947897,
+        1.927434313868171,
+        1.7880693233396059,
+        1.8972988367473027,
+        1.887284912393362,
+        1.7359862663426677,
+        1.8565721291901822,
+        1.8621060668124776
+      ],
+      "fallback_attempts_completed": 0,
+      "fallback_attempts_started": 0,
+      "fallbacks": 0,
+      "final_execution_cursor": {
+        "answered_total": 26,
+        "remaining_depth": 2
+      },
+      "finished_at_utc": "2026-10-17T22:49:58.923001Z",
+      "grid": 5,
+      "initial_candidate_count": 3,
+      "initial_singleton": false,
+      "interruption": null,
+      "job_id": "job000007",
+      "journal_ref": {
+        "path": "jobs/job000007/attempts/attempt0001/events.jsonl",
+        "sha256": "c5d6d7938199897721116f3edba5af9aa2d639327246c35c6d9430313c13d13e"
+      },
+      "last_good_sequence": 211,
+      "manifest_ref": {
+        "path": "jobs/job000007/attempts/attempt0001/manifest.json",
+        "sha256": "d35b3c3ca86a245d6693c148304d93b17d03a1dab54040dc88e31292afdba7fb"
+      },
+      "mode": "adaptive",
+      "objectives": 7,
+      "partial_api_seconds": null,
+      "progress_matches_full_result_prefix": true,
+      "progress_ref": {
+        "bytes": 760,
+        "path": "jobs/job000007/attempts/attempt0001/progress.json",
+        "sha256": "931f44424f154b08a7b87b4bf087a7d6b3a2e463e97e8944a0c2db80b64844cd"
+      },
+      "quality": "correct",
+      "queries": 26,
+      "result_ref": {
+        "path": "jobs/job000007/attempts/attempt0001/result.json",
+        "sha256": "113d29a470812498d851fab3c9488ba4deac6f276fe8089900efbfb7eb348758"
+      },
+      "selected_candidate_id": "a3",
+      "solved": true,
+      "stagnant_answer_steps": 24,
+      "started_at_utc": "2026-10-17T22:48:55.825826Z",
+      "state_winner_lost_indices": [],
+      "status": "completed",
+      "successful_fallbacks": 0,
+      "termination_reason": "exact_single_candidate",
+      "uncommitted_recorded_answers_checked_no_credit": 0,
+      "unsuccessful_fallbacks": 0,
+      "winner_ids": [
+        "a3"
+      ]
+    },
+    {
+      "actual_horizons": [
+        1,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        1,
+        1,
+        2,
+        1
+      ],
+      "answers_checked": 20,
+      "api_seconds": 34.49425518699991,
+      "attempt_id": "attempt0001",
+      "attempts_completed": 20,
+      "attempts_started": 20,
+      "candidate_count_path": [
+        5,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      "case_id": "d7-m5-c000047",
+      "case_seconds": 34.95685018200038,
+      "configuration_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05-config",
+      "controller_seconds": 35.382958127000165,
+      "error": null,
+      "error_code": null,
+      "expected_candidates": [
+        4.3593908470909515,
+        3.445384980710033,
+        2.580903085971012,
+        3.3568262581028505,
+        3.6172936040894967,
+        3.1968349440129686,
+        3.6366141682019197,
+        1.814824107827377,
+        1.8426558269985316,
+        1.871041928482371,
+        1.9055232483845372,
+        1.9020875948787035,
+        1.88393648341372,
+        1.9336820386981526,
+        1.322201589571288,
+        1.5514876846463799,
+        1.225737499882943,
+        1.6285639606599496,
+        1.5459473213311723,
+        1.5038921698215153
+      ],
+      "fallback_attempts_completed": 0,
+      "fallback_attempts_started": 0,
+      "fallbacks": 0,
+      "final_execution_cursor": {
+        "answered_total": 20,
+        "remaining_depth": 2
+      },
+      "finished_at_utc": "2026-10-17T22:50:34.401059Z",
+      "grid": 5,
+      "initial_candidate_count": 5,
+      "initial_singleton": false,
+      "interruption": null,
+      "job_id": "job000008",
+      "journal_ref": {
+        "path": "jobs/job000008/attempts/attempt0001/events.jsonl",
+        "sha256": "65a4b7f1ec3699c2b907699244b903c07a48a3aa5cbfee5727a2bd25d3b2bbc9"
+      },
+      "last_good_sequence": 163,
+      "manifest_ref": {
+        "path": "jobs/job000008/attempts/attempt0001/manifest.json",
+        "sha256": "667891240a68e9720ac4a36acc3d1a63a1e8db34a1bcea1d960e1091067ffde8"
+      },
+      "mode": "adaptive",
+      "objectives": 7,
+      "partial_api_seconds": null,
+      "progress_matches_full_result_prefix": true,
+      "progress_ref": {
+        "bytes": 760,
+        "path": "jobs/job000008/attempts/attempt0001/progress.json",
+        "sha256": "16e23f3848c98df6b2159074c4061d89eb730d07ecaba10c4f1183ee44b77b46"
+      },
+      "quality": "correct",
+      "queries": 20,
+      "result_ref": {
+        "path": "jobs/job000008/attempts/attempt0001/result.json",
+        "sha256": "089efc7bfc0ff4ec922e3490589de569c8dd2f09fe36dcc282422686d76c6d8b"
+      },
+      "selected_candidate_id": "a2",
+      "solved": true,
+      "stagnant_answer_steps": 17,
+      "started_at_utc": "2026-10-17T22:49:59.444229Z",
+      "state_winner_lost_indices": [],
+      "status": "completed",
+      "successful_fallbacks": 0,
+      "termination_reason": "exact_single_candidate",
+      "uncommitted_recorded_answers_checked_no_credit": 0,
+      "unsuccessful_fallbacks": 0,
+      "winner_ids": [
+        "a2"
+      ]
+    },
+    {
+      "actual_horizons": [
+        2,
+        2,
+        2,
+        1,
+        2,
+        1,
+        2,
+        1,
+        2,
+        1
+      ],
+      "answers_checked": 10,
+      "api_seconds": 9.162107334000211,
+      "attempt_id": "attempt0001",
+      "attempts_completed": 10,
+      "attempts_started": 10,
+      "candidate_count_path": [
+        4,
+        4,
+        4,
+        4,
+        3,
+        3,
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      "case_id": "d7-m5-c000048",
+      "case_seconds": 9.586898973000643,
+      "configuration_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05-config",
+      "controller_seconds": 9.863695824000388,
+      "error": null,
+      "error_code": null,
+      "expected_candidates": [
+        3.3972920761376244,
+        3.5744360924592744,
+        3.1085588082761566,
+        3.0670978141017717,
+        2.44654546391801,
+        2.449504789218836,
+        1.3775177840928945,
+        1.2226646934407461,
+        1.4214575721840177,
+        1.2942881080075517
+      ],
+      "fallback_attempts_completed": 0,
+      "fallback_attempts_started": 0,
+      "fallbacks": 0,
+      "final_execution_cursor": {
+        "answered_total": 10,
+        "remaining_depth": 2
+      },
+      "finished_at_utc": "2026-10-17T22:50:44.437318Z",
+      "grid": 5,
+      "initial_candidate_count": 4,
+      "initial_singleton": false,
+      "interruption": null,
+      "job_id": "job000009",
+      "journal_ref": {
+        "path": "jobs/job000009/attempts/attempt0001/events.jsonl",
+        "sha256": "e82342a14e0de6510b154b464cbb43f97af802ddef2d1aa2ceaa116513a9295d"
+      },
+      "last_good_sequence": 83,
+      "manifest_ref": {
+        "path": "jobs/job000009/attempts/attempt0001/manifest.json",
+        "sha256": "818d9c058116a7185139cde6aa57247b334a3d680be1da08d2f608d6d98cf88f"
+      },
+      "mode": "adaptive",
+      "objectives": 7,
+      "partial_api_seconds": null,
+      "progress_matches_full_result_prefix": true,
+      "progress_ref": {
+        "bytes": 758,
+        "path": "jobs/job000009/attempts/attempt0001/progress.json",
+        "sha256": "5882d7a46598e0a6e05858f7af0e0768b3294aa8cbf5f1153b6e7d4a40746546"
+      },
+      "quality": "correct",
+      "queries": 10,
+      "result_ref": {
+        "path": "jobs/job000009/attempts/attempt0001/result.json",
+        "sha256": "0e9032dc9d94cb1deb9b9e06ef591a19a91a9915e72166ecfa59a0f9c804a990"
+      },
+      "selected_candidate_id": "a1",
+      "solved": true,
+      "stagnant_answer_steps": 7,
+      "started_at_utc": "2026-10-17T22:50:34.850437Z",
+      "state_winner_lost_indices": [],
+      "status": "completed",
+      "successful_fallbacks": 0,
+      "termination_reason": "exact_single_candidate",
+      "uncommitted_recorded_answers_checked_no_credit": 0,
+      "unsuccessful_fallbacks": 0,
+      "winner_ids": [
+        "a1"
+      ]
+    },
+    {
+      "actual_horizons": [
+        1,
+        1,
+        2,
+        1
+      ],
+      "answers_checked": 4,
+      "api_seconds": 3.58234594500027,
+      "attempt_id": "attempt0001",
+      "attempts_completed": 4,
+      "attempts_started": 4,
+      "candidate_count_path": [
+        5,
+        4,
+        2,
+        2,
+        1
+      ],
+      "case_id": "d7-m5-c000049",
+      "case_seconds": 3.9160818370000925,
+      "configuration_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05-config",
+      "controller_seconds": 4.123897323999699,
+      "error": null,
+      "error_code": null,
+      "expected_candidates": [
+        3.458496648959834,
+        2.990851193558683,
+        1.4779585435424003,
+        1.1269822184473464
+      ],
+      "fallback_attempts_completed": 0,
+      "fallback_attempts_started": 0,
+      "fallbacks": 0,
+      "final_execution_cursor": {
+        "answered_total": 4,
+        "remaining_depth": 2
+      },
+      "finished_at_utc": "2026-10-17T22:50:48.655357Z",
+      "grid": 5,
+      "initial_candidate_count": 5,
+      "initial_singleton": false,
+      "interruption": null,
+      "job_id": "job000010",
+      "journal_ref": {
+        "path": "jobs/job000010/attempts/attempt0001/events.jsonl",
+        "sha256": "95295f0e5b3815b86e5b24387a9f160c8eeb4344fb935980bca6b0368d91c37b"
+      },
+      "last_good_sequence": 35,
+      "manifest_ref": {
+        "path": "jobs/job000010/attempts/attempt0001/manifest.json",
+        "sha256": "df838e35c0e1060b5f714f21b519b2c257b2e441eec02d8bef795acf5ef16cbf"
+      },
+      "mode": "adaptive",
+      "objectives": 7,
+      "partial_api_seconds": null,
+      "progress_matches_full_result_prefix": true,
+      "progress_ref": {
+        "bytes": 754,
+        "path": "jobs/job000010/attempts/attempt0001/progress.json",
+        "sha256": "23d46da42e2108472148e6cbd3677f54ad88772c0def7b825f2fccb529d70d51"
+      },
+      "quality": "correct",
+      "queries": 4,
+      "result_ref": {
+        "path": "jobs/job000010/attempts/attempt0001/result.json",
+        "sha256": "b57bb90180a2ebe4c0683a65666d220c3d94da32ca427b8b23aa62039ccad89f"
+      },
+      "selected_candidate_id": "a4",
+      "solved": true,
+      "stagnant_answer_steps": 1,
+      "started_at_utc": "2026-10-17T22:50:44.739294Z",
+      "state_winner_lost_indices": [],
+      "status": "completed",
+      "successful_fallbacks": 0,
+      "termination_reason": "exact_single_candidate",
+      "uncommitted_recorded_answers_checked_no_credit": 0,
+      "unsuccessful_fallbacks": 0,
+      "winner_ids": [
+        "a4"
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "scientific_completion": false,
+  "series_id": "1835da8c-51fc-495d-98b0-b4ca1c7e9d82",
+  "source": {
+    "dirty": false,
+    "git_commit": "62d1d01339f91802e2916b63660a4e640d99c9cc",
+    "inventory_format": "otqa-source-v1",
+    "source_sha256": "720726607ae451b319e59e01453b6ba69b9950ef42420e700ed6b4eaa5b34d0e",
+    "version": "0.2.0"
+  },
+  "state": {
+    "bytes": 11355,
+    "path": "state.json",
+    "sha256": "d55d98425788fd584124d16a27dcb5ff53486b7510ad033aa07a575266bc2b6d"
+  },
+  "status": "provisional_pass",
+  "study_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05",
+  "terminal_reasons": {
+    "exact_single_candidate": 10
+  },
+  "verified_read_artifacts": [
+    {
+      "bytes": 18457,
+      "path": "@finish_proof",
+      "sha256": "949822ca5120fa7281c53cbda22570f56b6214a26ce337eafbb12932a089e7a3"
+    },
+    {
+      "bytes": 2319,
+      "path": "@prepared_input_contract",
+      "sha256": "93be7f6ce20e6babb55e7c6ecc8ec8eae2ae592876681fd578113ba52a7f7572"
+    },
+    {
+      "bytes": 235081,
+      "path": "@wheel",
+      "sha256": "24e4a5c901690895bdb1557a5a90ef1e9d5f6d3eb06381df58031d8ce02f1a97"
+    },
+    {
+      "bytes": 8004,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/exports/fleet-final.csv",
+      "sha256": "5aa28bb5f8a08aba7c0700a52a42b83ed69da9782364cada5a2ecc4743f4fe3d"
+    },
+    {
+      "bytes": 612,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/exports/fleet-final.csv.receipt.json",
+      "sha256": "ecd9036f02288196420fe79c143514ae3af3ccc036c91a592cc6bf602fb1bfe5"
+    },
+    {
+      "bytes": 12515,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/exports/fleet-final.json",
+      "sha256": "e1035668ba743b1fb45f35af88fd150bec13cf10670e46cff9cc824ab6e47d63"
+    },
+    {
+      "bytes": 614,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/exports/fleet-final.json.receipt.json",
+      "sha256": "5cb58f3cd4824b2525c5edcfadd53e36379856bdd50bf1177a1d6e5c4ce72b46"
+    },
+    {
+      "bytes": 837,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/configuration.json",
+      "sha256": "5304fe97d2e48e05f8083caadb84a9150c0b03fcfa40fe84931251d73eafb243"
+    },
+    {
+      "bytes": 5279,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/dataset.json",
+      "sha256": "4a40a8fc4225e6c4f8b732de56c2492c798331791467d26d73d3d23b727d517e"
+    },
+    {
+      "bytes": 211,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/oracles/d7-m5-c000040.json",
+      "sha256": "53ee49206d097ef13a865be087ddeea48ca5ddc8a03f4e9efee538b20e29930f"
+    },
+    {
+      "bytes": 208,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/oracles/d7-m5-c000041.json",
+      "sha256": "830e601bb5cdbc81426220c7efe21f6d3aa9bc310511bf5fa422451999bcd539"
+    },
+    {
+      "bytes": 205,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/oracles/d7-m5-c000042.json",
+      "sha256": "cd70e40b1503a47548d3870cfdacad3e3bf9808ec1e4c9702f336e144e87f6d1"
+    },
+    {
+      "bytes": 211,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/oracles/d7-m5-c000043.json",
+      "sha256": "e6836e0e35d171a4b430c98ddd9771bec7134dc8eece94871527f94ec1c9e97e"
+    },
+    {
+      "bytes": 207,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/oracles/d7-m5-c000044.json",
+      "sha256": "72c0c35c5d1b8a58fd5a5c06968f0eb661ed1b6f2cfcc456d4c00414cab07249"
+    },
+    {
+      "bytes": 209,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/oracles/d7-m5-c000045.json",
+      "sha256": "d7f0748af833684b0a0a714dd763ba2c7b1a60449674d8078895efe20b288b0b"
+    },
+    {
+      "bytes": 209,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/oracles/d7-m5-c000046.json",
+      "sha256": "1f47184138866e568ede3adaabb2b0c05c464fa4d463c48155f317823409ee3a"
+    },
+    {
+      "bytes": 211,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/oracles/d7-m5-c000047.json",
+      "sha256": "df3a5dffa997959e8aae43869a15953292b7671b22bb983440846b8d03b249d7"
+    },
+    {
+      "bytes": 207,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/oracles/d7-m5-c000048.json",
+      "sha256": "c1f2ceb87ac202ec100d90f231afccbcba32f58dff645b77e79d77a050417e61"
+    },
+    {
+      "bytes": 207,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/oracles/d7-m5-c000049.json",
+      "sha256": "1b02124112c40c942092b19921414c7241a1b83924bc4f170cfd5553f689dc9d"
+    },
+    {
+      "bytes": 854,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/problems/d7-m5-c000040.json",
+      "sha256": "a3cbf145520f2252cf499deeff02e9c1be3715c6f1d438c2e4f31e4855351809"
+    },
+    {
+      "bytes": 851,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/problems/d7-m5-c000041.json",
+      "sha256": "ef33bf88d0c44a30d134f391d339b212d55af1eb01be3b94b3b1cf8b5e13632b"
+    },
+    {
+      "bytes": 853,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/problems/d7-m5-c000042.json",
+      "sha256": "82c578b796780367b10be9a532bd44a60d90687d482629f177edce5c4f2292b5"
+    },
+    {
+      "bytes": 848,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/problems/d7-m5-c000043.json",
+      "sha256": "cb659f77bb9c8cf00622bf6eb2ff64d990e3be7281609818769da2ab5d9c1f10"
+    },
+    {
+      "bytes": 854,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/problems/d7-m5-c000044.json",
+      "sha256": "b97b7f5cd30cc7d75a49919e13067b4ffabf899f2af12511792cf0282b1b8678"
+    },
+    {
+      "bytes": 852,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/problems/d7-m5-c000045.json",
+      "sha256": "50481054e49af57daeca94101b0ffff0a3cdd7ff1e62ded3aac4a3cf18b11e8b"
+    },
+    {
+      "bytes": 845,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/problems/d7-m5-c000046.json",
+      "sha256": "f6f8660dc2601f9a9d250a2e0cfc882e5702001ed4fdabb4466d16a49f5e302f"
+    },
+    {
+      "bytes": 847,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/problems/d7-m5-c000047.json",
+      "sha256": "7d1aa789d296bd88ad8f72361c009b9a4f2c51e895f1447f5895465acb6df276"
+    },
+    {
+      "bytes": 847,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/problems/d7-m5-c000048.json",
+      "sha256": "4c5deea9e608a78b7012b1669604ab821cfd75e98e9f9249108355f6557a36fb"
+    },
+    {
+      "bytes": 852,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/problems/d7-m5-c000049.json",
+      "sha256": "d43580bc8dc8e0036aca54f9fe65b2a537fc84088fedd54670ef508fb4d682bd"
+    },
+    {
+      "bytes": 2465,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/certification.json",
+      "sha256": "927f7e700b991e13287f36487ee7decf2aa0e9afdb48b4d4572280dc2f605458"
+    },
+    {
+      "bytes": 706,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/backend_conformance.json",
+      "sha256": "b84b291ebacd5f8b81e9ea6f75321c4871fd3f7da021f0f2845493ac704c6de1"
+    },
+    {
+      "bytes": 687,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/installation.json",
+      "sha256": "13b3d5a9bcbbe989e7bd175c0f6df4e0ddd19d13c7d99132acf8296137b40563"
+    },
+    {
+      "bytes": 716,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/linux_recovery.json",
+      "sha256": "7bf483e60d8319c99931c12f6c3caf8b77f5fbc40cb444656992dfc445e5d0db"
+    },
+    {
+      "bytes": 709,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/numerical_conformance.json",
+      "sha256": "9648afa483e0ae73dd30a7a60f35feefd8477d03b881fd853d2c6b46ca44e6bb"
+    },
+    {
+      "bytes": 685,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/sdk_lifecycle.json",
+      "sha256": "9f5f83a2286f87cc96dc9c216e5a4123e67fac87adaab6d1d52974c87cfb8ce6"
+    },
+    {
+      "bytes": 699,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/standalone_io.json",
+      "sha256": "22e40357717f1e047dc088e75c27ff712ba123ef65d3f7174b772c6cbb3a96c3"
+    },
+    {
+      "bytes": 181,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/environment-lock.txt",
+      "sha256": "c02ba80f6442217b91383cf21a3077b483d21f9fa04ab45027c6a30e922c86e6"
+    },
+    {
+      "bytes": 876,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/profile.json",
+      "sha256": "7dabb63be556d99b816703f4f1958b03b86b0bd19d06f55844196aadc3f122fb"
+    },
+    {
+      "bytes": 1603,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/backend_conformance.json",
+      "sha256": "88532dea2d187f8a6d4ab8db47100cc89812bf6a35454c3333cffa8b74ea1a65"
+    },
+    {
+      "bytes": 2325,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/installation.json",
+      "sha256": "8ea454acbc0ef16ea0eb743e835dfa8700b1b7eb5e272e45e2e8ac629137a4cb"
+    },
+    {
+      "bytes": 2849,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/linux_recovery.json",
+      "sha256": "0c451ad427ca96d0d51684e36a0c7da636cc2ee607c5c079a79184dda6b129c0"
+    },
+    {
+      "bytes": 1295,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/numerical_conformance.json",
+      "sha256": "f9d5172b57c479aee9148f6f11e016d830c73c8d09be40d4a627319feb65b3d0"
+    },
+    {
+      "bytes": 1897,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/sdk_lifecycle.json",
+      "sha256": "11cc018031c96cb39c95737e3645702185989875789cbd74f3bfc95df7147c2e"
+    },
+    {
+      "bytes": 2607,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/standalone_io.json",
+      "sha256": "4d15d08bb6a8ec157a7129d08d464e32124cf6b4fcab9cf0b4f37cc718a89ce1"
+    },
+    {
+      "bytes": 1138,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/inputs/runs/four-host-readiness-20261017T2140Z/prepared-suites/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/suite.json",
+      "sha256": "fd01c1859d84f7fd7a1c89d225c763552f91023573c522a2a8f2492b29608444"
+    },
+    {
+      "bytes": 2544,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000001/attempts/attempt0001/case-request.json",
+      "sha256": "15b46c002a4fccc5a5b689b0bd5696694b1c6d24505828c3b53e08236bcf6eb7"
+    },
+    {
+      "bytes": 558,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000001/attempts/attempt0001/child_registration.json",
+      "sha256": "950144d3ca207727ae18ebde0c279e01cd1faa912836c4b3ace8e173be5a5422"
+    },
+    {
+      "bytes": 565604,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000001/attempts/attempt0001/events.jsonl",
+      "sha256": "3278b2bf7ed4545302df18981aa950f8228d813356419c1f61ec10c8a48c8190"
+    },
+    {
+      "bytes": 826,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000001/attempts/attempt0001/launch_intent.json",
+      "sha256": "5b70c1cbcbd0f8738c004798441dd61adc5ffa474334ef37de5524b7b7121995"
+    },
+    {
+      "bytes": 7511,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000001/attempts/attempt0001/manifest.json",
+      "sha256": "0899cd572fca1866a7a66973734c5ae6609668f33aa7c941f26b1530c7f1eee1"
+    },
+    {
+      "bytes": 754,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000001/attempts/attempt0001/progress.json",
+      "sha256": "97a20b727252e66f3c1f6c6f21b575078031a8d7538bdfb3b7dc74cfa1cd6283"
+    },
+    {
+      "bytes": 430652,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000001/attempts/attempt0001/result.json",
+      "sha256": "9c5ab0d4863373992db8b9f0188234db8f0457b377d0a35ccc83639215327e01"
+    },
+    {
+      "bytes": 720,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000001/attempts/attempt0001/start_grant.json",
+      "sha256": "a6b1367674e0f2250c0f67afe376adfcfe0680c8774cd27c67449a6d6f098325"
+    },
+    {
+      "bytes": 2544,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000002/attempts/attempt0001/case-request.json",
+      "sha256": "f8e411384ae806d162db7759516074ba7c317940e30401c935d95ec6439580e6"
+    },
+    {
+      "bytes": 558,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000002/attempts/attempt0001/child_registration.json",
+      "sha256": "67fe51bac50961c31f52d4c0a9ef485df8ac7e059f22d8b1e671fb317b3148f3"
+    },
+    {
+      "bytes": 750897,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000002/attempts/attempt0001/events.jsonl",
+      "sha256": "316bed301c3a2dec84b5707b6878a464aaaceb60c5050447d76e4f2c6fb35d3e"
+    },
+    {
+      "bytes": 826,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000002/attempts/attempt0001/launch_intent.json",
+      "sha256": "e2a3eaf2623159de25cd6c6c02c65817aaf4b95a0d60ca7089553d304dbc19d4"
+    },
+    {
+      "bytes": 7511,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000002/attempts/attempt0001/manifest.json",
+      "sha256": "ce6229bfc23d2ee8d575f5ff23dab42e01e616cd6ffe9179fb93494258032a34"
+    },
+    {
+      "bytes": 755,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000002/attempts/attempt0001/progress.json",
+      "sha256": "44a565e541fb4d98b814b560587058640174abd401f072fb0b5ee665806cb4e4"
+    },
+    {
+      "bytes": 568971,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000002/attempts/attempt0001/result.json",
+      "sha256": "3fbaa07582b37f17c2beafcc30f885e3ce64d31208334c8012164be3811cb002"
+    },
+    {
+      "bytes": 720,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000002/attempts/attempt0001/start_grant.json",
+      "sha256": "ccba18f938c8f525f005bbdc87bf6c4873c4d69338e97cb15e46b5fae16c6bc5"
+    },
+    {
+      "bytes": 2544,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000003/attempts/attempt0001/case-request.json",
+      "sha256": "800defc32bb844180c496ae8a3f1e5ee2cd8ca8b52df479052f38c3a6f38a186"
+    },
+    {
+      "bytes": 558,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000003/attempts/attempt0001/child_registration.json",
+      "sha256": "6cc31b921885529fda03d613a8f90b9881aca643d0c93a2e3d248dfea2492850"
+    },
+    {
+      "bytes": 440853,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000003/attempts/attempt0001/events.jsonl",
+      "sha256": "c3877b1c36620822de3587084c17b96ae91d4e928ddeb4889319764691723f60"
+    },
+    {
+      "bytes": 826,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000003/attempts/attempt0001/launch_intent.json",
+      "sha256": "f1779da2b4d9563648c47afcd81a715163dd042ea971f5de63f382927812fe26"
+    },
+    {
+      "bytes": 7511,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000003/attempts/attempt0001/manifest.json",
+      "sha256": "dcfc1c3c7bccca0b3e217e86402cd4bc1935d9c528ff3d046cc33d997ad1d76e"
+    },
+    {
+      "bytes": 753,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000003/attempts/attempt0001/progress.json",
+      "sha256": "60f809634de156944206630a427224a89151abe74cd38be049da749e731fe10d"
+    },
+    {
+      "bytes": 335341,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000003/attempts/attempt0001/result.json",
+      "sha256": "c94fb05c1d08d596a28223aa1d0f07feeb2ef90ad1082c7d2b4d0b83e363f6d9"
+    },
+    {
+      "bytes": 720,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000003/attempts/attempt0001/start_grant.json",
+      "sha256": "ff3d9a73a4f74375aec1ca478babca5ae260d7fc7cef5baedafb08d6c37c87a4"
+    },
+    {
+      "bytes": 2544,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000004/attempts/attempt0001/case-request.json",
+      "sha256": "a55e55f346ff2077b21b7d76d8e786c7cdf99c536fb2705059bde0126b5d427b"
+    },
+    {
+      "bytes": 558,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000004/attempts/attempt0001/child_registration.json",
+      "sha256": "09fb377a90aa10116aa8d86e9aab13b62de4f24791d3ab033eab7a3b3577aa5a"
+    },
+    {
+      "bytes": 2603464,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000004/attempts/attempt0001/events.jsonl",
+      "sha256": "b95ad4dcc9b96e78398bc07a2c3a2d1b555565146cf049944fbf9737b3d36865"
+    },
+    {
+      "bytes": 826,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000004/attempts/attempt0001/launch_intent.json",
+      "sha256": "5e0283d5e9c7290e3e358d39b81fe584fff72c33be17790939daa24cdabf071b"
+    },
+    {
+      "bytes": 7511,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000004/attempts/attempt0001/manifest.json",
+      "sha256": "a2959aa1856008e83681baf5cab4804e3d4515558f56e82db9ae07e5aa1d42af"
+    },
+    {
+      "bytes": 761,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000004/attempts/attempt0001/progress.json",
+      "sha256": "ab712de7892de0ce163e0c986da80c4e349dad32230455d96987639bc731bf54"
+    },
+    {
+      "bytes": 1984618,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000004/attempts/attempt0001/result.json",
+      "sha256": "bd7d154b74cb1894ef02f6b2f95aa68ae73e2b203d9e41ff4aabfd13098ff169"
+    },
+    {
+      "bytes": 720,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000004/attempts/attempt0001/start_grant.json",
+      "sha256": "6e8ebef7ba9225ce502c1229962bf6c6469ae510fc643a8889d6d0d02e131e65"
+    },
+    {
+      "bytes": 2544,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000005/attempts/attempt0001/case-request.json",
+      "sha256": "6fbb47f0c0812e5e65a981593a75a863f9bc7e19063a5964d3496a6fc9097572"
+    },
+    {
+      "bytes": 558,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000005/attempts/attempt0001/child_registration.json",
+      "sha256": "acc41800afeb3071152b1473f6afa6ea1fffa381219f535d204f5623a7209585"
+    },
+    {
+      "bytes": 348187,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000005/attempts/attempt0001/events.jsonl",
+      "sha256": "08855b79f904622a03b590919bfff4d6890f6fa72ef3f7ef1caabdab93be8e57"
+    },
+    {
+      "bytes": 826,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000005/attempts/attempt0001/launch_intent.json",
+      "sha256": "432c7b3101050b658d3d10754a5f5ee4c298828ad4fc791f6c3b929a7a4411d6"
+    },
+    {
+      "bytes": 7511,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000005/attempts/attempt0001/manifest.json",
+      "sha256": "4bd5961dcb85d3352520777d7268e4b92fea20d5549d3749e5444fb200e9e245"
+    },
+    {
+      "bytes": 755,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000005/attempts/attempt0001/progress.json",
+      "sha256": "d2ee14e9e8da81cd4b1f984a7acb3a9f236d220c5f9cc9bbbf70337bc9c2001b"
+    },
+    {
+      "bytes": 265011,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000005/attempts/attempt0001/result.json",
+      "sha256": "a2e108bc19c038e0a3e0a50dca9dc561bd84fd6ed39fd0629ca257e9d30da325"
+    },
+    {
+      "bytes": 720,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000005/attempts/attempt0001/start_grant.json",
+      "sha256": "521952b88eac45c60fd15c54d87274aa8f8ddc3f8aa92a9e7bbdb9a47cb54670"
+    },
+    {
+      "bytes": 2544,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000006/attempts/attempt0001/case-request.json",
+      "sha256": "093a32b691a30db5cae4345800549c123f61d6269933a6021f85d5803192e588"
+    },
+    {
+      "bytes": 558,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000006/attempts/attempt0001/child_registration.json",
+      "sha256": "663b19b291f3cbf522e29dcab50a70d85e7a9b76acfb3a65af03feb1f696ec9f"
+    },
+    {
+      "bytes": 5943521,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000006/attempts/attempt0001/events.jsonl",
+      "sha256": "6de5dd29d002113bd83002f4acc9cb4ae735dfadf65750e0a32f799f36f00c9b"
+    },
+    {
+      "bytes": 826,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000006/attempts/attempt0001/launch_intent.json",
+      "sha256": "beb10e1def65bc15fbd7d4306c404902ebaa4a5f0d80dec853bea0ebb1582197"
+    },
+    {
+      "bytes": 7511,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000006/attempts/attempt0001/manifest.json",
+      "sha256": "1990a9cff774571164795d1767949c8aeac6e1aa05cf5b4ca64a0c3904b8a784"
+    },
+    {
+      "bytes": 761,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000006/attempts/attempt0001/progress.json",
+      "sha256": "0bd9e4c17aa607a7f9e76cbbfa15ed6c757dc1fa8ba6264066aed80e73b20e16"
+    },
+    {
+      "bytes": 4528135,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000006/attempts/attempt0001/result.json",
+      "sha256": "00fbb61c02d0eef5ce7ce20d61295706c8b64e1d7cba4884fe33fac6a4becbd8"
+    },
+    {
+      "bytes": 720,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000006/attempts/attempt0001/start_grant.json",
+      "sha256": "f3d1bdfb48d547329a5eda31aaa390145aca865ff3b48e569bf711b6822bbbbd"
+    },
+    {
+      "bytes": 2544,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000007/attempts/attempt0001/case-request.json",
+      "sha256": "76da73b370bda57287bc9f5c560396542c995b36ecd5e172df5e7ddffcb61516"
+    },
+    {
+      "bytes": 558,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000007/attempts/attempt0001/child_registration.json",
+      "sha256": "6b3764de4648cb6095e3776e7c59a1e3761f6f578e93bae8997adc061b6b41cb"
+    },
+    {
+      "bytes": 2406049,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000007/attempts/attempt0001/events.jsonl",
+      "sha256": "c5d6d7938199897721116f3edba5af9aa2d639327246c35c6d9430313c13d13e"
+    },
+    {
+      "bytes": 826,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000007/attempts/attempt0001/launch_intent.json",
+      "sha256": "21d95ea5e3c30803a2c9f83a0c99417f9ffd7060acf8ae757836eb0828cb632c"
+    },
+    {
+      "bytes": 7511,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000007/attempts/attempt0001/manifest.json",
+      "sha256": "d35b3c3ca86a245d6693c148304d93b17d03a1dab54040dc88e31292afdba7fb"
+    },
+    {
+      "bytes": 760,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000007/attempts/attempt0001/progress.json",
+      "sha256": "931f44424f154b08a7b87b4bf087a7d6b3a2e463e97e8944a0c2db80b64844cd"
+    },
+    {
+      "bytes": 1834841,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000007/attempts/attempt0001/result.json",
+      "sha256": "113d29a470812498d851fab3c9488ba4deac6f276fe8089900efbfb7eb348758"
+    },
+    {
+      "bytes": 720,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000007/attempts/attempt0001/start_grant.json",
+      "sha256": "a790381e2bd65383efc585ee1724a36380a27b3b23365ee29448d4c34ebb2c8b"
+    },
+    {
+      "bytes": 2544,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000008/attempts/attempt0001/case-request.json",
+      "sha256": "9c05ac229276f2148a6c1b59f1ca32d482bd6b590bfd1e9e92270f080630f81a"
+    },
+    {
+      "bytes": 558,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000008/attempts/attempt0001/child_registration.json",
+      "sha256": "03512718d0ffe226727267f44d20475549b1fc94c727bfaa923294d1d7dc2600"
+    },
+    {
+      "bytes": 1821090,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000008/attempts/attempt0001/events.jsonl",
+      "sha256": "65a4b7f1ec3699c2b907699244b903c07a48a3aa5cbfee5727a2bd25d3b2bbc9"
+    },
+    {
+      "bytes": 826,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000008/attempts/attempt0001/launch_intent.json",
+      "sha256": "6cbe9f0914744863369c4a7ba16dfc4fd285b015de74cec8e2fd96fddd9109ff"
+    },
+    {
+      "bytes": 7511,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000008/attempts/attempt0001/manifest.json",
+      "sha256": "667891240a68e9720ac4a36acc3d1a63a1e8db34a1bcea1d960e1091067ffde8"
+    },
+    {
+      "bytes": 760,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000008/attempts/attempt0001/progress.json",
+      "sha256": "16e23f3848c98df6b2159074c4061d89eb730d07ecaba10c4f1183ee44b77b46"
+    },
+    {
+      "bytes": 1387011,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000008/attempts/attempt0001/result.json",
+      "sha256": "089efc7bfc0ff4ec922e3490589de569c8dd2f09fe36dcc282422686d76c6d8b"
+    },
+    {
+      "bytes": 720,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000008/attempts/attempt0001/start_grant.json",
+      "sha256": "f7672d35ed33111c7ba2cfc10e5870d2d9f0d840e9ba280d0991e4496ae035c1"
+    },
+    {
+      "bytes": 2544,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000009/attempts/attempt0001/case-request.json",
+      "sha256": "5ee0b1dde8292f42394cd17d5dd3cfcf0474235bc9eafd4dc73467ad60061188"
+    },
+    {
+      "bytes": 558,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000009/attempts/attempt0001/child_registration.json",
+      "sha256": "25b6a674e86af012aa642546249b4e9bdfbbff29c405803af868eed73bf8b16d"
+    },
+    {
+      "bytes": 872999,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000009/attempts/attempt0001/events.jsonl",
+      "sha256": "e82342a14e0de6510b154b464cbb43f97af802ddef2d1aa2ceaa116513a9295d"
+    },
+    {
+      "bytes": 826,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000009/attempts/attempt0001/launch_intent.json",
+      "sha256": "021bb3043de396ee790a857d6add24dbc60ca4ff8b50accdc7e23d24ec1f240d"
+    },
+    {
+      "bytes": 7511,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000009/attempts/attempt0001/manifest.json",
+      "sha256": "818d9c058116a7185139cde6aa57247b334a3d680be1da08d2f608d6d98cf88f"
+    },
+    {
+      "bytes": 758,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000009/attempts/attempt0001/progress.json",
+      "sha256": "5882d7a46598e0a6e05858f7af0e0768b3294aa8cbf5f1153b6e7d4a40746546"
+    },
+    {
+      "bytes": 662607,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000009/attempts/attempt0001/result.json",
+      "sha256": "0e9032dc9d94cb1deb9b9e06ef591a19a91a9915e72166ecfa59a0f9c804a990"
+    },
+    {
+      "bytes": 720,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000009/attempts/attempt0001/start_grant.json",
+      "sha256": "b295573d9ebdd62587f93783268ef3f1dcca0a27d59ebf954ac5a62c72437649"
+    },
+    {
+      "bytes": 2544,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000010/attempts/attempt0001/case-request.json",
+      "sha256": "d8394aec51c2445257b1bacbe8b20ddb4e9a050e8d2237b025cb98886a22f7b8"
+    },
+    {
+      "bytes": 558,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000010/attempts/attempt0001/child_registration.json",
+      "sha256": "fdc785c7e478eb3b941f1c4c1486a6677b84eeb90c6db3adebd7aac91553d796"
+    },
+    {
+      "bytes": 348808,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000010/attempts/attempt0001/events.jsonl",
+      "sha256": "95295f0e5b3815b86e5b24387a9f160c8eeb4344fb935980bca6b0368d91c37b"
+    },
+    {
+      "bytes": 826,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000010/attempts/attempt0001/launch_intent.json",
+      "sha256": "ffbc139e5a92ab6e3e1155deb7b8a38edc58f975cd0761bac05f96c9ab4d6f6f"
+    },
+    {
+      "bytes": 7511,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000010/attempts/attempt0001/manifest.json",
+      "sha256": "df838e35c0e1060b5f714f21b519b2c257b2e441eec02d8bef795acf5ef16cbf"
+    },
+    {
+      "bytes": 754,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000010/attempts/attempt0001/progress.json",
+      "sha256": "23d46da42e2108472148e6cbd3677f54ad88772c0def7b825f2fccb529d70d51"
+    },
+    {
+      "bytes": 265307,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000010/attempts/attempt0001/result.json",
+      "sha256": "b57bb90180a2ebe4c0683a65666d220c3d94da32ca427b8b23aa62039ccad89f"
+    },
+    {
+      "bytes": 720,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/jobs/job000010/attempts/attempt0001/start_grant.json",
+      "sha256": "f7dde44c10f363045507fc1fc0801f44788a43fca6d27451feff05dbf3adb14b"
+    },
+    {
+      "bytes": 41089,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/materialization_receipt.json",
+      "sha256": "cb61f057d74a1c744013da57523304247cb96de7b004fe0f18f02bded28083e2"
+    },
+    {
+      "bytes": 26316,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/plan.json",
+      "sha256": "6b6211822735a8095bf84aac4bd69a4a6b92fe72aeb26de403f7f8d85c50d748"
+    },
+    {
+      "bytes": 837,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/configuration.json",
+      "sha256": "5304fe97d2e48e05f8083caadb84a9150c0b03fcfa40fe84931251d73eafb243"
+    },
+    {
+      "bytes": 6039,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/dataset.json",
+      "sha256": "6b26b6d2da9f39f49df5e80d843deaed0f184c7243759a1bcbeebe26d0230d3d"
+    },
+    {
+      "bytes": 211,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/oracles/d7-m5-c000040.json",
+      "sha256": "53ee49206d097ef13a865be087ddeea48ca5ddc8a03f4e9efee538b20e29930f"
+    },
+    {
+      "bytes": 208,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/oracles/d7-m5-c000041.json",
+      "sha256": "830e601bb5cdbc81426220c7efe21f6d3aa9bc310511bf5fa422451999bcd539"
+    },
+    {
+      "bytes": 205,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/oracles/d7-m5-c000042.json",
+      "sha256": "cd70e40b1503a47548d3870cfdacad3e3bf9808ec1e4c9702f336e144e87f6d1"
+    },
+    {
+      "bytes": 211,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/oracles/d7-m5-c000043.json",
+      "sha256": "e6836e0e35d171a4b430c98ddd9771bec7134dc8eece94871527f94ec1c9e97e"
+    },
+    {
+      "bytes": 207,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/oracles/d7-m5-c000044.json",
+      "sha256": "72c0c35c5d1b8a58fd5a5c06968f0eb661ed1b6f2cfcc456d4c00414cab07249"
+    },
+    {
+      "bytes": 209,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/oracles/d7-m5-c000045.json",
+      "sha256": "d7f0748af833684b0a0a714dd763ba2c7b1a60449674d8078895efe20b288b0b"
+    },
+    {
+      "bytes": 209,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/oracles/d7-m5-c000046.json",
+      "sha256": "1f47184138866e568ede3adaabb2b0c05c464fa4d463c48155f317823409ee3a"
+    },
+    {
+      "bytes": 211,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/oracles/d7-m5-c000047.json",
+      "sha256": "df3a5dffa997959e8aae43869a15953292b7671b22bb983440846b8d03b249d7"
+    },
+    {
+      "bytes": 207,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/oracles/d7-m5-c000048.json",
+      "sha256": "c1f2ceb87ac202ec100d90f231afccbcba32f58dff645b77e79d77a050417e61"
+    },
+    {
+      "bytes": 207,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/oracles/d7-m5-c000049.json",
+      "sha256": "1b02124112c40c942092b19921414c7241a1b83924bc4f170cfd5553f689dc9d"
+    },
+    {
+      "bytes": 854,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/problems/d7-m5-c000040.json",
+      "sha256": "a3cbf145520f2252cf499deeff02e9c1be3715c6f1d438c2e4f31e4855351809"
+    },
+    {
+      "bytes": 851,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/problems/d7-m5-c000041.json",
+      "sha256": "ef33bf88d0c44a30d134f391d339b212d55af1eb01be3b94b3b1cf8b5e13632b"
+    },
+    {
+      "bytes": 853,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/problems/d7-m5-c000042.json",
+      "sha256": "82c578b796780367b10be9a532bd44a60d90687d482629f177edce5c4f2292b5"
+    },
+    {
+      "bytes": 848,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/problems/d7-m5-c000043.json",
+      "sha256": "cb659f77bb9c8cf00622bf6eb2ff64d990e3be7281609818769da2ab5d9c1f10"
+    },
+    {
+      "bytes": 854,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/problems/d7-m5-c000044.json",
+      "sha256": "b97b7f5cd30cc7d75a49919e13067b4ffabf899f2af12511792cf0282b1b8678"
+    },
+    {
+      "bytes": 852,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/problems/d7-m5-c000045.json",
+      "sha256": "50481054e49af57daeca94101b0ffff0a3cdd7ff1e62ded3aac4a3cf18b11e8b"
+    },
+    {
+      "bytes": 845,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/problems/d7-m5-c000046.json",
+      "sha256": "f6f8660dc2601f9a9d250a2e0cfc882e5702001ed4fdabb4466d16a49f5e302f"
+    },
+    {
+      "bytes": 847,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/problems/d7-m5-c000047.json",
+      "sha256": "7d1aa789d296bd88ad8f72361c009b9a4f2c51e895f1447f5895465acb6df276"
+    },
+    {
+      "bytes": 847,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/problems/d7-m5-c000048.json",
+      "sha256": "4c5deea9e608a78b7012b1669604ab821cfd75e98e9f9249108355f6557a36fb"
+    },
+    {
+      "bytes": 852,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/problems/d7-m5-c000049.json",
+      "sha256": "d43580bc8dc8e0036aca54f9fe65b2a537fc84088fedd54670ef508fb4d682bd"
+    },
+    {
+      "bytes": 2416,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/certification.json",
+      "sha256": "13a50e80e3cad6f8a7d21c440823ceea821c39f9d2053eb4a547278a004c06e3"
+    },
+    {
+      "bytes": 699,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/backend_conformance.json",
+      "sha256": "8f5d6c960fdcad3f49db6422a5072d5f8949a1b0ae5788b30f5efc884d2605b9"
+    },
+    {
+      "bytes": 680,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/installation.json",
+      "sha256": "87306418aa21f60fe19214b95a08fbe3f0b9c8de69eef2584b4337f39e1dfc22"
+    },
+    {
+      "bytes": 709,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/linux_recovery.json",
+      "sha256": "adf62da93262667c1e1712378ce90330146ea244fd86b87501d55251659aa0fb"
+    },
+    {
+      "bytes": 702,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/numerical_conformance.json",
+      "sha256": "e7b1261105fda1c85f9d19def68d313c372b72bc38db207efb09584915787a40"
+    },
+    {
+      "bytes": 678,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/sdk_lifecycle.json",
+      "sha256": "fc7a85cb8378822fb745f8fa32ab918e2be8160f39472770c8d186e067247904"
+    },
+    {
+      "bytes": 692,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/standalone_io.json",
+      "sha256": "1b1d0fc7dd5613c7a7b3f590e085feaf60952358c8a9b3939e21a8695ba21612"
+    },
+    {
+      "bytes": 181,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/environment-lock.txt",
+      "sha256": "c02ba80f6442217b91383cf21a3077b483d21f9fa04ab45027c6a30e922c86e6"
+    },
+    {
+      "bytes": 862,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/profile.json",
+      "sha256": "c2e9a5022df479fcc6c7f80d7ab8a9a93c7dbc816754833a0df5bf6e0fedb581"
+    },
+    {
+      "bytes": 1603,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/backend_conformance.json",
+      "sha256": "88532dea2d187f8a6d4ab8db47100cc89812bf6a35454c3333cffa8b74ea1a65"
+    },
+    {
+      "bytes": 2325,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/installation.json",
+      "sha256": "8ea454acbc0ef16ea0eb743e835dfa8700b1b7eb5e272e45e2e8ac629137a4cb"
+    },
+    {
+      "bytes": 2849,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/linux_recovery.json",
+      "sha256": "0c451ad427ca96d0d51684e36a0c7da636cc2ee607c5c079a79184dda6b129c0"
+    },
+    {
+      "bytes": 1295,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/numerical_conformance.json",
+      "sha256": "f9d5172b57c479aee9148f6f11e016d830c73c8d09be40d4a627319feb65b3d0"
+    },
+    {
+      "bytes": 1897,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/sdk_lifecycle.json",
+      "sha256": "11cc018031c96cb39c95737e3645702185989875789cbd74f3bfc95df7147c2e"
+    },
+    {
+      "bytes": 2607,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/standalone_io.json",
+      "sha256": "4d15d08bb6a8ec157a7129d08d464e32124cf6b4fcab9cf0b4f37cc718a89ce1"
+    },
+    {
+      "bytes": 1124,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/provenance/original/runs/four-host-readiness-20261017T2140Z/prepared-suites/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/suite.json",
+      "sha256": "677d8bb3b76ae4bfdf3902e74f948cd950e2a493153a34136e3b6d76d8664ba6"
+    },
+    {
+      "bytes": 3348,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/reports/3ceeb4a4-90de-51a6-a4c4-bdac6de04c65/audit.json",
+      "sha256": "681c3226ac7248f393ee45ea37bbbf6e5aa6d982d6e846efa598a9f01e0f9f6f"
+    },
+    {
+      "bytes": 11355,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/reports/3ceeb4a4-90de-51a6-a4c4-bdac6de04c65/state-snapshot.json",
+      "sha256": "d55d98425788fd584124d16a27dcb5ff53486b7510ad033aa07a575266bc2b6d"
+    },
+    {
+      "bytes": 12515,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/reports/3ceeb4a4-90de-51a6-a4c4-bdac6de04c65/summary.json",
+      "sha256": "e1035668ba743b1fb45f35af88fd150bec13cf10670e46cff9cc824ab6e47d63"
+    },
+    {
+      "bytes": 325,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/source/build-provenance.json",
+      "sha256": "12fde9ab005f42ea8e40fb9c7f13814149d5a09b3f2f32a6aa83f34c2a1c92c6"
+    },
+    {
+      "bytes": 16558,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/source/inventory.json",
+      "sha256": "09d2a9de41fb870ecace63571141ad71923186a73120dc6cb151b63b0264ae00"
+    },
+    {
+      "bytes": 11355,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group05/state.json",
+      "sha256": "d55d98425788fd584124d16a27dcb5ff53486b7510ad033aa07a575266bc2b6d"
+    }
+  ],
+  "verifier": {
+    "native_package_imported": false,
+    "path": "verify_study_raw.py",
+    "sha256": "f84ec9771d07f44f427816edbb0302d3b14c8d98440eb28bd79c2bbd2e97594f",
+    "standard_library_only": true
+  }
+}
