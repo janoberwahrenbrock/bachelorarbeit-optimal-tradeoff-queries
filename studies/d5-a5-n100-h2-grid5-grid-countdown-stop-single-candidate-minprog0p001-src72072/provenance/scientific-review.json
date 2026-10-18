@@ -1,0 +1,241 @@
+{
+  "bindings": {
+    "all_attempts_cost_and_outcome_sha256": "2ba4e0f6ae473156b75899a0e566de737ad93dc729f5c7ca4b5a3651ef4a46b6",
+    "audit": {
+      "bytes": 25128,
+      "path": "runs/studies/d5-a5-n100-h2-grid5-grid-countdown-stop-single-candidate-minprog0p001-src72072/reports/2e7d69e8-034b-5a2e-99be-9b53928393a8/audit.json",
+      "sha256": "fc6940ee554ea6b8b474953d889e5898232ba83cce210c055aeba9f8945f5012"
+    },
+    "classification_counts": {
+      "correct": 100
+    },
+    "denominators": {
+      "all_attempts": 100,
+      "independent_problems": 100,
+      "primary_cells": 100,
+      "repetitions": 1,
+      "terminal_cells": 100
+    },
+    "input_contract": {
+      "bytes": 4486,
+      "path": "studies/d5-a5-n100-h2-grid5-grid-countdown-stop-single-candidate-minprog0p001-src72072/provenance/input-contract.json",
+      "sha256": "032dfb7e5201c523def010de8682896f902d5423089f518b802bde9ba93c17e7"
+    },
+    "missing_costs": {
+      "api_seconds": 0,
+      "case_seconds": 0,
+      "controller_seconds": 0
+    },
+    "plan": {
+      "bytes": 177336,
+      "path": "runs/studies/d5-a5-n100-h2-grid5-grid-countdown-stop-single-candidate-minprog0p001-src72072/plan.json",
+      "sha256": "064aeb62b70a1002d8d0be1a021c8f3c53c1e074227bcce3fadf06d3e1a7280b"
+    },
+    "raw_check": {
+      "bytes": 1101463,
+      "path": "studies/d5-a5-n100-h2-grid5-grid-countdown-stop-single-candidate-minprog0p001-src72072/provenance/raw-check.json",
+      "sha256": "41e518e2860b78a7c16dc641c43e88722f7a9971c288af84493e19afaeee253c"
+    },
+    "regular_stop_outcomes": [],
+    "report_files": {
+      "attempts.csv": {
+        "bytes": 54032,
+        "path": "studies/d5-a5-n100-h2-grid5-grid-countdown-stop-single-candidate-minprog0p001-src72072/results/attempts.csv",
+        "sha256": "b259d1b6050e68c16d5211967182fb13f4d7358a724a563f641acff94a641a59"
+      },
+      "report.md": {
+        "bytes": 10445,
+        "path": "studies/d5-a5-n100-h2-grid5-grid-countdown-stop-single-candidate-minprog0p001-src72072/results/report.md",
+        "sha256": "9fe993817cbd065c073e19cd691e5b19ee14b7f337a5d01156065315044ba6b5"
+      },
+      "results.csv": {
+        "bytes": 60933,
+        "path": "studies/d5-a5-n100-h2-grid5-grid-countdown-stop-single-candidate-minprog0p001-src72072/results/results.csv",
+        "sha256": "ab40ac34abc85b4188e47ba3040c504d5ba786ca09d57e68166624b207ae6eff"
+      },
+      "results.json": {
+        "bytes": 983457,
+        "path": "studies/d5-a5-n100-h2-grid5-grid-countdown-stop-single-candidate-minprog0p001-src72072/results/results.json",
+        "sha256": "d6802be80bb71ec57c399d15157fe216349e338813ee7afd7d0820268a34f38d"
+      }
+    },
+    "required_diagnosis_subjects": [],
+    "schema_version": 1,
+    "series_id": "3eae96b1-3e43-49a3-b763-6570a527c11d",
+    "source": {
+      "dirty": false,
+      "git_commit": "62d1d01339f91802e2916b63660a4e640d99c9cc",
+      "inventory_format": "otqa-source-v1",
+      "source_sha256": "720726607ae451b319e59e01453b6ba69b9950ef42420e700ed6b4eaa5b34d0e",
+      "version": "0.2.0"
+    },
+    "state": {
+      "bytes": 111033,
+      "path": "runs/studies/d5-a5-n100-h2-grid5-grid-countdown-stop-single-candidate-minprog0p001-src72072/state.json",
+      "sha256": "84ca943956112ec826b62a865aba8bbd78d3112ff95a8bec3c79f3fbfd4808d3"
+    },
+    "study_id": "d5-a5-n100-h2-grid5-grid-countdown-stop-single-candidate-minprog0p001-src72072",
+    "tool_files": {
+      "raw_checker": {
+        "bytes": 78257,
+        "path": "studies/d5-a5-n100-h2-grid5-grid-countdown-stop-single-candidate-minprog0p001-src72072/reproduction/verify_study_raw.py",
+        "sha256": "f84ec9771d07f44f427816edbb0302d3b14c8d98440eb28bd79c2bbd2e97594f"
+      },
+      "reporter": {
+        "bytes": 29756,
+        "path": "studies/d5-a5-n100-h2-grid5-grid-countdown-stop-single-candidate-minprog0p001-src72072/reproduction/single_study_report.py",
+        "sha256": "618cc5fc631f1bfdd04fbfe2ffd752b8f18f8aaacda33600522a7bd6bbce7f79"
+      }
+    }
+  },
+  "created_at_utc": "2026-10-18T00:01:20.856197+00:00",
+  "diagnoses": [],
+  "limits": [
+    "This accepts only this configuration and its original independent problem denominator; regular unresolved outcomes remain separate from solved cases.",
+    "Every preserved actual answer and actual-weight utility winner was checked with exact Fraction interpretations of binary64 inputs.",
+    "Recorded geometric volumes, hypothetical regions/branches and query-inventory completeness/global optimality were not independently recertified.",
+    "Ordinary stops match their saved inventory and strict0.001 threshold; a different or deeper query inventory can behave differently.",
+    "Observed execution costs belong to the recorded host/session; no isolated causal runtime or Hyper-Threading guarantee is inferred.",
+    "Final fresh archive acceptance, scientific overall completion, staging publication and actual public download validation remain separate gates."
+  ],
+  "passed": true,
+  "private_supplementary_review_evidence_sha256": "b1ffd57c124006cf5987b026cff49e793ffcc71e720e26831e2f4c511e1c4219",
+  "publication_completion": false,
+  "reviewer": "/root/sixth_host_launch_review",
+  "schema_version": 1,
+  "scientific_completion": false,
+  "scope_evidence": {
+    "actual_answers_and_winners": {
+      "actual_weight_winner_retained_in_observed_states": true,
+      "classification_counts": {
+        "correct": 100
+      },
+      "exact_binary64_fraction_answers": 884,
+      "independent_utility_winner_sets": 100
+    },
+    "all_terminal_outcomes_and_missing_costs": {
+      "classification_counts": {
+        "correct": 100
+      },
+      "completed": 100,
+      "each_api_case_controller_cost_crosschecked": true,
+      "failed": 0,
+      "interrupted": 0,
+      "missing_costs": {
+        "api_seconds": 0,
+        "case_seconds": 0,
+        "controller_seconds": 0
+      },
+      "one_actual_api_duration_per_primary_cell": true,
+      "outlier_case_ids": [
+        "d5-m5-c000025",
+        "d5-m5-c000036",
+        "d5-m5-c000046",
+        "d5-m5-c000058",
+        "d5-m5-c000070",
+        "d5-m5-c000071",
+        "d5-m5-c000078"
+      ],
+      "unavailable_phase_timings_preserved_as_null": true
+    },
+    "independent_reporter_and_raw_checker_reviews": {
+      "fresh_raw_replay_matched": true,
+      "public_attestations_checked": 2,
+      "separate_fresh_extracted_package_report_reproduction_passed": true
+    },
+    "journal_cursor_progress_and_all_attempts": {
+      "actual_mode": "countdown",
+      "all_actual_horizons_and_answer_cursors_checked": true,
+      "all_attempts": 100,
+      "countdown_decrement_reset_checked_when_applicable": true,
+      "extra_or_orphan_attempts": 0,
+      "independent_problems": 100,
+      "primary_cells": 100,
+      "repetitions": 1
+    },
+    "native_audit_json_csv_same_snapshot": {
+      "all_snapshot_bindings_match": true,
+      "audit_reexecuted": false,
+      "existing_native_audits": 1,
+      "native_groups": 1,
+      "native_result_rows": 100
+    },
+    "source_and_frozen_inputs": {
+      "algorithm": {
+        "depth": 2,
+        "grid_size": 5,
+        "higher_depth_query_source": "grid",
+        "horizon_execution": "countdown",
+        "min_expected_progress": 0.001,
+        "planning_evaluation": "candidate_count",
+        "query_strategy": "fixed",
+        "stopping": {
+          "rule": "single_candidate"
+        }
+      },
+      "alternatives": 5,
+      "execution": {
+        "cache_policy_id": "bounded_v1",
+        "case_timeout_seconds": null,
+        "native_threads": 1,
+        "start_method": "forkserver",
+        "workers": 16
+      },
+      "full_original_matrices_and_preference_vectors_checked": 100,
+      "numerical_values_sha256": "1374fa8394bffe9b7f84585b29ea2a0b353f105500f28f6b2c6a79fbcec4a56c",
+      "objectives": 5,
+      "original_and_materialized_input_contract_checked": true,
+      "wheel_source_inventory_files_checked": 128
+    },
+    "valid_regular_stops_and_exception_diagnoses": {
+      "exception_diagnoses_required": 0,
+      "ordinary_stops_counted_as_solved": false,
+      "ordinary_stops_counted_as_solver_errors": false,
+      "ordinary_threshold_stop_cases": []
+    }
+  },
+  "scopes_checked": [
+    "actual_answers_and_winners",
+    "all_terminal_outcomes_and_missing_costs",
+    "independent_reporter_and_raw_checker_reviews",
+    "journal_cursor_progress_and_all_attempts",
+    "native_audit_json_csv_same_snapshot",
+    "source_and_frozen_inputs",
+    "valid_regular_stops_and_exception_diagnoses"
+  ],
+  "separate_original_host_byte_gate_checked_for_consistency": {
+    "bytes": 6156312,
+    "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/selected-remote-hash-gates/d5-a5-n100-h2-grid5-grid-countdown-stop-single-candidate-minprog0p001-src72072-20261018T000111.471359Z/gate-proof.json",
+    "sha256": "3aa5298ac9f3f4c368a73b3de38847056cd1479d2dabd7f8ac432c8d376328ca"
+  },
+  "separate_original_host_origin_selection_sha256": "26d012f4253014365c759554c9773e98ea4f9aa84878839c10289dfa8383b37d",
+  "status": "independent_scientific_content_review_pass",
+  "study_id": "d5-a5-n100-h2-grid5-grid-countdown-stop-single-candidate-minprog0p001-src72072",
+  "tool_reviews": {
+    "raw_checker": {
+      "artifact": {
+        "bytes": 1665,
+        "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/public-tool-review-attestations/20261017T230741.274312Z/raw_checker.json",
+        "sha256": "834a441553e4aa88e3070d0c791b986be1d371222f46f33a9780855b43dd3bf8"
+      },
+      "passed": true,
+      "reviewer": "/root/ht_study_design",
+      "scope": "Independent source and saved-output validation for full input/source/attempt/cost/Fraction/journal/cursor/export/CSV correctness.",
+      "tool_sha256": "f84ec9771d07f44f427816edbb0302d3b14c8d98440eb28bd79c2bbd2e97594f",
+      "unresolved_issues": []
+    },
+    "reporter": {
+      "artifact": {
+        "bytes": 1565,
+        "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/public-tool-review-attestations/20261017T230741.274312Z/reporter.json",
+        "sha256": "8c2f5e200b439fdc2e00437ccb8b2219db521dc2fdfa51d6b0db9fff46fe1290"
+      },
+      "passed": true,
+      "reviewer": "/root/ht_study_design",
+      "scope": "Independent source and saved-output validation for full input/source/attempt/cost/Fraction/journal/cursor/export/CSV correctness.",
+      "tool_sha256": "618cc5fc631f1bfdd04fbfe2ffd752b8f18f8aaacda33600522a7bd6bbce7f79",
+      "unresolved_issues": []
+    }
+  },
+  "unresolved_issues": []
+}
