@@ -1,0 +1,689 @@
+{
+  "all_attempts": [
+    {
+      "attempt_id": "attempt0001",
+      "case_id": "d7-m5-c000056",
+      "controller_elapsed_seconds": 1210.1750514920004,
+      "error": null,
+      "evidence": {
+        "actual_horizons": [
+          1,
+          1,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          1
+        ],
+        "answers_checked": 9,
+        "api_seconds": 1209.4795972560005,
+        "attempt_id": "attempt0001",
+        "attempts_completed": 9,
+        "attempts_started": 9,
+        "candidate_count_path": [
+          4,
+          3,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1
+        ],
+        "case_id": "d7-m5-c000056",
+        "case_seconds": 1209.8775204350004,
+        "configuration_id": "d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056-config",
+        "controller_seconds": 1210.1750514920004,
+        "error": null,
+        "error_code": null,
+        "expected_candidates": [
+          3.0,
+          2.0927360562525212,
+          1.7151581685092325,
+          1.7743988549356842,
+          1.8361883209141014,
+          1.8447026123579944,
+          1.9009147469997143,
+          1.726401764952377,
+          1.7386460131641441
+        ],
+        "fallback_attempts_completed": 0,
+        "fallback_attempts_started": 0,
+        "fallbacks": 0,
+        "final_execution_cursor": {
+          "answered_total": 9,
+          "remaining_depth": 3
+        },
+        "finished_at_utc": "2026-10-18T01:45:35.800159Z",
+        "grid": 5,
+        "initial_candidate_count": 4,
+        "initial_singleton": false,
+        "interruption": null,
+        "job_id": "job000001",
+        "journal_ref": {
+          "path": "jobs/job000001/attempts/attempt0001/events.jsonl",
+          "sha256": "439a4f9b1420f8922cbee8be994538909f7c87a6315097c47fa80da732f9c51d"
+        },
+        "last_good_sequence": 75,
+        "manifest_ref": {
+          "path": "jobs/job000001/attempts/attempt0001/manifest.json",
+          "sha256": "23075f7c4e4f7af791f4fa7fee98dd92fddcea6083146b36bea23742bd04db6b"
+        },
+        "mode": "adaptive",
+        "objectives": 7,
+        "partial_api_seconds": null,
+        "progress_matches_full_result_prefix": true,
+        "progress_ref": {
+          "bytes": 757,
+          "path": "jobs/job000001/attempts/attempt0001/progress.json",
+          "sha256": "aba8781bb9d826ad7408553397b7c19a5449a63ff85db4497bfe9f8623f1fbd8"
+        },
+        "quality": "correct",
+        "queries": 9,
+        "result_ref": {
+          "path": "jobs/job000001/attempts/attempt0001/result.json",
+          "sha256": "793a86c8ab09dad645abd3905dad14a30f10ec69bddacd73804b1d39b1398a27"
+        },
+        "selected_candidate_id": "a4",
+        "solved": true,
+        "stagnant_answer_steps": 6,
+        "started_at_utc": "2026-10-18T01:25:25.922658Z",
+        "state_winner_lost_indices": [],
+        "status": "completed",
+        "successful_fallbacks": 0,
+        "termination_reason": "exact_single_candidate",
+        "uncommitted_recorded_answers_checked_no_credit": 0,
+        "unsuccessful_fallbacks": 0,
+        "winner_ids": [
+          "a4"
+        ]
+      },
+      "execution_status": "completed",
+      "interruption": null,
+      "job_id": "job000001",
+      "result": {
+        "path": "jobs/job000001/attempts/attempt0001/result.json",
+        "sha256": "793a86c8ab09dad645abd3905dad14a30f10ec69bddacd73804b1d39b1398a27"
+      },
+      "run_id": "f120e89b-d4e3-48da-8786-ed5b4b16919d",
+      "timings": {
+        "answer_wait_wall_seconds": 4.424200233188458e-05,
+        "api_call_wall_seconds": 1209.4795972560005,
+        "case_elapsed_seconds": 1209.8775204350004,
+        "complete_api_measurement": true,
+        "observer_wall_seconds": 0.0,
+        "partial_api_elapsed_seconds": null,
+        "persistence_in_call_wall_seconds": null,
+        "planning_wall_seconds": null,
+        "recorder_wall_seconds": 0.6434826050026459,
+        "scope_version": 1,
+        "state_analysis_wall_seconds": null,
+        "unattributed_wall_seconds": null,
+        "worker_cpu_seconds": null,
+        "worker_shutdown_wall_seconds": null,
+        "worker_startup_wall_seconds": null
+      },
+      "verified": true
+    }
+  ],
+  "configuration": {
+    "algorithm": {
+      "depth": 3,
+      "grid_size": 5,
+      "higher_depth_query_source": "both",
+      "horizon_execution": "receding",
+      "min_expected_progress": 0.001,
+      "planning_evaluation": "candidate_count",
+      "query_strategy": "reduction_per_query",
+      "stopping": {
+        "rule": "single_candidate"
+      }
+    },
+    "budget": {
+      "max_queries": null
+    },
+    "configuration_id": "d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056-config",
+    "execution": {
+      "cache_policy_id": "bounded_v1",
+      "case_timeout_seconds": null,
+      "native_threads": 1,
+      "start_method": "forkserver",
+      "workers": 16
+    },
+    "recording": {
+      "durability": "per_answer",
+      "profile": false,
+      "telemetry_failure_policy": "continue",
+      "trace_level": "standard"
+    },
+    "schema_version": 2
+  },
+  "counts": {
+    "all_attempts": 1,
+    "answers_checked_exact_fraction": 9,
+    "attempts_verified": 1,
+    "correct": 1,
+    "failed": 0,
+    "incorrect": 0,
+    "interrupted_attempts": 0,
+    "primary_rows": 1,
+    "regular_unsolved": 0,
+    "solved": 1,
+    "uncommitted_recorded_answers_checked_no_credit": 0,
+    "unknown_controller_costs": 0,
+    "winner_sets_checked_exact_fraction": 1
+  },
+  "created_at_utc": "2026-10-18T02:02:53.246312+00:00",
+  "elapsed_seconds": 0.14715983299538493,
+  "expected_original_case_ids": [
+    "d7-m5-c000056"
+  ],
+  "expected_original_inputs": {
+    "configuration": {
+      "bytes": 839,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/configuration.json",
+      "sha256": "d7b54d5ec8b17f68d581f5ddaea3edfac281db78aab4882d88c81d1200bd4a40"
+    },
+    "dataset": {
+      "bytes": 819,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/dataset.json",
+      "sha256": "005304994da421900350b2e173daa86d3720c6b3301ec533c9df90f43af3cb1b"
+    },
+    "suite": {
+      "bytes": 1209,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/suite.json",
+      "sha256": "dd78cf8cf101dac29a2c1fdc784a5f14e3b685fc2f6b5b6e29cc4ecf10b77647"
+    }
+  },
+  "exports": {
+    "aggregate_rounding_tolerance": "32ULP for aggregate floating values only; individual costs retained unchanged",
+    "audit": {
+      "bytes": 1170,
+      "path": "reports/8b25fb56-6931-5a63-a84c-0bdfdc51fd16/audit.json",
+      "sha256": "ae79609b5a07c3494c9f5a43aa066c1374af2dcbbc06b63010e4ca20b8f1e076"
+    },
+    "csv": {
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/exports/fleet-final.csv",
+      "sha256": "26c6f954e85e990c5c6a15068ae45913ad79697352e9fba82535ade02f23238d"
+    },
+    "group_count": 1,
+    "json": {
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/exports/fleet-final.json",
+      "sha256": "6283cb27b524f93709ff7b639b242e5a9979738c1f65485093881310a34378d9"
+    },
+    "row_count": 1,
+    "state_snapshot": {
+      "path": "reports/8b25fb56-6931-5a63-a84c-0bdfdc51fd16/state-snapshot.json",
+      "sha256": "814c6d3595ae5bc20f9c4e3c45662bfdd37244a9b1ec7e5dca8fba49f02e9540"
+    }
+  },
+  "findings": [],
+  "finish_proof_sha256": "f27b565e1d6a67e63245dd71761ab858b627eeed2889c63673ea25819702f1d0",
+  "independent_problems": 1,
+  "limitations": [
+    "Provisional independent evidence only; root and peer review, final cross-host hash proof, packaging and download verification remain separate.",
+    "No geometric region, LP feasibility, hypothetical branch probability, alternative plan inventory or global score optimum was recomputed or certified.",
+    "Stored generated/evaluated inventory counts, horizon decisions and progress threshold arithmetic were checked against recorded evidence.",
+    "Exact Fraction comparisons interpret the preserved binary64 matrix, preferences and actual query thresholds; they do not prove other-weight region geometry.",
+    "Historical process-group end is bound to the native finish evidence; this offline checker makes no fresh Linux process-liveness claim.",
+    "Intermediate progress phase labels are not independently reconstructed beyond durable identities, prefix, counts/cursor, and terminal/answer phase barriers.",
+    "Native aggregate floating values permit32ULP rounding difference across Python summation implementations; every individual original timing and attempt cost is retained.",
+    "UTC format and observed ordering are checked only as a clock-anomaly review gate; operating-system wall clocks can step, and no performance duration is calculated from UTC timestamps."
+  ],
+  "ordered_problem_oracle_sha256": "d4781bf647e223082193f2b40579910b3c4ca1fd6022b2b96d95d1260cf892e3",
+  "plan": {
+    "bytes": 10286,
+    "path": "plan.json",
+    "sha256": "a163c5a2b5f9fd15bcf3a0616ec2d4f80a8ce0bd930afee8a3431d65f15b976f"
+  },
+  "primary_cells": 1,
+  "primary_rows_verified": 1,
+  "publication_completion": false,
+  "repetitions": 1,
+  "rows": [
+    {
+      "actual_horizons": [
+        1,
+        1,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        1
+      ],
+      "answers_checked": 9,
+      "api_seconds": 1209.4795972560005,
+      "attempt_id": "attempt0001",
+      "attempts_completed": 9,
+      "attempts_started": 9,
+      "candidate_count_path": [
+        4,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      "case_id": "d7-m5-c000056",
+      "case_seconds": 1209.8775204350004,
+      "configuration_id": "d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056-config",
+      "controller_seconds": 1210.1750514920004,
+      "error": null,
+      "error_code": null,
+      "expected_candidates": [
+        3.0,
+        2.0927360562525212,
+        1.7151581685092325,
+        1.7743988549356842,
+        1.8361883209141014,
+        1.8447026123579944,
+        1.9009147469997143,
+        1.726401764952377,
+        1.7386460131641441
+      ],
+      "fallback_attempts_completed": 0,
+      "fallback_attempts_started": 0,
+      "fallbacks": 0,
+      "final_execution_cursor": {
+        "answered_total": 9,
+        "remaining_depth": 3
+      },
+      "finished_at_utc": "2026-10-18T01:45:35.800159Z",
+      "grid": 5,
+      "initial_candidate_count": 4,
+      "initial_singleton": false,
+      "interruption": null,
+      "job_id": "job000001",
+      "journal_ref": {
+        "path": "jobs/job000001/attempts/attempt0001/events.jsonl",
+        "sha256": "439a4f9b1420f8922cbee8be994538909f7c87a6315097c47fa80da732f9c51d"
+      },
+      "last_good_sequence": 75,
+      "manifest_ref": {
+        "path": "jobs/job000001/attempts/attempt0001/manifest.json",
+        "sha256": "23075f7c4e4f7af791f4fa7fee98dd92fddcea6083146b36bea23742bd04db6b"
+      },
+      "mode": "adaptive",
+      "objectives": 7,
+      "partial_api_seconds": null,
+      "progress_matches_full_result_prefix": true,
+      "progress_ref": {
+        "bytes": 757,
+        "path": "jobs/job000001/attempts/attempt0001/progress.json",
+        "sha256": "aba8781bb9d826ad7408553397b7c19a5449a63ff85db4497bfe9f8623f1fbd8"
+      },
+      "quality": "correct",
+      "queries": 9,
+      "result_ref": {
+        "path": "jobs/job000001/attempts/attempt0001/result.json",
+        "sha256": "793a86c8ab09dad645abd3905dad14a30f10ec69bddacd73804b1d39b1398a27"
+      },
+      "selected_candidate_id": "a4",
+      "solved": true,
+      "stagnant_answer_steps": 6,
+      "started_at_utc": "2026-10-18T01:25:25.922658Z",
+      "state_winner_lost_indices": [],
+      "status": "completed",
+      "successful_fallbacks": 0,
+      "termination_reason": "exact_single_candidate",
+      "uncommitted_recorded_answers_checked_no_credit": 0,
+      "unsuccessful_fallbacks": 0,
+      "winner_ids": [
+        "a4"
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "scientific_completion": false,
+  "series_id": "c0103e44-cded-42a8-bd40-cbfb7c82c67e",
+  "source": {
+    "dirty": false,
+    "git_commit": "62d1d01339f91802e2916b63660a4e640d99c9cc",
+    "inventory_format": "otqa-source-v1",
+    "source_sha256": "720726607ae451b319e59e01453b6ba69b9950ef42420e700ed6b4eaa5b34d0e",
+    "version": "0.2.0"
+  },
+  "state": {
+    "bytes": 1391,
+    "path": "state.json",
+    "sha256": "814c6d3595ae5bc20f9c4e3c45662bfdd37244a9b1ec7e5dca8fba49f02e9540"
+  },
+  "status": "provisional_pass",
+  "study_id": "d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056",
+  "terminal_reasons": {
+    "exact_single_candidate": 1
+  },
+  "verified_read_artifacts": [
+    {
+      "bytes": 8932,
+      "path": "@finish_proof",
+      "sha256": "f27b565e1d6a67e63245dd71761ab858b627eeed2889c63673ea25819702f1d0"
+    },
+    {
+      "bytes": 1065,
+      "path": "@prepared_input_contract",
+      "sha256": "558b72af5f2c4cc19089066601de498c896d44213b76f42714777f845b38fd55"
+    },
+    {
+      "bytes": 235081,
+      "path": "@wheel",
+      "sha256": "24e4a5c901690895bdb1557a5a90ef1e9d5f6d3eb06381df58031d8ce02f1a97"
+    },
+    {
+      "bytes": 1228,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/exports/fleet-final.csv",
+      "sha256": "26c6f954e85e990c5c6a15068ae45913ad79697352e9fba82535ade02f23238d"
+    },
+    {
+      "bytes": 612,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/exports/fleet-final.csv.receipt.json",
+      "sha256": "22a126a848ad9beb7a68c2ab72c1bd8de34cb46c84b241088a0862779d13f006"
+    },
+    {
+      "bytes": 3500,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/exports/fleet-final.json",
+      "sha256": "6283cb27b524f93709ff7b639b242e5a9979738c1f65485093881310a34378d9"
+    },
+    {
+      "bytes": 614,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/exports/fleet-final.json.receipt.json",
+      "sha256": "78108f366725614607b410159e50237f2599ea622206f7fe1bb15c02d20cba0c"
+    },
+    {
+      "bytes": 2465,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/certification.json",
+      "sha256": "824a17e096634b85d8c043bdba4c025a2d92bad7e7c3914d7664a1be52e6e0d5"
+    },
+    {
+      "bytes": 706,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/backend_conformance.json",
+      "sha256": "b9a7a19fc17b95d171f6c09dd237cdf07ee502ff57801dc57d93ffcbbb3c6d8c"
+    },
+    {
+      "bytes": 687,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/installation.json",
+      "sha256": "57cfe1df48cfe12782f835d781290c5496653ec5a8811521ac442e0c79298338"
+    },
+    {
+      "bytes": 716,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/linux_recovery.json",
+      "sha256": "67e13ec7c3a446fae68431c198d0f8317f1fcbcf6b3399ed5267bed2b0e922c9"
+    },
+    {
+      "bytes": 709,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/numerical_conformance.json",
+      "sha256": "81afe5252df506d06bd720d37e2ec1f463e81305d4260fdcc9d4eddaac904668"
+    },
+    {
+      "bytes": 685,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/sdk_lifecycle.json",
+      "sha256": "eff9bc80d91f5747329801d3865977cba9e9825d63c01f0ea07f6352e7b139fb"
+    },
+    {
+      "bytes": 699,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/standalone_io.json",
+      "sha256": "9d120fc5bc81957fcd2d4b216d58d0dd38e2cba2b235e9fbaf9c4f6ec1e565a6"
+    },
+    {
+      "bytes": 181,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/environment-lock.txt",
+      "sha256": "c02ba80f6442217b91383cf21a3077b483d21f9fa04ab45027c6a30e922c86e6"
+    },
+    {
+      "bytes": 876,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/profile.json",
+      "sha256": "2547b946754cf86d617ede38b00b0378ab6f7d42399fef88ff70f8789137f5a8"
+    },
+    {
+      "bytes": 1603,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/backend_conformance.json",
+      "sha256": "b7b1808462b34ea04421edaeb1d5bc39c73468f73a16c74e14622a6f2c930d54"
+    },
+    {
+      "bytes": 2325,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/installation.json",
+      "sha256": "24b0860429c930f66c932b6d60327bb3c67eb42cfd2dfc472dbeb5fda01cc382"
+    },
+    {
+      "bytes": 2849,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/linux_recovery.json",
+      "sha256": "f05b2b39b3d81cfb16bd292ed2ea00332a638e6e56eb4ed8c021c036304010e0"
+    },
+    {
+      "bytes": 1295,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/numerical_conformance.json",
+      "sha256": "a1c52ed3947bc499b5d534609ee1f4256246427143f79dbd238f3d5ebd9f503f"
+    },
+    {
+      "bytes": 1897,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/sdk_lifecycle.json",
+      "sha256": "f2169146248bebcb87b2ecfbcbc5c08d1b395d98a89ac84e398e8518ffdeb6ae"
+    },
+    {
+      "bytes": 2606,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/standalone_io.json",
+      "sha256": "cb91a4968cf1c51e3e55424b333181b7407d8827a2fae21b8975d2107b515e06"
+    },
+    {
+      "bytes": 839,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/inputs/runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/configuration.json",
+      "sha256": "d7b54d5ec8b17f68d581f5ddaea3edfac281db78aab4882d88c81d1200bd4a40"
+    },
+    {
+      "bytes": 725,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/inputs/runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/dataset.json",
+      "sha256": "cb92d079f473f63bf999a95849e967b349d898555c05e7d86919751cfd5f6270"
+    },
+    {
+      "bytes": 209,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/inputs/runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/oracle.json",
+      "sha256": "45d78e5cf86ad97b049c9d8d7465ab00de702bf79c9b04ecc1a9b5d8a49d366c"
+    },
+    {
+      "bytes": 853,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/inputs/runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/problem.json",
+      "sha256": "6adea841faf43d8939a52e6429b5a27c18b6e7be7352e675d323261f31647b41"
+    },
+    {
+      "bytes": 1082,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/inputs/runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/suite.json",
+      "sha256": "8497de66d77b7dd23827431ce859401750876552ef4de8403cf774e3043bdb92"
+    },
+    {
+      "bytes": 2768,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/jobs/job000001/attempts/attempt0001/case-request.json",
+      "sha256": "1424609fb46e027808766248990127e34c168dbcc17be7983304a99092bbbaef"
+    },
+    {
+      "bytes": 559,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/jobs/job000001/attempts/attempt0001/child_registration.json",
+      "sha256": "42be1973598db5a174b07f07ae8f8a5aaa77bb7e38702d8fd82d6b32f3bfadde"
+    },
+    {
+      "bytes": 1080304,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/jobs/job000001/attempts/attempt0001/events.jsonl",
+      "sha256": "439a4f9b1420f8922cbee8be994538909f7c87a6315097c47fa80da732f9c51d"
+    },
+    {
+      "bytes": 829,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/jobs/job000001/attempts/attempt0001/launch_intent.json",
+      "sha256": "30787e77e82dbc9c98c618d264897ab4a55fc36a825f89148fc39be447a6319f"
+    },
+    {
+      "bytes": 7650,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/jobs/job000001/attempts/attempt0001/manifest.json",
+      "sha256": "23075f7c4e4f7af791f4fa7fee98dd92fddcea6083146b36bea23742bd04db6b"
+    },
+    {
+      "bytes": 757,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/jobs/job000001/attempts/attempt0001/progress.json",
+      "sha256": "aba8781bb9d826ad7408553397b7c19a5449a63ff85db4497bfe9f8623f1fbd8"
+    },
+    {
+      "bytes": 825110,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/jobs/job000001/attempts/attempt0001/result.json",
+      "sha256": "793a86c8ab09dad645abd3905dad14a30f10ec69bddacd73804b1d39b1398a27"
+    },
+    {
+      "bytes": 721,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/jobs/job000001/attempts/attempt0001/start_grant.json",
+      "sha256": "31fe8231dc53c39278e3fd3c7a83d8e7a6e7add33662dc83c813e55eb983e96a"
+    },
+    {
+      "bytes": 20420,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/materialization_receipt.json",
+      "sha256": "faee67beea6be63d900238916fcc7d0774c5304eb311d1c49b39cc216238b7b5"
+    },
+    {
+      "bytes": 10286,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/plan.json",
+      "sha256": "a163c5a2b5f9fd15bcf3a0616ec2d4f80a8ce0bd930afee8a3431d65f15b976f"
+    },
+    {
+      "bytes": 2416,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/certification.json",
+      "sha256": "fdcaa8844be4a9b947f79cd2bf835239e6be1b0d55437a4428ef88ba752f2bcc"
+    },
+    {
+      "bytes": 699,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/backend_conformance.json",
+      "sha256": "3ac2b2ea82c22a55101dc8d7c0ceaa46690c708dd66638ab8d07cb67fb92d3f3"
+    },
+    {
+      "bytes": 680,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/installation.json",
+      "sha256": "ca1f1a1d5f18aa81005d186ca42891ca766388400903831b2c8a8afd3849a8fa"
+    },
+    {
+      "bytes": 709,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/linux_recovery.json",
+      "sha256": "2a6454182af4a261cb6f6700761805afaee16c9b3aeb65b4119de9f22626ce36"
+    },
+    {
+      "bytes": 702,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/numerical_conformance.json",
+      "sha256": "4f86f9cc8a538d42f63407087319fc137873a88ac406e69a096ef64ef54927d3"
+    },
+    {
+      "bytes": 678,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/sdk_lifecycle.json",
+      "sha256": "b7661fb1f635a0adbe242fbe1ebf867b616aedbf661a301a5471646234dc7aaf"
+    },
+    {
+      "bytes": 692,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/standalone_io.json",
+      "sha256": "a7821b3fd8b4ceb71b117c43331aa95f4cb81ccef5c86d7350804850da04cadf"
+    },
+    {
+      "bytes": 181,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/environment-lock.txt",
+      "sha256": "c02ba80f6442217b91383cf21a3077b483d21f9fa04ab45027c6a30e922c86e6"
+    },
+    {
+      "bytes": 862,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/profile.json",
+      "sha256": "4eb21919ada9d1613bb4e637efe5d9c8628ff88d2ddb9f49fe9c0b3639bb5ecd"
+    },
+    {
+      "bytes": 1603,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/backend_conformance.json",
+      "sha256": "b7b1808462b34ea04421edaeb1d5bc39c73468f73a16c74e14622a6f2c930d54"
+    },
+    {
+      "bytes": 2325,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/installation.json",
+      "sha256": "24b0860429c930f66c932b6d60327bb3c67eb42cfd2dfc472dbeb5fda01cc382"
+    },
+    {
+      "bytes": 2849,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/linux_recovery.json",
+      "sha256": "f05b2b39b3d81cfb16bd292ed2ea00332a638e6e56eb4ed8c021c036304010e0"
+    },
+    {
+      "bytes": 1295,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/numerical_conformance.json",
+      "sha256": "a1c52ed3947bc499b5d534609ee1f4256246427143f79dbd238f3d5ebd9f503f"
+    },
+    {
+      "bytes": 1897,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/sdk_lifecycle.json",
+      "sha256": "f2169146248bebcb87b2ecfbcbc5c08d1b395d98a89ac84e398e8518ffdeb6ae"
+    },
+    {
+      "bytes": 2606,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/standalone_io.json",
+      "sha256": "cb91a4968cf1c51e3e55424b333181b7407d8827a2fae21b8975d2107b515e06"
+    },
+    {
+      "bytes": 839,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/provenance/original/runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/configuration.json",
+      "sha256": "d7b54d5ec8b17f68d581f5ddaea3edfac281db78aab4882d88c81d1200bd4a40"
+    },
+    {
+      "bytes": 819,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/provenance/original/runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/dataset.json",
+      "sha256": "005304994da421900350b2e173daa86d3720c6b3301ec533c9df90f43af3cb1b"
+    },
+    {
+      "bytes": 209,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/provenance/original/runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/oracle.json",
+      "sha256": "45d78e5cf86ad97b049c9d8d7465ab00de702bf79c9b04ecc1a9b5d8a49d366c"
+    },
+    {
+      "bytes": 853,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/provenance/original/runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/problem.json",
+      "sha256": "6adea841faf43d8939a52e6429b5a27c18b6e7be7352e675d323261f31647b41"
+    },
+    {
+      "bytes": 1209,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/provenance/original/runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/suite.json",
+      "sha256": "dd78cf8cf101dac29a2c1fdc784a5f14e3b685fc2f6b5b6e29cc4ecf10b77647"
+    },
+    {
+      "bytes": 1170,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/reports/8b25fb56-6931-5a63-a84c-0bdfdc51fd16/audit.json",
+      "sha256": "ae79609b5a07c3494c9f5a43aa066c1374af2dcbbc06b63010e4ca20b8f1e076"
+    },
+    {
+      "bytes": 1391,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/reports/8b25fb56-6931-5a63-a84c-0bdfdc51fd16/state-snapshot.json",
+      "sha256": "814c6d3595ae5bc20f9c4e3c45662bfdd37244a9b1ec7e5dca8fba49f02e9540"
+    },
+    {
+      "bytes": 3500,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/reports/8b25fb56-6931-5a63-a84c-0bdfdc51fd16/summary.json",
+      "sha256": "6283cb27b524f93709ff7b639b242e5a9979738c1f65485093881310a34378d9"
+    },
+    {
+      "bytes": 325,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/source/build-provenance.json",
+      "sha256": "12fde9ab005f42ea8e40fb9c7f13814149d5a09b3f2f32a6aa83f34c2a1c92c6"
+    },
+    {
+      "bytes": 16558,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/source/inventory.json",
+      "sha256": "09d2a9de41fb870ecace63571141ad71923186a73120dc6cb151b63b0264ae00"
+    },
+    {
+      "bytes": 1391,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native/d7-a5-n1-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-case000056/state.json",
+      "sha256": "814c6d3595ae5bc20f9c4e3c45662bfdd37244a9b1ec7e5dca8fba49f02e9540"
+    }
+  ],
+  "verifier": {
+    "native_package_imported": false,
+    "path": "verify_h3_raw.py",
+    "sha256": "0349526048394d9cd3ff4c19c6d4dfec9837ef4de3f967b53c71ed0b15c9de0f",
+    "standard_library_only": true
+  }
+}

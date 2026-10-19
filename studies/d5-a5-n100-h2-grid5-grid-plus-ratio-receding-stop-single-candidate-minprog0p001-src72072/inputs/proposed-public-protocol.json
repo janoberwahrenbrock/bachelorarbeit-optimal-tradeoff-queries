@@ -1,0 +1,76 @@
+{
+  "alternatives": 5,
+  "budget": {
+    "max_queries": null
+  },
+  "cohort_sha256": "133061ab663f37931e551d101335a3f2ca668e458ad3b41e8d5cb1d72022c519",
+  "dataset_generator": null,
+  "depth": 2,
+  "execution": {
+    "cache_policy_id": "bounded_v1",
+    "case_timeout_seconds": null,
+    "native_threads": 1,
+    "start_method": "forkserver",
+    "workers": 16
+  },
+  "fixed_input_files": true,
+  "grid_size": 5,
+  "inputs": {
+    "configuration.json": {
+      "path": "inputs/studies/d5-a5-n100-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072/configuration.json",
+      "sha256": "a84bdb99799dac80ba1b80ffcc3236680a6c5703217a95f4b778b1dd976b0333"
+    },
+    "dataset.json": {
+      "path": "inputs/studies/d5-a5-n100-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072/dataset.json",
+      "sha256": "66f5a18cae1450091d7a890ec747d7d57efafdc8d40c259eda6143e3fc898aec"
+    },
+    "input-cohort.json": {
+      "path": "inputs/studies/d5-a5-n100-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072/input-cohort.json",
+      "sha256": "46e9a75e47e00a8912d75168c96bb2f28247c01229ba0800bd34ed22d196a2ed"
+    }
+  },
+  "minimum_expected_progress": 0.001,
+  "mode": "receding",
+  "numerical_method": {
+    "numerical_profile_id": "otqa-exact-v3",
+    "numerical_values_sha256": "1374fa8394bffe9b7f84585b29ea2a0b353f105500f28f6b2c6a79fbcec4a56c",
+    "query_generation": {
+      "close_interval_absolute_tolerance": 1e-15,
+      "close_interval_relative_tolerance": 1e-12,
+      "degenerate_interval": "empty",
+      "grid_spacing": "log_interior",
+      "interior_formula": "geomspace(lower, upper, grid_size + 2)[1:-1]",
+      "last_level_query_source": "ratio",
+      "maximum": 20.0,
+      "minimum": 0.05,
+      "ratio_epsilon": 0.001,
+      "state_bounds": "clip fixed limits to existing current-state LP interval",
+      "strict_endpoint_filter": "lower < point < upper"
+    }
+  },
+  "objectives": 5,
+  "planning_evaluation": "candidate_count",
+  "problem_count": 100,
+  "qualification_status": "actual Linux host source/profile qualification required before execution",
+  "query_generator": "grid-plus-ratio",
+  "recording": {
+    "durability": "per_answer",
+    "profile": false,
+    "telemetry_failure_policy": "continue",
+    "trace_level": "standard"
+  },
+  "reference_root": "project_root",
+  "repetitions": 1,
+  "results_status": "No solver, native suite, native plan or qualification has been started by input preparation.",
+  "schema_version": 1,
+  "self_contained_inputs": "Every dataset problem and oracle is stored inside this study input tree; no external dataset dependency.",
+  "source": {
+    "branch": "codex/exact-partition-recovery",
+    "pinned_commit": "62d1d01339f91802e2916b63660a4e640d99c9cc",
+    "source_sha256": "720726607ae451b319e59e01453b6ba69b9950ef42420e700ed6b4eaa5b34d0e",
+    "wheel_sha256": "24e4a5c901690895bdb1557a5a90ef1e9d5f6d3eb06381df58031d8ce02f1a97"
+  },
+  "status": "prepared_not_executed",
+  "stopping_rule": "single_candidate",
+  "study_id": "d5-a5-n100-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072"
+}

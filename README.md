@@ -1,14 +1,28 @@
 # Bachelorarbeit: Optimal Tradeoff Queries
 
-Pythonprojekt zur Untersuchung des Optimal Tradeoff Query Algorithmus mit reproduzierbaren Benchmarkläufen. Das installierbare Paket und das Kommandozeilenprogramm heißen `otqa`.
+Implementierung und veröffentlichte Studien zur Bachelorarbeit über die Identifikation optimaler Handlungsalternativen durch Tradeoff-Queries. Das Pythonpaket und das Kommandozeilenprogramm heißen `otqa`.
 
-## Projektstand
+- [Studien und Rohdaten nach Abschnitten der Bachelorarbeit](studies/README.md)
+- [Zuordnung der Studien zu den Kapiteln als CSV](studies/thesis-map.csv) und [als JSON](studies/catalog.json)
+- [Code der tatsächlich ausgeführten Studien](https://github.com/janoberwahrenbrock/bachelorarbeit-optimal-tradeoff-queries/tree/62d1d01339f91802e2916b63660a4e640d99c9cc)
 
-Der Solver unterstützt feste und adaptive Planung bis Tiefe drei, geometrische Antwortwahrscheinlichkeiten ohne Sampling, Singleton- und Volumenkonfidenzabbruch sowie die Berücksichtigung des Abbruchs in der Planung. Die adaptive Strategie maximiert die erwartete Kandidatenverringerung pro erwarteter Query. Feste Planung unterstützt Neuplanung und Countdown mit einmaliger voller Ersatzplanung. Der Mindestfortschritt pro vollständigem Planungshorizont ist standardmäßig `0.001` und lässt sich ausdrücklich deaktivieren.
+## Code und Studienstand
 
-Die [Studienübersicht](studies/README.md) führt zu den Veröffentlichungen der Bachelorarbeit, den Ergebnissen und den vollständigen Rohdaten. Die Untersuchungen vergleichen Zielzahl, Planungsmodus, Gridgröße, Alternativenzahl, Lookahead-Tiefe und volumenbasierte Abbruchregeln.
+Main enthält den verwendeten Recovery-Code und die **104 aktuellen Studien**. **96 Studien** bilden die Datengrundlage der empirischen Abschnitte 6.2–6.7 der Bachelorarbeit; acht zusätzliche Grid-Vergleiche sind im Katalog gekennzeichnet. Wiederverwendete Probleme und Referenzausführungen werden dort ausdrücklich zugeordnet.
 
-Die Prüfnachweise sind an die jeweilige Paketquelle gebunden. Historische Vergleiche belegen weder automatisch die neue Fortschrittsschwelle noch die neue Countdown-Fallbacksemantik. Den geprüften Umfang und die Grenzen beschreibt [der Implementierungsstatus](docs/implementation-status.md); die [Laufzeitprüfung](docs/performance.md) trennt diese Ergebnisse von einer allgemeinen Laufzeitgarantie.
+Die wissenschaftliche Quellenbindung bleibt fest:
+
+| Merkmal | Wert |
+| --- | --- |
+| Gemessener Codecommit | `62d1d01339f91802e2916b63660a4e640d99c9cc` |
+| Produktionsquellhash SHA256 | `720726607ae451b319e59e01453b6ba69b9950ef42420e700ed6b4eaa5b34d0e` |
+| Numerisches Profil | `otqa-exact-v3` |
+
+Spätere Zusammenführungs- und Dokumentationscommits sind vom gemessenen Codecommit zu unterscheiden. Eingaben, Einzelresultate, Konfigurationen und Quellenbelege liegen in den jeweiligen Studienordnern. Die vollständigen Rohdatenpakete und ihre Prüfsummen stehen in den dort verlinkten GitHub-Releases. GitHubs automatisch erzeugte „Source code“-Archive gehören zum jeweiligen Tag-Commit; für die Reproduktion der Messungen sind der oben verlinkte Codecommit und die eigentlichen Studienpakete maßgeblich.
+
+Der Solver unterstützt feste und adaptive Planung bis Tiefe drei, geometrische Antwortwahrscheinlichkeiten ohne Sampling, Singleton- und Volumenkonfidenzabbruch sowie die Berücksichtigung des Abbruchs in der Planung. Die adaptive Strategie maximiert die erwartete Kandidatenverringerung pro erwarteter Query. Feste Planung unterstützt Neuplanung und Countdown mit einmaliger voller Ersatzplanung. Der Mindestfortschritt beträgt standardmäßig `0.001`.
+
+Regulär ungelöste Fälle, falsche Konfidenzauswahlen und technische Solverfehler bleiben getrennte Ergebnisse. Laufzeitarten und tatsächliche Ausführungsbedingungen sind in den Studienberichten dokumentiert. Der [Implementierungsstatus](docs/implementation-status.md) und die [Laufzeitprüfung](docs/performance.md) beschreiben die Grenzen der technischen Nachweise.
 
 ## Einstieg
 

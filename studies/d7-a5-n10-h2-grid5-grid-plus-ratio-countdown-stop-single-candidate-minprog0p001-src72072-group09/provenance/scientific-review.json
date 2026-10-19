@@ -1,0 +1,326 @@
+{
+  "bindings": {
+    "all_attempts_cost_and_outcome_sha256": "17fc8a9ac1a13fca9c14dca2d42fdc660d88c946b7aff31126ed1f557d5e1e8a",
+    "audit": {
+      "bytes": 3348,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-group09/reports/bcde03e4-68bb-5942-a0d4-c9b518c5cd21/audit.json",
+      "sha256": "7bd1e5abf6fae88360b829065d1c1fc647a986f989940633efe899beafffb242"
+    },
+    "classification_counts": {
+      "correct": 9,
+      "regular_unsolved": 1
+    },
+    "denominators": {
+      "all_attempts": 10,
+      "independent_problems": 10,
+      "primary_cells": 10,
+      "repetitions": 1,
+      "terminal_cells": 10
+    },
+    "input_contract": {
+      "bytes": 2324,
+      "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-group09/provenance/input-contract.json",
+      "sha256": "036c6e87a93d5ffe363dbfcb3fe14309bbbb69b6ed8e4f46bb09b62dfb025b63"
+    },
+    "missing_costs": {
+      "api_seconds": 0,
+      "case_seconds": 0,
+      "controller_seconds": 0
+    },
+    "plan": {
+      "bytes": 26406,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-group09/plan.json",
+      "sha256": "ba60336e1e933f1c0012c6f1530b217a3163d55c18b08867c3cc15a762d611df"
+    },
+    "raw_check": {
+      "bytes": 141135,
+      "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-group09/provenance/raw-check.json",
+      "sha256": "0156794eda1c9679f62b2a6e2ea7f384ef1d2a2cdff6f482888c3787389c5a5b"
+    },
+    "regular_stop_outcomes": [
+      {
+        "attempt_id": "attempt0001",
+        "case_id": "d7-m5-c000084",
+        "classification": "regular_unsolved",
+        "final_candidate_ids": [
+          "a1",
+          "a3"
+        ],
+        "job_id": "job000005",
+        "journal": {
+          "bytes": 108929,
+          "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-group09/jobs/job000005/attempts/attempt0001/events.jsonl",
+          "sha256": "dbab519376035e9fc5d70c36c94119d7f03ffa31d8d5702fb1b29ff0b4a2cf83"
+        },
+        "min_expected_progress": 0.001,
+        "queries": 2,
+        "result": {
+          "bytes": 77904,
+          "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-group09/jobs/job000005/attempts/attempt0001/result.json",
+          "sha256": "28d3755848fe5c09e52003032861ccf0272afce82a73da25a205a720e9342425"
+        },
+        "source": {
+          "dirty": false,
+          "git_commit": "62d1d01339f91802e2916b63660a4e640d99c9cc",
+          "inventory_format": "otqa-source-v1",
+          "source_sha256": "720726607ae451b319e59e01453b6ba69b9950ef42420e700ed6b4eaa5b34d0e",
+          "version": "0.2.0"
+        },
+        "status": "completed",
+        "termination_reason": "insufficient_expected_progress"
+      }
+    ],
+    "report_files": {
+      "attempts.csv": {
+        "bytes": 6001,
+        "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-group09/results/attempts.csv",
+        "sha256": "65987ec3a66b83a8a99ef2888d5c8b173a6f7e411f691dbe765fbf5cc666cb33"
+      },
+      "report.md": {
+        "bytes": 3048,
+        "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-group09/results/report.md",
+        "sha256": "850b0df562322608c8801f03232a92f7aca07d0b5c0161dbd349f1d7fd36c123"
+      },
+      "results.csv": {
+        "bytes": 6945,
+        "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-group09/results/results.csv",
+        "sha256": "d0b9eee0290747c3ae9599380091397b20698bb428bb6a4b115fbf1c940a6427"
+      },
+      "results.json": {
+        "bytes": 130133,
+        "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-group09/results/results.json",
+        "sha256": "30f55d9a8b863949c313374a1fceddbe5e2086a6583dd518bc4983b2aece5056"
+      }
+    },
+    "required_diagnosis_subjects": [],
+    "schema_version": 1,
+    "series_id": "caa1e057-b40a-4c42-95ae-d96ad9169b2a",
+    "source": {
+      "dirty": false,
+      "git_commit": "62d1d01339f91802e2916b63660a4e640d99c9cc",
+      "inventory_format": "otqa-source-v1",
+      "source_sha256": "720726607ae451b319e59e01453b6ba69b9950ef42420e700ed6b4eaa5b34d0e",
+      "version": "0.2.0"
+    },
+    "state": {
+      "bytes": 11355,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-group09/state.json",
+      "sha256": "0143aeffbba6a9202fa1c5e6c6cafa6c44606ffa5b056642f735d58a772cafb6"
+    },
+    "study_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-group09",
+    "tool_files": {
+      "raw_checker": {
+        "bytes": 78257,
+        "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-group09/reproduction/verify_study_raw.py",
+        "sha256": "f84ec9771d07f44f427816edbb0302d3b14c8d98440eb28bd79c2bbd2e97594f"
+      },
+      "reporter": {
+        "bytes": 29756,
+        "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-group09/reproduction/single_study_report.py",
+        "sha256": "618cc5fc631f1bfdd04fbfe2ffd752b8f18f8aaacda33600522a7bd6bbce7f79"
+      }
+    }
+  },
+  "created_at_utc": "2026-10-18T00:44:12.920257+00:00",
+  "diagnoses": [],
+  "limits": [
+    "This accepts only this configuration and its original independent problem denominator; regular unresolved outcomes remain separate from solved cases.",
+    "Every preserved actual answer and actual-weight utility winner was checked with exact Fraction interpretations of binary64 inputs.",
+    "Recorded geometric volumes, hypothetical regions/branches and query-inventory completeness/global optimality were not independently recertified.",
+    "Ordinary stops match their saved inventory and strict0.001 threshold; a different or deeper query inventory can behave differently.",
+    "Observed execution costs belong to the recorded host/session; no isolated causal runtime or Hyper-Threading guarantee is inferred.",
+    "Final fresh archive acceptance, scientific overall completion, staging publication and actual public download validation remain separate gates."
+  ],
+  "passed": true,
+  "private_supplementary_review_evidence_sha256": "ef0a4a5ffc907e2cafc152175488c7af833bbc9ec825df7fc046439765645ea5",
+  "publication_completion": false,
+  "reviewer": "/root/sixth_host_launch_review",
+  "schema_version": 1,
+  "scientific_completion": false,
+  "scope_evidence": {
+    "actual_answers_and_winners": {
+      "actual_weight_winner_retained_in_observed_states": true,
+      "classification_counts": {
+        "correct": 9,
+        "regular_unsolved": 1
+      },
+      "exact_binary64_fraction_answers": 158,
+      "independent_utility_winner_sets": 10
+    },
+    "all_terminal_outcomes_and_missing_costs": {
+      "classification_counts": {
+        "correct": 9,
+        "regular_unsolved": 1
+      },
+      "completed": 10,
+      "each_api_case_controller_cost_crosschecked": true,
+      "failed": 0,
+      "interrupted": 0,
+      "missing_costs": {
+        "api_seconds": 0,
+        "case_seconds": 0,
+        "controller_seconds": 0
+      },
+      "one_actual_api_duration_per_primary_cell": true,
+      "outlier_case_ids": [],
+      "unavailable_phase_timings_preserved_as_null": true
+    },
+    "independent_reporter_and_raw_checker_reviews": {
+      "fresh_raw_replay_matched": true,
+      "public_attestations_checked": 2,
+      "separate_fresh_extracted_package_report_reproduction_passed": true
+    },
+    "journal_cursor_progress_and_all_attempts": {
+      "actual_mode": "countdown",
+      "all_actual_horizons_and_answer_cursors_checked": true,
+      "all_attempts": 10,
+      "countdown_decrement_reset_checked_when_applicable": true,
+      "extra_or_orphan_attempts": 0,
+      "independent_problems": 10,
+      "primary_cells": 10,
+      "repetitions": 1
+    },
+    "native_audit_json_csv_same_snapshot": {
+      "all_snapshot_bindings_match": true,
+      "audit_reexecuted": false,
+      "existing_native_audits": 1,
+      "native_groups": 1,
+      "native_result_rows": 10,
+      "own_controller_provenance_snapshot_correction": {
+        "actual_new_selected_original_hash_gate_passed": true,
+        "all_other_remote_original_bytes_unchanged": true,
+        "bound_native_controller_exit": {
+          "bytes": 17816,
+          "sha256": "dc919ae4928364afbdea8fc8aa2225c1688dac80cdd3b3d754e4c2e48bc92da2"
+        },
+        "corrected_stdout": {
+          "bytes": 11808,
+          "sha256": "d07d142090acca94280bf8fed920b82f057cfe9a9d054f45375acfd390c680b2"
+        },
+        "derived_package_attempt": 2,
+        "existing_f84_171_and_reporter_117_readsets_unchanged": true,
+        "new_solver_attempts": 0,
+        "old_provisional_manifest_sha256_preserved": "01e6ca02d7bb12234d84779c522f3f234345ceb6d9c74987bf8b0767da07a0f4",
+        "old_stdout_bytes": 0,
+        "old_stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "only_added_original_control_file": "controller-exited.json",
+        "only_changed_original_control_file": "native-stdout.log",
+        "original_native_results_and_audit_unchanged": true,
+        "own_old_provisional_archive_sha256_preserved": "9f6ba4e39b46272c50f028d13d14d4a8388dd8bba001f4324e273762f131c40a",
+        "reason": "The earlier controller-provenance mirror preceded native controller exit; its terminal stdout and bound exit receipt were preserved later. Native scientific result bytes were unchanged.",
+        "unselected_audit_intent_imported": false
+      }
+    },
+    "source_and_frozen_inputs": {
+      "algorithm": {
+        "depth": 2,
+        "grid_size": 5,
+        "higher_depth_query_source": "both",
+        "horizon_execution": "countdown",
+        "min_expected_progress": 0.001,
+        "planning_evaluation": "candidate_count",
+        "query_strategy": "fixed",
+        "stopping": {
+          "rule": "single_candidate"
+        }
+      },
+      "alternatives": 5,
+      "execution": {
+        "cache_policy_id": "bounded_v1",
+        "case_timeout_seconds": null,
+        "native_threads": 1,
+        "start_method": "forkserver",
+        "workers": 16
+      },
+      "full_original_matrices_and_preference_vectors_checked": 10,
+      "numerical_values_sha256": "1374fa8394bffe9b7f84585b29ea2a0b353f105500f28f6b2c6a79fbcec4a56c",
+      "objectives": 7,
+      "original_and_materialized_input_contract_checked": true,
+      "wheel_source_inventory_files_checked": 128
+    },
+    "valid_regular_stops_and_exception_diagnoses": {
+      "exception_diagnoses_required": 0,
+      "ordinary_stops_counted_as_solved": false,
+      "ordinary_stops_counted_as_solver_errors": false,
+      "ordinary_threshold_stop_cases": [
+        {
+          "case_id": "d7-m5-c000084",
+          "exception_or_interruption": false,
+          "final_candidate_ids": [
+            "a1",
+            "a3"
+          ],
+          "hypothetical_geometry_or_global_inventory_recertified": false,
+          "independent_true_winner_ids": [
+            "a3"
+          ],
+          "job_id": "job000005",
+          "ordinary_policy_stop": true,
+          "queries": 2,
+          "recorded_horizon_evidence": [
+            {
+              "best_progress": {
+                "admissible": false,
+                "basis": "candidate_count",
+                "comparison": "strict_greater",
+                "expected_progress": 4.440892098500626e-16,
+                "expected_terminal_value": 1.9999999999999996,
+                "starting_value": 2.0,
+                "threshold": 0.001
+              },
+              "evaluated_queries": 107,
+              "generated_queries": 107,
+              "horizon": 2,
+              "outcome": "insufficient_expected_progress"
+            }
+          ],
+          "termination_reason": "insufficient_expected_progress"
+        }
+      ]
+    }
+  },
+  "scopes_checked": [
+    "actual_answers_and_winners",
+    "all_terminal_outcomes_and_missing_costs",
+    "independent_reporter_and_raw_checker_reviews",
+    "journal_cursor_progress_and_all_attempts",
+    "native_audit_json_csv_same_snapshot",
+    "source_and_frozen_inputs",
+    "valid_regular_stops_and_exception_diagnoses"
+  ],
+  "separate_original_host_byte_gate_checked_for_consistency": {
+    "bytes": 1056953,
+    "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/selected-remote-hash-gates/two-control-attempt02-e6f1edf1f5b049f9bbe288a8b4abcf72-20261018T004252.070208Z/gate-proof.json",
+    "sha256": "1f2d6662b0e78b69603b69c31d09d41646539e79338559f985748ee85cc6b708"
+  },
+  "separate_original_host_origin_selection_sha256": "e223a6913aa3740b45fc362116b924aa551db22e5af8256c2692c9337907de5c",
+  "status": "independent_scientific_content_review_pass",
+  "study_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-countdown-stop-single-candidate-minprog0p001-src72072-group09",
+  "tool_reviews": {
+    "raw_checker": {
+      "artifact": {
+        "bytes": 1665,
+        "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/public-tool-review-attestations/20261017T230741.274312Z/raw_checker.json",
+        "sha256": "834a441553e4aa88e3070d0c791b986be1d371222f46f33a9780855b43dd3bf8"
+      },
+      "passed": true,
+      "reviewer": "/root/ht_study_design",
+      "scope": "Independent source and saved-output validation for full input/source/attempt/cost/Fraction/journal/cursor/export/CSV correctness.",
+      "tool_sha256": "f84ec9771d07f44f427816edbb0302d3b14c8d98440eb28bd79c2bbd2e97594f",
+      "unresolved_issues": []
+    },
+    "reporter": {
+      "artifact": {
+        "bytes": 1565,
+        "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/public-tool-review-attestations/20261017T230741.274312Z/reporter.json",
+        "sha256": "8c2f5e200b439fdc2e00437ccb8b2219db521dc2fdfa51d6b0db9fff46fe1290"
+      },
+      "passed": true,
+      "reviewer": "/root/ht_study_design",
+      "scope": "Independent source and saved-output validation for full input/source/attempt/cost/Fraction/journal/cursor/export/CSV correctness.",
+      "tool_sha256": "618cc5fc631f1bfdd04fbfe2ffd752b8f18f8aaacda33600522a7bd6bbce7f79",
+      "unresolved_issues": []
+    }
+  },
+  "unresolved_issues": []
+}

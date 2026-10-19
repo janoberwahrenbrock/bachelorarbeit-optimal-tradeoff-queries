@@ -1,0 +1,233 @@
+{
+  "bindings": {
+    "all_attempts_cost_and_outcome_sha256": "65a05df126a647d8451dfdd956ca3c186394f9d24b03ec1fd4ec092b8b7ae602",
+    "audit": {
+      "bytes": 3348,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group08/reports/8281af35-da16-5063-8158-2ac4fa6e8982/audit.json",
+      "sha256": "b22beca85b20891224ea4d9243791e6f7fc9f8af75a82035fc53e549cad5a4f9"
+    },
+    "classification_counts": {
+      "correct": 10
+    },
+    "denominators": {
+      "all_attempts": 10,
+      "independent_problems": 10,
+      "primary_cells": 10,
+      "repetitions": 1,
+      "terminal_cells": 10
+    },
+    "input_contract": {
+      "bytes": 2319,
+      "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group08/provenance/input-contract.json",
+      "sha256": "64b237d2c743e884ee95e5f17faf6f34e862e03485552d4abbcdb2c3f1656435"
+    },
+    "missing_costs": {
+      "api_seconds": 0,
+      "case_seconds": 0,
+      "controller_seconds": 0
+    },
+    "plan": {
+      "bytes": 26316,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group08/plan.json",
+      "sha256": "ef60557ffe286dbe208190b49f11ab3a5e314fefb6e495bb393da1bde71ef604"
+    },
+    "raw_check": {
+      "bytes": 141485,
+      "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group08/provenance/raw-check.json",
+      "sha256": "0db66e395ad0fd11d8ceed7e40e3fb433e68388aa4de7bb73b56d593b35894ac"
+    },
+    "regular_stop_outcomes": [],
+    "report_files": {
+      "attempts.csv": {
+        "bytes": 5969,
+        "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group08/results/attempts.csv",
+        "sha256": "b869e952ee295e508f022ca7145898f62fd90191bd1fb624975353bc38058b6a"
+      },
+      "report.md": {
+        "bytes": 3033,
+        "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group08/results/report.md",
+        "sha256": "7c3cea029cb18ff8683338e8c0c234f38c279684662ed81c18c33b3a092e1b0c"
+      },
+      "results.csv": {
+        "bytes": 6892,
+        "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group08/results/results.csv",
+        "sha256": "6782e0db5ca626bbaf96c8203bce8cc0e8f0aea36b33c03262b933921e73aca8"
+      },
+      "results.json": {
+        "bytes": 129505,
+        "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group08/results/results.json",
+        "sha256": "1326f6d8622b21d724c1b271ff0acc1d0120231b4a62d20a783b10ce54c00c34"
+      }
+    },
+    "required_diagnosis_subjects": [],
+    "schema_version": 1,
+    "series_id": "54a19bb9-54b7-4677-b4d7-148ee15a42da",
+    "source": {
+      "dirty": false,
+      "git_commit": "62d1d01339f91802e2916b63660a4e640d99c9cc",
+      "inventory_format": "otqa-source-v1",
+      "source_sha256": "720726607ae451b319e59e01453b6ba69b9950ef42420e700ed6b4eaa5b34d0e",
+      "version": "0.2.0"
+    },
+    "state": {
+      "bytes": 11357,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group08/state.json",
+      "sha256": "f7689f1d49aa8d5fdd4d1ef7bcee893d84bce3a617b60bf32b6822d85f742e0e"
+    },
+    "study_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group08",
+    "tool_files": {
+      "raw_checker": {
+        "bytes": 78257,
+        "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group08/reproduction/verify_study_raw.py",
+        "sha256": "f84ec9771d07f44f427816edbb0302d3b14c8d98440eb28bd79c2bbd2e97594f"
+      },
+      "reporter": {
+        "bytes": 29756,
+        "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group08/reproduction/single_study_report.py",
+        "sha256": "618cc5fc631f1bfdd04fbfe2ffd752b8f18f8aaacda33600522a7bd6bbce7f79"
+      }
+    }
+  },
+  "created_at_utc": "2026-10-18T00:00:33.150729+00:00",
+  "diagnoses": [],
+  "limits": [
+    "This accepts only this configuration and its original independent problem denominator; regular unresolved outcomes remain separate from solved cases.",
+    "Every preserved actual answer and actual-weight utility winner was checked with exact Fraction interpretations of binary64 inputs.",
+    "Recorded geometric volumes, hypothetical regions/branches and query-inventory completeness/global optimality were not independently recertified.",
+    "Ordinary stops match their saved inventory and strict0.001 threshold; a different or deeper query inventory can behave differently.",
+    "Observed execution costs belong to the recorded host/session; no isolated causal runtime or Hyper-Threading guarantee is inferred.",
+    "Final fresh archive acceptance, scientific overall completion, staging publication and actual public download validation remain separate gates."
+  ],
+  "passed": true,
+  "private_supplementary_review_evidence_sha256": "10623f59827fd15cb222f72d8a3a15d025392ac428d15a2bbff172f2c71a22d8",
+  "publication_completion": false,
+  "reviewer": "/root/sixth_host_launch_review",
+  "schema_version": 1,
+  "scientific_completion": false,
+  "scope_evidence": {
+    "actual_answers_and_winners": {
+      "actual_weight_winner_retained_in_observed_states": true,
+      "classification_counts": {
+        "correct": 10
+      },
+      "exact_binary64_fraction_answers": 164,
+      "independent_utility_winner_sets": 10
+    },
+    "all_terminal_outcomes_and_missing_costs": {
+      "classification_counts": {
+        "correct": 10
+      },
+      "completed": 10,
+      "each_api_case_controller_cost_crosschecked": true,
+      "failed": 0,
+      "interrupted": 0,
+      "missing_costs": {
+        "api_seconds": 0,
+        "case_seconds": 0,
+        "controller_seconds": 0
+      },
+      "one_actual_api_duration_per_primary_cell": true,
+      "outlier_case_ids": [],
+      "unavailable_phase_timings_preserved_as_null": true
+    },
+    "independent_reporter_and_raw_checker_reviews": {
+      "fresh_raw_replay_matched": true,
+      "public_attestations_checked": 2,
+      "separate_fresh_extracted_package_report_reproduction_passed": true
+    },
+    "journal_cursor_progress_and_all_attempts": {
+      "actual_mode": "receding",
+      "all_actual_horizons_and_answer_cursors_checked": true,
+      "all_attempts": 10,
+      "countdown_decrement_reset_checked_when_applicable": true,
+      "extra_or_orphan_attempts": 0,
+      "independent_problems": 10,
+      "primary_cells": 10,
+      "repetitions": 1
+    },
+    "native_audit_json_csv_same_snapshot": {
+      "all_snapshot_bindings_match": true,
+      "audit_reexecuted": false,
+      "existing_native_audits": 1,
+      "native_groups": 1,
+      "native_result_rows": 10
+    },
+    "source_and_frozen_inputs": {
+      "algorithm": {
+        "depth": 2,
+        "grid_size": 5,
+        "higher_depth_query_source": "both",
+        "horizon_execution": "receding",
+        "min_expected_progress": 0.001,
+        "planning_evaluation": "candidate_count",
+        "query_strategy": "fixed",
+        "stopping": {
+          "rule": "single_candidate"
+        }
+      },
+      "alternatives": 5,
+      "execution": {
+        "cache_policy_id": "bounded_v1",
+        "case_timeout_seconds": null,
+        "native_threads": 1,
+        "start_method": "forkserver",
+        "workers": 16
+      },
+      "full_original_matrices_and_preference_vectors_checked": 10,
+      "numerical_values_sha256": "1374fa8394bffe9b7f84585b29ea2a0b353f105500f28f6b2c6a79fbcec4a56c",
+      "objectives": 7,
+      "original_and_materialized_input_contract_checked": true,
+      "wheel_source_inventory_files_checked": 128
+    },
+    "valid_regular_stops_and_exception_diagnoses": {
+      "exception_diagnoses_required": 0,
+      "ordinary_stops_counted_as_solved": false,
+      "ordinary_stops_counted_as_solver_errors": false,
+      "ordinary_threshold_stop_cases": []
+    }
+  },
+  "scopes_checked": [
+    "actual_answers_and_winners",
+    "all_terminal_outcomes_and_missing_costs",
+    "independent_reporter_and_raw_checker_reviews",
+    "journal_cursor_progress_and_all_attempts",
+    "native_audit_json_csv_same_snapshot",
+    "source_and_frozen_inputs",
+    "valid_regular_stops_and_exception_diagnoses"
+  ],
+  "separate_original_host_byte_gate_checked_for_consistency": {
+    "bytes": 1053315,
+    "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/selected-remote-hash-gates/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group08-20261018T000031.346720Z/gate-proof.json",
+    "sha256": "9807ebc7d04d0e5617f79a6fcf7f2d063ae03a7c8fbd4c6cb79982290c34f747"
+  },
+  "separate_original_host_origin_selection_sha256": "27b90faeedc17ca15377ca4c6708258a52c2d964ed9d6b418b038eabefe4c2ff",
+  "status": "independent_scientific_content_review_pass",
+  "study_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group08",
+  "tool_reviews": {
+    "raw_checker": {
+      "artifact": {
+        "bytes": 1665,
+        "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/public-tool-review-attestations/20261017T230741.274312Z/raw_checker.json",
+        "sha256": "834a441553e4aa88e3070d0c791b986be1d371222f46f33a9780855b43dd3bf8"
+      },
+      "passed": true,
+      "reviewer": "/root/ht_study_design",
+      "scope": "Independent source and saved-output validation for full input/source/attempt/cost/Fraction/journal/cursor/export/CSV correctness.",
+      "tool_sha256": "f84ec9771d07f44f427816edbb0302d3b14c8d98440eb28bd79c2bbd2e97594f",
+      "unresolved_issues": []
+    },
+    "reporter": {
+      "artifact": {
+        "bytes": 1565,
+        "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/public-tool-review-attestations/20261017T230741.274312Z/reporter.json",
+        "sha256": "8c2f5e200b439fdc2e00437ccb8b2219db521dc2fdfa51d6b0db9fff46fe1290"
+      },
+      "passed": true,
+      "reviewer": "/root/ht_study_design",
+      "scope": "Independent source and saved-output validation for full input/source/attempt/cost/Fraction/journal/cursor/export/CSV correctness.",
+      "tool_sha256": "618cc5fc631f1bfdd04fbfe2ffd752b8f18f8aaacda33600522a7bd6bbce7f79",
+      "unresolved_issues": []
+    }
+  },
+  "unresolved_issues": []
+}
