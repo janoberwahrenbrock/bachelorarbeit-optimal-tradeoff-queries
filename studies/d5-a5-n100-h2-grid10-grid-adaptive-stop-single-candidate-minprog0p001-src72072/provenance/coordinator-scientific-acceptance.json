@@ -1,0 +1,86 @@
+{
+  "checks": [
+    "all_outcomes_attempts_costs_and_diagnoses",
+    "final_archive_manifest_and_fresh_offline_reproduction",
+    "independent_raw_report_and_tools",
+    "remote_originals_and_stable_mac_selection",
+    "source_inputs_profile_audit_and_terminal_denominators"
+  ],
+  "coordinator_scope_review_sha256": "8efd80b6a520b7c3e07f2e46b24e190aab7a5294831096eb4e1a6d8e25b49202",
+  "created_at_utc": "2026-10-18T02:05:06.564623+00:00",
+  "denominators": {
+    "all_attempts": 100,
+    "correct": 100,
+    "failed": 0,
+    "incorrect": 0,
+    "independent_problems": 100,
+    "interrupted": 0,
+    "missing_controller_costs": 0,
+    "primary_cells": 100,
+    "regular_unsolved": 0
+  },
+  "independent_final_review": {
+    "bytes": 3994,
+    "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/independent-final-package-review-batch-20261018T004150.419938Z/d5-a5-n100-h2-grid10-grid-adaptive-stop-single-candidate-minprog0p001-src72072/review.json",
+    "sha256": "99960777c9476d3440958c6c47c89d38c2fedaee883920490c7317097225834c"
+  },
+  "notes": [
+    "Root accepted the exact reviewed subject scope; publication/download remain separate gates."
+  ],
+  "package": {
+    "archive": {
+      "bytes": 62325817,
+      "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/final-publication/d5-a5-n100-h2-grid10-grid-adaptive-stop-single-candidate-minprog0p001-src72072/20261018T004141.855736Z/d5-a5-n100-h2-grid10-grid-adaptive-stop-single-candidate-minprog0p001-src72072-v1.zip",
+      "sha256": "aee1b9861207441e7bd6b21d883eb83457750225c1780d7ca8532774bebe8fa5"
+    },
+    "checksums": {
+      "bytes": 334,
+      "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/final-publication/d5-a5-n100-h2-grid10-grid-adaptive-stop-single-candidate-minprog0p001-src72072/20261018T004141.855736Z/SHA256SUMS",
+      "sha256": "fe5a189f30d639c3258a602ecefde3db376cf1cebcb0c110dfe18dc355aab86a"
+    },
+    "manifest": {
+      "bytes": 1626387,
+      "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/final-publication/d5-a5-n100-h2-grid10-grid-adaptive-stop-single-candidate-minprog0p001-src72072/20261018T004141.855736Z/publication-manifest.json",
+      "sha256": "98d2f1ef050b52f253bd6998881b2ca825683b14f961aebd4262a17dd76d7bed"
+    },
+    "validation": {
+      "bytes": 3909,
+      "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/final-publication/d5-a5-n100-h2-grid10-grid-adaptive-stop-single-candidate-minprog0p001-src72072/20261018T004141.855736Z/package-validation.json",
+      "sha256": "019d01fd9ec64a16606e5d81e752cc73c8fabf1974e97ac0fe5157890e53192e"
+    }
+  },
+  "passed": true,
+  "public_artifact_locations": {
+    "independent_final_review": {
+      "original": {
+        "bytes": 3994,
+        "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/independent-final-package-review-batch-20261018T004150.419938Z/d5-a5-n100-h2-grid10-grid-adaptive-stop-single-candidate-minprog0p001-src72072/review.json",
+        "sha256": "99960777c9476d3440958c6c47c89d38c2fedaee883920490c7317097225834c"
+      },
+      "public_path": "studies/d5-a5-n100-h2-grid10-grid-adaptive-stop-single-candidate-minprog0p001-src72072/provenance/independent-final-package-review.json"
+    },
+    "offline_verification": {
+      "original": {
+        "bytes": 1088,
+        "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/final-publication/d5-a5-n100-h2-grid10-grid-adaptive-stop-single-candidate-minprog0p001-src72072/20261018T004141.855736Z/fresh-offline-analysis/reproduction-verification.json",
+        "sha256": "0f3220d691bc0a9bc553e5e87be9ccb28f75a7f7cce01b21c389599cf372597b"
+      },
+      "public_path": "studies/d5-a5-n100-h2-grid10-grid-adaptive-stop-single-candidate-minprog0p001-src72072/provenance/final-offline-verification.json"
+    }
+  },
+  "publication_commit": null,
+  "publication_completion": false,
+  "reviewer": "/root",
+  "root_scope_subjects_sha256": "ae75942a11cd4673b7dfb8b6bded6c6c3aa4a6d0eb55bd917ff64fc60f08c8a5",
+  "schema_version": 1,
+  "source": {
+    "dirty": false,
+    "git_commit": "62d1d01339f91802e2916b63660a4e640d99c9cc",
+    "inventory_format": "otqa-source-v1",
+    "source_sha256": "720726607ae451b319e59e01453b6ba69b9950ef42420e700ed6b4eaa5b34d0e",
+    "version": "0.2.0"
+  },
+  "status": "coordinator_scientific_package_accepted",
+  "study_id": "d5-a5-n100-h2-grid10-grid-adaptive-stop-single-candidate-minprog0p001-src72072",
+  "unresolved_issues": []
+}

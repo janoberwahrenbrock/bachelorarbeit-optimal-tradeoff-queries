@@ -1,0 +1,1576 @@
+{
+  "CPU_core_seconds": null,
+  "answers": 154,
+  "case_ids": [
+    "d5-m5-c000080",
+    "d5-m5-c000081",
+    "d5-m5-c000082",
+    "d5-m5-c000083",
+    "d5-m5-c000084",
+    "d5-m5-c000085",
+    "d5-m5-c000086",
+    "d5-m5-c000087",
+    "d5-m5-c000088",
+    "d5-m5-c000089",
+    "d5-m5-c000090",
+    "d5-m5-c000091",
+    "d5-m5-c000092",
+    "d5-m5-c000093",
+    "d5-m5-c000094",
+    "d5-m5-c000095",
+    "d5-m5-c000096",
+    "d5-m5-c000097",
+    "d5-m5-c000098",
+    "d5-m5-c000099"
+  ],
+  "cohort_sha256": "133061ab663f37931e551d101335a3f2ca668e458ad3b41e8d5cb1d72022c519",
+  "condition": {
+    "condition_key": "candidate_count-volume-confidence-099",
+    "confidence_threshold": 0.99,
+    "partition_id": "b05",
+    "planning_evaluation": "candidate_count"
+  },
+  "costs_separate": {
+    "API_seconds": {
+      "complete_total": 64.63958461399307,
+      "known_sum": 64.63958461399307,
+      "unknown_count": 0
+    },
+    "case_seconds": {
+      "complete_total": 71.84575747998315,
+      "known_sum": 71.84575747998315,
+      "unknown_count": 0
+    },
+    "controller_seconds": {
+      "complete_total": 77.01403116786969,
+      "known_sum": 77.01403116786969,
+      "unknown_count": 0
+    }
+  },
+  "counts": {
+    "correct": 20,
+    "regular_unsolved": 0,
+    "solver_errors": 0,
+    "wrong_confident": 0
+  },
+  "historical_baseline_is_context_not_new_data": true,
+  "new_scientific_credit": 0,
+  "primary_attempts": 20,
+  "primary_cases": 20,
+  "rows": [
+    {
+      "API_seconds": 2.910779541998636,
+      "accepted_answers": [
+        {
+          "a": 2,
+          "answer": "<",
+          "b": 4,
+          "value_hex": "0x1.9ff5bbdb4a951p+1"
+        },
+        {
+          "a": 3,
+          "answer": "<",
+          "b": 4,
+          "value_hex": "0x1.bdbd343d7872dp+0"
+        },
+        {
+          "a": 0,
+          "answer": "<",
+          "b": 2,
+          "value_hex": "0x1.0000000000000p+0"
+        },
+        {
+          "a": 1,
+          "answer": "<",
+          "b": 4,
+          "value_hex": "0x1.e1c4403e724bap+0"
+        },
+        {
+          "a": 0,
+          "answer": "<",
+          "b": 2,
+          "value_hex": "0x1.36c3c0e82123ep-1"
+        },
+        {
+          "a": 3,
+          "answer": "<",
+          "b": 1,
+          "value_hex": "0x1.c3697f8ac7acfp+1"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 2,
+          "value_hex": "0x1.0e6f999657c23p-2"
+        },
+        {
+          "a": 1,
+          "answer": ">",
+          "b": 2,
+          "value_hex": "0x1.0000000000000p+0"
+        },
+        {
+          "a": 4,
+          "answer": "<",
+          "b": 1,
+          "value_hex": "0x1.8185fbdfac610p+0"
+        }
+      ],
+      "achieved_model_confidence": 1.0,
+      "case_id": "d5-m5-c000080",
+      "case_seconds": 3.2687413610110525,
+      "controller_seconds": 3.53744631097652,
+      "journal": {
+        "bytes": 817467,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000001/attempts/attempt0001/events.jsonl",
+        "sha256": "da7e98617cbfce378b0db6811e453ddb0e6b3d9e092364504e6cbd61675ba2ea"
+      },
+      "quality": "correct",
+      "queries": 9,
+      "remaining_K": 1,
+      "result": {
+        "bytes": 621946,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000001/attempts/attempt0001/result.json",
+        "sha256": "a02c0094d6f052aa83fd39afd159be1e14caffff5cd48ce904c82b1a777d66da"
+      },
+      "run_id": "1f249403-b117-4bb2-a37f-2855e33731d1",
+      "selected": "a3",
+      "solved": true,
+      "termination_reason": "exact_single_candidate",
+      "true_winner_ids": [
+        "a3"
+      ]
+    },
+    {
+      "API_seconds": 2.1423470430017915,
+      "accepted_answers": [
+        {
+          "a": 2,
+          "answer": "<",
+          "b": 3,
+          "value_hex": "0x1.1b80069bcc15bp+1"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 2,
+          "value_hex": "0x1.793eace1a3426p-2"
+        },
+        {
+          "a": 1,
+          "answer": "<",
+          "b": 4,
+          "value_hex": "0x1.55159b7f5eaebp+0"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 2,
+          "value_hex": "0x1.4bcfd013fe26cp+0"
+        },
+        {
+          "a": 1,
+          "answer": "<",
+          "b": 4,
+          "value_hex": "0x1.8ab6f11a031f2p-1"
+        },
+        {
+          "a": 0,
+          "answer": "<",
+          "b": 4,
+          "value_hex": "0x1.ac41529ffad2cp+0"
+        }
+      ],
+      "achieved_model_confidence": 1.0,
+      "case_id": "d5-m5-c000081",
+      "case_seconds": 2.4758196139882784,
+      "controller_seconds": 2.6989657359954435,
+      "journal": {
+        "bytes": 535684,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000002/attempts/attempt0001/events.jsonl",
+        "sha256": "0077f683cf23f63d3f6bbadde5f26d9f69e107b3aed50697cec67333095e60ed"
+      },
+      "quality": "correct",
+      "queries": 6,
+      "remaining_K": 1,
+      "result": {
+        "bytes": 407556,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000002/attempts/attempt0001/result.json",
+        "sha256": "b2dd23c375954f82619e9613c087261604ce16c428f04c7124bb7aa3dac28752"
+      },
+      "run_id": "ed51f367-cb61-435d-82ec-aafd9f8428ab",
+      "selected": "a2",
+      "solved": true,
+      "termination_reason": "exact_single_candidate",
+      "true_winner_ids": [
+        "a2"
+      ]
+    },
+    {
+      "API_seconds": 2.6026533890108112,
+      "accepted_answers": [
+        {
+          "a": 4,
+          "answer": ">",
+          "b": 3,
+          "value_hex": "0x1.3a1c1e9dc1cebp+1"
+        },
+        {
+          "a": 4,
+          "answer": ">",
+          "b": 0,
+          "value_hex": "0x1.6392c404a8bb0p+0"
+        },
+        {
+          "a": 2,
+          "answer": ">",
+          "b": 4,
+          "value_hex": "0x1.793eace1a3426p-2"
+        },
+        {
+          "a": 4,
+          "answer": "<",
+          "b": 2,
+          "value_hex": "0x1.5f8a518e70bb7p+0"
+        },
+        {
+          "a": 4,
+          "answer": ">",
+          "b": 1,
+          "value_hex": "0x1.608184d6b489bp+0"
+        },
+        {
+          "a": 2,
+          "answer": ">",
+          "b": 4,
+          "value_hex": "0x1.b1bad891e35c3p+0"
+        }
+      ],
+      "achieved_model_confidence": 1.0,
+      "case_id": "d5-m5-c000082",
+      "case_seconds": 2.939372936001746,
+      "controller_seconds": 3.177833648980595,
+      "journal": {
+        "bytes": 563906,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000003/attempts/attempt0001/events.jsonl",
+        "sha256": "bf35a098577d587e38a2e24a60ab7b3e7489f914813a020d73ce7976d63b71ab"
+      },
+      "quality": "correct",
+      "queries": 6,
+      "remaining_K": 1,
+      "result": {
+        "bytes": 429515,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000003/attempts/attempt0001/result.json",
+        "sha256": "425e32c2c10671fda25cc5e899c7f12d612670bf7c38b9854bcb5a899f138a69"
+      },
+      "run_id": "bb72b383-d4ee-4b9e-a61d-de6bfb57d18f",
+      "selected": "a0",
+      "solved": true,
+      "termination_reason": "exact_single_candidate",
+      "true_winner_ids": [
+        "a0"
+      ]
+    },
+    {
+      "API_seconds": 2.2837031680101063,
+      "accepted_answers": [
+        {
+          "a": 2,
+          "answer": "<",
+          "b": 3,
+          "value_hex": "0x1.9a0cb282bb965p+1"
+        },
+        {
+          "a": 1,
+          "answer": ">",
+          "b": 3,
+          "value_hex": "0x1.02deaa99fb07fp+0"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 3,
+          "value_hex": "0x1.9502b6e9db328p+0"
+        },
+        {
+          "a": 4,
+          "answer": "<",
+          "b": 1,
+          "value_hex": "0x1.1fcd2274bba5ep+0"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 1,
+          "value_hex": "0x1.03bf12616c4cdp+1"
+        }
+      ],
+      "achieved_model_confidence": 1.0,
+      "case_id": "d5-m5-c000083",
+      "case_seconds": 2.610597942984896,
+      "controller_seconds": 2.824461304000579,
+      "journal": {
+        "bytes": 471068,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000004/attempts/attempt0001/events.jsonl",
+        "sha256": "00bb725488e8c4632dbb79334d7047d6ff2787cfaffcb956f0d348c4ce87e6c5"
+      },
+      "quality": "correct",
+      "queries": 5,
+      "remaining_K": 1,
+      "result": {
+        "bytes": 358968,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000004/attempts/attempt0001/result.json",
+        "sha256": "fcd244cc1f85f6bbc062ac6582eee017db472f8dab0de73017d81343808c76b0"
+      },
+      "run_id": "8bf75519-139b-4453-a631-5563ecf56b76",
+      "selected": "a4",
+      "solved": true,
+      "termination_reason": "exact_single_candidate",
+      "true_winner_ids": [
+        "a4"
+      ]
+    },
+    {
+      "API_seconds": 4.405977599992184,
+      "accepted_answers": [
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 2,
+          "value_hex": "0x1.0000000000000p+0"
+        },
+        {
+          "a": 1,
+          "answer": "<",
+          "b": 0,
+          "value_hex": "0x1.d547ddaed4de8p+2"
+        },
+        {
+          "a": 2,
+          "answer": "<",
+          "b": 3,
+          "value_hex": "0x1.0000000000000p+0"
+        },
+        {
+          "a": 4,
+          "answer": ">",
+          "b": 1,
+          "value_hex": "0x1.0e0a8b1a3c3c5p+0"
+        },
+        {
+          "a": 3,
+          "answer": ">",
+          "b": 4,
+          "value_hex": "0x1.793eace1a3426p-2"
+        },
+        {
+          "a": 3,
+          "answer": "<",
+          "b": 2,
+          "value_hex": "0x1.f5c5ecfe3d5b5p+1"
+        },
+        {
+          "a": 4,
+          "answer": "<",
+          "b": 3,
+          "value_hex": "0x1.651b7ec7990bbp+0"
+        },
+        {
+          "a": 3,
+          "answer": ">",
+          "b": 2,
+          "value_hex": "0x1.ae14aacfad834p+0"
+        },
+        {
+          "a": 1,
+          "answer": ">",
+          "b": 4,
+          "value_hex": "0x1.6c0d474738ff0p-2"
+        },
+        {
+          "a": 0,
+          "answer": "<",
+          "b": 3,
+          "value_hex": "0x1.8f044b536e8ccp+0"
+        }
+      ],
+      "achieved_model_confidence": 1.0,
+      "case_id": "d5-m5-c000084",
+      "case_seconds": 4.773743984987959,
+      "controller_seconds": 5.05992382299155,
+      "journal": {
+        "bytes": 871125,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000005/attempts/attempt0001/events.jsonl",
+        "sha256": "28fc1703d032f2c638f105f2b2a0420d71e1b811e068d583c248881a96d355d6"
+      },
+      "quality": "correct",
+      "queries": 10,
+      "remaining_K": 1,
+      "result": {
+        "bytes": 661197,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000005/attempts/attempt0001/result.json",
+        "sha256": "128c191b954ff08b8c8c5689a371fe80564ed008599d12d0d9fe737156f4dba0"
+      },
+      "run_id": "5681c6f2-bb92-44f1-bfd1-9e36f5f57155",
+      "selected": "a1",
+      "solved": true,
+      "termination_reason": "exact_single_candidate",
+      "true_winner_ids": [
+        "a1"
+      ]
+    },
+    {
+      "API_seconds": 1.2900565439776983,
+      "accepted_answers": [
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 2,
+          "value_hex": "0x1.80e2783f790acp+0"
+        },
+        {
+          "a": 0,
+          "answer": "<",
+          "b": 1,
+          "value_hex": "0x1.fc1253af25065p+0"
+        }
+      ],
+      "achieved_model_confidence": 1.0,
+      "case_id": "d5-m5-c000085",
+      "case_seconds": 1.5962161679926794,
+      "controller_seconds": 1.7823175769881345,
+      "journal": {
+        "bytes": 189750,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000006/attempts/attempt0001/events.jsonl",
+        "sha256": "ed9842be23d445147bbab1a5058f9cb96287e2cdf27ee8f2fd6edd4883b9e30d"
+      },
+      "quality": "correct",
+      "queries": 2,
+      "remaining_K": 1,
+      "result": {
+        "bytes": 145341,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000006/attempts/attempt0001/result.json",
+        "sha256": "712bf68140427d695acd2037030ce63441ba779424bf6a3cb74258f14b3b572c"
+      },
+      "run_id": "8820fff2-2a49-4e8e-8f3d-e5aa5cdf2a17",
+      "selected": "a4",
+      "solved": true,
+      "termination_reason": "exact_single_candidate",
+      "true_winner_ids": [
+        "a4"
+      ]
+    },
+    {
+      "API_seconds": 1.1819007140002213,
+      "accepted_answers": [
+        {
+          "a": 2,
+          "answer": "<",
+          "b": 3,
+          "value_hex": "0x1.3032620272c9fp+3"
+        },
+        {
+          "a": 3,
+          "answer": ">",
+          "b": 0,
+          "value_hex": "0x1.6674b9180103cp+0"
+        }
+      ],
+      "achieved_model_confidence": 1.0,
+      "case_id": "d5-m5-c000086",
+      "case_seconds": 1.516230280016316,
+      "controller_seconds": 1.6923086199967656,
+      "journal": {
+        "bytes": 189863,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000007/attempts/attempt0001/events.jsonl",
+        "sha256": "260e2f0879ee1fcbaf095fc77676459e9fe92bb830104775bd7fa83c0ece5d20"
+      },
+      "quality": "correct",
+      "queries": 2,
+      "remaining_K": 1,
+      "result": {
+        "bytes": 145531,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000007/attempts/attempt0001/result.json",
+        "sha256": "73549379d66447526e3f814dc4a2d7c92409447ec6c8490c81b6937362731688"
+      },
+      "run_id": "541af006-af67-42b1-8907-ecbdbec02b55",
+      "selected": "a2",
+      "solved": true,
+      "termination_reason": "exact_single_candidate",
+      "true_winner_ids": [
+        "a2"
+      ]
+    },
+    {
+      "API_seconds": 0.9804040539893322,
+      "accepted_answers": [
+        {
+          "a": 3,
+          "answer": "<",
+          "b": 4,
+          "value_hex": "0x1.32e77fe732a62p+0"
+        }
+      ],
+      "achieved_model_confidence": 1.0,
+      "case_id": "d5-m5-c000087",
+      "case_seconds": 1.2789797660079785,
+      "controller_seconds": 1.4470163910009433,
+      "journal": {
+        "bytes": 95645,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000008/attempts/attempt0001/events.jsonl",
+        "sha256": "8b101224e8591e3da27df24dcc7f13eb80d23a622c12a597570b0123b0a00fb9"
+      },
+      "quality": "correct",
+      "queries": 1,
+      "remaining_K": 1,
+      "result": {
+        "bytes": 73903,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000008/attempts/attempt0001/result.json",
+        "sha256": "ac7801cf061d6f8f6e99f2ffc3b18eb2f1997fbb20ddff98744dad76b54fc77b"
+      },
+      "run_id": "a4b4565c-a514-418a-bc2b-c91dba0590c0",
+      "selected": "a1",
+      "solved": true,
+      "termination_reason": "exact_single_candidate",
+      "true_winner_ids": [
+        "a1"
+      ]
+    },
+    {
+      "API_seconds": 2.7238557990058325,
+      "accepted_answers": [
+        {
+          "a": 1,
+          "answer": "<",
+          "b": 4,
+          "value_hex": "0x1.241d8d1c477f8p+0"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 4,
+          "value_hex": "0x1.0000000000000p+0"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 4,
+          "value_hex": "0x1.4ab7e63aea256p+0"
+        },
+        {
+          "a": 0,
+          "answer": "<",
+          "b": 2,
+          "value_hex": "0x1.5b7209557b0eep+1"
+        },
+        {
+          "a": 2,
+          "answer": ">",
+          "b": 3,
+          "value_hex": "0x1.4202ce79b02c0p+0"
+        },
+        {
+          "a": 3,
+          "answer": ">",
+          "b": 2,
+          "value_hex": "0x1.9851ab29f9b41p-3"
+        },
+        {
+          "a": 2,
+          "answer": "<",
+          "b": 0,
+          "value_hex": "0x1.6f09bcbd675afp-1"
+        },
+        {
+          "a": 4,
+          "answer": "<",
+          "b": 1,
+          "value_hex": "0x1.0d88a37a35988p+1"
+        }
+      ],
+      "achieved_model_confidence": 1.0,
+      "case_id": "d5-m5-c000088",
+      "case_seconds": 3.0759945879981387,
+      "controller_seconds": 3.3326731779961847,
+      "journal": {
+        "bytes": 724351,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000009/attempts/attempt0001/events.jsonl",
+        "sha256": "558813184b5c97c33c53910f12180c59c321ab2a17ba936a18f31b5a6092bc48"
+      },
+      "quality": "correct",
+      "queries": 8,
+      "remaining_K": 1,
+      "result": {
+        "bytes": 551075,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000009/attempts/attempt0001/result.json",
+        "sha256": "4f2fea460a447f6b346ffe99fc8ed3e28de78ab29dbd33b2995208a100892273"
+      },
+      "run_id": "0c59d9eb-4d45-4b9f-a8b9-4b8a27efa2f6",
+      "selected": "a1",
+      "solved": true,
+      "termination_reason": "exact_single_candidate",
+      "true_winner_ids": [
+        "a1"
+      ]
+    },
+    {
+      "API_seconds": 1.6561373799922876,
+      "accepted_answers": [
+        {
+          "a": 1,
+          "answer": ">",
+          "b": 2,
+          "value_hex": "0x1.b316ff1704a66p+0"
+        },
+        {
+          "a": 1,
+          "answer": ">",
+          "b": 4,
+          "value_hex": "0x1.81890aee3155bp+1"
+        },
+        {
+          "a": 3,
+          "answer": "<",
+          "b": 0,
+          "value_hex": "0x1.f9150473157b7p+1"
+        }
+      ],
+      "achieved_model_confidence": 1.0,
+      "case_id": "d5-m5-c000089",
+      "case_seconds": 1.9765397689770907,
+      "controller_seconds": 2.1734181699866895,
+      "journal": {
+        "bytes": 283624,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000010/attempts/attempt0001/events.jsonl",
+        "sha256": "8727701424216a86f0c2028daaaa032affa2304732e4c8e8a7e03c7728f9f849"
+      },
+      "quality": "correct",
+      "queries": 3,
+      "remaining_K": 1,
+      "result": {
+        "bytes": 216501,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000010/attempts/attempt0001/result.json",
+        "sha256": "f460c959b070424cf6b86d8996f154c57cdafb3cbe5f68d993124b82a003f52e"
+      },
+      "run_id": "7c2a1c20-0667-4ba6-8b37-e5fc452aee9c",
+      "selected": "a4",
+      "solved": true,
+      "termination_reason": "exact_single_candidate",
+      "true_winner_ids": [
+        "a4"
+      ]
+    },
+    {
+      "API_seconds": 7.1740693080064375,
+      "accepted_answers": [
+        {
+          "a": 3,
+          "answer": ">",
+          "b": 4,
+          "value_hex": "0x1.12764e211f219p+0"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 3,
+          "value_hex": "0x1.793eace1a3426p-2"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 4,
+          "value_hex": "0x1.0f2c6783520dcp+1"
+        },
+        {
+          "a": 2,
+          "answer": "<",
+          "b": 3,
+          "value_hex": "0x1.0000000000000p+0"
+        },
+        {
+          "a": 2,
+          "answer": "<",
+          "b": 3,
+          "value_hex": "0x1.36c3c0e82123ep-1"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 1,
+          "value_hex": "0x1.217fde07485d4p+0"
+        },
+        {
+          "a": 1,
+          "answer": ">",
+          "b": 2,
+          "value_hex": "0x1.0000000000000p+0"
+        },
+        {
+          "a": 3,
+          "answer": "<",
+          "b": 0,
+          "value_hex": "0x1.628596e776ab3p+0"
+        },
+        {
+          "a": 1,
+          "answer": ">",
+          "b": 2,
+          "value_hex": "0x1.a5c5c4fb3273bp+0"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 3,
+          "value_hex": "0x1.0883e3d2879aep+0"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 3,
+          "value_hex": "0x1.22f01a4cbaad0p+2"
+        },
+        {
+          "a": 0,
+          "answer": "<",
+          "b": 1,
+          "value_hex": "0x1.6250c2581f801p+1"
+        },
+        {
+          "a": 0,
+          "answer": "<",
+          "b": 1,
+          "value_hex": "0x1.06e7c19967db7p+1"
+        },
+        {
+          "a": 1,
+          "answer": ">",
+          "b": 0,
+          "value_hex": "0x1.3024004c28d19p-1"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 1,
+          "value_hex": "0x1.3f0214a975fecp+0"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 1,
+          "value_hex": "0x1.60a6e834da184p+0"
+        },
+        {
+          "a": 0,
+          "answer": "<",
+          "b": 1,
+          "value_hex": "0x1.85d81372ee7d2p+0"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 4,
+          "value_hex": "0x1.0f3059ff790e2p+3"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 3,
+          "value_hex": "0x1.746c0399ea735p+2"
+        },
+        {
+          "a": 2,
+          "answer": "<",
+          "b": 3,
+          "value_hex": "0x1.99faf676ced73p-2"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 4,
+          "value_hex": "0x1.5d892c1a66f20p+3"
+        },
+        {
+          "a": 0,
+          "answer": "<",
+          "b": 1,
+          "value_hex": "0x1.72c82fb6c8820p+0"
+        },
+        {
+          "a": 0,
+          "answer": "<",
+          "b": 4,
+          "value_hex": "0x1.cec829474a0e5p+3"
+        }
+      ],
+      "achieved_model_confidence": 1.0,
+      "case_id": "d5-m5-c000090",
+      "case_seconds": 7.6760041959933005,
+      "controller_seconds": 8.14097831500112,
+      "journal": {
+        "bytes": 2103962,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000011/attempts/attempt0001/events.jsonl",
+        "sha256": "cf2adba37a72b5094f427b9204cf16d07137eadfdac68346f208fcb078f525f2"
+      },
+      "quality": "correct",
+      "queries": 23,
+      "remaining_K": 1,
+      "result": {
+        "bytes": 1604280,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000011/attempts/attempt0001/result.json",
+        "sha256": "b9d21a35cfd24f0ff6df3349e1b025f79848b62adef366d71ab07774e8c3602b"
+      },
+      "run_id": "2cce553d-450b-449d-a9bd-5aca0ad9153b",
+      "selected": "a4",
+      "solved": true,
+      "termination_reason": "exact_single_candidate",
+      "true_winner_ids": [
+        "a4"
+      ]
+    },
+    {
+      "API_seconds": 3.557045074994676,
+      "accepted_answers": [
+        {
+          "a": 3,
+          "answer": "<",
+          "b": 4,
+          "value_hex": "0x1.3d9d54ac9f3d8p+0"
+        },
+        {
+          "a": 2,
+          "answer": "<",
+          "b": 4,
+          "value_hex": "0x1.7a9d38e2ed893p+0"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 3,
+          "value_hex": "0x1.0000000000000p+0"
+        },
+        {
+          "a": 4,
+          "answer": ">",
+          "b": 1,
+          "value_hex": "0x1.11209865b1c77p+0"
+        },
+        {
+          "a": 1,
+          "answer": ">",
+          "b": 3,
+          "value_hex": "0x1.0000000000000p+0"
+        },
+        {
+          "a": 0,
+          "answer": "<",
+          "b": 4,
+          "value_hex": "0x1.3557137a64dc5p+0"
+        },
+        {
+          "a": 1,
+          "answer": "<",
+          "b": 2,
+          "value_hex": "0x1.0000000000000p+0"
+        },
+        {
+          "a": 1,
+          "answer": "<",
+          "b": 2,
+          "value_hex": "0x1.793eace1a3426p-2"
+        },
+        {
+          "a": 4,
+          "answer": "<",
+          "b": 0,
+          "value_hex": "0x1.d0bcccc8bc8f8p+1"
+        },
+        {
+          "a": 2,
+          "answer": ">",
+          "b": 1,
+          "value_hex": "0x1.e4ab581c3693fp+1"
+        },
+        {
+          "a": 4,
+          "answer": ">",
+          "b": 0,
+          "value_hex": "0x1.069c36b2bd5a7p+1"
+        }
+      ],
+      "achieved_model_confidence": 1.0,
+      "case_id": "d5-m5-c000091",
+      "case_seconds": 3.939289482019376,
+      "controller_seconds": 4.248040804988705,
+      "journal": {
+        "bytes": 1032798,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000012/attempts/attempt0001/events.jsonl",
+        "sha256": "4a0bdb107f363d6152f135fffcd9cd5583bbf69a4d777da3bdc0570bd37321cd"
+      },
+      "quality": "correct",
+      "queries": 11,
+      "remaining_K": 1,
+      "result": {
+        "bytes": 786799,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000012/attempts/attempt0001/result.json",
+        "sha256": "c05c0abb0a2981f725600154d4f1cf0ad5104509a0a437f03b46f8b7d209247c"
+      },
+      "run_id": "1b822fcf-4b9c-48ea-b988-deb25486adab",
+      "selected": "a2",
+      "solved": true,
+      "termination_reason": "exact_single_candidate",
+      "true_winner_ids": [
+        "a2"
+      ]
+    },
+    {
+      "API_seconds": 3.5843270939949434,
+      "accepted_answers": [
+        {
+          "a": 4,
+          "answer": ">",
+          "b": 0,
+          "value_hex": "0x1.54f40310b1096p+1"
+        },
+        {
+          "a": 2,
+          "answer": "<",
+          "b": 3,
+          "value_hex": "0x1.2dcd212242225p+1"
+        },
+        {
+          "a": 4,
+          "answer": "<",
+          "b": 3,
+          "value_hex": "0x1.1cc52de29c742p+0"
+        },
+        {
+          "a": 1,
+          "answer": ">",
+          "b": 3,
+          "value_hex": "0x1.0fe4e14e39884p+1"
+        },
+        {
+          "a": 1,
+          "answer": ">",
+          "b": 2,
+          "value_hex": "0x1.968cc70177926p+1"
+        },
+        {
+          "a": 2,
+          "answer": ">",
+          "b": 4,
+          "value_hex": "0x1.793eace1a3426p-2"
+        },
+        {
+          "a": 1,
+          "answer": "<",
+          "b": 3,
+          "value_hex": "0x1.8746100af5a51p+1"
+        }
+      ],
+      "achieved_model_confidence": 1.0,
+      "case_id": "d5-m5-c000092",
+      "case_seconds": 3.9331063579884358,
+      "controller_seconds": 4.188373113021953,
+      "journal": {
+        "bytes": 659458,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000013/attempts/attempt0001/events.jsonl",
+        "sha256": "69b92fc66f039f053f279425d3b270161c33bdd706ec71d7a76377780b0a91f9"
+      },
+      "quality": "correct",
+      "queries": 7,
+      "remaining_K": 1,
+      "result": {
+        "bytes": 501827,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000013/attempts/attempt0001/result.json",
+        "sha256": "48c8ae77bdb787fbab27f198a31356358871568d9be96b349ba27d10c804fb0e"
+      },
+      "run_id": "09cab644-4153-4ead-ba19-7a7fe94980d7",
+      "selected": "a0",
+      "solved": true,
+      "termination_reason": "exact_single_candidate",
+      "true_winner_ids": [
+        "a0"
+      ]
+    },
+    {
+      "API_seconds": 1.1280162780021783,
+      "accepted_answers": [
+        {
+          "a": 0,
+          "answer": "<",
+          "b": 1,
+          "value_hex": "0x1.4dad2a6d04694p+1"
+        },
+        {
+          "a": 1,
+          "answer": ">",
+          "b": 4,
+          "value_hex": "0x1.0000000000000p+0"
+        }
+      ],
+      "achieved_model_confidence": 0.9951645440368181,
+      "case_id": "d5-m5-c000093",
+      "case_seconds": 1.4390044250176288,
+      "controller_seconds": 1.618884507974144,
+      "journal": {
+        "bytes": 159798,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000014/attempts/attempt0001/events.jsonl",
+        "sha256": "4abb556ec22cc7503bfcac9841c89dd9f5e93de3b61cd1c576e705f51bcbb847"
+      },
+      "quality": "correct",
+      "queries": 2,
+      "remaining_K": 2,
+      "result": {
+        "bytes": 122173,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000014/attempts/attempt0001/result.json",
+        "sha256": "e319849828f19010cae62c29922bebb1cf35c509d31c3d9bbef5932e942747d0"
+      },
+      "run_id": "7a517f46-8c3e-4142-92fd-fa38c574805d",
+      "selected": "a2",
+      "solved": true,
+      "termination_reason": "volume_confidence",
+      "true_winner_ids": [
+        "a2"
+      ]
+    },
+    {
+      "API_seconds": 1.9628222349856514,
+      "accepted_answers": [
+        {
+          "a": 3,
+          "answer": "<",
+          "b": 2,
+          "value_hex": "0x1.6a64d5b1bfb79p+2"
+        },
+        {
+          "a": 3,
+          "answer": ">",
+          "b": 0,
+          "value_hex": "0x1.3613f68411e5fp+0"
+        },
+        {
+          "a": 4,
+          "answer": "<",
+          "b": 2,
+          "value_hex": "0x1.12bb889b28e17p+1"
+        },
+        {
+          "a": 4,
+          "answer": "<",
+          "b": 2,
+          "value_hex": "0x1.4f74a1a2fd440p-2"
+        },
+        {
+          "a": 2,
+          "answer": ">",
+          "b": 1,
+          "value_hex": "0x1.885d21cb93509p+0"
+        }
+      ],
+      "achieved_model_confidence": 1.0,
+      "case_id": "d5-m5-c000094",
+      "case_seconds": 2.3330828390026,
+      "controller_seconds": 2.5580767979845405,
+      "journal": {
+        "bytes": 471055,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000015/attempts/attempt0001/events.jsonl",
+        "sha256": "d760ea6e9d5f765a791d8a1d28216f4283c782213d1b76fec8a4404fea0ebab1"
+      },
+      "quality": "correct",
+      "queries": 5,
+      "remaining_K": 1,
+      "result": {
+        "bytes": 359188,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000015/attempts/attempt0001/result.json",
+        "sha256": "09f7ac311e50fb85bae9f95880ae5f14eb78d24ef9210d00e6b29e694b72ddbf"
+      },
+      "run_id": "9f9c72ed-c9c2-4986-a2c7-8fe005e78d02",
+      "selected": "a1",
+      "solved": true,
+      "termination_reason": "exact_single_candidate",
+      "true_winner_ids": [
+        "a1"
+      ]
+    },
+    {
+      "API_seconds": 3.715462970023509,
+      "accepted_answers": [
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 2,
+          "value_hex": "0x1.68e7f2c8b589ep+1"
+        },
+        {
+          "a": 1,
+          "answer": ">",
+          "b": 4,
+          "value_hex": "0x1.2d78ff8edcf9cp+0"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 3,
+          "value_hex": "0x1.38ac0c5264c1ep+0"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 1,
+          "value_hex": "0x1.2e6ff0e009b4fp+1"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 3,
+          "value_hex": "0x1.b9b07236a9f78p+1"
+        }
+      ],
+      "achieved_model_confidence": 1.0,
+      "case_id": "d5-m5-c000095",
+      "case_seconds": 4.0585874329844955,
+      "controller_seconds": 4.278163334005512,
+      "journal": {
+        "bytes": 472281,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000016/attempts/attempt0001/events.jsonl",
+        "sha256": "a8b5efd7e20c2d11fbc8f070d31faea733eff026765360170649a17eb54d6649"
+      },
+      "quality": "correct",
+      "queries": 5,
+      "remaining_K": 1,
+      "result": {
+        "bytes": 358960,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000016/attempts/attempt0001/result.json",
+        "sha256": "25d6ec951d743a50d66db33182453ca047899220d5e3fd9229f3dfff9c2a248d"
+      },
+      "run_id": "e0a3b9bd-643f-41a4-a89f-6644ad785776",
+      "selected": "a2",
+      "solved": true,
+      "termination_reason": "exact_single_candidate",
+      "true_winner_ids": [
+        "a2"
+      ]
+    },
+    {
+      "API_seconds": 1.46142397299991,
+      "accepted_answers": [
+        {
+          "a": 1,
+          "answer": "<",
+          "b": 0,
+          "value_hex": "0x1.30e3c2f99be73p+2"
+        },
+        {
+          "a": 2,
+          "answer": "<",
+          "b": 4,
+          "value_hex": "0x1.0000000000000p+0"
+        },
+        {
+          "a": 4,
+          "answer": ">",
+          "b": 1,
+          "value_hex": "0x1.0072878bffed6p+0"
+        }
+      ],
+      "achieved_model_confidence": 1.0,
+      "case_id": "d5-m5-c000096",
+      "case_seconds": 1.8102827340189833,
+      "controller_seconds": 2.0024166499788407,
+      "journal": {
+        "bytes": 253602,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000017/attempts/attempt0001/events.jsonl",
+        "sha256": "49a7a7571bc444e4e8df352b03c2839e1138f5b81157c6777f8c0bb505d672d4"
+      },
+      "quality": "correct",
+      "queries": 3,
+      "remaining_K": 1,
+      "result": {
+        "bytes": 193406,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000017/attempts/attempt0001/result.json",
+        "sha256": "63794f04ca01784a04c3735cc6eb2861d0545df3adf51a52ba2b66c2ee9a4d4c"
+      },
+      "run_id": "7dca43e2-c0a0-417d-82de-8cc6bbb70ad1",
+      "selected": "a0",
+      "solved": true,
+      "termination_reason": "exact_single_candidate",
+      "true_winner_ids": [
+        "a0"
+      ]
+    },
+    {
+      "API_seconds": 4.7069788049848285,
+      "accepted_answers": [
+        {
+          "a": 1,
+          "answer": "<",
+          "b": 3,
+          "value_hex": "0x1.024b0644b123dp+0"
+        },
+        {
+          "a": 3,
+          "answer": ">",
+          "b": 4,
+          "value_hex": "0x1.859466bcd1eb6p+0"
+        },
+        {
+          "a": 0,
+          "answer": "<",
+          "b": 3,
+          "value_hex": "0x1.09c3571fc9dcep+0"
+        },
+        {
+          "a": 3,
+          "answer": ">",
+          "b": 1,
+          "value_hex": "0x1.f170b381d947ap+0"
+        },
+        {
+          "a": 3,
+          "answer": "<",
+          "b": 4,
+          "value_hex": "0x1.e741ffa6e856fp+1"
+        },
+        {
+          "a": 3,
+          "answer": "<",
+          "b": 2,
+          "value_hex": "0x1.9627b6f2d49efp+0"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 4,
+          "value_hex": "0x1.3ccdeeb756e39p+0"
+        },
+        {
+          "a": 2,
+          "answer": "<",
+          "b": 3,
+          "value_hex": "0x1.0bef3e066f698p+0"
+        },
+        {
+          "a": 3,
+          "answer": "<",
+          "b": 0,
+          "value_hex": "0x1.63776af43e365p+0"
+        }
+      ],
+      "achieved_model_confidence": 1.0,
+      "case_id": "d5-m5-c000097",
+      "case_seconds": 5.075805992993992,
+      "controller_seconds": 5.348996598011581,
+      "journal": {
+        "bytes": 847988,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000018/attempts/attempt0001/events.jsonl",
+        "sha256": "453342b0601f1c2c023d07621fea1b70c98d5b1252a633a187bcc75ad6a9d6e6"
+      },
+      "quality": "correct",
+      "queries": 9,
+      "remaining_K": 1,
+      "result": {
+        "bytes": 644570,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000018/attempts/attempt0001/result.json",
+        "sha256": "8ee53057ace11803112d2318ca145b53b4a4691f4de65711b934abe1334d9907"
+      },
+      "run_id": "2bc1c3dd-1a14-4d9e-a0ea-13f7348b76fa",
+      "selected": "a2",
+      "solved": true,
+      "termination_reason": "exact_single_candidate",
+      "true_winner_ids": [
+        "a2"
+      ]
+    },
+    {
+      "API_seconds": 9.876175262004836,
+      "accepted_answers": [
+        {
+          "a": 0,
+          "answer": "<",
+          "b": 4,
+          "value_hex": "0x1.cf6adc9fad908p+4"
+        },
+        {
+          "a": 0,
+          "answer": "<",
+          "b": 2,
+          "value_hex": "0x1.0000000000000p+0"
+        },
+        {
+          "a": 2,
+          "answer": ">",
+          "b": 1,
+          "value_hex": "0x1.ae41e9a29473bp+0"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 2,
+          "value_hex": "0x1.793eace1a3426p-2"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 2,
+          "value_hex": "0x1.36c3c0e82123ep-1"
+        },
+        {
+          "a": 0,
+          "answer": "<",
+          "b": 3,
+          "value_hex": "0x1.f10e67eb13100p+0"
+        },
+        {
+          "a": 3,
+          "answer": "<",
+          "b": 4,
+          "value_hex": "0x1.0000000000000p+0"
+        },
+        {
+          "a": 0,
+          "answer": "<",
+          "b": 3,
+          "value_hex": "0x1.31a72cb8b54c8p+0"
+        },
+        {
+          "a": 4,
+          "answer": "<",
+          "b": 3,
+          "value_hex": "0x1.3ead3e4782141p+1"
+        },
+        {
+          "a": 2,
+          "answer": ">",
+          "b": 0,
+          "value_hex": "0x1.651b7ec7990b9p+0"
+        },
+        {
+          "a": 3,
+          "answer": ">",
+          "b": 4,
+          "value_hex": "0x1.447d24cd8ae2ep-1"
+        },
+        {
+          "a": 3,
+          "answer": "<",
+          "b": 0,
+          "value_hex": "0x1.7f14924b07264p+1"
+        },
+        {
+          "a": 0,
+          "answer": "<",
+          "b": 2,
+          "value_hex": "0x1.51bb3873bd121p-1"
+        },
+        {
+          "a": 3,
+          "answer": ">",
+          "b": 4,
+          "value_hex": "0x1.9799c402443dep-1"
+        },
+        {
+          "a": 3,
+          "answer": "<",
+          "b": 0,
+          "value_hex": "0x1.ea90f99f64eb8p+0"
+        },
+        {
+          "a": 2,
+          "answer": "<",
+          "b": 1,
+          "value_hex": "0x1.eb25db4d1b095p+1"
+        },
+        {
+          "a": 3,
+          "answer": ">",
+          "b": 0,
+          "value_hex": "0x1.0c55111f33f9ep+0"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 2,
+          "value_hex": "0x1.43f7b04636ad4p-1"
+        },
+        {
+          "a": 3,
+          "answer": ">",
+          "b": 0,
+          "value_hex": "0x1.31e7c6c366dcdp+0"
+        },
+        {
+          "a": 4,
+          "answer": ">",
+          "b": 3,
+          "value_hex": "0x1.1eeaf5dc695eep+0"
+        },
+        {
+          "a": 3,
+          "answer": ">",
+          "b": 0,
+          "value_hex": "0x1.4cefcf88f98cdp+0"
+        },
+        {
+          "a": 1,
+          "answer": ">",
+          "b": 2,
+          "value_hex": "0x1.933b4b4beb387p-2"
+        },
+        {
+          "a": 3,
+          "answer": "<",
+          "b": 0,
+          "value_hex": "0x1.69bd45cd3badcp+0"
+        }
+      ],
+      "achieved_model_confidence": 1.0,
+      "case_id": "d5-m5-c000098",
+      "case_seconds": 10.362446087005083,
+      "controller_seconds": 10.83204126500641,
+      "journal": {
+        "bytes": 2161363,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000019/attempts/attempt0001/events.jsonl",
+        "sha256": "3e8ae353e3d0380ccc2a2896608f327f388062036cc7f2015ecd29429b3845c7"
+      },
+      "quality": "correct",
+      "queries": 23,
+      "remaining_K": 1,
+      "result": {
+        "bytes": 1649488,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000019/attempts/attempt0001/result.json",
+        "sha256": "c7468212a3737815027f6ed632fc7cfe48c5cd4eb99b0dbafbf0ee839c0796dd"
+      },
+      "run_id": "0ce4e5cb-ade5-4ac3-b576-f8656c2e6cc9",
+      "selected": "a2",
+      "solved": true,
+      "termination_reason": "exact_single_candidate",
+      "true_winner_ids": [
+        "a2"
+      ]
+    },
+    {
+      "API_seconds": 5.295448381017195,
+      "accepted_answers": [
+        {
+          "a": 0,
+          "answer": "<",
+          "b": 2,
+          "value_hex": "0x1.65941e898cb6dp+0"
+        },
+        {
+          "a": 1,
+          "answer": "<",
+          "b": 2,
+          "value_hex": "0x1.5b7209557b0eep+1"
+        },
+        {
+          "a": 4,
+          "answer": "<",
+          "b": 2,
+          "value_hex": "0x1.05664d3d14e58p+1"
+        },
+        {
+          "a": 2,
+          "answer": "<",
+          "b": 1,
+          "value_hex": "0x1.22dbf4b616298p+2"
+        },
+        {
+          "a": 1,
+          "answer": "<",
+          "b": 3,
+          "value_hex": "0x1.0000000000000p+0"
+        },
+        {
+          "a": 0,
+          "answer": "<",
+          "b": 1,
+          "value_hex": "0x1.b55713f2d9091p+0"
+        },
+        {
+          "a": 4,
+          "answer": "<",
+          "b": 1,
+          "value_hex": "0x1.4dcf8827da263p+1"
+        },
+        {
+          "a": 1,
+          "answer": "<",
+          "b": 3,
+          "value_hex": "0x1.793eace1a3426p-2"
+        },
+        {
+          "a": 0,
+          "answer": "<",
+          "b": 1,
+          "value_hex": "0x1.e590c18e477b4p-1"
+        },
+        {
+          "a": 4,
+          "answer": "<",
+          "b": 1,
+          "value_hex": "0x1.5963ec84a2d58p+0"
+        },
+        {
+          "a": 3,
+          "answer": "<",
+          "b": 1,
+          "value_hex": "0x1.520b7ffbedb2ep+2"
+        },
+        {
+          "a": 0,
+          "answer": ">",
+          "b": 1,
+          "value_hex": "0x1.6c254bc6017b9p-2"
+        },
+        {
+          "a": 1,
+          "answer": ">",
+          "b": 2,
+          "value_hex": "0x1.8bb10f62af43bp-1"
+        },
+        {
+          "a": 1,
+          "answer": ">",
+          "b": 4,
+          "value_hex": "0x1.1378bfbcf6f01p+1"
+        }
+      ],
+      "achieved_model_confidence": 1.0,
+      "case_id": "d5-m5-c000099",
+      "case_seconds": 5.705911522993119,
+      "controller_seconds": 6.0716950229834765,
+      "journal": {
+        "bytes": 1316099,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000020/attempts/attempt0001/events.jsonl",
+        "sha256": "ba7a1bbd70a0d0f7a1655077b6d294dded229806f71ed29b5e2405367c30b4fc"
+      },
+      "quality": "correct",
+      "queries": 14,
+      "remaining_K": 1,
+      "result": {
+        "bytes": 1003276,
+        "path": "runs/d5-h2-volume-confidence-comparison-20261019T162127Z/d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05/jobs/job000020/attempts/attempt0001/result.json",
+        "sha256": "9065dde7f92e0999cad26bf8c5df1211952cc4aa45bf35cfdcaa4ea3eb24950c"
+      },
+      "run_id": "87be16f6-693f-4223-90f2-5db1eb487dec",
+      "selected": "a3",
+      "solved": true,
+      "termination_reason": "exact_single_candidate",
+      "true_winner_ids": [
+        "a3"
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "scientific_reanalysis_executed": false,
+  "source": {
+    "numeric_profile_id": "otqa-exact-v3",
+    "numeric_profile_values_sha256": "1374fa8394bffe9b7f84585b29ea2a0b353f105500f28f6b2c6a79fbcec4a56c",
+    "pinned_commit": "62d1d01339f91802e2916b63660a4e640d99c9cc",
+    "source_sha256": "720726607ae451b319e59e01453b6ba69b9950ef42420e700ed6b4eaa5b34d0e",
+    "wheel_sha256": "24e4a5c901690895bdb1557a5a90ef1e9d5f6d3eb06381df58031d8ce02f1a97"
+  },
+  "study_id": "d5-a5-n20-h2-grid5-both-adaptive-stop-volume-confidence099-candidate-count-minprog0p001-src72072-b05"
+}

@@ -1,0 +1,156 @@
+{
+  "archive_specific_validation": "detached package-validation.json, written only after fresh offline replay",
+  "bindings": {
+    "all_attempts_cost_and_outcome_sha256": "51dfb622b6dbed8bd4a5f3caa34e88a7f011d4340613ee9e7a0eb0021d195b7e",
+    "audit": {
+      "bytes": 3348,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group06/reports/9dccd2dc-b0dd-5f0c-9f13-5b889d8933ff/audit.json",
+      "sha256": "8a39e071475b3550bf10e86ed56449507e4a5bb02221a07776668e23590f02fa"
+    },
+    "classification_counts": {
+      "correct": 9,
+      "regular_unsolved": 1
+    },
+    "denominators": {
+      "all_attempts": 10,
+      "independent_problems": 10,
+      "primary_cells": 10,
+      "repetitions": 1,
+      "terminal_cells": 10
+    },
+    "input_contract": {
+      "bytes": 2319,
+      "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group06/provenance/input-contract.json",
+      "sha256": "f77a274ed5962e99cf4ed1a2e51c645ab277dc5d5cd1cc6dd29798d77dc03f95"
+    },
+    "missing_costs": {
+      "api_seconds": 0,
+      "case_seconds": 0,
+      "controller_seconds": 0
+    },
+    "plan": {
+      "bytes": 26316,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group06/plan.json",
+      "sha256": "837f46217fb07cad95909a38ea52a1cc0bec43a506e6489501706f1e2a264ac1"
+    },
+    "raw_check": {
+      "bytes": 139203,
+      "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group06/provenance/raw-check.json",
+      "sha256": "1cbc9e7d9c7aea1d0850d6b52775230cc790b1f07511ded33d8fabac6812f604"
+    },
+    "regular_stop_outcomes": [
+      {
+        "attempt_id": "attempt0001",
+        "case_id": "d7-m5-c000056",
+        "classification": "regular_unsolved",
+        "final_candidate_ids": [
+          "a3",
+          "a4"
+        ],
+        "job_id": "job000007",
+        "journal": {
+          "bytes": 209516,
+          "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group06/jobs/job000007/attempts/attempt0001/events.jsonl",
+          "sha256": "ebdb406cb9ad3a6b4ad45aff184bf6c9f9ebaead4d91b2110ed9bbec4857ece9"
+        },
+        "min_expected_progress": 0.001,
+        "queries": 2,
+        "result": {
+          "bytes": 155728,
+          "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group06/jobs/job000007/attempts/attempt0001/result.json",
+          "sha256": "2fc77f4faaf9246903c5cad3c22eccbebaba8c59f1e89ac0b957878d970f12b4"
+        },
+        "source": {
+          "dirty": false,
+          "git_commit": "62d1d01339f91802e2916b63660a4e640d99c9cc",
+          "inventory_format": "otqa-source-v1",
+          "source_sha256": "720726607ae451b319e59e01453b6ba69b9950ef42420e700ed6b4eaa5b34d0e",
+          "version": "0.2.0"
+        },
+        "status": "completed",
+        "termination_reason": "insufficient_expected_progress"
+      }
+    ],
+    "report_files": {
+      "attempts.csv": {
+        "bytes": 5988,
+        "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group06/results/attempts.csv",
+        "sha256": "0db345d01aa49f47a1e1bce6674c13695151f0a5c99c66e38543e33e1d7d91ee"
+      },
+      "report.md": {
+        "bytes": 3052,
+        "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group06/results/report.md",
+        "sha256": "ccefd7e6aaebcfaa50a89ad58ec58930d3480936f5ea5279eb54598937236e71"
+      },
+      "results.csv": {
+        "bytes": 6928,
+        "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group06/results/results.csv",
+        "sha256": "326f6d498f2ba74b2502e42cbcfebfcd02eb7428305a1f264f33e52d9d2fea23"
+      },
+      "results.json": {
+        "bytes": 129979,
+        "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group06/results/results.json",
+        "sha256": "5742cb4404d49ad716d2f7297df7f42eaf82344cd241f3fac633a2b8dd3a0b40"
+      }
+    },
+    "required_diagnosis_subjects": [],
+    "schema_version": 1,
+    "series_id": "43f1ad1e-974e-4663-9096-568cb3918183",
+    "source": {
+      "dirty": false,
+      "git_commit": "62d1d01339f91802e2916b63660a4e640d99c9cc",
+      "inventory_format": "otqa-source-v1",
+      "source_sha256": "720726607ae451b319e59e01453b6ba69b9950ef42420e700ed6b4eaa5b34d0e",
+      "version": "0.2.0"
+    },
+    "state": {
+      "bytes": 11358,
+      "path": "runs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group06/state.json",
+      "sha256": "63c1261cb8eab9ecb585cf24cd4eb1a247505917c1319b99fdc0ffdf534c04c0"
+    },
+    "study_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group06",
+    "tool_files": {
+      "raw_checker": {
+        "bytes": 78257,
+        "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group06/reproduction/verify_study_raw.py",
+        "sha256": "f84ec9771d07f44f427816edbb0302d3b14c8d98440eb28bd79c2bbd2e97594f"
+      },
+      "reporter": {
+        "bytes": 29756,
+        "path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group06/reproduction/single_study_report.py",
+        "sha256": "618cc5fc631f1bfdd04fbfe2ffd752b8f18f8aaacda33600522a7bd6bbce7f79"
+      }
+    }
+  },
+  "independent_scientific_review": {
+    "bytes": 13706,
+    "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/scientific-content-reviews/batch42-20261017T235943.638912Z/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group06/review.json",
+    "sha256": "a3ced193f51554569a283ea593a4d5badfb4aee1b6630fe6719385c37a6cbf45"
+  },
+  "limits": [
+    "One configuration and one planned execution per problem; no cross-study paired comparison.",
+    "No geometric volumes, LP regions, hypothetical branches or global plan optima recertified.",
+    "All attempts and unavailable costs are retained; unavailable does not mean zero.",
+    "The coordinator must independently accept the package and verify its eventual public download."
+  ],
+  "publication_commit": null,
+  "publication_completion": false,
+  "remote_original_hash_gate": {
+    "bytes": 1056004,
+    "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/selected-remote-hash-gates/d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group06-20261017T235943.638912Z/gate-proof.json",
+    "sha256": "74555ee01e2a74443cf15420c93d9aaa215aa8a1501ca5e73fefc716606fde09"
+  },
+  "remote_original_selection_sha256": "192c573e673a15767bdfb03d97bbeed4930730530764235349f4c235446ca08f",
+  "schema_version": 1,
+  "scientific_completion": false,
+  "series_id": "43f1ad1e-974e-4663-9096-568cb3918183",
+  "source": {
+    "dirty": false,
+    "git_commit": "62d1d01339f91802e2916b63660a4e640d99c9cc",
+    "inventory_format": "otqa-source-v1",
+    "source_sha256": "720726607ae451b319e59e01453b6ba69b9950ef42420e700ed6b4eaa5b34d0e",
+    "version": "0.2.0"
+  },
+  "status": "scientific_content_gates_passed_package_acceptance_detached",
+  "study_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group06"
+}

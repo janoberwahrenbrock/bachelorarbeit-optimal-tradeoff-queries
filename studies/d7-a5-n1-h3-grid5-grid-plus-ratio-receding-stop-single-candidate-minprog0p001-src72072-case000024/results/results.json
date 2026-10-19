@@ -1,0 +1,901 @@
+{
+  "actual_environments_recorded": [
+    {
+      "backend_capabilities": {
+        "continuous_validation_fastpath": true,
+        "reusable_highs": true,
+        "scipy_highs": true,
+        "scipy_qhull": true
+      },
+      "cpu_model": null,
+      "hostname": "machine3",
+      "logical_cpus": 16,
+      "native_thread_environment": {
+        "BLIS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "packages": {
+        "attrs": "26.1.0",
+        "bachelorarbeit-optimal-tradeoff-queries": "0.2.0",
+        "jsonschema": "4.26.0",
+        "jsonschema-specifications": "2025.9.1",
+        "numpy": "2.5.4",
+        "referencing": "0.37.0",
+        "rpds-py": "2026.9.1",
+        "scipy": "1.18.1"
+      },
+      "physical_cores": null,
+      "platform": "Linux-7.0.0-14-generic-x86_64-with-glibc2.43",
+      "platform_family": "linux",
+      "python": "3.14.4"
+    }
+  ],
+  "all_attempts": [
+    {
+      "api_measurement_complete": true,
+      "api_seconds": 35235.114947787,
+      "attempt_id": "attempt0001",
+      "case_id": "d7-m5-c000024",
+      "case_seconds": 35235.655386946,
+      "configuration_id": "d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024-config",
+      "controller_seconds": 35236.215354556996,
+      "error": null,
+      "exactly_solved": true,
+      "final_candidate_ids": [
+        "a0"
+      ],
+      "final_candidate_volume_shares_recorded": {
+        "a0": 1.0
+      },
+      "initial_candidate_count": 4,
+      "initial_candidate_ids": [
+        "a0",
+        "a1",
+        "a2",
+        "a4"
+      ],
+      "initial_candidate_volume_shares_recorded": {
+        "a0": 0.09329938797288692,
+        "a1": 0.4789821404198576,
+        "a2": 0.3936708264530499,
+        "a4": 0.0340476451542056
+      },
+      "interruption": null,
+      "job_id": "job000001",
+      "journal": {
+        "bytes": 2129409,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/jobs/job000001/attempts/attempt0001/events.jsonl",
+        "sha256": "c314589751e5e2faea8291b12d38e8c2ba2cb019247bdffd1789be66e27e149a"
+      },
+      "journal_event_counts": {
+        "answer_received": 45,
+        "planning_attempt_completed": 45,
+        "planning_attempt_started": 45,
+        "planning_resolved": 45,
+        "query_completed": 45,
+        "query_dispatched": 45,
+        "query_planned": 45,
+        "run_finished": 1,
+        "run_started": 1,
+        "state_analyzed": 46
+      },
+      "manifest": {
+        "bytes": 7684,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/jobs/job000001/attempts/attempt0001/manifest.json",
+        "sha256": "c8ac119931bc8583a7a08d13a60dca22007d57b96c9367c4dfe451d0d2aad988"
+      },
+      "partial_api_seconds": null,
+      "quality": "correct",
+      "quality_findings": [],
+      "queries": 45,
+      "query_counts": {
+        "answered_new": 45,
+        "answered_total": 45,
+        "dispatched_new": 45,
+        "initial_answers": 0
+      },
+      "result": {
+        "bytes": 1567305,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/jobs/job000001/attempts/attempt0001/result.json",
+        "sha256": "d219dc249354f9c20fe2df9c4c31c55d67f87bf36bac4b4558bfe66aa540b31d"
+      },
+      "run_id": "832e3fb9-ad05-4258-9927-644ba71904f1",
+      "selected_candidate_id": "a0",
+      "solved": true,
+      "status": "completed",
+      "telemetry_errors": [],
+      "termination_reason": "exact_single_candidate",
+      "timings": {
+        "answer_wait_wall_seconds": 0.00017109900363720953,
+        "api_call_wall_seconds": 35235.114947787,
+        "case_elapsed_seconds": 35235.655386946,
+        "complete_api_measurement": true,
+        "observer_wall_seconds": 0.0,
+        "partial_api_elapsed_seconds": null,
+        "persistence_in_call_wall_seconds": null,
+        "planning_wall_seconds": null,
+        "recorder_wall_seconds": 2.814572358973237,
+        "scope_version": 1,
+        "state_analysis_wall_seconds": null,
+        "unattributed_wall_seconds": null,
+        "worker_cpu_seconds": null,
+        "worker_shutdown_wall_seconds": null,
+        "worker_startup_wall_seconds": null
+      },
+      "true_winner_ids_recorded": [
+        "a0"
+      ]
+    }
+  ],
+  "conditions": 1,
+  "configuration": {
+    "algorithm": {
+      "depth": 3,
+      "grid_size": 5,
+      "higher_depth_query_source": "both",
+      "horizon_execution": "receding",
+      "min_expected_progress": 0.001,
+      "planning_evaluation": "candidate_count",
+      "query_strategy": "fixed",
+      "stopping": {
+        "rule": "single_candidate"
+      }
+    },
+    "budget": {
+      "max_queries": null
+    },
+    "configuration_id": "d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024-config",
+    "execution": {
+      "cache_policy_id": "bounded_v1",
+      "case_timeout_seconds": null,
+      "native_threads": 1,
+      "start_method": "forkserver",
+      "workers": 16
+    },
+    "recording": {
+      "durability": "per_answer",
+      "profile": false,
+      "telemetry_failure_policy": "continue",
+      "trace_level": "standard"
+    },
+    "schema_version": 2
+  },
+  "generated_at_utc": "2026-10-18T13:33:02.018295+00:00",
+  "independent_problems": 1,
+  "input_cohort": {
+    "case_count": 1,
+    "cohort_sha256": "33018111a825d77fed4345bbeeaa1654091a84a2442a6555cc93c169e7a7156f",
+    "contract": "ordered case_id/problem_sha256/oracle_sha256 triples; canonical sorted-key compact JSON, no paths"
+  },
+  "limitations": [
+    "Native status/quality and geometric candidate data are recorded observations; independent answer/winner/raw review is a separate artifact.",
+    "No process-liveness, final backup, publication or verified-completion state is established by this report.",
+    "One execution per problem/configuration, no repetition medians. Medians summarize different cases/attempts.",
+    "Single-condition study: no paired strategy/query-generator deltas or pooling across unrelated problems.",
+    "One full API time per primary row; case and controller costs are distinct scopes and are never added to API time.",
+    "All attempts and partial API costs are retained separately; unavailable costs remain null, not zero.",
+    "No LP, geometry volume, hypothetical-tree recertification or new solver execution is performed."
+  ],
+  "mode": "receding",
+  "numerical_profile": {
+    "numeric_hex": {
+      "/values/geometry/containment_relative_tolerance": "0x1.5798ee2308c3ap-27",
+      "/values/geometry/equality_residual_factor": "0x1.4000000000000p+3",
+      "/values/geometry/ratio_terminal_tolerance": "0x1.19799812dea11p-40",
+      "/values/geometry/snap_dedup_tolerance": "0x1.b7cdfd9d7bdbbp-34",
+      "/values/geometry/snap_relative_tolerance": "0x1.4f8b588e368f1p-17",
+      "/values/geometry/support_margin_factor": "0x1.9000000000000p+6",
+      "/values/geometry/support_margin_floor": "0x1.5798ee2308c3ap-27",
+      "/values/geometry/support_tolerance": "0x1.b7cdfd9d7bdbbp-34",
+      "/values/geometry/tolerance": "0x1.b7cdfd9d7bdbbp-34",
+      "/values/linear_programming/dual_feasibility_tolerance": "0x1.b7cdfd9d7bdbbp-34",
+      "/values/linear_programming/primal_feasibility_tolerance": "0x1.b7cdfd9d7bdbbp-34",
+      "/values/linear_programming/primal_validation_tol": "0x1.12e0be826d695p-30",
+      "/values/query_generation/answered_abs_tolerance": "0x1.19799812dea11p-40",
+      "/values/query_generation/answered_rel_tolerance": "0x1.12e0be826d695p-30",
+      "/values/query_generation/dedup_abs_tolerance": "0x1.19799812dea11p-40",
+      "/values/query_generation/dedup_rel_tolerance": "0x1.12e0be826d695p-30",
+      "/values/query_generation/grid_close_abs_tolerance": "0x1.203af9ee75616p-50",
+      "/values/query_generation/grid_close_rel_tolerance": "0x1.19799812dea11p-40",
+      "/values/query_generation/max_grid_value": "0x1.4000000000000p+4",
+      "/values/query_generation/min_grid_value": "0x1.999999999999ap-5",
+      "/values/query_generation/ratio_query_epsilon": "0x1.0624dd2f1a9fcp-10",
+      "/values/query_generation/raw_query_tolerance": "0x1.19799812dea11p-40",
+      "/values/simplex_partition_recovery/max_wall_seconds": "0x1.6800000000000p+5"
+    },
+    "profile_id": "otqa-exact-v3",
+    "values": {
+      "exact_recovery": {
+        "decimal_precision": 80,
+        "max_active_sets": 20000,
+        "max_explicit_affine_dimension": 2,
+        "max_lp_variables": 5
+      },
+      "geometry": {
+        "candidate_mode": "ratio_relevant",
+        "containment_relative_tolerance": 1e-08,
+        "equality_residual_factor": 10.0,
+        "halfspace_options": [
+          null,
+          "Q12",
+          "Q12 QJ"
+        ],
+        "higher_dim_prefix": "Qx",
+        "hull_fallback": "QJ",
+        "ratio_batch_elements": 1048576,
+        "ratio_batch_pair_factor": 4,
+        "ratio_terminal_tolerance": 1e-12,
+        "skip_exact_zero_branches": true,
+        "snap_dedup_tolerance": 1e-10,
+        "snap_relative_tolerance": 1e-05,
+        "support_margin_factor": 100.0,
+        "support_margin_floor": 1e-08,
+        "support_tolerance": 1e-10,
+        "tolerance": 1e-10
+      },
+      "linear_programming": {
+        "cold_solve": true,
+        "dual_feasibility_tolerance": 1e-10,
+        "method": "highs",
+        "presolve_first": true,
+        "primal_feasibility_tolerance": 1e-10,
+        "primal_validation_rule": "sqrt_tol_times_10",
+        "primal_validation_tol": 1e-09,
+        "retry_methods": [
+          "highs-ds",
+          "highs-ipm"
+        ],
+        "retry_without_presolve": true,
+        "variable_bounds": "explicit_constraints_free_variables"
+      },
+      "query_generation": {
+        "answer_order": [
+          "<",
+          "=",
+          ">"
+        ],
+        "answered_abs_tolerance": 1e-12,
+        "answered_rel_tolerance": 1e-09,
+        "dedup_abs_tolerance": 1e-12,
+        "dedup_rel_tolerance": 1e-09,
+        "grid_close_abs_tolerance": 1e-15,
+        "grid_close_rel_tolerance": 1e-12,
+        "grid_spacing": "log",
+        "max_grid_value": 20.0,
+        "min_grid_value": 0.05,
+        "ratio_query_epsilon": 0.001,
+        "raw_query_tolerance": 1e-12
+      },
+      "simplex_partition_recovery": {
+        "max_bits": 8192,
+        "max_constraints": 96,
+        "max_faces": 30000,
+        "max_goals": 7,
+        "max_operations": 3000000,
+        "max_pair_checks": 200000,
+        "max_rank_calls": 100000,
+        "max_simplices": 100000,
+        "max_vertices": 1024,
+        "max_wall_seconds": 45.0
+      }
+    }
+  },
+  "primary_cells": 1,
+  "provenance": {
+    "audit": {
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/reports/e9ca3c9b-71be-53c0-b8be-e90f58bd701c/audit.json",
+      "sha256": "61630a4e3e20449e3f97c1e210d9bab1c1f858eb1f17666d394f2c068c12aca6"
+    },
+    "file_references": [
+      {
+        "bytes": 2598,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/control/relocations170/fda7a4f9c2894b99b5c81a2c2105580b/launch-request.json",
+        "sha256": "5bd230b0425d75ed48a9dfa15f44f209a484802ba46c32f71889614ba1151194"
+      },
+      {
+        "bytes": 6428,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/control/relocations170/fda7a4f9c2894b99b5c81a2c2105580b/relocation-scope.json",
+        "sha256": "39e5f3e64d8813ee0c633f5cc47ce658c923300b2cfa98c6a5304ed4d3fbf4f4"
+      },
+      {
+        "bytes": 12416,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/monitoring/host170-native-resume-observed-a20c61ca6ff146d0ad142512388e3b11.json",
+        "sha256": "f303534f487569708c91511d5e309dd0bd9d6c9e4b088b9fc65fe9df54f0fe74"
+      },
+      {
+        "bytes": 1203,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/monitoring/root-relocate170-to179-authorization-fda7a4f9c2894b99b5c81a2c2105580b.json",
+        "sha256": "936e3a8cd67dcfae9c1b64e716b1252271ab5b03bf48c549509fbf4b904a9213"
+      },
+      {
+        "bytes": 1216,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/exports/fleet-final.csv",
+        "sha256": "2e72f9118505fc625bc8eadb11da8253532ea81d91b61e6be427243a9cae9063"
+      },
+      {
+        "bytes": 612,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/exports/fleet-final.csv.receipt.json",
+        "sha256": "0ebda8446f348f54535f6340190bd9d09178410714fcde8d58f515ac02a07e7e"
+      },
+      {
+        "bytes": 3438,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/exports/fleet-final.json",
+        "sha256": "40b9009016ebf75ab70157e3da860a49017c298aa1149878187a8395b8bf3174"
+      },
+      {
+        "bytes": 614,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/exports/fleet-final.json.receipt.json",
+        "sha256": "99bf0064ed4830079693268b480a9f9981be97cda2d16aa536800c678fff6732"
+      },
+      {
+        "bytes": 2465,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/certification.json",
+        "sha256": "927f7e700b991e13287f36487ee7decf2aa0e9afdb48b4d4572280dc2f605458"
+      },
+      {
+        "bytes": 706,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/backend_conformance.json",
+        "sha256": "b84b291ebacd5f8b81e9ea6f75321c4871fd3f7da021f0f2845493ac704c6de1"
+      },
+      {
+        "bytes": 687,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/installation.json",
+        "sha256": "13b3d5a9bcbbe989e7bd175c0f6df4e0ddd19d13c7d99132acf8296137b40563"
+      },
+      {
+        "bytes": 716,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/linux_recovery.json",
+        "sha256": "7bf483e60d8319c99931c12f6c3caf8b77f5fbc40cb444656992dfc445e5d0db"
+      },
+      {
+        "bytes": 709,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/numerical_conformance.json",
+        "sha256": "9648afa483e0ae73dd30a7a60f35feefd8477d03b881fd853d2c6b46ca44e6bb"
+      },
+      {
+        "bytes": 685,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/sdk_lifecycle.json",
+        "sha256": "9f5f83a2286f87cc96dc9c216e5a4123e67fac87adaab6d1d52974c87cfb8ce6"
+      },
+      {
+        "bytes": 699,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/standalone_io.json",
+        "sha256": "22e40357717f1e047dc088e75c27ff712ba123ef65d3f7174b772c6cbb3a96c3"
+      },
+      {
+        "bytes": 181,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/environment-lock.txt",
+        "sha256": "c02ba80f6442217b91383cf21a3077b483d21f9fa04ab45027c6a30e922c86e6"
+      },
+      {
+        "bytes": 876,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/profile.json",
+        "sha256": "7dabb63be556d99b816703f4f1958b03b86b0bd19d06f55844196aadc3f122fb"
+      },
+      {
+        "bytes": 1603,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/backend_conformance.json",
+        "sha256": "88532dea2d187f8a6d4ab8db47100cc89812bf6a35454c3333cffa8b74ea1a65"
+      },
+      {
+        "bytes": 2325,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/installation.json",
+        "sha256": "8ea454acbc0ef16ea0eb743e835dfa8700b1b7eb5e272e45e2e8ac629137a4cb"
+      },
+      {
+        "bytes": 2849,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/linux_recovery.json",
+        "sha256": "0c451ad427ca96d0d51684e36a0c7da636cc2ee607c5c079a79184dda6b129c0"
+      },
+      {
+        "bytes": 1295,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/numerical_conformance.json",
+        "sha256": "f9d5172b57c479aee9148f6f11e016d830c73c8d09be40d4a627319feb65b3d0"
+      },
+      {
+        "bytes": 1897,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/sdk_lifecycle.json",
+        "sha256": "11cc018031c96cb39c95737e3645702185989875789cbd74f3bfc95df7147c2e"
+      },
+      {
+        "bytes": 2607,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/standalone_io.json",
+        "sha256": "4d15d08bb6a8ec157a7129d08d464e32124cf6b4fcab9cf0b4f37cc718a89ce1"
+      },
+      {
+        "bytes": 825,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/inputs/runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/configuration.json",
+        "sha256": "69da087385986d29e27a84aa6af7b5f237a10cad1fc862e0ad8b38a8a252bbca"
+      },
+      {
+        "bytes": 725,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/inputs/runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/dataset.json",
+        "sha256": "816cadaefd16c9fae3eb79815a3e12cfc7d554db0d537db648fd2014530ca699"
+      },
+      {
+        "bytes": 209,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/inputs/runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/oracle.json",
+        "sha256": "621c9bad39515eece8d31a37cdc00770cc9ff163110c07557455d7140760da31"
+      },
+      {
+        "bytes": 851,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/inputs/runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/problem.json",
+        "sha256": "96737c02286c3079e6877a02faa611edf7dcdeecfd24f45fb747b8c4281d7d63"
+      },
+      {
+        "bytes": 1082,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/inputs/runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/suite.json",
+        "sha256": "7bc81475841a871bb3dd5731537e6fa533ef94a91f733f4f1202030be9a7a385"
+      },
+      {
+        "bytes": 2129409,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/jobs/job000001/attempts/attempt0001/events.jsonl",
+        "sha256": "c314589751e5e2faea8291b12d38e8c2ba2cb019247bdffd1789be66e27e149a"
+      },
+      {
+        "bytes": 7684,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/jobs/job000001/attempts/attempt0001/manifest.json",
+        "sha256": "c8ac119931bc8583a7a08d13a60dca22007d57b96c9367c4dfe451d0d2aad988"
+      },
+      {
+        "bytes": 1567305,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/jobs/job000001/attempts/attempt0001/result.json",
+        "sha256": "d219dc249354f9c20fe2df9c4c31c55d67f87bf36bac4b4558bfe66aa540b31d"
+      },
+      {
+        "bytes": 20420,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/materialization_receipt.json",
+        "sha256": "086fdc38bcf6f1615f1ec59269c75ad45f7ad49287c9656b49c84e99893a1661"
+      },
+      {
+        "bytes": 10334,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/plan.json",
+        "sha256": "d9cf82c67abe5a1aa46405567ac375f67c5f9f726720c71bfa007f48d831081d"
+      },
+      {
+        "bytes": 2416,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/certification.json",
+        "sha256": "13a50e80e3cad6f8a7d21c440823ceea821c39f9d2053eb4a547278a004c06e3"
+      },
+      {
+        "bytes": 699,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/backend_conformance.json",
+        "sha256": "8f5d6c960fdcad3f49db6422a5072d5f8949a1b0ae5788b30f5efc884d2605b9"
+      },
+      {
+        "bytes": 680,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/installation.json",
+        "sha256": "87306418aa21f60fe19214b95a08fbe3f0b9c8de69eef2584b4337f39e1dfc22"
+      },
+      {
+        "bytes": 709,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/linux_recovery.json",
+        "sha256": "adf62da93262667c1e1712378ce90330146ea244fd86b87501d55251659aa0fb"
+      },
+      {
+        "bytes": 702,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/numerical_conformance.json",
+        "sha256": "e7b1261105fda1c85f9d19def68d313c372b72bc38db207efb09584915787a40"
+      },
+      {
+        "bytes": 678,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/sdk_lifecycle.json",
+        "sha256": "fc7a85cb8378822fb745f8fa32ab918e2be8160f39472770c8d186e067247904"
+      },
+      {
+        "bytes": 692,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/standalone_io.json",
+        "sha256": "1b1d0fc7dd5613c7a7b3f590e085feaf60952358c8a9b3939e21a8695ba21612"
+      },
+      {
+        "bytes": 181,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/environment-lock.txt",
+        "sha256": "c02ba80f6442217b91383cf21a3077b483d21f9fa04ab45027c6a30e922c86e6"
+      },
+      {
+        "bytes": 862,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/profile.json",
+        "sha256": "c2e9a5022df479fcc6c7f80d7ab8a9a93c7dbc816754833a0df5bf6e0fedb581"
+      },
+      {
+        "bytes": 1603,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/backend_conformance.json",
+        "sha256": "88532dea2d187f8a6d4ab8db47100cc89812bf6a35454c3333cffa8b74ea1a65"
+      },
+      {
+        "bytes": 2325,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/installation.json",
+        "sha256": "8ea454acbc0ef16ea0eb743e835dfa8700b1b7eb5e272e45e2e8ac629137a4cb"
+      },
+      {
+        "bytes": 2849,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/linux_recovery.json",
+        "sha256": "0c451ad427ca96d0d51684e36a0c7da636cc2ee607c5c079a79184dda6b129c0"
+      },
+      {
+        "bytes": 1295,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/numerical_conformance.json",
+        "sha256": "f9d5172b57c479aee9148f6f11e016d830c73c8d09be40d4a627319feb65b3d0"
+      },
+      {
+        "bytes": 1897,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/sdk_lifecycle.json",
+        "sha256": "11cc018031c96cb39c95737e3645702185989875789cbd74f3bfc95df7147c2e"
+      },
+      {
+        "bytes": 2607,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/standalone_io.json",
+        "sha256": "4d15d08bb6a8ec157a7129d08d464e32124cf6b4fcab9cf0b4f37cc718a89ce1"
+      },
+      {
+        "bytes": 825,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/provenance/original/runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/configuration.json",
+        "sha256": "69da087385986d29e27a84aa6af7b5f237a10cad1fc862e0ad8b38a8a252bbca"
+      },
+      {
+        "bytes": 819,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/provenance/original/runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/dataset.json",
+        "sha256": "c3a8103bdddd1a97433fe0b9789aff43df508f88905473c5217096e53f5c3c9d"
+      },
+      {
+        "bytes": 209,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/provenance/original/runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/oracle.json",
+        "sha256": "621c9bad39515eece8d31a37cdc00770cc9ff163110c07557455d7140760da31"
+      },
+      {
+        "bytes": 851,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/provenance/original/runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/problem.json",
+        "sha256": "96737c02286c3079e6877a02faa611edf7dcdeecfd24f45fb747b8c4281d7d63"
+      },
+      {
+        "bytes": 1209,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/provenance/original/runs/seven-h3-grid5-followups-20261018T011350Z/inputs/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/suite.json",
+        "sha256": "c85a3fffe739534e9b0f57ea5be9698dcb984673758d6794a090a37815781cff"
+      },
+      {
+        "bytes": 1170,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/reports/e9ca3c9b-71be-53c0-b8be-e90f58bd701c/audit.json",
+        "sha256": "61630a4e3e20449e3f97c1e210d9bab1c1f858eb1f17666d394f2c068c12aca6"
+      },
+      {
+        "bytes": 1391,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/reports/e9ca3c9b-71be-53c0-b8be-e90f58bd701c/state-snapshot.json",
+        "sha256": "ee16ad37c8a8346eb4ba5f6376e9a924b786d3e6d5f3e22f2acd6aa80d2c87ba"
+      },
+      {
+        "bytes": 325,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/source/build-provenance.json",
+        "sha256": "12fde9ab005f42ea8e40fb9c7f13814149d5a09b3f2f32a6aa83f34c2a1c92c6"
+      },
+      {
+        "bytes": 16558,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/source/inventory.json",
+        "sha256": "09d2a9de41fb870ecace63571141ad71923186a73120dc6cb151b63b0264ae00"
+      },
+      {
+        "bytes": 1391,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/state.json",
+        "sha256": "ee16ad37c8a8346eb4ba5f6376e9a924b786d3e6d5f3e22f2acd6aa80d2c87ba"
+      },
+      {
+        "bytes": 5009,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/review/relocate170-to179-independent-20261018T0209Z/review.json",
+        "sha256": "2ba3380747d3cc003045ca830b584f180b4dd4fc24cd0a2602e13cb018093363"
+      },
+      {
+        "bytes": 37065,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/scope.json",
+        "sha256": "4dbca0964c03476cb38a40681d9c9798228eac39b3aeb4aa4f68a9d56c7235cf"
+      }
+    ],
+    "json_csv_same_audit_ref": true,
+    "plan": {
+      "bytes": 10334,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/plan.json",
+      "sha256": "d9cf82c67abe5a1aa46405567ac375f67c5f9f726720c71bfa007f48d831081d"
+    },
+    "reference_root": "project_root",
+    "series_path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024",
+    "state": {
+      "bytes": 1391,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/state.json",
+      "sha256": "ee16ad37c8a8346eb4ba5f6376e9a924b786d3e6d5f3e22f2acd6aa80d2c87ba"
+    }
+  },
+  "repetitions": 1,
+  "report_status": "provisional_pending_independent_raw_and_final_hash_review",
+  "rows": [
+    {
+      "all_attempt_controller_missing": 0,
+      "all_attempt_controller_seconds": 35236.215354556996,
+      "alternatives": 5,
+      "api_measurement_complete": true,
+      "api_seconds": 35235.114947787,
+      "attempt_count": 1,
+      "attempt_id": "attempt0001",
+      "case_id": "d7-m5-c000024",
+      "case_seconds": 35235.655386946,
+      "classification": "correct",
+      "configuration_id": "d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024-config",
+      "controller_seconds": 35236.215354556996,
+      "error": null,
+      "exactly_solved": true,
+      "final_candidate_ids": [
+        "a0"
+      ],
+      "final_candidate_volume_shares_recorded": {
+        "a0": 1.0
+      },
+      "grid": 5,
+      "initial_candidate_count": 4,
+      "initial_candidate_ids": [
+        "a0",
+        "a1",
+        "a2",
+        "a4"
+      ],
+      "initial_candidate_volume_shares_recorded": {
+        "a0": 0.09329938797288692,
+        "a1": 0.4789821404198576,
+        "a2": 0.3936708264530499,
+        "a4": 0.0340476451542056
+      },
+      "interruption": null,
+      "job_id": "job000001",
+      "journal": {
+        "bytes": 2129409,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/jobs/job000001/attempts/attempt0001/events.jsonl",
+        "sha256": "c314589751e5e2faea8291b12d38e8c2ba2cb019247bdffd1789be66e27e149a"
+      },
+      "journal_event_counts": {
+        "answer_received": 45,
+        "planning_attempt_completed": 45,
+        "planning_attempt_started": 45,
+        "planning_resolved": 45,
+        "query_completed": 45,
+        "query_dispatched": 45,
+        "query_planned": 45,
+        "run_finished": 1,
+        "run_started": 1,
+        "state_analyzed": 46
+      },
+      "known_all_attempt_controller_seconds_sum": 35236.215354556996,
+      "manifest": {
+        "bytes": 7684,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/jobs/job000001/attempts/attempt0001/manifest.json",
+        "sha256": "c8ac119931bc8583a7a08d13a60dca22007d57b96c9367c4dfe451d0d2aad988"
+      },
+      "mode": "receding",
+      "objectives": 7,
+      "partial_api_seconds": null,
+      "quality": "correct",
+      "quality_findings": [],
+      "queries": 45,
+      "query_counts": {
+        "answered_new": 45,
+        "answered_total": 45,
+        "dispatched_new": 45,
+        "initial_answers": 0
+      },
+      "result": {
+        "bytes": 1567305,
+        "path": "runs/seven-h3-grid5-followups-20261018T011350Z/native-relocations170/fda7a4f9c2894b99b5c81a2c2105580b/d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024/jobs/job000001/attempts/attempt0001/result.json",
+        "sha256": "d219dc249354f9c20fe2df9c4c31c55d67f87bf36bac4b4558bfe66aa540b31d"
+      },
+      "run_id": "832e3fb9-ad05-4258-9927-644ba71904f1",
+      "selected_candidate_id": "a0",
+      "solved": true,
+      "status": "completed",
+      "telemetry_errors": [],
+      "termination_reason": "exact_single_candidate",
+      "timings": {
+        "answer_wait_wall_seconds": 0.00017109900363720953,
+        "api_call_wall_seconds": 35235.114947787,
+        "case_elapsed_seconds": 35235.655386946,
+        "complete_api_measurement": true,
+        "observer_wall_seconds": 0.0,
+        "partial_api_elapsed_seconds": null,
+        "persistence_in_call_wall_seconds": null,
+        "planning_wall_seconds": null,
+        "recorder_wall_seconds": 2.814572358973237,
+        "scope_version": 1,
+        "state_analysis_wall_seconds": null,
+        "unattributed_wall_seconds": null,
+        "worker_cpu_seconds": null,
+        "worker_shutdown_wall_seconds": null,
+        "worker_startup_wall_seconds": null
+      },
+      "true_winner_ids_recorded": [
+        "a0"
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "series_id": "f0f66acc-7a05-4e13-acc8-374ed13ff2f4",
+  "source": {
+    "dirty": false,
+    "git_commit": "62d1d01339f91802e2916b63660a4e640d99c9cc",
+    "inventory_format": "otqa-source-v1",
+    "source_sha256": "720726607ae451b319e59e01453b6ba69b9950ef42420e700ed6b4eaa5b34d0e",
+    "version": "0.2.0"
+  },
+  "study_id": "d7-a5-n1-h3-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-case000024",
+  "summary": {
+    "all_attempt_costs": {
+      "api_seconds": {
+        "maximum": 35235.114947787,
+        "mean": 35235.114947787,
+        "median_across_cases_or_attempts": 35235.114947787,
+        "minimum": 35235.114947787,
+        "n": 1,
+        "p90": 35235.114947787,
+        "total": 35235.114947787
+      },
+      "case_seconds": {
+        "maximum": 35235.655386946,
+        "mean": 35235.655386946,
+        "median_across_cases_or_attempts": 35235.655386946,
+        "minimum": 35235.655386946,
+        "n": 1,
+        "p90": 35235.655386946,
+        "total": 35235.655386946
+      },
+      "controller_seconds": {
+        "maximum": 35236.215354556996,
+        "mean": 35236.215354556996,
+        "median_across_cases_or_attempts": 35236.215354556996,
+        "minimum": 35236.215354556996,
+        "n": 1,
+        "p90": 35236.215354556996,
+        "total": 35236.215354556996
+      },
+      "partial_api_seconds": {
+        "maximum": null,
+        "mean": null,
+        "median_across_cases_or_attempts": null,
+        "minimum": null,
+        "n": 0,
+        "p90": null,
+        "total": null
+      }
+    },
+    "all_attempt_queries": {
+      "maximum": 45,
+      "mean": 45,
+      "median_across_cases_or_attempts": 45,
+      "minimum": 45,
+      "n": 1,
+      "p90": 45.0,
+      "total": 45.0
+    },
+    "all_attempt_status_counts": {
+      "completed": 1
+    },
+    "all_attempts": 1,
+    "api_outlier_case_ids": [],
+    "api_seconds_all_primary_measured": {
+      "maximum": 35235.114947787,
+      "mean": 35235.114947787,
+      "median_across_cases_or_attempts": 35235.114947787,
+      "minimum": 35235.114947787,
+      "n": 1,
+      "p90": 35235.114947787,
+      "total": 35235.114947787
+    },
+    "api_seconds_correct": {
+      "maximum": 35235.114947787,
+      "mean": 35235.114947787,
+      "median_across_cases_or_attempts": 35235.114947787,
+      "minimum": 35235.114947787,
+      "n": 1,
+      "p90": 35235.114947787,
+      "total": 35235.114947787
+    },
+    "classification_counts": {
+      "correct": 1
+    },
+    "correct": 1,
+    "correct_denominator": 1,
+    "correct_fraction": 1.0,
+    "initial_candidate_count_distribution": {
+      "4": 1
+    },
+    "largest_api_cases": [
+      {
+        "api_seconds": 35235.114947787,
+        "case_id": "d7-m5-c000024",
+        "classification": "correct",
+        "queries": 45,
+        "status": "completed"
+      }
+    ],
+    "missing_all_attempt_costs": {
+      "api_seconds": 0,
+      "case_seconds": 0,
+      "controller_seconds": 0
+    },
+    "missing_all_attempt_query_counts": 0,
+    "one_query_correct": 0,
+    "outlier_rule": {
+      "action": "descriptive only; no exclusion",
+      "metric": "one recorded API duration per primary case",
+      "q1": 35235.114947787,
+      "q3": 35235.114947787,
+      "rule": "greater than Q3 + 1.5 IQR",
+      "upper_fence": 35235.114947787
+    },
+    "primary_status_counts": {
+      "completed": 1
+    },
+    "quality_counts_recorded": {
+      "correct": 1
+    },
+    "queries_all_completed": {
+      "maximum": 45,
+      "mean": 45,
+      "median_across_cases_or_attempts": 45,
+      "minimum": 45,
+      "n": 1,
+      "p90": 45.0,
+      "total": 45.0
+    },
+    "queries_correct": {
+      "maximum": 45,
+      "mean": 45,
+      "median_across_cases_or_attempts": 45,
+      "minimum": 45,
+      "n": 1,
+      "p90": 45.0,
+      "total": 45.0
+    },
+    "termination_reason_counts": {
+      "exact_single_candidate": 1
+    },
+    "zero_query_correct": 0
+  },
+  "technical_relocation": {
+    "distinct_original_problem_oracle_pairs": 5,
+    "limitation": "Technical attempts and known partial costs remain separate from the one logical quality cell; original full costs and post-snapshot answers are unavailable.",
+    "logical_primary_cells_in_original_scope": 7,
+    "native_rows_and_all_attempts_describe_destination_series_only": true,
+    "new_logical_quality_case": false,
+    "original_attempts": [
+      {
+        "attempt_id": "attempt0001",
+        "complete_api_seconds": null,
+        "confirmed_committed_answers_at_snapshot": 2,
+        "controller_seconds": null,
+        "partial_api_seconds_at_snapshot": 255.0806905630002,
+        "progress_credit_to_relocated_attempt": 0,
+        "result_available_at_snapshot": true,
+        "snapshot_afterwards_activity_and_final_costs": "unknown; no later native result or costs inferred",
+        "status_at_saved_observation": "interrupted"
+      },
+      {
+        "attempt_id": "attempt0002",
+        "complete_api_seconds": null,
+        "confirmed_committed_answers_at_snapshot": 0,
+        "controller_seconds": null,
+        "partial_api_seconds_at_snapshot": null,
+        "progress_credit_to_relocated_attempt": 0,
+        "result_available_at_snapshot": false,
+        "snapshot_afterwards_activity_and_final_costs": "unknown; no later native result or costs inferred",
+        "status_at_saved_observation": "running"
+      }
+    ],
+    "original_complete_total_api_seconds": null,
+    "original_complete_total_controller_seconds": null,
+    "original_observation": {
+      "bytes": 12416,
+      "path": "runs/seven-h3-grid5-followups-20261018T011350Z/monitoring/host170-native-resume-observed-a20c61ca6ff146d0ad142512388e3b11.json",
+      "sha256": "f303534f487569708c91511d5e309dd0bd9d6c9e4b088b9fc65fe9df54f0fe74"
+    },
+    "original_observation_is_historical_not_current_process_status": true,
+    "physical_relocation_owner": "fda7a4f9c2894b99b5c81a2c2105580b",
+    "relocated_attempt_starts_from_original_inputs_with_zero_answers": true
+  }
+}

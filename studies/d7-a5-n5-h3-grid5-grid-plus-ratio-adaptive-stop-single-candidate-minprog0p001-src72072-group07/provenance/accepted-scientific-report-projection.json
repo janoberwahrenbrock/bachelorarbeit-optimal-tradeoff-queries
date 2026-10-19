@@ -1,0 +1,194 @@
+{
+  "one_future_public_release_per_original_parent": 1,
+  "primary_cases": 5,
+  "public_scientific_projection_private_original_retained": true,
+  "rows": [
+    {
+      "API_seconds": 49290.928648807,
+      "all_original_attempts": [
+        {
+          "attempt_id": "attempt0001",
+          "result": {
+            "path": "jobs/job000001/attempts/attempt0001/result.json",
+            "sha256": "c545dc961c63b441044043ae99d5d7b6bbe877c66b6978a2048b1929149ab52d"
+          },
+          "run_id": "80953c7f-7112-43c7-bea5-fa56b66d355a"
+        }
+      ],
+      "case_id": "d7-m5-c000030",
+      "case_seconds": 49291.702777113,
+      "controller_seconds": 49292.696748222,
+      "error": null,
+      "native_fragment_id": "d7-a5-n5-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group07",
+      "native_series_id": "75675e1f-426e-4d35-9329-ca979e64459a",
+      "partial_API_seconds": null,
+      "primary_attempts_recorded": 1,
+      "quality": "correct",
+      "queries": 43,
+      "result": {
+        "path": "jobs/job000001/attempts/attempt0001/result.json",
+        "sha256": "c545dc961c63b441044043ae99d5d7b6bbe877c66b6978a2048b1929149ab52d"
+      },
+      "scientific_terminal": true,
+      "solved": true,
+      "status": "completed"
+    },
+    {
+      "API_seconds": 910.0160933570005,
+      "all_original_attempts": [
+        {
+          "attempt_id": "attempt0001",
+          "result": {
+            "path": "jobs/job000002/attempts/attempt0001/result.json",
+            "sha256": "d9e9d9c61f243a16e89c981382fc2ca5ac9075c93526380ec68af3601fa36e09"
+          },
+          "run_id": "cafca43f-0f27-4543-ba35-356e77902386"
+        }
+      ],
+      "case_id": "d7-m5-c000031",
+      "case_seconds": 910.3896427110012,
+      "controller_seconds": 910.6393645670032,
+      "error": null,
+      "native_fragment_id": "d7-a5-n5-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group07",
+      "native_series_id": "75675e1f-426e-4d35-9329-ca979e64459a",
+      "partial_API_seconds": null,
+      "primary_attempts_recorded": 1,
+      "quality": "correct",
+      "queries": 6,
+      "result": {
+        "path": "jobs/job000002/attempts/attempt0001/result.json",
+        "sha256": "d9e9d9c61f243a16e89c981382fc2ca5ac9075c93526380ec68af3601fa36e09"
+      },
+      "scientific_terminal": true,
+      "solved": true,
+      "status": "completed"
+    },
+    {
+      "API_seconds": 3930.2249301450065,
+      "all_original_attempts": [
+        {
+          "attempt_id": "attempt0001",
+          "result": {
+            "path": "jobs/job000003/attempts/attempt0001/result.json",
+            "sha256": "c3ab9344aeaaeb14dc9b230780d1536ce6e0db5c8908318bb8429d2ff5cfcdac"
+          },
+          "run_id": "0783be72-7b3a-4aa9-83bf-c6e2e6bbb107"
+        }
+      ],
+      "case_id": "d7-m5-c000032",
+      "case_seconds": 3930.6492817020044,
+      "controller_seconds": 3930.991774508002,
+      "error": null,
+      "native_fragment_id": "d7-a5-n5-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group07",
+      "native_series_id": "75675e1f-426e-4d35-9329-ca979e64459a",
+      "partial_API_seconds": null,
+      "primary_attempts_recorded": 1,
+      "quality": "correct",
+      "queries": 10,
+      "result": {
+        "path": "jobs/job000003/attempts/attempt0001/result.json",
+        "sha256": "c3ab9344aeaaeb14dc9b230780d1536ce6e0db5c8908318bb8429d2ff5cfcdac"
+      },
+      "scientific_terminal": true,
+      "solved": true,
+      "status": "completed"
+    },
+    {
+      "API_seconds": 38474.94466577402,
+      "all_original_attempts": [
+        {
+          "attempt_id": "attempt0001",
+          "result": {
+            "path": "jobs/job000004/attempts/attempt0001/result.json",
+            "sha256": "675643526b13efe9f0c0a3662af4d41ff76f17d044781925259ef2d5e91d8c37"
+          },
+          "run_id": "b0ebf9e9-ea52-41d4-b821-a0c9232431bf"
+        }
+      ],
+      "case_id": "d7-m5-c000033",
+      "case_seconds": 38475.767608144015,
+      "controller_seconds": 38476.366079982996,
+      "error": {
+        "code": "numerical_failure",
+        "context": {
+          "memory_answer_count": 46,
+          "memory_execution_cursor": {
+            "answered_total": 46,
+            "remaining_depth": 3
+          },
+          "memory_pending_planning": {
+            "active_attempt_index": 1,
+            "completed_attempts": 0,
+            "cursor_before": {
+              "answered_total": 46,
+              "remaining_depth": 3
+            },
+            "requested_depth": 3
+          },
+          "memory_query_counts": {
+            "answered_new": 46,
+            "answered_total": 46,
+            "dispatched_new": 46,
+            "initial_answers": 0
+          }
+        },
+        "message": "positive-probability branch has no valid candidates in query-efficiency plan",
+        "stage": "numerics",
+        "traceback": "concurrent.futures.process._RemoteTraceback: \n\"\"\"\nTraceback (most recent call last):\n  File \"/usr/lib/python3.14/concurrent/futures/process.py\", line 254, in _process_worker\n    r = call_item.fn(*call_item.args, **call_item.kwargs)\n  File \"/home/cruncher/bachelorarbeit-optimal-tradeoff-queries/.venv-studies-v3-62d1d01/lib/python3.14/site-packages/otqa/planning/session.py\", line 122, in _run_worker\n    result, blocks = _WORKER._execute_task(task)\n                     ~~~~~~~~~~~~~~~~~~~~~^^^^^^\n  File \"/home/cruncher/bachelorarbeit-optimal-tradeoff-queries/.venv-studies-v3-62d1d01/lib/python3.14/site-packages/otqa/planning/session.py\", line 559, in _execute_task\n    result = self._evaluate_one(state, task.query, task.depth, task.source, task.mode)\n  File \"/home/cruncher/bachelorarbeit-optimal-tradeoff-queries/.venv-studies-v3-62d1d01/lib/python3.14/site-packages/otqa/planning/session.py\", line 532, in _evaluate_one\n    return self._evaluate_h3(state, query, source)\n           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/cruncher/bachelorarbeit-optimal-tradeoff-queries/.venv-studies-v3-62d1d01/lib/python3.14/site-packages/otqa/planning/session.py\", line 438, in _evaluate_h3\n    frontiers.append(self._child_frontier(child))\n                     ~~~~~~~~~~~~~~~~~~~~^^^^^^^\n  File \"/home/cruncher/bachelorarbeit-optimal-tradeoff-queries/.venv-studies-v3-62d1d01/lib/python3.14/site-packages/otqa/planning/session.py\", line 414, in _child_frontier\n    results = self._evaluate_many(state, data, 2, \"efficiency\", root=False)\n  File \"/home/cruncher/bachelorarbeit-optimal-tradeoff-queries/.venv-studies-v3-62d1d01/lib/python3.14/site-packages/otqa/planning/session.py\", line 615, in _evaluate_many\n    return tuple(self._evaluate_one(state, query, depth,\n           ^^^^^\n  File \"/home/cruncher/bachelorarbeit-optimal-tradeoff-queries/.venv-studies-v3-62d1d01/lib/python3.14/site-packages/otqa/planning/session.py\", line 615, in <genexpr>\n    return tuple(self._evaluate_one(state, query, depth,\n                 ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^\n        data.query_sources.get(canonical_key(query), \"unknown\"), mode) for query in queries)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/cruncher/bachelorarbeit-optimal-tradeoff-queries/.venv-studies-v3-62d1d01/lib/python3.14/site-packages/otqa/planning/session.py\", line 535, in _evaluate_one\n    self._validate(result.evaluation)\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^\n  File \"/home/cruncher/bachelorarbeit-optimal-tradeoff-queries/.venv-studies-v3-62d1d01/lib/python3.14/site-packages/otqa/planning/session.py\", line 494, in _validate\n    raise RuntimeError(\"positive-probability branch has no valid candidates in query-efficiency plan\")\nRuntimeError: positive-probability branch has no valid candidates in query-efficiency plan\n\"\"\"\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/home/cruncher/bachelorarbeit-optimal-tradeoff-queries/.venv-studies-v3-62d1d01/lib/python3.14/site-packages/otqa/solver.py\", line 93, in compute\n    return operation(*args, **kwargs)\n  File \"/home/cruncher/bachelorarbeit-optimal-tradeoff-queries/.venv-studies-v3-62d1d01/lib/python3.14/site-packages/otqa/planning/session.py\", line 801, in plan\n    results = self._evaluate_many(state, data, depth, \"efficiency\", root=True)\n  File \"/home/cruncher/bachelorarbeit-optimal-tradeoff-queries/.venv-studies-v3-62d1d01/lib/python3.14/site-packages/otqa/planning/session.py\", line 702, in _evaluate_many\n    raise errors[min(errors)]\n  File \"/home/cruncher/bachelorarbeit-optimal-tradeoff-queries/.venv-studies-v3-62d1d01/lib/python3.14/site-packages/otqa/planning/session.py\", line 668, in _evaluate_many\n    received = self._receive(future.result, options)\n  File \"/home/cruncher/bachelorarbeit-optimal-tradeoff-queries/.venv-studies-v3-62d1d01/lib/python3.14/site-packages/otqa/planning/session.py\", line 581, in _receive\n    return call()\n  File \"/usr/lib/python3.14/concurrent/futures/_base.py\", line 443, in result\n    return self.__get_result()\n           ~~~~~~~~~~~~~~~~~^^\n  File \"/usr/lib/python3.14/concurrent/futures/_base.py\", line 395, in __get_result\n    raise self._exception\nRuntimeError: positive-probability branch has no valid candidates in query-efficiency plan\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/home/cruncher/bachelorarbeit-optimal-tradeoff-queries/.venv-studies-v3-62d1d01/lib/python3.14/site-packages/otqa/runtime/case.py\", line 161, in run_attempt\n    result = solve(domain_problem, policy, measured_provider, budget=budget, execution=execution,\n                   initial_answers=() if continuation is not None else initial, continuation=continuation, recorder=recorder, observer=observer)\n  File \"/home/cruncher/bachelorarbeit-optimal-tradeoff-queries/.venv-studies-v3-62d1d01/lib/python3.14/site-packages/otqa/api.py\", line 25, in solve\n    return solve_with_session(problem, policy, answer_provider, budget=budget,\n                              execution=execution, initial_answers=initial_answers,\n                              continuation=continuation, recorder=recorder, observer=observer)\n  File \"/home/cruncher/bachelorarbeit-optimal-tradeoff-queries/.venv-studies-v3-62d1d01/lib/python3.14/site-packages/otqa/solver.py\", line 56, in solve_with_session\n    return _drive(problem, policy, answer_provider, budget=budget, history=history,\n                  recorder=recorder, observer=observer, session=session, execution_cursor=cursor)\n  File \"/home/cruncher/bachelorarbeit-optimal-tradeoff-queries/.venv-studies-v3-62d1d01/lib/python3.14/site-packages/otqa/solver.py\", line 152, in _drive\n    attempted = attempt_at(cursor.remaining_depth)\n  File \"/home/cruncher/bachelorarbeit-optimal-tradeoff-queries/.venv-studies-v3-62d1d01/lib/python3.14/site-packages/otqa/solver.py\", line 145, in attempt_at\n    attempted = compute(session.plan, state, requested_depth=requested_depth)\n  File \"/home/cruncher/bachelorarbeit-optimal-tradeoff-queries/.venv-studies-v3-62d1d01/lib/python3.14/site-packages/otqa/solver.py\", line 97, in compute\n    raise NumericalError(str(exc), context=context()) from exc\notqa.errors.NumericalError: positive-probability branch has no valid candidates in query-efficiency plan\n",
+        "type": "NumericalError"
+      },
+      "native_fragment_id": "d7-a5-n5-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group07",
+      "native_series_id": "75675e1f-426e-4d35-9329-ca979e64459a",
+      "partial_API_seconds": null,
+      "primary_attempts_recorded": 1,
+      "quality": "not_selected",
+      "queries": 46,
+      "result": {
+        "path": "jobs/job000004/attempts/attempt0001/result.json",
+        "sha256": "675643526b13efe9f0c0a3662af4d41ff76f17d044781925259ef2d5e91d8c37"
+      },
+      "scientific_terminal": true,
+      "solved": false,
+      "status": "failed"
+    },
+    {
+      "API_seconds": 1699.881999336998,
+      "all_original_attempts": [
+        {
+          "attempt_id": "attempt0001",
+          "result": {
+            "path": "jobs/job000001/attempts/attempt0001/result.json",
+            "sha256": "db066077415f99e0c531dafb2f4b3650c08ca39292be45e77eb0fc4378b4d548"
+          },
+          "run_id": "5892e2bd-6929-41ab-9463-4d38250f30cd"
+        }
+      ],
+      "case_id": "d7-m5-c000034",
+      "case_seconds": 1700.2890671819914,
+      "controller_seconds": 1700.624249528002,
+      "error": null,
+      "native_fragment_id": "d7-a5-n5-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group07--technical-n1-000034",
+      "native_series_id": "7f643131-f1c9-42a3-b02a-60c9d6e6419d",
+      "partial_API_seconds": null,
+      "primary_attempts_recorded": 1,
+      "quality": "correct",
+      "queries": 10,
+      "result": {
+        "path": "jobs/job000001/attempts/attempt0001/result.json",
+        "sha256": "db066077415f99e0c531dafb2f4b3650c08ca39292be45e77eb0fc4378b4d548"
+      },
+      "scientific_terminal": true,
+      "solved": true,
+      "status": "completed"
+    }
+  ],
+  "source": {
+    "numeric_profile_id": "otqa-exact-v3",
+    "numeric_profile_values_sha256": "1374fa8394bffe9b7f84585b29ea2a0b353f105500f28f6b2c6a79fbcec4a56c",
+    "pinned_commit": "62d1d01339f91802e2916b63660a4e640d99c9cc",
+    "source_sha256": "720726607ae451b319e59e01453b6ba69b9950ef42420e700ed6b4eaa5b34d0e",
+    "wheel_sha256": "24e4a5c901690895bdb1557a5a90ef1e9d5f6d3eb06381df58031d8ce02f1a97"
+  },
+  "study_id": "d7-a5-n5-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group07",
+  "technical_fragments_public_only_under_raw_provenance": true
+}

@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-18T00:27:15.454499+00:00",
+  "status": "coordinator_scientific_package_accepted",
+  "passed": true,
+  "reviewer": "/root",
+  "study_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group07",
+  "source": {
+    "dirty": false,
+    "git_commit": "62d1d01339f91802e2916b63660a4e640d99c9cc",
+    "inventory_format": "otqa-source-v1",
+    "source_sha256": "720726607ae451b319e59e01453b6ba69b9950ef42420e700ed6b4eaa5b34d0e",
+    "version": "0.2.0"
+  },
+  "package": {
+    "manifest": {
+      "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/final-publication/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group07/20261018T001034.061444Z/publication-manifest.json",
+      "sha256": "9f288880b74a3fad7f68a13d5989561622cd96970e16c44a1bda1aa439c10082",
+      "bytes": 281044
+    },
+    "archive": {
+      "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/final-publication/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group07/20261018T001034.061444Z/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group07-v1.zip",
+      "sha256": "43693b7d513f2846d6a0108acbcfbfaec21ffb1929136bf12709b6d16acb2886",
+      "bytes": 55071008
+    },
+    "checksums": {
+      "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/final-publication/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group07/20261018T001034.061444Z/SHA256SUMS",
+      "sha256": "b7a27618c7573229c632c39e54f8c1556bd2379172a32911d822dfbf1f6d2fb1",
+      "bytes": 351
+    },
+    "validation": {
+      "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/final-publication/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group07/20261018T001034.061444Z/package-validation.json",
+      "sha256": "aba5a09a7d2826e19f24280fcd85484bfba3e2fd554a35fc545abe6355cefd97",
+      "bytes": 4073
+    }
+  },
+  "checks": [
+    "independent_raw_report_and_tools",
+    "all_outcomes_attempts_costs_and_diagnoses",
+    "source_inputs_profile_audit_and_terminal_denominators",
+    "remote_originals_and_stable_mac_selection",
+    "final_archive_manifest_and_fresh_offline_reproduction"
+  ],
+  "independent_final_review": {
+    "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/independent-final-package-reviews/20261018T001402.810129Z/review.json",
+    "sha256": "2b64519e1768767fe5c48c786f077494fcbca978b6a340daec01f0c72339b0be",
+    "bytes": 4356
+  },
+  "unresolved_issues": [],
+  "denominators": {
+    "primary_cells": 10,
+    "independent_problems": 10,
+    "all_attempts": 10,
+    "correct": 10,
+    "regular_unsolved": 0,
+    "failed": 0,
+    "incorrect": 0
+  },
+  "public_artifact_locations": {
+    "independent_final_review": {
+      "original": {
+        "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/independent-final-package-reviews/20261018T001402.810129Z/review.json",
+        "sha256": "2b64519e1768767fe5c48c786f077494fcbca978b6a340daec01f0c72339b0be",
+        "bytes": 4356
+      },
+      "public_path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group07/provenance/independent-final-package-review.json"
+    },
+    "offline_verification": {
+      "original": {
+        "bytes": 1097,
+        "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/final-publication/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group07/20261018T001034.061444Z/fresh-offline-analysis/reproduction-verification.json",
+        "sha256": "722fe05d9e8115e9b0ca00867c441b05ec0fa5c22eb0eb080d47c941c958d24b"
+      },
+      "public_path": "studies/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group07/provenance/final-offline-verification.json"
+    }
+  },
+  "publication_completion": false,
+  "publication_commit": null,
+  "notes": [
+    "Scientifically accepted standalone content/package; actual GitHub publication and fresh public download remain separate gates.",
+    "All10correct results retained in original denominator; no geometric recertification or causal runtime guarantee."
+  ]
+}

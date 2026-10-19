@@ -1,0 +1,3152 @@
+{
+  "all_attempts": [
+    {
+      "attempt_id": "attempt0001",
+      "case_id": "d5-m5-c000000",
+      "controller_elapsed_seconds": 35.96829784199872,
+      "error": null,
+      "evidence": {
+        "actual_horizons": [
+          3,
+          2,
+          1
+        ],
+        "answers_checked": 3,
+        "api_seconds": 35.418678932997864,
+        "attempt_id": "attempt0001",
+        "attempts_completed": 3,
+        "attempts_started": 3,
+        "candidate_count_path": [
+          2,
+          2,
+          2,
+          1
+        ],
+        "case_id": "d5-m5-c000000",
+        "case_seconds": 35.7572426350016,
+        "configuration_id": "d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01-config",
+        "controller_seconds": 35.96829784199872,
+        "error": null,
+        "error_code": null,
+        "expected_candidates": [
+          1.5204749149212595,
+          1.1915123400956895,
+          1.1915123400956895
+        ],
+        "fallback_attempts_completed": 0,
+        "fallback_attempts_started": 0,
+        "fallbacks": 0,
+        "final_execution_cursor": {
+          "answered_total": 3,
+          "remaining_depth": 3
+        },
+        "finished_at_utc": "2026-10-18T02:31:27.049592Z",
+        "grid": 5,
+        "initial_candidate_count": 2,
+        "initial_singleton": false,
+        "interruption": null,
+        "job_id": "job000001",
+        "journal_ref": {
+          "path": "jobs/job000001/attempts/attempt0001/events.jsonl",
+          "sha256": "67089944bc634757b7417da31886e75a31375bdf6050520bf761875943460734"
+        },
+        "last_good_sequence": 27,
+        "manifest_ref": {
+          "path": "jobs/job000001/attempts/attempt0001/manifest.json",
+          "sha256": "d61a7b2205e443261c22ac9ade7e5a999a58abd1b4548eebc5025c7e818624bc"
+        },
+        "mode": "adaptive",
+        "objectives": 5,
+        "partial_api_seconds": null,
+        "progress_matches_full_result_prefix": true,
+        "progress_ref": {
+          "bytes": 755,
+          "path": "jobs/job000001/attempts/attempt0001/progress.json",
+          "sha256": "70057a87c83321f8779eac05bc902c0d98e592e61a6c1748c42dfbaf64b5b752"
+        },
+        "quality": "correct",
+        "queries": 3,
+        "result_ref": {
+          "path": "jobs/job000001/attempts/attempt0001/result.json",
+          "sha256": "ea3dd2b9e5e1753f8017a94d1ff17bda346885ef2be673f247b3f680b9ca5da1"
+        },
+        "selected_candidate_id": "a2",
+        "solved": true,
+        "stagnant_answer_steps": 2,
+        "started_at_utc": "2026-10-18T02:30:51.292369Z",
+        "state_winner_lost_indices": [],
+        "status": "completed",
+        "successful_fallbacks": 0,
+        "termination_reason": "exact_single_candidate",
+        "uncommitted_recorded_answers_checked_no_credit": 0,
+        "unsuccessful_fallbacks": 0,
+        "winner_ids": [
+          "a2"
+        ]
+      },
+      "execution_status": "completed",
+      "interruption": null,
+      "job_id": "job000001",
+      "result": {
+        "path": "jobs/job000001/attempts/attempt0001/result.json",
+        "sha256": "ea3dd2b9e5e1753f8017a94d1ff17bda346885ef2be673f247b3f680b9ca5da1"
+      },
+      "run_id": "9af818ec-ce8e-4198-9e26-31e88381ef71",
+      "timings": {
+        "answer_wait_wall_seconds": 1.532800160930492e-05,
+        "api_call_wall_seconds": 35.418678932997864,
+        "case_elapsed_seconds": 35.7572426350016,
+        "complete_api_measurement": true,
+        "observer_wall_seconds": 0.0,
+        "partial_api_elapsed_seconds": null,
+        "persistence_in_call_wall_seconds": null,
+        "planning_wall_seconds": null,
+        "recorder_wall_seconds": 0.15400859801229672,
+        "scope_version": 1,
+        "state_analysis_wall_seconds": null,
+        "unattributed_wall_seconds": null,
+        "worker_cpu_seconds": null,
+        "worker_shutdown_wall_seconds": null,
+        "worker_startup_wall_seconds": null
+      },
+      "verified": true
+    },
+    {
+      "attempt_id": "attempt0001",
+      "case_id": "d5-m5-c000001",
+      "controller_elapsed_seconds": 450.69474165499923,
+      "error": null,
+      "evidence": {
+        "actual_horizons": [
+          1,
+          2,
+          1,
+          1,
+          1,
+          1,
+          2,
+          1,
+          2,
+          1
+        ],
+        "answers_checked": 10,
+        "api_seconds": 449.93104729600236,
+        "attempt_id": "attempt0001",
+        "attempts_completed": 10,
+        "attempts_started": 10,
+        "candidate_count_path": [
+          5,
+          4,
+          3,
+          3,
+          3,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1
+        ],
+        "case_id": "d5-m5-c000001",
+        "case_seconds": 450.35405756399996,
+        "configuration_id": "d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01-config",
+        "controller_seconds": 450.69474165499923,
+        "error": null,
+        "error_code": null,
+        "expected_candidates": [
+          4.0,
+          2.851751280895334,
+          2.4185354005394606,
+          2.4982525824599193,
+          2.357193744634219,
+          1.5936926265714748,
+          1.4929047684659518,
+          1.177315952269768,
+          1.4449739337791514,
+          1.2626939348344974
+        ],
+        "fallback_attempts_completed": 0,
+        "fallback_attempts_started": 0,
+        "fallbacks": 0,
+        "final_execution_cursor": {
+          "answered_total": 10,
+          "remaining_depth": 3
+        },
+        "finished_at_utc": "2026-10-18T02:38:57.625572Z",
+        "grid": 5,
+        "initial_candidate_count": 5,
+        "initial_singleton": false,
+        "interruption": null,
+        "job_id": "job000002",
+        "journal_ref": {
+          "path": "jobs/job000002/attempts/attempt0001/events.jsonl",
+          "sha256": "f4ceb697ff3fd817775d54fed3643f1e368e4cb41cc06354ebb28bc8e0ad0a04"
+        },
+        "last_good_sequence": 83,
+        "manifest_ref": {
+          "path": "jobs/job000002/attempts/attempt0001/manifest.json",
+          "sha256": "ad1b5041158d2c53e66af8713340b5a689c7f809f0bbe1726afd732610c65e7f"
+        },
+        "mode": "adaptive",
+        "objectives": 5,
+        "partial_api_seconds": null,
+        "progress_matches_full_result_prefix": true,
+        "progress_ref": {
+          "bytes": 760,
+          "path": "jobs/job000002/attempts/attempt0001/progress.json",
+          "sha256": "d09d0c5d6ab9122d511bb08e2696b9695b5f7b0b3a217829c8275348d90c5493"
+        },
+        "quality": "correct",
+        "queries": 10,
+        "result_ref": {
+          "path": "jobs/job000002/attempts/attempt0001/result.json",
+          "sha256": "edc87179ea1a242f69d1b58d6ff8279760d82567e56d4a8164dd49f874311de4"
+        },
+        "selected_candidate_id": "a4",
+        "solved": true,
+        "stagnant_answer_steps": 6,
+        "started_at_utc": "2026-10-18T02:31:27.271535Z",
+        "state_winner_lost_indices": [],
+        "status": "completed",
+        "successful_fallbacks": 0,
+        "termination_reason": "exact_single_candidate",
+        "uncommitted_recorded_answers_checked_no_credit": 0,
+        "unsuccessful_fallbacks": 0,
+        "winner_ids": [
+          "a4"
+        ]
+      },
+      "execution_status": "completed",
+      "interruption": null,
+      "job_id": "job000002",
+      "result": {
+        "path": "jobs/job000002/attempts/attempt0001/result.json",
+        "sha256": "edc87179ea1a242f69d1b58d6ff8279760d82567e56d4a8164dd49f874311de4"
+      },
+      "run_id": "c04aefbb-df39-4e09-b31f-851fa53c217d",
+      "timings": {
+        "answer_wait_wall_seconds": 3.9170001400634646e-05,
+        "api_call_wall_seconds": 449.93104729600236,
+        "case_elapsed_seconds": 450.35405756399996,
+        "complete_api_measurement": true,
+        "observer_wall_seconds": 0.0,
+        "partial_api_elapsed_seconds": null,
+        "persistence_in_call_wall_seconds": null,
+        "planning_wall_seconds": null,
+        "recorder_wall_seconds": 0.5813138200210233,
+        "scope_version": 1,
+        "state_analysis_wall_seconds": null,
+        "unattributed_wall_seconds": null,
+        "worker_cpu_seconds": null,
+        "worker_shutdown_wall_seconds": null,
+        "worker_startup_wall_seconds": null
+      },
+      "verified": true
+    },
+    {
+      "attempt_id": "attempt0001",
+      "case_id": "d5-m5-c000002",
+      "controller_elapsed_seconds": 143.37690647600175,
+      "error": null,
+      "evidence": {
+        "actual_horizons": [
+          1,
+          1,
+          3,
+          2,
+          1
+        ],
+        "answers_checked": 5,
+        "api_seconds": 142.77126668900019,
+        "attempt_id": "attempt0001",
+        "attempts_completed": 5,
+        "attempts_started": 5,
+        "candidate_count_path": [
+          5,
+          3,
+          2,
+          2,
+          2,
+          1
+        ],
+        "case_id": "d5-m5-c000002",
+        "case_seconds": 143.12610815300286,
+        "configuration_id": "d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01-config",
+        "controller_seconds": 143.37690647600175,
+        "error": null,
+        "error_code": null,
+        "expected_candidates": [
+          3.5120709406561783,
+          2.2163722242271033,
+          1.4658086372308017,
+          1.663719520892398,
+          1.4029632632209208
+        ],
+        "fallback_attempts_completed": 0,
+        "fallback_attempts_started": 0,
+        "fallbacks": 0,
+        "final_execution_cursor": {
+          "answered_total": 5,
+          "remaining_depth": 3
+        },
+        "finished_at_utc": "2026-10-18T02:41:21.112167Z",
+        "grid": 5,
+        "initial_candidate_count": 5,
+        "initial_singleton": false,
+        "interruption": null,
+        "job_id": "job000003",
+        "journal_ref": {
+          "path": "jobs/job000003/attempts/attempt0001/events.jsonl",
+          "sha256": "4201ff45c0d7b0b5382705d04f11193a451f3e17ccb62925b88b8e14651c3e5b"
+        },
+        "last_good_sequence": 43,
+        "manifest_ref": {
+          "path": "jobs/job000003/attempts/attempt0001/manifest.json",
+          "sha256": "9dbc6c6d50e401388a448f7ca3ad754d8ed311d43289cc596616a885a8fd4237"
+        },
+        "mode": "adaptive",
+        "objectives": 5,
+        "partial_api_seconds": null,
+        "progress_matches_full_result_prefix": true,
+        "progress_ref": {
+          "bytes": 755,
+          "path": "jobs/job000003/attempts/attempt0001/progress.json",
+          "sha256": "1f547b2ae651b82ea295c6c9f30eb14eb69466be77f6cc40746e954403cd0390"
+        },
+        "quality": "correct",
+        "queries": 5,
+        "result_ref": {
+          "path": "jobs/job000003/attempts/attempt0001/result.json",
+          "sha256": "1a00507d1283a9495140657604a07651590919e67268198d3f8d6b8a7352dfbf"
+        },
+        "selected_candidate_id": "a1",
+        "solved": true,
+        "stagnant_answer_steps": 2,
+        "started_at_utc": "2026-10-18T02:38:57.986077Z",
+        "state_winner_lost_indices": [],
+        "status": "completed",
+        "successful_fallbacks": 0,
+        "termination_reason": "exact_single_candidate",
+        "uncommitted_recorded_answers_checked_no_credit": 0,
+        "unsuccessful_fallbacks": 0,
+        "winner_ids": [
+          "a1"
+        ]
+      },
+      "execution_status": "completed",
+      "interruption": null,
+      "job_id": "job000003",
+      "result": {
+        "path": "jobs/job000003/attempts/attempt0001/result.json",
+        "sha256": "1a00507d1283a9495140657604a07651590919e67268198d3f8d6b8a7352dfbf"
+      },
+      "run_id": "bd980900-10ef-45a1-863b-06a719527e43",
+      "timings": {
+        "answer_wait_wall_seconds": 2.232000042567961e-05,
+        "api_call_wall_seconds": 142.77126668900019,
+        "case_elapsed_seconds": 143.12610815300286,
+        "complete_api_measurement": true,
+        "observer_wall_seconds": 0.0,
+        "partial_api_elapsed_seconds": null,
+        "persistence_in_call_wall_seconds": null,
+        "planning_wall_seconds": null,
+        "recorder_wall_seconds": 0.3485975769981451,
+        "scope_version": 1,
+        "state_analysis_wall_seconds": null,
+        "unattributed_wall_seconds": null,
+        "worker_cpu_seconds": null,
+        "worker_shutdown_wall_seconds": null,
+        "worker_startup_wall_seconds": null
+      },
+      "verified": true
+    },
+    {
+      "attempt_id": "attempt0001",
+      "case_id": "d5-m5-c000003",
+      "controller_elapsed_seconds": 74.89876937599911,
+      "error": null,
+      "evidence": {
+        "actual_horizons": [
+          1,
+          3,
+          2,
+          1
+        ],
+        "answers_checked": 4,
+        "api_seconds": 74.24314229200172,
+        "attempt_id": "attempt0001",
+        "attempts_completed": 4,
+        "attempts_started": 4,
+        "candidate_count_path": [
+          3,
+          2,
+          2,
+          2,
+          1
+        ],
+        "case_id": "d5-m5-c000003",
+        "case_seconds": 74.65084872499938,
+        "configuration_id": "d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01-config",
+        "controller_seconds": 74.89876937599911,
+        "error": null,
+        "error_code": null,
+        "expected_candidates": [
+          2.3057122791311864,
+          1.5153757767025158,
+          1.48165358214826,
+          1.4045585459775762
+        ],
+        "fallback_attempts_completed": 0,
+        "fallback_attempts_started": 0,
+        "fallbacks": 0,
+        "final_execution_cursor": {
+          "answered_total": 4,
+          "remaining_depth": 3
+        },
+        "finished_at_utc": "2026-10-18T02:42:36.025661Z",
+        "grid": 5,
+        "initial_candidate_count": 3,
+        "initial_singleton": false,
+        "interruption": null,
+        "job_id": "job000004",
+        "journal_ref": {
+          "path": "jobs/job000004/attempts/attempt0001/events.jsonl",
+          "sha256": "d3fb62e1ba8d2a31762dc38cc83a6e7514cfd9da1644f13a03536539f4fa92c4"
+        },
+        "last_good_sequence": 35,
+        "manifest_ref": {
+          "path": "jobs/job000004/attempts/attempt0001/manifest.json",
+          "sha256": "99481157fe33b3390884faefb2ae2f47f83b485864b88f1895255454e4a4a65f"
+        },
+        "mode": "adaptive",
+        "objectives": 5,
+        "partial_api_seconds": null,
+        "progress_matches_full_result_prefix": true,
+        "progress_ref": {
+          "bytes": 755,
+          "path": "jobs/job000004/attempts/attempt0001/progress.json",
+          "sha256": "3f339eaaf6972c985ebcc9bedb0e17b2cae07c14c33e696e2ea81e60ba601da5"
+        },
+        "quality": "correct",
+        "queries": 4,
+        "result_ref": {
+          "path": "jobs/job000004/attempts/attempt0001/result.json",
+          "sha256": "6ff3398472f3c9e1428c6f8a51273c36fc174c4dc05dd84bd50e1337247c83be"
+        },
+        "selected_candidate_id": "a2",
+        "solved": true,
+        "stagnant_answer_steps": 2,
+        "started_at_utc": "2026-10-18T02:41:21.374830Z",
+        "state_winner_lost_indices": [],
+        "status": "completed",
+        "successful_fallbacks": 0,
+        "termination_reason": "exact_single_candidate",
+        "uncommitted_recorded_answers_checked_no_credit": 0,
+        "unsuccessful_fallbacks": 0,
+        "winner_ids": [
+          "a2"
+        ]
+      },
+      "execution_status": "completed",
+      "interruption": null,
+      "job_id": "job000004",
+      "result": {
+        "path": "jobs/job000004/attempts/attempt0001/result.json",
+        "sha256": "6ff3398472f3c9e1428c6f8a51273c36fc174c4dc05dd84bd50e1337247c83be"
+      },
+      "run_id": "7b79636d-8ec1-407f-839b-14c1d93266fb",
+      "timings": {
+        "answer_wait_wall_seconds": 2.052000127150677e-05,
+        "api_call_wall_seconds": 74.24314229200172,
+        "case_elapsed_seconds": 74.65084872499938,
+        "complete_api_measurement": true,
+        "observer_wall_seconds": 0.0,
+        "partial_api_elapsed_seconds": null,
+        "persistence_in_call_wall_seconds": null,
+        "planning_wall_seconds": null,
+        "recorder_wall_seconds": 0.2811895100021502,
+        "scope_version": 1,
+        "state_analysis_wall_seconds": null,
+        "unattributed_wall_seconds": null,
+        "worker_cpu_seconds": null,
+        "worker_shutdown_wall_seconds": null,
+        "worker_startup_wall_seconds": null
+      },
+      "verified": true
+    },
+    {
+      "attempt_id": "attempt0001",
+      "case_id": "d5-m5-c000004",
+      "controller_elapsed_seconds": 1037.551123385998,
+      "error": null,
+      "evidence": {
+        "actual_horizons": [
+          3,
+          1,
+          1,
+          1,
+          2,
+          1,
+          1,
+          1,
+          1
+        ],
+        "answers_checked": 9,
+        "api_seconds": 1036.8294884410025,
+        "attempt_id": "attempt0001",
+        "attempts_completed": 9,
+        "attempts_started": 9,
+        "candidate_count_path": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          3,
+          2,
+          2,
+          1
+        ],
+        "case_id": "d5-m5-c000004",
+        "case_seconds": 1037.2401843049993,
+        "configuration_id": "d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01-config",
+        "controller_seconds": 1037.551123385998,
+        "error": null,
+        "error_code": null,
+        "expected_candidates": [
+          3.2869886102859827,
+          4.127380770954493,
+          4.1684158327526495,
+          4.181863304469677,
+          3.3973810420018316,
+          4.1418796783310885,
+          2.234428130623847,
+          1.344736043812988,
+          1.5354933255456222
+        ],
+        "fallback_attempts_completed": 0,
+        "fallback_attempts_started": 0,
+        "fallbacks": 0,
+        "final_execution_cursor": {
+          "answered_total": 9,
+          "remaining_depth": 3
+        },
+        "finished_at_utc": "2026-10-18T02:59:53.527561Z",
+        "grid": 5,
+        "initial_candidate_count": 5,
+        "initial_singleton": false,
+        "interruption": null,
+        "job_id": "job000005",
+        "journal_ref": {
+          "path": "jobs/job000005/attempts/attempt0001/events.jsonl",
+          "sha256": "eaa15ec5aad3b0d584e64a9b7a194e19d226356cd28c11b8d8c9ad08a965032e"
+        },
+        "last_good_sequence": 75,
+        "manifest_ref": {
+          "path": "jobs/job000005/attempts/attempt0001/manifest.json",
+          "sha256": "0e58d39e8bf686b554247b2c27d8ffdd3ce81c9298d0c1728660e2bdab0a8df8"
+        },
+        "mode": "adaptive",
+        "objectives": 5,
+        "partial_api_seconds": null,
+        "progress_matches_full_result_prefix": true,
+        "progress_ref": {
+          "bytes": 757,
+          "path": "jobs/job000005/attempts/attempt0001/progress.json",
+          "sha256": "70ce2c94ea3c3ec30390bcc6feeacefc2bc90870ada42eb744785811bfb8b6a3"
+        },
+        "quality": "correct",
+        "queries": 9,
+        "result_ref": {
+          "path": "jobs/job000005/attempts/attempt0001/result.json",
+          "sha256": "de3e7e3003ea353d3a52bdf51d3c0a7675927dd81be0635c0fa013e2b5dcb96d"
+        },
+        "selected_candidate_id": "a2",
+        "solved": true,
+        "stagnant_answer_steps": 6,
+        "started_at_utc": "2026-10-18T02:42:36.287395Z",
+        "state_winner_lost_indices": [],
+        "status": "completed",
+        "successful_fallbacks": 0,
+        "termination_reason": "exact_single_candidate",
+        "uncommitted_recorded_answers_checked_no_credit": 0,
+        "unsuccessful_fallbacks": 0,
+        "winner_ids": [
+          "a2"
+        ]
+      },
+      "execution_status": "completed",
+      "interruption": null,
+      "job_id": "job000005",
+      "result": {
+        "path": "jobs/job000005/attempts/attempt0001/result.json",
+        "sha256": "de3e7e3003ea353d3a52bdf51d3c0a7675927dd81be0635c0fa013e2b5dcb96d"
+      },
+      "run_id": "5ff5e447-e61a-4128-8da4-a7006260ee1e",
+      "timings": {
+        "answer_wait_wall_seconds": 3.717800063895993e-05,
+        "api_call_wall_seconds": 1036.8294884410025,
+        "case_elapsed_seconds": 1037.2401843049993,
+        "complete_api_measurement": true,
+        "observer_wall_seconds": 0.0,
+        "partial_api_elapsed_seconds": null,
+        "persistence_in_call_wall_seconds": null,
+        "planning_wall_seconds": null,
+        "recorder_wall_seconds": 0.6390667099913117,
+        "scope_version": 1,
+        "state_analysis_wall_seconds": null,
+        "unattributed_wall_seconds": null,
+        "worker_cpu_seconds": null,
+        "worker_shutdown_wall_seconds": null,
+        "worker_startup_wall_seconds": null
+      },
+      "verified": true
+    },
+    {
+      "attempt_id": "attempt0001",
+      "case_id": "d5-m5-c000005",
+      "controller_elapsed_seconds": 718.7591051900017,
+      "error": null,
+      "evidence": {
+        "actual_horizons": [
+          1,
+          1,
+          1,
+          2,
+          3,
+          1,
+          2,
+          1,
+          3,
+          1,
+          1,
+          1,
+          2,
+          1
+        ],
+        "answers_checked": 14,
+        "api_seconds": 717.8833263560009,
+        "attempt_id": "attempt0001",
+        "attempts_completed": 14,
+        "attempts_started": 14,
+        "candidate_count_path": [
+          5,
+          4,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2,
+          2,
+          2,
+          1
+        ],
+        "case_id": "d5-m5-c000005",
+        "case_seconds": 718.3416777769999,
+        "configuration_id": "d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01-config",
+        "controller_seconds": 718.7591051900017,
+        "error": null,
+        "error_code": null,
+        "expected_candidates": [
+          4.0,
+          3.1790083630532697,
+          2.5525863510098974,
+          2.325870441167699,
+          2.0395443944750804,
+          2.546040152018046,
+          2.4550261970819367,
+          2.415694006519978,
+          2.1608639994500356,
+          2.3541419784535718,
+          1.5485579557919025,
+          1.754382797915806,
+          1.7069082229058004,
+          1.613037318551767
+        ],
+        "fallback_attempts_completed": 0,
+        "fallback_attempts_started": 0,
+        "fallbacks": 0,
+        "final_execution_cursor": {
+          "answered_total": 14,
+          "remaining_depth": 3
+        },
+        "finished_at_utc": "2026-10-18T03:11:52.199378Z",
+        "grid": 5,
+        "initial_candidate_count": 5,
+        "initial_singleton": false,
+        "interruption": null,
+        "job_id": "job000006",
+        "journal_ref": {
+          "path": "jobs/job000006/attempts/attempt0001/events.jsonl",
+          "sha256": "70847ed60521603e2708e5c17c23b5af2a7b9961e4f511a0fa7e142636387bf4"
+        },
+        "last_good_sequence": 115,
+        "manifest_ref": {
+          "path": "jobs/job000006/attempts/attempt0001/manifest.json",
+          "sha256": "f120e0da66a54bf977b20341f1fe45147bdccb9c62c1e8b374d1ca9614122868"
+        },
+        "mode": "adaptive",
+        "objectives": 5,
+        "partial_api_seconds": null,
+        "progress_matches_full_result_prefix": true,
+        "progress_ref": {
+          "bytes": 761,
+          "path": "jobs/job000006/attempts/attempt0001/progress.json",
+          "sha256": "d3119735ef27bac5fed767f710c3361feaf4bafb58d920a56ea17b1d52391601"
+        },
+        "quality": "correct",
+        "queries": 14,
+        "result_ref": {
+          "path": "jobs/job000006/attempts/attempt0001/result.json",
+          "sha256": "2691ab78b914abfae9395794bc3df6ffa553c2ea7e7b522c3f41146b6650cc3d"
+        },
+        "selected_candidate_id": "a2",
+        "solved": true,
+        "stagnant_answer_steps": 10,
+        "started_at_utc": "2026-10-18T02:59:53.857720Z",
+        "state_winner_lost_indices": [],
+        "status": "completed",
+        "successful_fallbacks": 0,
+        "termination_reason": "exact_single_candidate",
+        "uncommitted_recorded_answers_checked_no_credit": 0,
+        "unsuccessful_fallbacks": 0,
+        "winner_ids": [
+          "a2"
+        ]
+      },
+      "execution_status": "completed",
+      "interruption": null,
+      "job_id": "job000006",
+      "result": {
+        "path": "jobs/job000006/attempts/attempt0001/result.json",
+        "sha256": "2691ab78b914abfae9395794bc3df6ffa553c2ea7e7b522c3f41146b6650cc3d"
+      },
+      "run_id": "dbffb000-66f9-4cdf-b30e-f93c617599c8",
+      "timings": {
+        "answer_wait_wall_seconds": 6.203900193213485e-05,
+        "api_call_wall_seconds": 717.8833263560009,
+        "case_elapsed_seconds": 718.3416777769999,
+        "complete_api_measurement": true,
+        "observer_wall_seconds": 0.0,
+        "partial_api_elapsed_seconds": null,
+        "persistence_in_call_wall_seconds": null,
+        "planning_wall_seconds": null,
+        "recorder_wall_seconds": 0.8007946000252559,
+        "scope_version": 1,
+        "state_analysis_wall_seconds": null,
+        "unattributed_wall_seconds": null,
+        "worker_cpu_seconds": null,
+        "worker_shutdown_wall_seconds": null,
+        "worker_startup_wall_seconds": null
+      },
+      "verified": true
+    },
+    {
+      "attempt_id": "attempt0001",
+      "case_id": "d5-m5-c000006",
+      "controller_elapsed_seconds": 133.72411838400149,
+      "error": null,
+      "evidence": {
+        "actual_horizons": [
+          2,
+          1,
+          3,
+          2,
+          1
+        ],
+        "answers_checked": 5,
+        "api_seconds": 133.11077429299985,
+        "attempt_id": "attempt0001",
+        "attempts_completed": 5,
+        "attempts_started": 5,
+        "candidate_count_path": [
+          3,
+          3,
+          2,
+          2,
+          2,
+          1
+        ],
+        "case_id": "d5-m5-c000006",
+        "case_seconds": 133.49128484299945,
+        "configuration_id": "d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01-config",
+        "controller_seconds": 133.72411838400149,
+        "error": null,
+        "error_code": null,
+        "expected_candidates": [
+          2.2181576697542686,
+          2.1307070037490146,
+          1.442811730944522,
+          1.2728645955797344,
+          1.1818118443389054
+        ],
+        "fallback_attempts_completed": 0,
+        "fallback_attempts_started": 0,
+        "fallbacks": 0,
+        "final_execution_cursor": {
+          "answered_total": 5,
+          "remaining_depth": 3
+        },
+        "finished_at_utc": "2026-10-18T03:14:06.132020Z",
+        "grid": 5,
+        "initial_candidate_count": 3,
+        "initial_singleton": false,
+        "interruption": null,
+        "job_id": "job000007",
+        "journal_ref": {
+          "path": "jobs/job000007/attempts/attempt0001/events.jsonl",
+          "sha256": "e6882f265139f08a344a045f6bea8517132d6d21d44ddbd979d1d667ce5a3cad"
+        },
+        "last_good_sequence": 43,
+        "manifest_ref": {
+          "path": "jobs/job000007/attempts/attempt0001/manifest.json",
+          "sha256": "bab321fbaeef038bf2e4e860fba4b394fdd4ff71640f475aded406b7322f02ba"
+        },
+        "mode": "adaptive",
+        "objectives": 5,
+        "partial_api_seconds": null,
+        "progress_matches_full_result_prefix": true,
+        "progress_ref": {
+          "bytes": 756,
+          "path": "jobs/job000007/attempts/attempt0001/progress.json",
+          "sha256": "7fa2713e76a3767cea76475048f42dc5284510a8fa5b503b1c09688cf4d7ba1d"
+        },
+        "quality": "correct",
+        "queries": 5,
+        "result_ref": {
+          "path": "jobs/job000007/attempts/attempt0001/result.json",
+          "sha256": "98192163b597e63f141d49b96a8d2ee23009bb1ed83e36a78d2bdb5e440e42b9"
+        },
+        "selected_candidate_id": "a4",
+        "solved": true,
+        "stagnant_answer_steps": 3,
+        "started_at_utc": "2026-10-18T03:11:52.640754Z",
+        "state_winner_lost_indices": [],
+        "status": "completed",
+        "successful_fallbacks": 0,
+        "termination_reason": "exact_single_candidate",
+        "uncommitted_recorded_answers_checked_no_credit": 0,
+        "unsuccessful_fallbacks": 0,
+        "winner_ids": [
+          "a4"
+        ]
+      },
+      "execution_status": "completed",
+      "interruption": null,
+      "job_id": "job000007",
+      "result": {
+        "path": "jobs/job000007/attempts/attempt0001/result.json",
+        "sha256": "98192163b597e63f141d49b96a8d2ee23009bb1ed83e36a78d2bdb5e440e42b9"
+      },
+      "run_id": "17df53ec-bb7e-414b-ba86-95eca734d5f7",
+      "timings": {
+        "answer_wait_wall_seconds": 2.1195995941525325e-05,
+        "api_call_wall_seconds": 133.11077429299985,
+        "case_elapsed_seconds": 133.49128484299945,
+        "complete_api_measurement": true,
+        "observer_wall_seconds": 0.0,
+        "partial_api_elapsed_seconds": null,
+        "persistence_in_call_wall_seconds": null,
+        "planning_wall_seconds": null,
+        "recorder_wall_seconds": 0.3033865130128106,
+        "scope_version": 1,
+        "state_analysis_wall_seconds": null,
+        "unattributed_wall_seconds": null,
+        "worker_cpu_seconds": null,
+        "worker_shutdown_wall_seconds": null,
+        "worker_startup_wall_seconds": null
+      },
+      "verified": true
+    },
+    {
+      "attempt_id": "attempt0001",
+      "case_id": "d5-m5-c000007",
+      "controller_elapsed_seconds": 108.0068508569966,
+      "error": null,
+      "evidence": {
+        "actual_horizons": [
+          1,
+          1
+        ],
+        "answers_checked": 2,
+        "api_seconds": 107.41413302100045,
+        "attempt_id": "attempt0001",
+        "attempts_completed": 2,
+        "attempts_started": 2,
+        "candidate_count_path": [
+          5,
+          3,
+          1
+        ],
+        "case_id": "d5-m5-c000007",
+        "case_seconds": 107.75884347700048,
+        "configuration_id": "d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01-config",
+        "controller_seconds": 108.0068508569966,
+        "error": null,
+        "error_code": null,
+        "expected_candidates": [
+          3.5563269882283666,
+          2.1711236666561784
+        ],
+        "fallback_attempts_completed": 0,
+        "fallback_attempts_started": 0,
+        "fallbacks": 0,
+        "final_execution_cursor": {
+          "answered_total": 2,
+          "remaining_depth": 3
+        },
+        "finished_at_utc": "2026-10-18T03:15:54.188572Z",
+        "grid": 5,
+        "initial_candidate_count": 5,
+        "initial_singleton": false,
+        "interruption": null,
+        "job_id": "job000008",
+        "journal_ref": {
+          "path": "jobs/job000008/attempts/attempt0001/events.jsonl",
+          "sha256": "8d6559ceed0d222675d685f1e06eeb62060b9edca294d33b6a3f9ebc5dde9bcf"
+        },
+        "last_good_sequence": 19,
+        "manifest_ref": {
+          "path": "jobs/job000008/attempts/attempt0001/manifest.json",
+          "sha256": "4c961838e295da7667e020d7d541fda70f71a3bcb299046c4ac6b5f915b9ab9a"
+        },
+        "mode": "adaptive",
+        "objectives": 5,
+        "partial_api_seconds": null,
+        "progress_matches_full_result_prefix": true,
+        "progress_ref": {
+          "bytes": 756,
+          "path": "jobs/job000008/attempts/attempt0001/progress.json",
+          "sha256": "db2fa15ff001e21fa3c33823f091d8f6a45dba64a449781f8d1e476206d381d6"
+        },
+        "quality": "correct",
+        "queries": 2,
+        "result_ref": {
+          "path": "jobs/job000008/attempts/attempt0001/result.json",
+          "sha256": "14f4a44d757cf6fe05dcc6ee52b7bc71df9fc5accf2f7ad812855e8ca5254457"
+        },
+        "selected_candidate_id": "a0",
+        "solved": true,
+        "stagnant_answer_steps": 0,
+        "started_at_utc": "2026-10-18T03:14:06.429747Z",
+        "state_winner_lost_indices": [],
+        "status": "completed",
+        "successful_fallbacks": 0,
+        "termination_reason": "exact_single_candidate",
+        "uncommitted_recorded_answers_checked_no_credit": 0,
+        "unsuccessful_fallbacks": 0,
+        "winner_ids": [
+          "a0"
+        ]
+      },
+      "execution_status": "completed",
+      "interruption": null,
+      "job_id": "job000008",
+      "result": {
+        "path": "jobs/job000008/attempts/attempt0001/result.json",
+        "sha256": "14f4a44d757cf6fe05dcc6ee52b7bc71df9fc5accf2f7ad812855e8ca5254457"
+      },
+      "run_id": "e8354318-b6b3-4085-ae18-e50a2458e739",
+      "timings": {
+        "answer_wait_wall_seconds": 1.2609001714736223e-05,
+        "api_call_wall_seconds": 107.41413302100045,
+        "case_elapsed_seconds": 107.75884347700048,
+        "complete_api_measurement": true,
+        "observer_wall_seconds": 0.0,
+        "partial_api_elapsed_seconds": null,
+        "persistence_in_call_wall_seconds": null,
+        "planning_wall_seconds": null,
+        "recorder_wall_seconds": 0.09543241500432487,
+        "scope_version": 1,
+        "state_analysis_wall_seconds": null,
+        "unattributed_wall_seconds": null,
+        "worker_cpu_seconds": null,
+        "worker_shutdown_wall_seconds": null,
+        "worker_startup_wall_seconds": null
+      },
+      "verified": true
+    },
+    {
+      "attempt_id": "attempt0001",
+      "case_id": "d5-m5-c000008",
+      "controller_elapsed_seconds": 633.1928816780019,
+      "error": null,
+      "evidence": {
+        "actual_horizons": [
+          1,
+          2,
+          1,
+          3,
+          1,
+          1,
+          1,
+          3,
+          1,
+          3,
+          1,
+          1,
+          3,
+          3,
+          1
+        ],
+        "answers_checked": 15,
+        "api_seconds": 632.1981649689988,
+        "attempt_id": "attempt0001",
+        "attempts_completed": 15,
+        "attempts_started": 15,
+        "candidate_count_path": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1
+        ],
+        "case_id": "d5-m5-c000008",
+        "case_seconds": 632.7084754969983,
+        "configuration_id": "d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01-config",
+        "controller_seconds": 633.1928816780019,
+        "error": null,
+        "error_code": null,
+        "expected_candidates": [
+          3.022225407658918,
+          2.6500539310689453,
+          3.0937801311112585,
+          2.414349195543909,
+          3.3641151855843887,
+          2.5427223388324967,
+          2.5320522210405905,
+          2.3059239909832736,
+          2.68696207925196,
+          1.6526743703492683,
+          1.6515871239993052,
+          1.7056992553558903,
+          1.6415854874349547,
+          1.6670694916096933,
+          1.4918617008891126
+        ],
+        "fallback_attempts_completed": 0,
+        "fallback_attempts_started": 0,
+        "fallbacks": 0,
+        "final_execution_cursor": {
+          "answered_total": 15,
+          "remaining_depth": 3
+        },
+        "finished_at_utc": "2026-10-18T03:26:27.147738Z",
+        "grid": 5,
+        "initial_candidate_count": 4,
+        "initial_singleton": false,
+        "interruption": null,
+        "job_id": "job000009",
+        "journal_ref": {
+          "path": "jobs/job000009/attempts/attempt0001/events.jsonl",
+          "sha256": "4c787b53476e8ff0e662522567eaa1dd30d968bf97e3d008007ab5a499dfd660"
+        },
+        "last_good_sequence": 123,
+        "manifest_ref": {
+          "path": "jobs/job000009/attempts/attempt0001/manifest.json",
+          "sha256": "d30baceccf38caa852a905d7c0f68028de0027d51cd55c2cf66613765c86a44e"
+        },
+        "mode": "adaptive",
+        "objectives": 5,
+        "partial_api_seconds": null,
+        "progress_matches_full_result_prefix": true,
+        "progress_ref": {
+          "bytes": 760,
+          "path": "jobs/job000009/attempts/attempt0001/progress.json",
+          "sha256": "ff164dd4f551e5a2dde02f6abc81c0f0c9b12881a6200ebff28b757a33a23ad5"
+        },
+        "quality": "correct",
+        "queries": 15,
+        "result_ref": {
+          "path": "jobs/job000009/attempts/attempt0001/result.json",
+          "sha256": "99589ff5e87a62eaf5e6a4bbd6971afb762a7c150a4c4698b78387424e4e3827"
+        },
+        "selected_candidate_id": "a4",
+        "solved": true,
+        "stagnant_answer_steps": 12,
+        "started_at_utc": "2026-10-18T03:15:54.439281Z",
+        "state_winner_lost_indices": [],
+        "status": "completed",
+        "successful_fallbacks": 0,
+        "termination_reason": "exact_single_candidate",
+        "uncommitted_recorded_answers_checked_no_credit": 0,
+        "unsuccessful_fallbacks": 0,
+        "winner_ids": [
+          "a4"
+        ]
+      },
+      "execution_status": "completed",
+      "interruption": null,
+      "job_id": "job000009",
+      "result": {
+        "path": "jobs/job000009/attempts/attempt0001/result.json",
+        "sha256": "99589ff5e87a62eaf5e6a4bbd6971afb762a7c150a4c4698b78387424e4e3827"
+      },
+      "run_id": "61503d5e-2f63-4245-863a-615b375815c7",
+      "timings": {
+        "answer_wait_wall_seconds": 5.835000047227368e-05,
+        "api_call_wall_seconds": 632.1981649689988,
+        "case_elapsed_seconds": 632.7084754969983,
+        "complete_api_measurement": true,
+        "observer_wall_seconds": 0.0,
+        "partial_api_elapsed_seconds": null,
+        "persistence_in_call_wall_seconds": null,
+        "planning_wall_seconds": null,
+        "recorder_wall_seconds": 0.9647019960029866,
+        "scope_version": 1,
+        "state_analysis_wall_seconds": null,
+        "unattributed_wall_seconds": null,
+        "worker_cpu_seconds": null,
+        "worker_shutdown_wall_seconds": null,
+        "worker_startup_wall_seconds": null
+      },
+      "verified": true
+    },
+    {
+      "attempt_id": "attempt0001",
+      "case_id": "d5-m5-c000009",
+      "controller_elapsed_seconds": 149.15525730600348,
+      "error": null,
+      "evidence": {
+        "actual_horizons": [
+          1,
+          1,
+          1
+        ],
+        "answers_checked": 3,
+        "api_seconds": 148.5991520050011,
+        "attempt_id": "attempt0001",
+        "attempts_completed": 3,
+        "attempts_started": 3,
+        "candidate_count_path": [
+          5,
+          3,
+          2,
+          1
+        ],
+        "case_id": "d5-m5-c000009",
+        "case_seconds": 148.9418404349999,
+        "configuration_id": "d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01-config",
+        "controller_seconds": 149.15525730600348,
+        "error": null,
+        "error_code": null,
+        "expected_candidates": [
+          3.4183179758387423,
+          2.056835050942686,
+          1.3077170026961231
+        ],
+        "fallback_attempts_completed": 0,
+        "fallback_attempts_started": 0,
+        "fallbacks": 0,
+        "final_execution_cursor": {
+          "answered_total": 3,
+          "remaining_depth": 3
+        },
+        "finished_at_utc": "2026-10-18T03:28:56.560261Z",
+        "grid": 5,
+        "initial_candidate_count": 5,
+        "initial_singleton": false,
+        "interruption": null,
+        "job_id": "job000010",
+        "journal_ref": {
+          "path": "jobs/job000010/attempts/attempt0001/events.jsonl",
+          "sha256": "41edad31977b962567cead865f6d6b71aa8297b85f6c3672944d49c1f7e058bb"
+        },
+        "last_good_sequence": 27,
+        "manifest_ref": {
+          "path": "jobs/job000010/attempts/attempt0001/manifest.json",
+          "sha256": "3cdae1e63c477dbb1dd4f2813afd88dcadcad6ac304700e0e4966fa39cc26eba"
+        },
+        "mode": "adaptive",
+        "objectives": 5,
+        "partial_api_seconds": null,
+        "progress_matches_full_result_prefix": true,
+        "progress_ref": {
+          "bytes": 756,
+          "path": "jobs/job000010/attempts/attempt0001/progress.json",
+          "sha256": "aad115622553ff23824c9e7730e077d1044a5ce94d884a341a4ae1242c5c9eda"
+        },
+        "quality": "correct",
+        "queries": 3,
+        "result_ref": {
+          "path": "jobs/job000010/attempts/attempt0001/result.json",
+          "sha256": "b073f7fcb23a526e2f94d8d67ac6706be0dde6692484d74d02cdf739998f1a15"
+        },
+        "selected_candidate_id": "a4",
+        "solved": true,
+        "stagnant_answer_steps": 0,
+        "started_at_utc": "2026-10-18T03:26:27.618439Z",
+        "state_winner_lost_indices": [],
+        "status": "completed",
+        "successful_fallbacks": 0,
+        "termination_reason": "exact_single_candidate",
+        "uncommitted_recorded_answers_checked_no_credit": 0,
+        "unsuccessful_fallbacks": 0,
+        "winner_ids": [
+          "a4"
+        ]
+      },
+      "execution_status": "completed",
+      "interruption": null,
+      "job_id": "job000010",
+      "result": {
+        "path": "jobs/job000010/attempts/attempt0001/result.json",
+        "sha256": "b073f7fcb23a526e2f94d8d67ac6706be0dde6692484d74d02cdf739998f1a15"
+      },
+      "run_id": "67e06cc5-f745-4b00-9de3-62fc3c56a395",
+      "timings": {
+        "answer_wait_wall_seconds": 1.602500196895562e-05,
+        "api_call_wall_seconds": 148.5991520050011,
+        "case_elapsed_seconds": 148.9418404349999,
+        "complete_api_measurement": true,
+        "observer_wall_seconds": 0.0,
+        "partial_api_elapsed_seconds": null,
+        "persistence_in_call_wall_seconds": null,
+        "planning_wall_seconds": null,
+        "recorder_wall_seconds": 0.21921714201016584,
+        "scope_version": 1,
+        "state_analysis_wall_seconds": null,
+        "unattributed_wall_seconds": null,
+        "worker_cpu_seconds": null,
+        "worker_shutdown_wall_seconds": null,
+        "worker_startup_wall_seconds": null
+      },
+      "verified": true
+    }
+  ],
+  "configuration": {
+    "algorithm": {
+      "depth": 3,
+      "grid_size": 5,
+      "higher_depth_query_source": "both",
+      "horizon_execution": "receding",
+      "min_expected_progress": 0.001,
+      "planning_evaluation": "candidate_count",
+      "query_strategy": "reduction_per_query",
+      "stopping": {
+        "rule": "single_candidate"
+      }
+    },
+    "budget": {
+      "max_queries": null
+    },
+    "configuration_id": "d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01-config",
+    "execution": {
+      "cache_policy_id": "bounded_v1",
+      "case_timeout_seconds": null,
+      "native_threads": 1,
+      "start_method": "forkserver",
+      "workers": 16
+    },
+    "recording": {
+      "durability": "per_answer",
+      "profile": false,
+      "telemetry_failure_policy": "continue",
+      "trace_level": "standard"
+    },
+    "schema_version": 2
+  },
+  "counts": {
+    "all_attempts": 10,
+    "answers_checked_exact_fraction": 70,
+    "attempts_verified": 10,
+    "correct": 10,
+    "failed": 0,
+    "incorrect": 0,
+    "interrupted_attempts": 0,
+    "primary_rows": 10,
+    "regular_unsolved": 0,
+    "solved": 10,
+    "uncommitted_recorded_answers_checked_no_credit": 0,
+    "unknown_controller_costs": 0,
+    "winner_sets_checked_exact_fraction": 10
+  },
+  "created_at_utc": "2026-10-18T03:37:01.529172+00:00",
+  "elapsed_seconds": 0.8078943750006147,
+  "expected_original_case_ids": [
+    "d5-m5-c000000",
+    "d5-m5-c000001",
+    "d5-m5-c000002",
+    "d5-m5-c000003",
+    "d5-m5-c000004",
+    "d5-m5-c000005",
+    "d5-m5-c000006",
+    "d5-m5-c000007",
+    "d5-m5-c000008",
+    "d5-m5-c000009"
+  ],
+  "expected_original_inputs": {
+    "configuration": {
+      "bytes": 837,
+      "path": "inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/configuration.json",
+      "sha256": "5a94ce747a5b29ce4cc8f306959429b21e89584911312f3c53e65f69236f20fb"
+    },
+    "dataset": {
+      "bytes": 6039,
+      "path": "inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/dataset.json",
+      "sha256": "c50fdb12594606086b0caf60420c912674eb805617df4fd3c179f0cfef1eea8c"
+    },
+    "suite": {
+      "bytes": 1346,
+      "path": "inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/suite.json",
+      "sha256": "178c46f95b7da45ae0f7a1a988d663c25a324156014f885161a32d6f7d2a12db"
+    }
+  },
+  "exports": {
+    "aggregate_rounding_tolerance": "32ULP for aggregate floating values only; individual costs retained unchanged",
+    "audit": {
+      "bytes": 3348,
+      "path": "reports/50984538-bdd5-5916-8d34-7a41d2e828ab/audit.json",
+      "sha256": "1b7d601885218683c101f336e28e4ad3cc07cc4e411831a598169a91cc38699d"
+    },
+    "csv": {
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/exports/fleet-final.csv",
+      "sha256": "154acc7657cac0c8cd16e9d56acf0642a92be7e9a183f4ae8a6d46b88a03ef8c"
+    },
+    "group_count": 1,
+    "json": {
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/exports/fleet-final.json",
+      "sha256": "59bdd684863ee9f2b4146ca044be80d2e53119c853a58503664c12213cfc1a4a"
+    },
+    "row_count": 10,
+    "state_snapshot": {
+      "path": "reports/50984538-bdd5-5916-8d34-7a41d2e828ab/state-snapshot.json",
+      "sha256": "4efa38373648cfb207ab2299975488392909a45fdf4199ddf2f93dc366cbb622"
+    }
+  },
+  "findings": [],
+  "finish_proof_sha256": "c2ea058f799f61254ba5507626702c7bfba71f407c10e8cae57e39ccf8848fb8",
+  "independent_problems": 10,
+  "limitations": [
+    "Provisional independent evidence only; root and peer review, final cross-host hash proof, packaging and download verification remain separate.",
+    "No geometric region, LP feasibility, hypothetical branch probability, alternative plan inventory or global score optimum was recomputed or certified.",
+    "Stored generated/evaluated inventory counts, horizon decisions and progress threshold arithmetic were checked against recorded evidence.",
+    "Exact Fraction comparisons interpret the preserved binary64 matrix, preferences and actual query thresholds; they do not prove other-weight region geometry.",
+    "Historical process-group end is bound to the native finish evidence; this offline checker makes no fresh Linux process-liveness claim.",
+    "Intermediate progress phase labels are not independently reconstructed beyond durable identities, prefix, counts/cursor, and terminal/answer phase barriers.",
+    "Native aggregate floating values permit32ULP rounding difference across Python summation implementations; every individual original timing and attempt cost is retained.",
+    "UTC format and observed ordering are checked only as a clock-anomaly review gate; operating-system wall clocks can step, and no performance duration is calculated from UTC timestamps."
+  ],
+  "ordered_problem_oracle_sha256": "ed8cb204afb8d9fee9b1382b970e5f5f532b3340f8e95ea9d942d034aa10ec08",
+  "plan": {
+    "bytes": 26218,
+    "path": "plan.json",
+    "sha256": "f93e1d3f7c5d4044f2593fca0b96e48163faacbdaf3302e2e6343778b8f74dc2"
+  },
+  "primary_cells": 10,
+  "primary_rows_verified": 10,
+  "publication_completion": false,
+  "repetitions": 1,
+  "rows": [
+    {
+      "actual_horizons": [
+        3,
+        2,
+        1
+      ],
+      "answers_checked": 3,
+      "api_seconds": 35.418678932997864,
+      "attempt_id": "attempt0001",
+      "attempts_completed": 3,
+      "attempts_started": 3,
+      "candidate_count_path": [
+        2,
+        2,
+        2,
+        1
+      ],
+      "case_id": "d5-m5-c000000",
+      "case_seconds": 35.7572426350016,
+      "configuration_id": "d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01-config",
+      "controller_seconds": 35.96829784199872,
+      "error": null,
+      "error_code": null,
+      "expected_candidates": [
+        1.5204749149212595,
+        1.1915123400956895,
+        1.1915123400956895
+      ],
+      "fallback_attempts_completed": 0,
+      "fallback_attempts_started": 0,
+      "fallbacks": 0,
+      "final_execution_cursor": {
+        "answered_total": 3,
+        "remaining_depth": 3
+      },
+      "finished_at_utc": "2026-10-18T02:31:27.049592Z",
+      "grid": 5,
+      "initial_candidate_count": 2,
+      "initial_singleton": false,
+      "interruption": null,
+      "job_id": "job000001",
+      "journal_ref": {
+        "path": "jobs/job000001/attempts/attempt0001/events.jsonl",
+        "sha256": "67089944bc634757b7417da31886e75a31375bdf6050520bf761875943460734"
+      },
+      "last_good_sequence": 27,
+      "manifest_ref": {
+        "path": "jobs/job000001/attempts/attempt0001/manifest.json",
+        "sha256": "d61a7b2205e443261c22ac9ade7e5a999a58abd1b4548eebc5025c7e818624bc"
+      },
+      "mode": "adaptive",
+      "objectives": 5,
+      "partial_api_seconds": null,
+      "progress_matches_full_result_prefix": true,
+      "progress_ref": {
+        "bytes": 755,
+        "path": "jobs/job000001/attempts/attempt0001/progress.json",
+        "sha256": "70057a87c83321f8779eac05bc902c0d98e592e61a6c1748c42dfbaf64b5b752"
+      },
+      "quality": "correct",
+      "queries": 3,
+      "result_ref": {
+        "path": "jobs/job000001/attempts/attempt0001/result.json",
+        "sha256": "ea3dd2b9e5e1753f8017a94d1ff17bda346885ef2be673f247b3f680b9ca5da1"
+      },
+      "selected_candidate_id": "a2",
+      "solved": true,
+      "stagnant_answer_steps": 2,
+      "started_at_utc": "2026-10-18T02:30:51.292369Z",
+      "state_winner_lost_indices": [],
+      "status": "completed",
+      "successful_fallbacks": 0,
+      "termination_reason": "exact_single_candidate",
+      "uncommitted_recorded_answers_checked_no_credit": 0,
+      "unsuccessful_fallbacks": 0,
+      "winner_ids": [
+        "a2"
+      ]
+    },
+    {
+      "actual_horizons": [
+        1,
+        2,
+        1,
+        1,
+        1,
+        1,
+        2,
+        1,
+        2,
+        1
+      ],
+      "answers_checked": 10,
+      "api_seconds": 449.93104729600236,
+      "attempt_id": "attempt0001",
+      "attempts_completed": 10,
+      "attempts_started": 10,
+      "candidate_count_path": [
+        5,
+        4,
+        3,
+        3,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      "case_id": "d5-m5-c000001",
+      "case_seconds": 450.35405756399996,
+      "configuration_id": "d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01-config",
+      "controller_seconds": 450.69474165499923,
+      "error": null,
+      "error_code": null,
+      "expected_candidates": [
+        4.0,
+        2.851751280895334,
+        2.4185354005394606,
+        2.4982525824599193,
+        2.357193744634219,
+        1.5936926265714748,
+        1.4929047684659518,
+        1.177315952269768,
+        1.4449739337791514,
+        1.2626939348344974
+      ],
+      "fallback_attempts_completed": 0,
+      "fallback_attempts_started": 0,
+      "fallbacks": 0,
+      "final_execution_cursor": {
+        "answered_total": 10,
+        "remaining_depth": 3
+      },
+      "finished_at_utc": "2026-10-18T02:38:57.625572Z",
+      "grid": 5,
+      "initial_candidate_count": 5,
+      "initial_singleton": false,
+      "interruption": null,
+      "job_id": "job000002",
+      "journal_ref": {
+        "path": "jobs/job000002/attempts/attempt0001/events.jsonl",
+        "sha256": "f4ceb697ff3fd817775d54fed3643f1e368e4cb41cc06354ebb28bc8e0ad0a04"
+      },
+      "last_good_sequence": 83,
+      "manifest_ref": {
+        "path": "jobs/job000002/attempts/attempt0001/manifest.json",
+        "sha256": "ad1b5041158d2c53e66af8713340b5a689c7f809f0bbe1726afd732610c65e7f"
+      },
+      "mode": "adaptive",
+      "objectives": 5,
+      "partial_api_seconds": null,
+      "progress_matches_full_result_prefix": true,
+      "progress_ref": {
+        "bytes": 760,
+        "path": "jobs/job000002/attempts/attempt0001/progress.json",
+        "sha256": "d09d0c5d6ab9122d511bb08e2696b9695b5f7b0b3a217829c8275348d90c5493"
+      },
+      "quality": "correct",
+      "queries": 10,
+      "result_ref": {
+        "path": "jobs/job000002/attempts/attempt0001/result.json",
+        "sha256": "edc87179ea1a242f69d1b58d6ff8279760d82567e56d4a8164dd49f874311de4"
+      },
+      "selected_candidate_id": "a4",
+      "solved": true,
+      "stagnant_answer_steps": 6,
+      "started_at_utc": "2026-10-18T02:31:27.271535Z",
+      "state_winner_lost_indices": [],
+      "status": "completed",
+      "successful_fallbacks": 0,
+      "termination_reason": "exact_single_candidate",
+      "uncommitted_recorded_answers_checked_no_credit": 0,
+      "unsuccessful_fallbacks": 0,
+      "winner_ids": [
+        "a4"
+      ]
+    },
+    {
+      "actual_horizons": [
+        1,
+        1,
+        3,
+        2,
+        1
+      ],
+      "answers_checked": 5,
+      "api_seconds": 142.77126668900019,
+      "attempt_id": "attempt0001",
+      "attempts_completed": 5,
+      "attempts_started": 5,
+      "candidate_count_path": [
+        5,
+        3,
+        2,
+        2,
+        2,
+        1
+      ],
+      "case_id": "d5-m5-c000002",
+      "case_seconds": 143.12610815300286,
+      "configuration_id": "d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01-config",
+      "controller_seconds": 143.37690647600175,
+      "error": null,
+      "error_code": null,
+      "expected_candidates": [
+        3.5120709406561783,
+        2.2163722242271033,
+        1.4658086372308017,
+        1.663719520892398,
+        1.4029632632209208
+      ],
+      "fallback_attempts_completed": 0,
+      "fallback_attempts_started": 0,
+      "fallbacks": 0,
+      "final_execution_cursor": {
+        "answered_total": 5,
+        "remaining_depth": 3
+      },
+      "finished_at_utc": "2026-10-18T02:41:21.112167Z",
+      "grid": 5,
+      "initial_candidate_count": 5,
+      "initial_singleton": false,
+      "interruption": null,
+      "job_id": "job000003",
+      "journal_ref": {
+        "path": "jobs/job000003/attempts/attempt0001/events.jsonl",
+        "sha256": "4201ff45c0d7b0b5382705d04f11193a451f3e17ccb62925b88b8e14651c3e5b"
+      },
+      "last_good_sequence": 43,
+      "manifest_ref": {
+        "path": "jobs/job000003/attempts/attempt0001/manifest.json",
+        "sha256": "9dbc6c6d50e401388a448f7ca3ad754d8ed311d43289cc596616a885a8fd4237"
+      },
+      "mode": "adaptive",
+      "objectives": 5,
+      "partial_api_seconds": null,
+      "progress_matches_full_result_prefix": true,
+      "progress_ref": {
+        "bytes": 755,
+        "path": "jobs/job000003/attempts/attempt0001/progress.json",
+        "sha256": "1f547b2ae651b82ea295c6c9f30eb14eb69466be77f6cc40746e954403cd0390"
+      },
+      "quality": "correct",
+      "queries": 5,
+      "result_ref": {
+        "path": "jobs/job000003/attempts/attempt0001/result.json",
+        "sha256": "1a00507d1283a9495140657604a07651590919e67268198d3f8d6b8a7352dfbf"
+      },
+      "selected_candidate_id": "a1",
+      "solved": true,
+      "stagnant_answer_steps": 2,
+      "started_at_utc": "2026-10-18T02:38:57.986077Z",
+      "state_winner_lost_indices": [],
+      "status": "completed",
+      "successful_fallbacks": 0,
+      "termination_reason": "exact_single_candidate",
+      "uncommitted_recorded_answers_checked_no_credit": 0,
+      "unsuccessful_fallbacks": 0,
+      "winner_ids": [
+        "a1"
+      ]
+    },
+    {
+      "actual_horizons": [
+        1,
+        3,
+        2,
+        1
+      ],
+      "answers_checked": 4,
+      "api_seconds": 74.24314229200172,
+      "attempt_id": "attempt0001",
+      "attempts_completed": 4,
+      "attempts_started": 4,
+      "candidate_count_path": [
+        3,
+        2,
+        2,
+        2,
+        1
+      ],
+      "case_id": "d5-m5-c000003",
+      "case_seconds": 74.65084872499938,
+      "configuration_id": "d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01-config",
+      "controller_seconds": 74.89876937599911,
+      "error": null,
+      "error_code": null,
+      "expected_candidates": [
+        2.3057122791311864,
+        1.5153757767025158,
+        1.48165358214826,
+        1.4045585459775762
+      ],
+      "fallback_attempts_completed": 0,
+      "fallback_attempts_started": 0,
+      "fallbacks": 0,
+      "final_execution_cursor": {
+        "answered_total": 4,
+        "remaining_depth": 3
+      },
+      "finished_at_utc": "2026-10-18T02:42:36.025661Z",
+      "grid": 5,
+      "initial_candidate_count": 3,
+      "initial_singleton": false,
+      "interruption": null,
+      "job_id": "job000004",
+      "journal_ref": {
+        "path": "jobs/job000004/attempts/attempt0001/events.jsonl",
+        "sha256": "d3fb62e1ba8d2a31762dc38cc83a6e7514cfd9da1644f13a03536539f4fa92c4"
+      },
+      "last_good_sequence": 35,
+      "manifest_ref": {
+        "path": "jobs/job000004/attempts/attempt0001/manifest.json",
+        "sha256": "99481157fe33b3390884faefb2ae2f47f83b485864b88f1895255454e4a4a65f"
+      },
+      "mode": "adaptive",
+      "objectives": 5,
+      "partial_api_seconds": null,
+      "progress_matches_full_result_prefix": true,
+      "progress_ref": {
+        "bytes": 755,
+        "path": "jobs/job000004/attempts/attempt0001/progress.json",
+        "sha256": "3f339eaaf6972c985ebcc9bedb0e17b2cae07c14c33e696e2ea81e60ba601da5"
+      },
+      "quality": "correct",
+      "queries": 4,
+      "result_ref": {
+        "path": "jobs/job000004/attempts/attempt0001/result.json",
+        "sha256": "6ff3398472f3c9e1428c6f8a51273c36fc174c4dc05dd84bd50e1337247c83be"
+      },
+      "selected_candidate_id": "a2",
+      "solved": true,
+      "stagnant_answer_steps": 2,
+      "started_at_utc": "2026-10-18T02:41:21.374830Z",
+      "state_winner_lost_indices": [],
+      "status": "completed",
+      "successful_fallbacks": 0,
+      "termination_reason": "exact_single_candidate",
+      "uncommitted_recorded_answers_checked_no_credit": 0,
+      "unsuccessful_fallbacks": 0,
+      "winner_ids": [
+        "a2"
+      ]
+    },
+    {
+      "actual_horizons": [
+        3,
+        1,
+        1,
+        1,
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "answers_checked": 9,
+      "api_seconds": 1036.8294884410025,
+      "attempt_id": "attempt0001",
+      "attempts_completed": 9,
+      "attempts_started": 9,
+      "candidate_count_path": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        3,
+        2,
+        2,
+        1
+      ],
+      "case_id": "d5-m5-c000004",
+      "case_seconds": 1037.2401843049993,
+      "configuration_id": "d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01-config",
+      "controller_seconds": 1037.551123385998,
+      "error": null,
+      "error_code": null,
+      "expected_candidates": [
+        3.2869886102859827,
+        4.127380770954493,
+        4.1684158327526495,
+        4.181863304469677,
+        3.3973810420018316,
+        4.1418796783310885,
+        2.234428130623847,
+        1.344736043812988,
+        1.5354933255456222
+      ],
+      "fallback_attempts_completed": 0,
+      "fallback_attempts_started": 0,
+      "fallbacks": 0,
+      "final_execution_cursor": {
+        "answered_total": 9,
+        "remaining_depth": 3
+      },
+      "finished_at_utc": "2026-10-18T02:59:53.527561Z",
+      "grid": 5,
+      "initial_candidate_count": 5,
+      "initial_singleton": false,
+      "interruption": null,
+      "job_id": "job000005",
+      "journal_ref": {
+        "path": "jobs/job000005/attempts/attempt0001/events.jsonl",
+        "sha256": "eaa15ec5aad3b0d584e64a9b7a194e19d226356cd28c11b8d8c9ad08a965032e"
+      },
+      "last_good_sequence": 75,
+      "manifest_ref": {
+        "path": "jobs/job000005/attempts/attempt0001/manifest.json",
+        "sha256": "0e58d39e8bf686b554247b2c27d8ffdd3ce81c9298d0c1728660e2bdab0a8df8"
+      },
+      "mode": "adaptive",
+      "objectives": 5,
+      "partial_api_seconds": null,
+      "progress_matches_full_result_prefix": true,
+      "progress_ref": {
+        "bytes": 757,
+        "path": "jobs/job000005/attempts/attempt0001/progress.json",
+        "sha256": "70ce2c94ea3c3ec30390bcc6feeacefc2bc90870ada42eb744785811bfb8b6a3"
+      },
+      "quality": "correct",
+      "queries": 9,
+      "result_ref": {
+        "path": "jobs/job000005/attempts/attempt0001/result.json",
+        "sha256": "de3e7e3003ea353d3a52bdf51d3c0a7675927dd81be0635c0fa013e2b5dcb96d"
+      },
+      "selected_candidate_id": "a2",
+      "solved": true,
+      "stagnant_answer_steps": 6,
+      "started_at_utc": "2026-10-18T02:42:36.287395Z",
+      "state_winner_lost_indices": [],
+      "status": "completed",
+      "successful_fallbacks": 0,
+      "termination_reason": "exact_single_candidate",
+      "uncommitted_recorded_answers_checked_no_credit": 0,
+      "unsuccessful_fallbacks": 0,
+      "winner_ids": [
+        "a2"
+      ]
+    },
+    {
+      "actual_horizons": [
+        1,
+        1,
+        1,
+        2,
+        3,
+        1,
+        2,
+        1,
+        3,
+        1,
+        1,
+        1,
+        2,
+        1
+      ],
+      "answers_checked": 14,
+      "api_seconds": 717.8833263560009,
+      "attempt_id": "attempt0001",
+      "attempts_completed": 14,
+      "attempts_started": 14,
+      "candidate_count_path": [
+        5,
+        4,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      "case_id": "d5-m5-c000005",
+      "case_seconds": 718.3416777769999,
+      "configuration_id": "d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01-config",
+      "controller_seconds": 718.7591051900017,
+      "error": null,
+      "error_code": null,
+      "expected_candidates": [
+        4.0,
+        3.1790083630532697,
+        2.5525863510098974,
+        2.325870441167699,
+        2.0395443944750804,
+        2.546040152018046,
+        2.4550261970819367,
+        2.415694006519978,
+        2.1608639994500356,
+        2.3541419784535718,
+        1.5485579557919025,
+        1.754382797915806,
+        1.7069082229058004,
+        1.613037318551767
+      ],
+      "fallback_attempts_completed": 0,
+      "fallback_attempts_started": 0,
+      "fallbacks": 0,
+      "final_execution_cursor": {
+        "answered_total": 14,
+        "remaining_depth": 3
+      },
+      "finished_at_utc": "2026-10-18T03:11:52.199378Z",
+      "grid": 5,
+      "initial_candidate_count": 5,
+      "initial_singleton": false,
+      "interruption": null,
+      "job_id": "job000006",
+      "journal_ref": {
+        "path": "jobs/job000006/attempts/attempt0001/events.jsonl",
+        "sha256": "70847ed60521603e2708e5c17c23b5af2a7b9961e4f511a0fa7e142636387bf4"
+      },
+      "last_good_sequence": 115,
+      "manifest_ref": {
+        "path": "jobs/job000006/attempts/attempt0001/manifest.json",
+        "sha256": "f120e0da66a54bf977b20341f1fe45147bdccb9c62c1e8b374d1ca9614122868"
+      },
+      "mode": "adaptive",
+      "objectives": 5,
+      "partial_api_seconds": null,
+      "progress_matches_full_result_prefix": true,
+      "progress_ref": {
+        "bytes": 761,
+        "path": "jobs/job000006/attempts/attempt0001/progress.json",
+        "sha256": "d3119735ef27bac5fed767f710c3361feaf4bafb58d920a56ea17b1d52391601"
+      },
+      "quality": "correct",
+      "queries": 14,
+      "result_ref": {
+        "path": "jobs/job000006/attempts/attempt0001/result.json",
+        "sha256": "2691ab78b914abfae9395794bc3df6ffa553c2ea7e7b522c3f41146b6650cc3d"
+      },
+      "selected_candidate_id": "a2",
+      "solved": true,
+      "stagnant_answer_steps": 10,
+      "started_at_utc": "2026-10-18T02:59:53.857720Z",
+      "state_winner_lost_indices": [],
+      "status": "completed",
+      "successful_fallbacks": 0,
+      "termination_reason": "exact_single_candidate",
+      "uncommitted_recorded_answers_checked_no_credit": 0,
+      "unsuccessful_fallbacks": 0,
+      "winner_ids": [
+        "a2"
+      ]
+    },
+    {
+      "actual_horizons": [
+        2,
+        1,
+        3,
+        2,
+        1
+      ],
+      "answers_checked": 5,
+      "api_seconds": 133.11077429299985,
+      "attempt_id": "attempt0001",
+      "attempts_completed": 5,
+      "attempts_started": 5,
+      "candidate_count_path": [
+        3,
+        3,
+        2,
+        2,
+        2,
+        1
+      ],
+      "case_id": "d5-m5-c000006",
+      "case_seconds": 133.49128484299945,
+      "configuration_id": "d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01-config",
+      "controller_seconds": 133.72411838400149,
+      "error": null,
+      "error_code": null,
+      "expected_candidates": [
+        2.2181576697542686,
+        2.1307070037490146,
+        1.442811730944522,
+        1.2728645955797344,
+        1.1818118443389054
+      ],
+      "fallback_attempts_completed": 0,
+      "fallback_attempts_started": 0,
+      "fallbacks": 0,
+      "final_execution_cursor": {
+        "answered_total": 5,
+        "remaining_depth": 3
+      },
+      "finished_at_utc": "2026-10-18T03:14:06.132020Z",
+      "grid": 5,
+      "initial_candidate_count": 3,
+      "initial_singleton": false,
+      "interruption": null,
+      "job_id": "job000007",
+      "journal_ref": {
+        "path": "jobs/job000007/attempts/attempt0001/events.jsonl",
+        "sha256": "e6882f265139f08a344a045f6bea8517132d6d21d44ddbd979d1d667ce5a3cad"
+      },
+      "last_good_sequence": 43,
+      "manifest_ref": {
+        "path": "jobs/job000007/attempts/attempt0001/manifest.json",
+        "sha256": "bab321fbaeef038bf2e4e860fba4b394fdd4ff71640f475aded406b7322f02ba"
+      },
+      "mode": "adaptive",
+      "objectives": 5,
+      "partial_api_seconds": null,
+      "progress_matches_full_result_prefix": true,
+      "progress_ref": {
+        "bytes": 756,
+        "path": "jobs/job000007/attempts/attempt0001/progress.json",
+        "sha256": "7fa2713e76a3767cea76475048f42dc5284510a8fa5b503b1c09688cf4d7ba1d"
+      },
+      "quality": "correct",
+      "queries": 5,
+      "result_ref": {
+        "path": "jobs/job000007/attempts/attempt0001/result.json",
+        "sha256": "98192163b597e63f141d49b96a8d2ee23009bb1ed83e36a78d2bdb5e440e42b9"
+      },
+      "selected_candidate_id": "a4",
+      "solved": true,
+      "stagnant_answer_steps": 3,
+      "started_at_utc": "2026-10-18T03:11:52.640754Z",
+      "state_winner_lost_indices": [],
+      "status": "completed",
+      "successful_fallbacks": 0,
+      "termination_reason": "exact_single_candidate",
+      "uncommitted_recorded_answers_checked_no_credit": 0,
+      "unsuccessful_fallbacks": 0,
+      "winner_ids": [
+        "a4"
+      ]
+    },
+    {
+      "actual_horizons": [
+        1,
+        1
+      ],
+      "answers_checked": 2,
+      "api_seconds": 107.41413302100045,
+      "attempt_id": "attempt0001",
+      "attempts_completed": 2,
+      "attempts_started": 2,
+      "candidate_count_path": [
+        5,
+        3,
+        1
+      ],
+      "case_id": "d5-m5-c000007",
+      "case_seconds": 107.75884347700048,
+      "configuration_id": "d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01-config",
+      "controller_seconds": 108.0068508569966,
+      "error": null,
+      "error_code": null,
+      "expected_candidates": [
+        3.5563269882283666,
+        2.1711236666561784
+      ],
+      "fallback_attempts_completed": 0,
+      "fallback_attempts_started": 0,
+      "fallbacks": 0,
+      "final_execution_cursor": {
+        "answered_total": 2,
+        "remaining_depth": 3
+      },
+      "finished_at_utc": "2026-10-18T03:15:54.188572Z",
+      "grid": 5,
+      "initial_candidate_count": 5,
+      "initial_singleton": false,
+      "interruption": null,
+      "job_id": "job000008",
+      "journal_ref": {
+        "path": "jobs/job000008/attempts/attempt0001/events.jsonl",
+        "sha256": "8d6559ceed0d222675d685f1e06eeb62060b9edca294d33b6a3f9ebc5dde9bcf"
+      },
+      "last_good_sequence": 19,
+      "manifest_ref": {
+        "path": "jobs/job000008/attempts/attempt0001/manifest.json",
+        "sha256": "4c961838e295da7667e020d7d541fda70f71a3bcb299046c4ac6b5f915b9ab9a"
+      },
+      "mode": "adaptive",
+      "objectives": 5,
+      "partial_api_seconds": null,
+      "progress_matches_full_result_prefix": true,
+      "progress_ref": {
+        "bytes": 756,
+        "path": "jobs/job000008/attempts/attempt0001/progress.json",
+        "sha256": "db2fa15ff001e21fa3c33823f091d8f6a45dba64a449781f8d1e476206d381d6"
+      },
+      "quality": "correct",
+      "queries": 2,
+      "result_ref": {
+        "path": "jobs/job000008/attempts/attempt0001/result.json",
+        "sha256": "14f4a44d757cf6fe05dcc6ee52b7bc71df9fc5accf2f7ad812855e8ca5254457"
+      },
+      "selected_candidate_id": "a0",
+      "solved": true,
+      "stagnant_answer_steps": 0,
+      "started_at_utc": "2026-10-18T03:14:06.429747Z",
+      "state_winner_lost_indices": [],
+      "status": "completed",
+      "successful_fallbacks": 0,
+      "termination_reason": "exact_single_candidate",
+      "uncommitted_recorded_answers_checked_no_credit": 0,
+      "unsuccessful_fallbacks": 0,
+      "winner_ids": [
+        "a0"
+      ]
+    },
+    {
+      "actual_horizons": [
+        1,
+        2,
+        1,
+        3,
+        1,
+        1,
+        1,
+        3,
+        1,
+        3,
+        1,
+        1,
+        3,
+        3,
+        1
+      ],
+      "answers_checked": 15,
+      "api_seconds": 632.1981649689988,
+      "attempt_id": "attempt0001",
+      "attempts_completed": 15,
+      "attempts_started": 15,
+      "candidate_count_path": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        3,
+        3,
+        3,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      "case_id": "d5-m5-c000008",
+      "case_seconds": 632.7084754969983,
+      "configuration_id": "d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01-config",
+      "controller_seconds": 633.1928816780019,
+      "error": null,
+      "error_code": null,
+      "expected_candidates": [
+        3.022225407658918,
+        2.6500539310689453,
+        3.0937801311112585,
+        2.414349195543909,
+        3.3641151855843887,
+        2.5427223388324967,
+        2.5320522210405905,
+        2.3059239909832736,
+        2.68696207925196,
+        1.6526743703492683,
+        1.6515871239993052,
+        1.7056992553558903,
+        1.6415854874349547,
+        1.6670694916096933,
+        1.4918617008891126
+      ],
+      "fallback_attempts_completed": 0,
+      "fallback_attempts_started": 0,
+      "fallbacks": 0,
+      "final_execution_cursor": {
+        "answered_total": 15,
+        "remaining_depth": 3
+      },
+      "finished_at_utc": "2026-10-18T03:26:27.147738Z",
+      "grid": 5,
+      "initial_candidate_count": 4,
+      "initial_singleton": false,
+      "interruption": null,
+      "job_id": "job000009",
+      "journal_ref": {
+        "path": "jobs/job000009/attempts/attempt0001/events.jsonl",
+        "sha256": "4c787b53476e8ff0e662522567eaa1dd30d968bf97e3d008007ab5a499dfd660"
+      },
+      "last_good_sequence": 123,
+      "manifest_ref": {
+        "path": "jobs/job000009/attempts/attempt0001/manifest.json",
+        "sha256": "d30baceccf38caa852a905d7c0f68028de0027d51cd55c2cf66613765c86a44e"
+      },
+      "mode": "adaptive",
+      "objectives": 5,
+      "partial_api_seconds": null,
+      "progress_matches_full_result_prefix": true,
+      "progress_ref": {
+        "bytes": 760,
+        "path": "jobs/job000009/attempts/attempt0001/progress.json",
+        "sha256": "ff164dd4f551e5a2dde02f6abc81c0f0c9b12881a6200ebff28b757a33a23ad5"
+      },
+      "quality": "correct",
+      "queries": 15,
+      "result_ref": {
+        "path": "jobs/job000009/attempts/attempt0001/result.json",
+        "sha256": "99589ff5e87a62eaf5e6a4bbd6971afb762a7c150a4c4698b78387424e4e3827"
+      },
+      "selected_candidate_id": "a4",
+      "solved": true,
+      "stagnant_answer_steps": 12,
+      "started_at_utc": "2026-10-18T03:15:54.439281Z",
+      "state_winner_lost_indices": [],
+      "status": "completed",
+      "successful_fallbacks": 0,
+      "termination_reason": "exact_single_candidate",
+      "uncommitted_recorded_answers_checked_no_credit": 0,
+      "unsuccessful_fallbacks": 0,
+      "winner_ids": [
+        "a4"
+      ]
+    },
+    {
+      "actual_horizons": [
+        1,
+        1,
+        1
+      ],
+      "answers_checked": 3,
+      "api_seconds": 148.5991520050011,
+      "attempt_id": "attempt0001",
+      "attempts_completed": 3,
+      "attempts_started": 3,
+      "candidate_count_path": [
+        5,
+        3,
+        2,
+        1
+      ],
+      "case_id": "d5-m5-c000009",
+      "case_seconds": 148.9418404349999,
+      "configuration_id": "d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01-config",
+      "controller_seconds": 149.15525730600348,
+      "error": null,
+      "error_code": null,
+      "expected_candidates": [
+        3.4183179758387423,
+        2.056835050942686,
+        1.3077170026961231
+      ],
+      "fallback_attempts_completed": 0,
+      "fallback_attempts_started": 0,
+      "fallbacks": 0,
+      "final_execution_cursor": {
+        "answered_total": 3,
+        "remaining_depth": 3
+      },
+      "finished_at_utc": "2026-10-18T03:28:56.560261Z",
+      "grid": 5,
+      "initial_candidate_count": 5,
+      "initial_singleton": false,
+      "interruption": null,
+      "job_id": "job000010",
+      "journal_ref": {
+        "path": "jobs/job000010/attempts/attempt0001/events.jsonl",
+        "sha256": "41edad31977b962567cead865f6d6b71aa8297b85f6c3672944d49c1f7e058bb"
+      },
+      "last_good_sequence": 27,
+      "manifest_ref": {
+        "path": "jobs/job000010/attempts/attempt0001/manifest.json",
+        "sha256": "3cdae1e63c477dbb1dd4f2813afd88dcadcad6ac304700e0e4966fa39cc26eba"
+      },
+      "mode": "adaptive",
+      "objectives": 5,
+      "partial_api_seconds": null,
+      "progress_matches_full_result_prefix": true,
+      "progress_ref": {
+        "bytes": 756,
+        "path": "jobs/job000010/attempts/attempt0001/progress.json",
+        "sha256": "aad115622553ff23824c9e7730e077d1044a5ce94d884a341a4ae1242c5c9eda"
+      },
+      "quality": "correct",
+      "queries": 3,
+      "result_ref": {
+        "path": "jobs/job000010/attempts/attempt0001/result.json",
+        "sha256": "b073f7fcb23a526e2f94d8d67ac6706be0dde6692484d74d02cdf739998f1a15"
+      },
+      "selected_candidate_id": "a4",
+      "solved": true,
+      "stagnant_answer_steps": 0,
+      "started_at_utc": "2026-10-18T03:26:27.618439Z",
+      "state_winner_lost_indices": [],
+      "status": "completed",
+      "successful_fallbacks": 0,
+      "termination_reason": "exact_single_candidate",
+      "uncommitted_recorded_answers_checked_no_credit": 0,
+      "unsuccessful_fallbacks": 0,
+      "winner_ids": [
+        "a4"
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "scientific_completion": false,
+  "series_id": "9d6e3f88-4fe6-4c7f-9ae0-0b3e3f5e472d",
+  "source": {
+    "dirty": false,
+    "git_commit": "62d1d01339f91802e2916b63660a4e640d99c9cc",
+    "inventory_format": "otqa-source-v1",
+    "source_sha256": "720726607ae451b319e59e01453b6ba69b9950ef42420e700ed6b4eaa5b34d0e",
+    "version": "0.2.0"
+  },
+  "state": {
+    "bytes": 11367,
+    "path": "state.json",
+    "sha256": "4efa38373648cfb207ab2299975488392909a45fdf4199ddf2f93dc366cbb622"
+  },
+  "status": "provisional_pass",
+  "study_id": "d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01",
+  "terminal_reasons": {
+    "exact_single_candidate": 10
+  },
+  "verified_read_artifacts": [
+    {
+      "bytes": 18629,
+      "path": "@finish_proof",
+      "sha256": "c2ea058f799f61254ba5507626702c7bfba71f407c10e8cae57e39ccf8848fb8"
+    },
+    {
+      "bytes": 163849,
+      "path": "@prepared_input_contract",
+      "sha256": "7b5e776e09fcf728c756a148a0c69aefc10d5115e0246602b02acd57c9c05c74"
+    },
+    {
+      "bytes": 235081,
+      "path": "@wheel",
+      "sha256": "24e4a5c901690895bdb1557a5a90ef1e9d5f6d3eb06381df58031d8ce02f1a97"
+    },
+    {
+      "bytes": 8005,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/exports/fleet-final.csv",
+      "sha256": "154acc7657cac0c8cd16e9d56acf0642a92be7e9a183f4ae8a6d46b88a03ef8c"
+    },
+    {
+      "bytes": 612,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/exports/fleet-final.csv.receipt.json",
+      "sha256": "c33e74459b1a0253513b51d39d53e0f757d8f3bd4eb13464a59ecf8ddc8eeef8"
+    },
+    {
+      "bytes": 12489,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/exports/fleet-final.json",
+      "sha256": "59bdd684863ee9f2b4146ca044be80d2e53119c853a58503664c12213cfc1a4a"
+    },
+    {
+      "bytes": 614,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/exports/fleet-final.json.receipt.json",
+      "sha256": "395f3d0f55ed90f581e0bfc0fb254618e65c86e2c29b16cdcd6a42933ae829cf"
+    },
+    {
+      "bytes": 837,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/configuration.json",
+      "sha256": "5a94ce747a5b29ce4cc8f306959429b21e89584911312f3c53e65f69236f20fb"
+    },
+    {
+      "bytes": 5279,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/dataset.json",
+      "sha256": "b73ef6827bea47c16a12ce4b0cd0cf355fd157e52c69bbc55704bd487db7cb89"
+    },
+    {
+      "bytes": 169,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/oracles/d5-m5-c000000.json",
+      "sha256": "2533edc73c568c0ffb2040f6b1d98236103cec2061007a53b6e87152058698d5"
+    },
+    {
+      "bytes": 170,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/oracles/d5-m5-c000001.json",
+      "sha256": "f9d0d20dabfcc77a3d425e64b439a6366bd883aa9f49dd29602e945ead351174"
+    },
+    {
+      "bytes": 167,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/oracles/d5-m5-c000002.json",
+      "sha256": "e7a01f83d7ff5aba6be6b051209248540d01ae61d7c37c4dfcf04a2689a6a60d"
+    },
+    {
+      "bytes": 170,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/oracles/d5-m5-c000003.json",
+      "sha256": "401c63c0e80a8b4eec170a3b7c58902ac5f3015cabf8e030560081e9dd1a7b56"
+    },
+    {
+      "bytes": 167,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/oracles/d5-m5-c000004.json",
+      "sha256": "617a59c983d73fa263e0dd4fa3aebeb2fca90ee89ff0310b8b8c19fac8f56997"
+    },
+    {
+      "bytes": 169,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/oracles/d5-m5-c000005.json",
+      "sha256": "9a00d29f8c28fe2bc0ada4957af4f1a72b73f8cd7ffdf87bd05fb481b190bf9a"
+    },
+    {
+      "bytes": 167,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/oracles/d5-m5-c000006.json",
+      "sha256": "f68ac3332faaa3ed4fecfe22a44a5950cf92f1dbcc22bed5ddf96408e07caf16"
+    },
+    {
+      "bytes": 169,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/oracles/d5-m5-c000007.json",
+      "sha256": "c850b2d86ae32155bf404492123987fdae40a1605065dfe243588e952769851d"
+    },
+    {
+      "bytes": 169,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/oracles/d5-m5-c000008.json",
+      "sha256": "594c257e5aad0195df772910ea5c7596e282baf0647cc28f998f6744e0e7a8d0"
+    },
+    {
+      "bytes": 168,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/oracles/d5-m5-c000009.json",
+      "sha256": "ce91be4b0cd228de1430b85ecef8dcf325fb80de6e9a8adb3fbaacdfb5bbd53c"
+    },
+    {
+      "bytes": 648,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/problems/d5-m5-c000000.json",
+      "sha256": "c04a778012c59f56e8920b14d2c05a827e3d73ebf736b9dfef90ccd9949340f6"
+    },
+    {
+      "bytes": 645,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/problems/d5-m5-c000001.json",
+      "sha256": "a691e6d5720590187be7bfe8982b674fcca3e4e4acd2a79c316b7f88eefb06d1"
+    },
+    {
+      "bytes": 646,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/problems/d5-m5-c000002.json",
+      "sha256": "c4a56bc8e332c3e8f02d4b55a1ae3f78cadade932b1318264fb462385257e3ee"
+    },
+    {
+      "bytes": 652,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/problems/d5-m5-c000003.json",
+      "sha256": "fb6db6ff52d13d115fd41666165da825a0c0d7c404f27d4d0e82951b273d9283"
+    },
+    {
+      "bytes": 644,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/problems/d5-m5-c000004.json",
+      "sha256": "9aa2e00256ead32993d7caf5a81a8c3e77abf72ab1911c614fe180750bfb251e"
+    },
+    {
+      "bytes": 652,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/problems/d5-m5-c000005.json",
+      "sha256": "e44cac03bf663f759665599dbd3b4a8aee8b941550d9f41f10ce098d4a214235"
+    },
+    {
+      "bytes": 646,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/problems/d5-m5-c000006.json",
+      "sha256": "09eb32a531502a8cf2630ee86bc1feb1e0d4db75beb5c1cc97fb98775db3eb46"
+    },
+    {
+      "bytes": 646,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/problems/d5-m5-c000007.json",
+      "sha256": "8fc41c441fd32530b916892b60fa06fb7dd150beaf0357b2eaae0d3c65f1c0d0"
+    },
+    {
+      "bytes": 646,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/problems/d5-m5-c000008.json",
+      "sha256": "bc2705b60ba5eeddd292c1ef834a692da04072b666d4d5e2420331e916a2127b"
+    },
+    {
+      "bytes": 646,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/problems/d5-m5-c000009.json",
+      "sha256": "ef73ea5539b615486a9f229f136300c4758153094045e0a5e82f87a4885d3a08"
+    },
+    {
+      "bytes": 1138,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/suite.json",
+      "sha256": "be157f380a7ee2130e54bdc2a0e95293488b33d3b61673a0630af9d03c316810"
+    },
+    {
+      "bytes": 2465,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/certification.json",
+      "sha256": "824a17e096634b85d8c043bdba4c025a2d92bad7e7c3914d7664a1be52e6e0d5"
+    },
+    {
+      "bytes": 706,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/backend_conformance.json",
+      "sha256": "b9a7a19fc17b95d171f6c09dd237cdf07ee502ff57801dc57d93ffcbbb3c6d8c"
+    },
+    {
+      "bytes": 687,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/installation.json",
+      "sha256": "57cfe1df48cfe12782f835d781290c5496653ec5a8811521ac442e0c79298338"
+    },
+    {
+      "bytes": 716,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/linux_recovery.json",
+      "sha256": "67e13ec7c3a446fae68431c198d0f8317f1fcbcf6b3399ed5267bed2b0e922c9"
+    },
+    {
+      "bytes": 709,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/numerical_conformance.json",
+      "sha256": "81afe5252df506d06bd720d37e2ec1f463e81305d4260fdcc9d4eddaac904668"
+    },
+    {
+      "bytes": 685,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/sdk_lifecycle.json",
+      "sha256": "eff9bc80d91f5747329801d3865977cba9e9825d63c01f0ea07f6352e7b139fb"
+    },
+    {
+      "bytes": 699,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/standalone_io.json",
+      "sha256": "9d120fc5bc81957fcd2d4b216d58d0dd38e2cba2b235e9fbaf9c4f6ec1e565a6"
+    },
+    {
+      "bytes": 181,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/environment-lock.txt",
+      "sha256": "c02ba80f6442217b91383cf21a3077b483d21f9fa04ab45027c6a30e922c86e6"
+    },
+    {
+      "bytes": 876,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/profile.json",
+      "sha256": "2547b946754cf86d617ede38b00b0378ab6f7d42399fef88ff70f8789137f5a8"
+    },
+    {
+      "bytes": 1603,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/backend_conformance.json",
+      "sha256": "b7b1808462b34ea04421edaeb1d5bc39c73468f73a16c74e14622a6f2c930d54"
+    },
+    {
+      "bytes": 2325,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/installation.json",
+      "sha256": "24b0860429c930f66c932b6d60327bb3c67eb42cfd2dfc472dbeb5fda01cc382"
+    },
+    {
+      "bytes": 2849,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/linux_recovery.json",
+      "sha256": "f05b2b39b3d81cfb16bd292ed2ea00332a638e6e56eb4ed8c021c036304010e0"
+    },
+    {
+      "bytes": 1295,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/numerical_conformance.json",
+      "sha256": "a1c52ed3947bc499b5d534609ee1f4256246427143f79dbd238f3d5ebd9f503f"
+    },
+    {
+      "bytes": 1897,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/sdk_lifecycle.json",
+      "sha256": "f2169146248bebcb87b2ecfbcbc5c08d1b395d98a89ac84e398e8518ffdeb6ae"
+    },
+    {
+      "bytes": 2606,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/inputs/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/standalone_io.json",
+      "sha256": "cb91a4968cf1c51e3e55424b333181b7407d8827a2fae21b8975d2107b515e06"
+    },
+    {
+      "bytes": 2619,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000001/attempts/attempt0001/case-request.json",
+      "sha256": "75478af3c5efc3f78cacf8df54ed121b9c3b304346fd671e1cdc10d0d302f0d7"
+    },
+    {
+      "bytes": 559,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000001/attempts/attempt0001/child_registration.json",
+      "sha256": "ac6cae8652165a5cfbf375759c93705c52698f1510cb3eb7594b1de254bba0a9"
+    },
+    {
+      "bytes": 344387,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000001/attempts/attempt0001/events.jsonl",
+      "sha256": "67089944bc634757b7417da31886e75a31375bdf6050520bf761875943460734"
+    },
+    {
+      "bytes": 827,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000001/attempts/attempt0001/launch_intent.json",
+      "sha256": "9a36ae6fff7d441a85dd1d379a2d85efef78bb3f14c6cac473ad4539eb68b7e4"
+    },
+    {
+      "bytes": 7537,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000001/attempts/attempt0001/manifest.json",
+      "sha256": "d61a7b2205e443261c22ac9ade7e5a999a58abd1b4548eebc5025c7e818624bc"
+    },
+    {
+      "bytes": 755,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000001/attempts/attempt0001/progress.json",
+      "sha256": "70057a87c83321f8779eac05bc902c0d98e592e61a6c1748c42dfbaf64b5b752"
+    },
+    {
+      "bytes": 264026,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000001/attempts/attempt0001/result.json",
+      "sha256": "ea3dd2b9e5e1753f8017a94d1ff17bda346885ef2be673f247b3f680b9ca5da1"
+    },
+    {
+      "bytes": 721,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000001/attempts/attempt0001/start_grant.json",
+      "sha256": "5ed1cdb39cd7ec0f368350280183b1b089b7eac4169f481180b771a839c29fb3"
+    },
+    {
+      "bytes": 2619,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000002/attempts/attempt0001/case-request.json",
+      "sha256": "d7fb2a5bafe136432f9e1a0295cee8e88db5a7de804b955e64494dba773fe6a6"
+    },
+    {
+      "bytes": 559,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000002/attempts/attempt0001/child_registration.json",
+      "sha256": "29f270ae069226c88d52378aab19c912e1fc7ca5af29a72b1e776920d959ad55"
+    },
+    {
+      "bytes": 1429056,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000002/attempts/attempt0001/events.jsonl",
+      "sha256": "f4ceb697ff3fd817775d54fed3643f1e368e4cb41cc06354ebb28bc8e0ad0a04"
+    },
+    {
+      "bytes": 827,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000002/attempts/attempt0001/launch_intent.json",
+      "sha256": "8f134eeac79656836949bfcf335dc39e102fd05d8324246b0a3f0e9e612b3e18"
+    },
+    {
+      "bytes": 7537,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000002/attempts/attempt0001/manifest.json",
+      "sha256": "ad1b5041158d2c53e66af8713340b5a689c7f809f0bbe1726afd732610c65e7f"
+    },
+    {
+      "bytes": 760,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000002/attempts/attempt0001/progress.json",
+      "sha256": "d09d0c5d6ab9122d511bb08e2696b9695b5f7b0b3a217829c8275348d90c5493"
+    },
+    {
+      "bytes": 1095280,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000002/attempts/attempt0001/result.json",
+      "sha256": "edc87179ea1a242f69d1b58d6ff8279760d82567e56d4a8164dd49f874311de4"
+    },
+    {
+      "bytes": 721,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000002/attempts/attempt0001/start_grant.json",
+      "sha256": "fc126d6f0f7fd45d745ffc2985769df874b359730894ed3436dfed58b9e7172c"
+    },
+    {
+      "bytes": 2619,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000003/attempts/attempt0001/case-request.json",
+      "sha256": "aaed3540f20bc1f6b83ef571c9c117a7e88c7e229129586447f8144e9ed0b348"
+    },
+    {
+      "bytes": 559,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000003/attempts/attempt0001/child_registration.json",
+      "sha256": "f376007b810321210ae073efb340425b1a65029f5836fbcb54f8dacb508ca016"
+    },
+    {
+      "bytes": 714770,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000003/attempts/attempt0001/events.jsonl",
+      "sha256": "4201ff45c0d7b0b5382705d04f11193a451f3e17ccb62925b88b8e14651c3e5b"
+    },
+    {
+      "bytes": 827,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000003/attempts/attempt0001/launch_intent.json",
+      "sha256": "51ecbb0a5d882cb7f2a15c3192dc432cc68cd5e451288013889f636cac1a0a80"
+    },
+    {
+      "bytes": 7537,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000003/attempts/attempt0001/manifest.json",
+      "sha256": "9dbc6c6d50e401388a448f7ca3ad754d8ed311d43289cc596616a885a8fd4237"
+    },
+    {
+      "bytes": 755,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000003/attempts/attempt0001/progress.json",
+      "sha256": "1f547b2ae651b82ea295c6c9f30eb14eb69466be77f6cc40746e954403cd0390"
+    },
+    {
+      "bytes": 548543,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000003/attempts/attempt0001/result.json",
+      "sha256": "1a00507d1283a9495140657604a07651590919e67268198d3f8d6b8a7352dfbf"
+    },
+    {
+      "bytes": 721,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000003/attempts/attempt0001/start_grant.json",
+      "sha256": "b070689e6aef3f2f06a7a9957d4be142eaf4d719f48a116d0a3ae5c46c58c502"
+    },
+    {
+      "bytes": 2619,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000004/attempts/attempt0001/case-request.json",
+      "sha256": "2a266057568ac764a0434ea34527aa0320ee55843e8ebb66a93f3899cf5dbe83"
+    },
+    {
+      "bytes": 559,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000004/attempts/attempt0001/child_registration.json",
+      "sha256": "d8e0bc4db716dcd6be8cc718185eeb7769acd7747037a6428cb45c9166fa10f2"
+    },
+    {
+      "bytes": 535344,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000004/attempts/attempt0001/events.jsonl",
+      "sha256": "d3fb62e1ba8d2a31762dc38cc83a6e7514cfd9da1644f13a03536539f4fa92c4"
+    },
+    {
+      "bytes": 827,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000004/attempts/attempt0001/launch_intent.json",
+      "sha256": "c0f72c7642c6b8e6d33c125aa5ca182b321357b6ec426f56d1475d18c689f37b"
+    },
+    {
+      "bytes": 7537,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000004/attempts/attempt0001/manifest.json",
+      "sha256": "99481157fe33b3390884faefb2ae2f47f83b485864b88f1895255454e4a4a65f"
+    },
+    {
+      "bytes": 755,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000004/attempts/attempt0001/progress.json",
+      "sha256": "3f339eaaf6972c985ebcc9bedb0e17b2cae07c14c33e696e2ea81e60ba601da5"
+    },
+    {
+      "bytes": 410799,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000004/attempts/attempt0001/result.json",
+      "sha256": "6ff3398472f3c9e1428c6f8a51273c36fc174c4dc05dd84bd50e1337247c83be"
+    },
+    {
+      "bytes": 721,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000004/attempts/attempt0001/start_grant.json",
+      "sha256": "cdf20fc75a531471687d721f69baada948bb2e15b70357d98f0a552afd5e83f0"
+    },
+    {
+      "bytes": 2619,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000005/attempts/attempt0001/case-request.json",
+      "sha256": "d54aa9e8a497720b44ac27b2e7751b282afae0e247e9f3d1497764b4f155a6fd"
+    },
+    {
+      "bytes": 559,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000005/attempts/attempt0001/child_registration.json",
+      "sha256": "74d398289c6d2ee742c3c2ee9384c27f59622073f3b09f1c60a84588e3e6194e"
+    },
+    {
+      "bytes": 1289878,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000005/attempts/attempt0001/events.jsonl",
+      "sha256": "eaa15ec5aad3b0d584e64a9b7a194e19d226356cd28c11b8d8c9ad08a965032e"
+    },
+    {
+      "bytes": 827,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000005/attempts/attempt0001/launch_intent.json",
+      "sha256": "f1b2b72cc66ffadfc83bcf8bc65fae2e574fc7b8fd69d293f5267cc7228b927e"
+    },
+    {
+      "bytes": 7537,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000005/attempts/attempt0001/manifest.json",
+      "sha256": "0e58d39e8bf686b554247b2c27d8ffdd3ce81c9298d0c1728660e2bdab0a8df8"
+    },
+    {
+      "bytes": 757,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000005/attempts/attempt0001/progress.json",
+      "sha256": "70ce2c94ea3c3ec30390bcc6feeacefc2bc90870ada42eb744785811bfb8b6a3"
+    },
+    {
+      "bytes": 987038,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000005/attempts/attempt0001/result.json",
+      "sha256": "de3e7e3003ea353d3a52bdf51d3c0a7675927dd81be0635c0fa013e2b5dcb96d"
+    },
+    {
+      "bytes": 721,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000005/attempts/attempt0001/start_grant.json",
+      "sha256": "9bcb0abacafc6afd8c68ce1aed9b1dcf3f02126f07892959c107abd567ff76bb"
+    },
+    {
+      "bytes": 2619,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000006/attempts/attempt0001/case-request.json",
+      "sha256": "9c6fecde50aae18b6808efbca26d09a06aaea25b928e6241e7d62ef843395b72"
+    },
+    {
+      "bytes": 559,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000006/attempts/attempt0001/child_registration.json",
+      "sha256": "1242394445075d505ba0298133a55e9ac00c6594f532359031c031fea70ac748"
+    },
+    {
+      "bytes": 1963279,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000006/attempts/attempt0001/events.jsonl",
+      "sha256": "70847ed60521603e2708e5c17c23b5af2a7b9961e4f511a0fa7e142636387bf4"
+    },
+    {
+      "bytes": 827,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000006/attempts/attempt0001/launch_intent.json",
+      "sha256": "64b271b55cc898f1a117677de3a4ecae8c87382cacabb1410e0e4e6160bb96f3"
+    },
+    {
+      "bytes": 7537,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000006/attempts/attempt0001/manifest.json",
+      "sha256": "f120e0da66a54bf977b20341f1fe45147bdccb9c62c1e8b374d1ca9614122868"
+    },
+    {
+      "bytes": 761,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000006/attempts/attempt0001/progress.json",
+      "sha256": "d3119735ef27bac5fed767f710c3361feaf4bafb58d920a56ea17b1d52391601"
+    },
+    {
+      "bytes": 1505532,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000006/attempts/attempt0001/result.json",
+      "sha256": "2691ab78b914abfae9395794bc3df6ffa553c2ea7e7b522c3f41146b6650cc3d"
+    },
+    {
+      "bytes": 721,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000006/attempts/attempt0001/start_grant.json",
+      "sha256": "7ae872752752452de158846be94535f442b17b442862f74a8c623ca55d0dcd26"
+    },
+    {
+      "bytes": 2619,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000007/attempts/attempt0001/case-request.json",
+      "sha256": "ed59cafafb4c9fe6a3a89185bb86302db7d5e949cf7d044259a9b94b021e6617"
+    },
+    {
+      "bytes": 559,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000007/attempts/attempt0001/child_registration.json",
+      "sha256": "b1484d5cf8de1915f3c58bdde3fdb42d2307032455d19b14299899fbd431eef2"
+    },
+    {
+      "bytes": 669463,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000007/attempts/attempt0001/events.jsonl",
+      "sha256": "e6882f265139f08a344a045f6bea8517132d6d21d44ddbd979d1d667ce5a3cad"
+    },
+    {
+      "bytes": 827,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000007/attempts/attempt0001/launch_intent.json",
+      "sha256": "81e6b74b27986d36042e483ea960ad0eb9249221607ff8b776e5d27248bc8cfa"
+    },
+    {
+      "bytes": 7537,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000007/attempts/attempt0001/manifest.json",
+      "sha256": "bab321fbaeef038bf2e4e860fba4b394fdd4ff71640f475aded406b7322f02ba"
+    },
+    {
+      "bytes": 756,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000007/attempts/attempt0001/progress.json",
+      "sha256": "7fa2713e76a3767cea76475048f42dc5284510a8fa5b503b1c09688cf4d7ba1d"
+    },
+    {
+      "bytes": 513245,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000007/attempts/attempt0001/result.json",
+      "sha256": "98192163b597e63f141d49b96a8d2ee23009bb1ed83e36a78d2bdb5e440e42b9"
+    },
+    {
+      "bytes": 721,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000007/attempts/attempt0001/start_grant.json",
+      "sha256": "9d6330f203fe485dc12851179a68e3f57ff0cc379d37398ae53192bbd83f4fd6"
+    },
+    {
+      "bytes": 2619,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000008/attempts/attempt0001/case-request.json",
+      "sha256": "be2b275cfc619370082feef56b5e1aee49f9240a24be767cb9a3f3cdb832c557"
+    },
+    {
+      "bytes": 559,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000008/attempts/attempt0001/child_registration.json",
+      "sha256": "55fc25cc536b5d06b695be08727fe1bd1c927f17d731b7fcef495521ac16ef90"
+    },
+    {
+      "bytes": 288191,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000008/attempts/attempt0001/events.jsonl",
+      "sha256": "8d6559ceed0d222675d685f1e06eeb62060b9edca294d33b6a3f9ebc5dde9bcf"
+    },
+    {
+      "bytes": 827,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000008/attempts/attempt0001/launch_intent.json",
+      "sha256": "5e9c730e6c03834ec5c716800aa8ecdf4da331448e1434403023150fdf60c7fe"
+    },
+    {
+      "bytes": 7537,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000008/attempts/attempt0001/manifest.json",
+      "sha256": "4c961838e295da7667e020d7d541fda70f71a3bcb299046c4ac6b5f915b9ab9a"
+    },
+    {
+      "bytes": 756,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000008/attempts/attempt0001/progress.json",
+      "sha256": "db2fa15ff001e21fa3c33823f091d8f6a45dba64a449781f8d1e476206d381d6"
+    },
+    {
+      "bytes": 221574,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000008/attempts/attempt0001/result.json",
+      "sha256": "14f4a44d757cf6fe05dcc6ee52b7bc71df9fc5accf2f7ad812855e8ca5254457"
+    },
+    {
+      "bytes": 721,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000008/attempts/attempt0001/start_grant.json",
+      "sha256": "2855ea1639a51476ffe57fbf45d2362f561c19bb70c238e1dbabf8caa2c6d536"
+    },
+    {
+      "bytes": 2619,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000009/attempts/attempt0001/case-request.json",
+      "sha256": "756cc83c7a3bb717fe2debf7ab063127527592806cd2ad88875f35a649b930ba"
+    },
+    {
+      "bytes": 559,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000009/attempts/attempt0001/child_registration.json",
+      "sha256": "1363ea9ce35f51b7003c68c12a0c1e9d62a43036e440dbfe2fe75ad8a8360043"
+    },
+    {
+      "bytes": 2071858,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000009/attempts/attempt0001/events.jsonl",
+      "sha256": "4c787b53476e8ff0e662522567eaa1dd30d968bf97e3d008007ab5a499dfd660"
+    },
+    {
+      "bytes": 827,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000009/attempts/attempt0001/launch_intent.json",
+      "sha256": "966308352868c77f421c6fa1975a9680b4a8019065fa0362c5b9deebd3aa3c96"
+    },
+    {
+      "bytes": 7537,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000009/attempts/attempt0001/manifest.json",
+      "sha256": "d30baceccf38caa852a905d7c0f68028de0027d51cd55c2cf66613765c86a44e"
+    },
+    {
+      "bytes": 760,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000009/attempts/attempt0001/progress.json",
+      "sha256": "ff164dd4f551e5a2dde02f6abc81c0f0c9b12881a6200ebff28b757a33a23ad5"
+    },
+    {
+      "bytes": 1588212,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000009/attempts/attempt0001/result.json",
+      "sha256": "99589ff5e87a62eaf5e6a4bbd6971afb762a7c150a4c4698b78387424e4e3827"
+    },
+    {
+      "bytes": 721,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000009/attempts/attempt0001/start_grant.json",
+      "sha256": "e8729835ef936be36650a9cb40e8055eea78e081f495dbef78e2a45cb2754680"
+    },
+    {
+      "bytes": 2619,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000010/attempts/attempt0001/case-request.json",
+      "sha256": "a4daf2cc59ac1d5b8ed29f1fc9206c32a084e86b1ead503ed21f8e14b9c3e724"
+    },
+    {
+      "bytes": 559,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000010/attempts/attempt0001/child_registration.json",
+      "sha256": "c5336198f146cdd51247b4399bc7ebcbaa8a1d059ddb07f9e607dadb79f95ead"
+    },
+    {
+      "bytes": 431407,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000010/attempts/attempt0001/events.jsonl",
+      "sha256": "41edad31977b962567cead865f6d6b71aa8297b85f6c3672944d49c1f7e058bb"
+    },
+    {
+      "bytes": 827,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000010/attempts/attempt0001/launch_intent.json",
+      "sha256": "8621b340a3b632b8c29e4fe52830721b2334943a4ab7078d8f3ab1d080ad7255"
+    },
+    {
+      "bytes": 7537,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000010/attempts/attempt0001/manifest.json",
+      "sha256": "3cdae1e63c477dbb1dd4f2813afd88dcadcad6ac304700e0e4966fa39cc26eba"
+    },
+    {
+      "bytes": 756,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000010/attempts/attempt0001/progress.json",
+      "sha256": "aad115622553ff23824c9e7730e077d1044a5ce94d884a341a4ae1242c5c9eda"
+    },
+    {
+      "bytes": 331249,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000010/attempts/attempt0001/result.json",
+      "sha256": "b073f7fcb23a526e2f94d8d67ac6706be0dde6692484d74d02cdf739998f1a15"
+    },
+    {
+      "bytes": 721,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/jobs/job000010/attempts/attempt0001/start_grant.json",
+      "sha256": "09814d0aba16c6dd9256427cddcd6d84e96fa859d2bcf5baf6a63054330dca57"
+    },
+    {
+      "bytes": 40925,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/materialization_receipt.json",
+      "sha256": "e0c3603f4da6616428fb8f55518c3bc585911746f938db39e8721844e8a70776"
+    },
+    {
+      "bytes": 26218,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/plan.json",
+      "sha256": "f93e1d3f7c5d4044f2593fca0b96e48163faacbdaf3302e2e6343778b8f74dc2"
+    },
+    {
+      "bytes": 837,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/configuration.json",
+      "sha256": "5a94ce747a5b29ce4cc8f306959429b21e89584911312f3c53e65f69236f20fb"
+    },
+    {
+      "bytes": 6039,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/dataset.json",
+      "sha256": "c50fdb12594606086b0caf60420c912674eb805617df4fd3c179f0cfef1eea8c"
+    },
+    {
+      "bytes": 169,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/oracles/d5-m5-c000000.json",
+      "sha256": "2533edc73c568c0ffb2040f6b1d98236103cec2061007a53b6e87152058698d5"
+    },
+    {
+      "bytes": 170,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/oracles/d5-m5-c000001.json",
+      "sha256": "f9d0d20dabfcc77a3d425e64b439a6366bd883aa9f49dd29602e945ead351174"
+    },
+    {
+      "bytes": 167,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/oracles/d5-m5-c000002.json",
+      "sha256": "e7a01f83d7ff5aba6be6b051209248540d01ae61d7c37c4dfcf04a2689a6a60d"
+    },
+    {
+      "bytes": 170,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/oracles/d5-m5-c000003.json",
+      "sha256": "401c63c0e80a8b4eec170a3b7c58902ac5f3015cabf8e030560081e9dd1a7b56"
+    },
+    {
+      "bytes": 167,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/oracles/d5-m5-c000004.json",
+      "sha256": "617a59c983d73fa263e0dd4fa3aebeb2fca90ee89ff0310b8b8c19fac8f56997"
+    },
+    {
+      "bytes": 169,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/oracles/d5-m5-c000005.json",
+      "sha256": "9a00d29f8c28fe2bc0ada4957af4f1a72b73f8cd7ffdf87bd05fb481b190bf9a"
+    },
+    {
+      "bytes": 167,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/oracles/d5-m5-c000006.json",
+      "sha256": "f68ac3332faaa3ed4fecfe22a44a5950cf92f1dbcc22bed5ddf96408e07caf16"
+    },
+    {
+      "bytes": 169,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/oracles/d5-m5-c000007.json",
+      "sha256": "c850b2d86ae32155bf404492123987fdae40a1605065dfe243588e952769851d"
+    },
+    {
+      "bytes": 169,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/oracles/d5-m5-c000008.json",
+      "sha256": "594c257e5aad0195df772910ea5c7596e282baf0647cc28f998f6744e0e7a8d0"
+    },
+    {
+      "bytes": 168,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/oracles/d5-m5-c000009.json",
+      "sha256": "ce91be4b0cd228de1430b85ecef8dcf325fb80de6e9a8adb3fbaacdfb5bbd53c"
+    },
+    {
+      "bytes": 648,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/problems/d5-m5-c000000.json",
+      "sha256": "c04a778012c59f56e8920b14d2c05a827e3d73ebf736b9dfef90ccd9949340f6"
+    },
+    {
+      "bytes": 645,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/problems/d5-m5-c000001.json",
+      "sha256": "a691e6d5720590187be7bfe8982b674fcca3e4e4acd2a79c316b7f88eefb06d1"
+    },
+    {
+      "bytes": 646,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/problems/d5-m5-c000002.json",
+      "sha256": "c4a56bc8e332c3e8f02d4b55a1ae3f78cadade932b1318264fb462385257e3ee"
+    },
+    {
+      "bytes": 652,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/problems/d5-m5-c000003.json",
+      "sha256": "fb6db6ff52d13d115fd41666165da825a0c0d7c404f27d4d0e82951b273d9283"
+    },
+    {
+      "bytes": 644,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/problems/d5-m5-c000004.json",
+      "sha256": "9aa2e00256ead32993d7caf5a81a8c3e77abf72ab1911c614fe180750bfb251e"
+    },
+    {
+      "bytes": 652,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/problems/d5-m5-c000005.json",
+      "sha256": "e44cac03bf663f759665599dbd3b4a8aee8b941550d9f41f10ce098d4a214235"
+    },
+    {
+      "bytes": 646,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/problems/d5-m5-c000006.json",
+      "sha256": "09eb32a531502a8cf2630ee86bc1feb1e0d4db75beb5c1cc97fb98775db3eb46"
+    },
+    {
+      "bytes": 646,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/problems/d5-m5-c000007.json",
+      "sha256": "8fc41c441fd32530b916892b60fa06fb7dd150beaf0357b2eaae0d3c65f1c0d0"
+    },
+    {
+      "bytes": 646,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/problems/d5-m5-c000008.json",
+      "sha256": "bc2705b60ba5eeddd292c1ef834a692da04072b666d4d5e2420331e916a2127b"
+    },
+    {
+      "bytes": 646,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/problems/d5-m5-c000009.json",
+      "sha256": "ef73ea5539b615486a9f229f136300c4758153094045e0a5e82f87a4885d3a08"
+    },
+    {
+      "bytes": 1346,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/inputs/studies/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/suite.json",
+      "sha256": "178c46f95b7da45ae0f7a1a988d663c25a324156014f885161a32d6f7d2a12db"
+    },
+    {
+      "bytes": 2416,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/certification.json",
+      "sha256": "fdcaa8844be4a9b947f79cd2bf835239e6be1b0d55437a4428ef88ba752f2bcc"
+    },
+    {
+      "bytes": 699,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/backend_conformance.json",
+      "sha256": "3ac2b2ea82c22a55101dc8d7c0ceaa46690c708dd66638ab8d07cb67fb92d3f3"
+    },
+    {
+      "bytes": 680,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/installation.json",
+      "sha256": "ca1f1a1d5f18aa81005d186ca42891ca766388400903831b2c8a8afd3849a8fa"
+    },
+    {
+      "bytes": 709,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/linux_recovery.json",
+      "sha256": "2a6454182af4a261cb6f6700761805afaee16c9b3aeb65b4119de9f22626ce36"
+    },
+    {
+      "bytes": 702,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/numerical_conformance.json",
+      "sha256": "4f86f9cc8a538d42f63407087319fc137873a88ac406e69a096ef64ef54927d3"
+    },
+    {
+      "bytes": 678,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/sdk_lifecycle.json",
+      "sha256": "b7661fb1f635a0adbe242fbe1ebf867b616aedbf661a301a5471646234dc7aaf"
+    },
+    {
+      "bytes": 692,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/checks/standalone_io.json",
+      "sha256": "a7821b3fd8b4ceb71b117c43331aa95f4cb81ccef5c86d7350804850da04cadf"
+    },
+    {
+      "bytes": 181,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/environment-lock.txt",
+      "sha256": "c02ba80f6442217b91383cf21a3077b483d21f9fa04ab45027c6a30e922c86e6"
+    },
+    {
+      "bytes": 862,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/profile.json",
+      "sha256": "4eb21919ada9d1613bb4e637efe5d9c8628ff88d2ddb9f49fe9c0b3639bb5ecd"
+    },
+    {
+      "bytes": 1603,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/backend_conformance.json",
+      "sha256": "b7b1808462b34ea04421edaeb1d5bc39c73468f73a16c74e14622a6f2c930d54"
+    },
+    {
+      "bytes": 2325,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/installation.json",
+      "sha256": "24b0860429c930f66c932b6d60327bb3c67eb42cfd2dfc472dbeb5fda01cc382"
+    },
+    {
+      "bytes": 2849,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/linux_recovery.json",
+      "sha256": "f05b2b39b3d81cfb16bd292ed2ea00332a638e6e56eb4ed8c021c036304010e0"
+    },
+    {
+      "bytes": 1295,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/numerical_conformance.json",
+      "sha256": "a1c52ed3947bc499b5d534609ee1f4256246427143f79dbd238f3d5ebd9f503f"
+    },
+    {
+      "bytes": 1897,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/sdk_lifecycle.json",
+      "sha256": "f2169146248bebcb87b2ecfbcbc5c08d1b395d98a89ac84e398e8518ffdeb6ae"
+    },
+    {
+      "bytes": 2606,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/provenance/original/runs/fleet-v3-preparation-20261017T2140Z/qualification/raw/standalone_io.json",
+      "sha256": "cb91a4968cf1c51e3e55424b333181b7407d8827a2fae21b8975d2107b515e06"
+    },
+    {
+      "bytes": 3348,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/reports/50984538-bdd5-5916-8d34-7a41d2e828ab/audit.json",
+      "sha256": "1b7d601885218683c101f336e28e4ad3cc07cc4e411831a598169a91cc38699d"
+    },
+    {
+      "bytes": 11367,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/reports/50984538-bdd5-5916-8d34-7a41d2e828ab/state-snapshot.json",
+      "sha256": "4efa38373648cfb207ab2299975488392909a45fdf4199ddf2f93dc366cbb622"
+    },
+    {
+      "bytes": 12489,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/reports/50984538-bdd5-5916-8d34-7a41d2e828ab/summary.json",
+      "sha256": "59bdd684863ee9f2b4146ca044be80d2e53119c853a58503664c12213cfc1a4a"
+    },
+    {
+      "bytes": 325,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/source/build-provenance.json",
+      "sha256": "12fde9ab005f42ea8e40fb9c7f13814149d5a09b3f2f32a6aa83f34c2a1c92c6"
+    },
+    {
+      "bytes": 16558,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/source/inventory.json",
+      "sha256": "09d2a9de41fb870ecace63571141ad71923186a73120dc6cb151b63b0264ae00"
+    },
+    {
+      "bytes": 11367,
+      "path": "runs/d5-h3-adaptive100-20261018T0218Z/d5-a5-n10-h3-grid5-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072-group01/state.json",
+      "sha256": "4efa38373648cfb207ab2299975488392909a45fdf4199ddf2f93dc366cbb622"
+    }
+  ],
+  "verifier": {
+    "native_package_imported": false,
+    "path": "verify_d5_h3_raw.py",
+    "sha256": "708d7751a2a72336b3f1988b58b839c018c6484fe54591ca73454e54e4be6c35",
+    "standard_library_only": true
+  }
+}

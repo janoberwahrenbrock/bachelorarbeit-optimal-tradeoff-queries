@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "at_utc": "2026-10-19T04:44:35.148166+00:00",
+  "status": "gate_pass",
+  "reviewer": "/root/publication_source_audit",
+  "findings": [],
+  "study_id": "d3-a5-n100-h1-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072",
+  "source": {
+    "dirty": false,
+    "git_commit": "62d1d01339f91802e2916b63660a4e640d99c9cc",
+    "inventory_format": "otqa-source-v1",
+    "source_sha256": "720726607ae451b319e59e01453b6ba69b9950ef42420e700ed6b4eaa5b34d0e",
+    "version": "0.2.0"
+  },
+  "package": {
+    "archive": {
+      "bytes": 4451695,
+      "path": "runs/h1-d3-and-alternative-count-d5-followups-20261018T2012Z/monitoring/final-publication-N100/d3-a5-n100-h1-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072/d3-a5-n100-h1-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-v1.zip",
+      "sha256": "7197f6c8ad1b701c41b35b8b628a6228a4bdcb397355742829dc7ebadfecfa0d"
+    },
+    "checksums": {
+      "bytes": 344,
+      "path": "runs/h1-d3-and-alternative-count-d5-followups-20261018T2012Z/monitoring/final-publication-N100/d3-a5-n100-h1-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072/SHA256SUMS",
+      "sha256": "408f1868068970b7d5e3e41ce08309df2d186a8a4a5433080a3a27d086ac49ec"
+    },
+    "manifest": {
+      "bytes": 1275022,
+      "path": "runs/h1-d3-and-alternative-count-d5-followups-20261018T2012Z/monitoring/final-publication-N100/d3-a5-n100-h1-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072/publication-manifest.json",
+      "sha256": "59234d98e54420187a7fb5c1d2b62729400198fbefc241fe337950d703aeb7a0"
+    },
+    "validation": {
+      "bytes": 3724,
+      "path": "runs/h1-d3-and-alternative-count-d5-followups-20261018T2012Z/monitoring/final-publication-N100/d3-a5-n100-h1-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072/package-validation.json",
+      "sha256": "4734d0cc6fbaac717f2a26ea72cfd6b3d27cd664428eb6564b322c03643af985"
+    }
+  },
+  "archive_sha256": "7197f6c8ad1b701c41b35b8b628a6228a4bdcb397355742829dc7ebadfecfa0d",
+  "manifest_sha256": "59234d98e54420187a7fb5c1d2b62729400198fbefc241fe337950d703aeb7a0",
+  "validation_sha256": "4734d0cc6fbaac717f2a26ea72cfd6b3d27cd664428eb6564b322c03643af985",
+  "source_closure": {
+    "path": "runs/h1-d3-and-alternative-count-d5-followups-20261018T2012Z/review/publication-final-H1-independent-20261019T044435.147298Z/source-closure.json",
+    "sha256": "dd0d6ce95762d723487b6ce405614c0e526de4ae65d156e6250b259a6386e765",
+    "bytes": 8350
+  },
+  "original_scientific_Root_acceptance": {
+    "bytes": 9065,
+    "path": "runs/h1-d3-and-alternative-count-d5-followups-20261018T2012Z/control/private-SCI-H1-Root-final-acceptance.json",
+    "sha256": "120bbc6f3cccb42887218c3b1d122750767340ed8096e95cc9879d3a9128a4ca"
+  },
+  "actual_Root_build_request": {
+    "bytes": 1802,
+    "path": "runs/h1-d3-and-alternative-count-d5-followups-20261018T2012Z/control/publication-build-requests/d3-a5-n100-h1-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072/request.json",
+    "sha256": "23642fab41a1a1f059945f570757aa75c72d9b619bf98adc5f1e75c83d1bc7f6"
+  },
+  "code_peer": {
+    "bytes": 6024,
+    "path": "runs/h1-d3-and-alternative-count-d5-followups-20261018T2012Z/review/e5-publication-v2-independent-20261019T044020.268881Z/review.json",
+    "sha256": "d28029a0a5237c6d8d9a152703358e526f48ddf77b62872d7b9b42be2fb17b9c"
+  },
+  "Root_code_acceptance": {
+    "bytes": 2346,
+    "path": "runs/h1-d3-and-alternative-count-d5-followups-20261018T2012Z/control/E5-publication-adapter-v2-Root-code-acceptance.json",
+    "sha256": "ca901e23473b55b873d3e78b1c6757a11f6c34f3c9341e0be2426d055cb2a81f"
+  },
+  "checks": [
+    "independent_raw_report_and_tools",
+    "all_outcomes_attempts_costs_and_diagnoses",
+    "source_inputs_profile_audit_and_terminal_denominators",
+    "remote_originals_and_stable_mac_selection",
+    "final_archive_manifest_and_fresh_offline_reproduction"
+  ],
+  "independent_actual_checks": {
+    "archive_members_excluding_embedded_manifest": 1642,
+    "archive_member_bytes": 36147590,
+    "exact_embedded_manifest_bytes": true,
+    "exact_source_to_archive_member_bytes_each": true,
+    "exact_original_native_members": 1364,
+    "exact_input_suite_originals": 204,
+    "all_primary_cells": 100,
+    "all_attempts": 100,
+    "every_attempt_count_one": true,
+    "correct": 70,
+    "regular_unsolved": 30,
+    "answers_independently_checked_Fraction": 242,
+    "original_Raw_status_preserved": "provisional_pass",
+    "original_report_provisional_status_preserved": true,
+    "A3_original_failure_and_distinct_export_issue_preserved": false,
+    "saved_first_offline_pass_and_exact_derived_report_CSV_Markdown_checked": true,
+    "exact4assets_SHA256SUMS_checked": true,
+    "fixed_semantic_build_and_first_local_offline_Onces_checked": true,
+    "archive_safety_membership_no_symlinks_and_casefold_unique": true
+  },
+  "limits": [
+    "Reviewer read ZIP members and existing original sources and performed independent exact Fraction arithmetic over saved inputs/results/answers.",
+    "No second offline execution, Raw/Reporter/SCI API, build, native audit, solver, remote access or publication by reviewer.",
+    "Review binds actual local final package; publication and fresh public-download/hash/offline completion must be accepted separately by Root.",
+    "Historical private/provisional status fields are intentionally retained; separate final SCI and publication authorization bind the later transition."
+  ]
+}

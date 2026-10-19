@@ -1,0 +1,261 @@
+{
+  "bindings": {
+    "all_attempts_cost_and_outcome_sha256": "cb749be5bfbfa76fc57ce58f2de0434ce22abcea65a0fef52e3fc20bd2565be8",
+    "audit": {
+      "bytes": 25128,
+      "path": "runs/studies/d5-a5-n100-h2-grid10-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072/reports/7b915d21-b8f9-5938-a313-946b62b8f98b/audit.json",
+      "sha256": "fbf369901a1526604f1cf8ec72e0295731cdb3ebbc5e963768e89663a78188d7"
+    },
+    "classification_counts": {
+      "correct": 100
+    },
+    "denominators": {
+      "all_attempts": 100,
+      "independent_problems": 100,
+      "primary_cells": 100,
+      "repetitions": 1,
+      "terminal_cells": 100
+    },
+    "input_contract": {
+      "bytes": 4541,
+      "path": "studies/d5-a5-n100-h2-grid10-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072/provenance/input-contract.json",
+      "sha256": "0252066cc28598ef168b74833376a5fc037af78bf17d91d5aa654b2e8623e9f4"
+    },
+    "missing_costs": {
+      "api_seconds": 0,
+      "case_seconds": 0,
+      "controller_seconds": 0
+    },
+    "plan": {
+      "bytes": 186246,
+      "path": "runs/studies/d5-a5-n100-h2-grid10-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072/plan.json",
+      "sha256": "dd4dd62b329517693ea90b1e4ac0b54875ff0a8cfdb6f6f02f95ff6c7e4045de"
+    },
+    "raw_check": {
+      "bytes": 1115662,
+      "path": "studies/d5-a5-n100-h2-grid10-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072/provenance/raw-check.json",
+      "sha256": "a1b7428b8508dba0633f426378110fb980d8613bdb2d38c9a87f9a0e3b20a835"
+    },
+    "regular_stop_outcomes": [],
+    "report_files": {
+      "attempts.csv": {
+        "bytes": 56190,
+        "path": "studies/d5-a5-n100-h2-grid10-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072/results/attempts.csv",
+        "sha256": "13e1009af6f8c1bbb1781f449cd0c04f80eed68aa79fa3ba4615594d992a866e"
+      },
+      "report.md": {
+        "bytes": 10402,
+        "path": "studies/d5-a5-n100-h2-grid10-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072/results/report.md",
+        "sha256": "fdc6661ede344d02db7ec4482068264eb4354260c86b9a6e22fc8c250adffb94"
+      },
+      "results.csv": {
+        "bytes": 63063,
+        "path": "studies/d5-a5-n100-h2-grid10-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072/results/results.csv",
+        "sha256": "4d56f1b9359b71e4804b3ed6ef1d649d1af803eb6fe63b988c8aa0a42740195a"
+      },
+      "results.json": {
+        "bytes": 1004764,
+        "path": "studies/d5-a5-n100-h2-grid10-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072/results/results.json",
+        "sha256": "a417862dc29a242ef24b6c4af6242ab0aa33c2ad4d56c2b20b7627e77b7289ff"
+      }
+    },
+    "required_diagnosis_subjects": [],
+    "schema_version": 1,
+    "series_id": "deeef933-a14f-4095-8bfb-024c7621ca50",
+    "source": {
+      "dirty": false,
+      "git_commit": "62d1d01339f91802e2916b63660a4e640d99c9cc",
+      "inventory_format": "otqa-source-v1",
+      "source_sha256": "720726607ae451b319e59e01453b6ba69b9950ef42420e700ed6b4eaa5b34d0e",
+      "version": "0.2.0"
+    },
+    "state": {
+      "bytes": 110880,
+      "path": "runs/studies/d5-a5-n100-h2-grid10-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072/state.json",
+      "sha256": "e387bd2195f33fb7d07b861bc8d830b3e2d389e0d87228594d87930bbba0532e"
+    },
+    "study_id": "d5-a5-n100-h2-grid10-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072",
+    "tool_files": {
+      "raw_checker": {
+        "bytes": 78257,
+        "path": "studies/d5-a5-n100-h2-grid10-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072/reproduction/verify_study_raw.py",
+        "sha256": "f84ec9771d07f44f427816edbb0302d3b14c8d98440eb28bd79c2bbd2e97594f"
+      },
+      "reporter": {
+        "bytes": 29756,
+        "path": "studies/d5-a5-n100-h2-grid10-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072/reproduction/single_study_report.py",
+        "sha256": "618cc5fc631f1bfdd04fbfe2ffd752b8f18f8aaacda33600522a7bd6bbce7f79"
+      }
+    }
+  },
+  "created_at_utc": "2026-10-18T00:35:27.362750+00:00",
+  "diagnoses": [],
+  "limits": [
+    "This accepts only this configuration and its original independent problem denominator; regular unresolved outcomes remain separate from solved cases.",
+    "Every preserved actual answer and actual-weight utility winner was checked with exact Fraction interpretations of binary64 inputs.",
+    "Recorded geometric volumes, hypothetical regions/branches and query-inventory completeness/global optimality were not independently recertified.",
+    "Ordinary stops match their saved inventory and strict0.001 threshold; a different or deeper query inventory can behave differently.",
+    "Observed execution costs belong to the recorded host/session; no isolated causal runtime or Hyper-Threading guarantee is inferred.",
+    "Final fresh archive acceptance, scientific overall completion, staging publication and actual public download validation remain separate gates."
+  ],
+  "passed": true,
+  "private_supplementary_review_evidence_sha256": "015029a72e054209f9df19d180b7c93f791e15d05b8b5c3b6e24bb37a485ea78",
+  "publication_completion": false,
+  "reviewer": "/root/sixth_host_launch_review",
+  "schema_version": 1,
+  "scientific_completion": false,
+  "scope_evidence": {
+    "actual_answers_and_winners": {
+      "actual_weight_winner_retained_in_observed_states": true,
+      "classification_counts": {
+        "correct": 100
+      },
+      "exact_binary64_fraction_answers": 830,
+      "independent_utility_winner_sets": 100
+    },
+    "all_terminal_outcomes_and_missing_costs": {
+      "classification_counts": {
+        "correct": 100
+      },
+      "completed": 100,
+      "each_api_case_controller_cost_crosschecked": true,
+      "failed": 0,
+      "interrupted": 0,
+      "missing_costs": {
+        "api_seconds": 0,
+        "case_seconds": 0,
+        "controller_seconds": 0
+      },
+      "one_actual_api_duration_per_primary_cell": true,
+      "outlier_case_ids": [
+        "d5-m5-c000036",
+        "d5-m5-c000046",
+        "d5-m5-c000058",
+        "d5-m5-c000070",
+        "d5-m5-c000098"
+      ],
+      "unavailable_phase_timings_preserved_as_null": true
+    },
+    "independent_reporter_and_raw_checker_reviews": {
+      "fresh_raw_replay_matched": true,
+      "public_attestations_checked": 2,
+      "separate_fresh_extracted_package_report_reproduction_passed": true
+    },
+    "journal_cursor_progress_and_all_attempts": {
+      "actual_mode": "adaptive",
+      "all_actual_horizons_and_answer_cursors_checked": true,
+      "all_attempts": 100,
+      "countdown_decrement_reset_checked_when_applicable": true,
+      "extra_or_orphan_attempts": 0,
+      "independent_problems": 100,
+      "primary_cells": 100,
+      "repetitions": 1
+    },
+    "native_audit_json_csv_same_snapshot": {
+      "all_snapshot_bindings_match": true,
+      "audit_reexecuted": false,
+      "existing_native_audits": 1,
+      "native_groups": 1,
+      "native_result_rows": 100,
+      "post_completion_read_only_reboot_bridge": {
+        "actual_own_finished_at_utc": "2026-10-17T22:50:46.519809Z",
+        "actual_own_released_at_utc": "2026-10-17T22:50:49.894072Z",
+        "all_actual_native_computation_finished_before_new_boot": true,
+        "current_boot_time_utc": "2026-10-18T00:17:01+00:00",
+        "current_live_identity": {
+          "boot_id": "d5338d3e-137d-46d0-8d1e-86908b554ae1",
+          "hostname": "machine",
+          "machine_id": "a1d2efc4209542c1873ee09b9f2758b7"
+        },
+        "independent_wrapper_review_sha256": "a0567040d12f0350f18f1ffd0e35526d0655964950663e9d04cbecb320ff2490",
+        "no_new_solver_audit_or_qualification": true,
+        "original_historical_context_preserved": true,
+        "original_launch_identity": {
+          "boot_id": "a2485751-8a92-4def-9bd3-e8cadb890cee",
+          "hostname": "machine",
+          "machine_id": "a1d2efc4209542c1873ee09b9f2758b7"
+        },
+        "public_wrapper_source_embedded_in_selected_bytegate": true,
+        "reviewed_wrapper_sha256": "e0a86b1cffac795473bdff1b2a08969bc88164d4b48f096923a78f3862820e13",
+        "source_plan_request_input_profile_and_results_unchanged": true
+      }
+    },
+    "source_and_frozen_inputs": {
+      "algorithm": {
+        "depth": 2,
+        "grid_size": 10,
+        "higher_depth_query_source": "both",
+        "horizon_execution": "receding",
+        "min_expected_progress": 0.001,
+        "planning_evaluation": "candidate_count",
+        "query_strategy": "reduction_per_query",
+        "stopping": {
+          "rule": "single_candidate"
+        }
+      },
+      "alternatives": 5,
+      "execution": {
+        "cache_policy_id": "bounded_v1",
+        "case_timeout_seconds": null,
+        "native_threads": 1,
+        "start_method": "forkserver",
+        "workers": 16
+      },
+      "full_original_matrices_and_preference_vectors_checked": 100,
+      "numerical_values_sha256": "1374fa8394bffe9b7f84585b29ea2a0b353f105500f28f6b2c6a79fbcec4a56c",
+      "objectives": 5,
+      "original_and_materialized_input_contract_checked": true,
+      "wheel_source_inventory_files_checked": 128
+    },
+    "valid_regular_stops_and_exception_diagnoses": {
+      "exception_diagnoses_required": 0,
+      "ordinary_stops_counted_as_solved": false,
+      "ordinary_stops_counted_as_solver_errors": false,
+      "ordinary_threshold_stop_cases": []
+    }
+  },
+  "scopes_checked": [
+    "actual_answers_and_winners",
+    "all_terminal_outcomes_and_missing_costs",
+    "independent_reporter_and_raw_checker_reviews",
+    "journal_cursor_progress_and_all_attempts",
+    "native_audit_json_csv_same_snapshot",
+    "source_and_frozen_inputs",
+    "valid_regular_stops_and_exception_diagnoses"
+  ],
+  "separate_original_host_byte_gate_checked_for_consistency": {
+    "bytes": 6469532,
+    "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/selected-remote-hash-gates/host170-post-reboot-0cb9472bae8f4291a90f1a59acc49f0e-20261018T003211.180023Z/gate-proof.json",
+    "sha256": "872f382d5f9304047d53f60a64e4e7278e7a3904044cb83e3f84a8e3d5d30945"
+  },
+  "separate_original_host_origin_selection_sha256": "2553eec98713959647b624b6a7d1188e37bc057dd389fd93c1a94da78d4b4ea5",
+  "status": "independent_scientific_content_review_pass",
+  "study_id": "d5-a5-n100-h2-grid10-grid-plus-ratio-adaptive-stop-single-candidate-minprog0p001-src72072",
+  "tool_reviews": {
+    "raw_checker": {
+      "artifact": {
+        "bytes": 1665,
+        "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/public-tool-review-attestations/20261017T230741.274312Z/raw_checker.json",
+        "sha256": "834a441553e4aa88e3070d0c791b986be1d371222f46f33a9780855b43dd3bf8"
+      },
+      "passed": true,
+      "reviewer": "/root/ht_study_design",
+      "scope": "Independent source and saved-output validation for full input/source/attempt/cost/Fraction/journal/cursor/export/CSV correctness.",
+      "tool_sha256": "f84ec9771d07f44f427816edbb0302d3b14c8d98440eb28bd79c2bbd2e97594f",
+      "unresolved_issues": []
+    },
+    "reporter": {
+      "artifact": {
+        "bytes": 1565,
+        "path": "runs/five-host-study-execution-20261017T2200Z/monitoring/public-tool-review-attestations/20261017T230741.274312Z/reporter.json",
+        "sha256": "8c2f5e200b439fdc2e00437ccb8b2219db521dc2fdfa51d6b0db9fff46fe1290"
+      },
+      "passed": true,
+      "reviewer": "/root/ht_study_design",
+      "scope": "Independent source and saved-output validation for full input/source/attempt/cost/Fraction/journal/cursor/export/CSV correctness.",
+      "tool_sha256": "618cc5fc631f1bfdd04fbfe2ffd752b8f18f8aaacda33600522a7bd6bbce7f79",
+      "unresolved_issues": []
+    }
+  },
+  "unresolved_issues": []
+}

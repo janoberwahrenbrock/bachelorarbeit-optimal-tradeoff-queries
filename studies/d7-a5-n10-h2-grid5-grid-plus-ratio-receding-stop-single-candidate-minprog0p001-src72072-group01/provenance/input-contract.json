@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "source": {
+    "dirty": false,
+    "git_commit": "62d1d01339f91802e2916b63660a4e640d99c9cc",
+    "inventory_format": "otqa-source-v1",
+    "source_sha256": "720726607ae451b319e59e01453b6ba69b9950ef42420e700ed6b4eaa5b34d0e",
+    "version": "0.2.0"
+  },
+  "studies": [
+    {
+      "case_ids": [
+        "d7-m5-c000000",
+        "d7-m5-c000001",
+        "d7-m5-c000002",
+        "d7-m5-c000003",
+        "d7-m5-c000004",
+        "d7-m5-c000005",
+        "d7-m5-c000006",
+        "d7-m5-c000007",
+        "d7-m5-c000008",
+        "d7-m5-c000009"
+      ],
+      "cohort_sha256": "c7b298a42384f7af365157e562533d1af3fabf19073060e5cefcda5cf486c3b3",
+      "configuration": {
+        "path": "inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group01/configuration.json",
+        "sha256": "b41a13fccb3736825c31135133675f65ba36a51e0647abca033542d402102ae8"
+      },
+      "cpu_affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "dataset": {
+        "path": "inputs/studies/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group01/dataset.json",
+        "sha256": "f458c7219863dcd6f74f344fd234f54f34a9da0ba8ec4f6efd3073fe30527b36"
+      },
+      "host": null,
+      "native_plan_created": false,
+      "objectives": 7,
+      "planned_jobs": 10,
+      "problem_count": 10,
+      "selection_file": {
+        "path": "runs/four-host-readiness-20261017T2140Z/prepared-suites/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group01/selection.json",
+        "sha256": "3683a61a0d2b3f2a66d0f31e90c430d6fe62bcdbea525bf2b8b8611939279e63"
+      },
+      "solver_started": false,
+      "study_id": "d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group01",
+      "suite": {
+        "path": "runs/four-host-readiness-20261017T2140Z/prepared-suites/d7-a5-n10-h2-grid5-grid-plus-ratio-receding-stop-single-candidate-minprog0p001-src72072-group01/suite.json",
+        "sha256": "eddaef7a96df08b747e29bab1940674fffc0e11caa204c0de4f173deb0745082"
+      },
+      "workers": 16
+    }
+  ]
+}
