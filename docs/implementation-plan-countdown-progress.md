@@ -1,6 +1,6 @@
 # Implementierungsplan für Countdown und Mindestfortschritt
 
-Stand: 16. Oktober 2026. Status: Implementierung und Abnahme abgeschlossen; der reguläre Stand ist auf `main` übernommen. Dieser Plan erhält den ursprünglich festgelegten Vertrag, die Arbeitspakete und Prüfkriterien. Die Entwicklungs- und Fehlerhistorie bleibt projektintern unter `runs/countdown-progress-integration-20261016T030055Z/` gesichert. Die anschließende 100-Probleme-Studie ist abgeschlossen und veröffentlicht.
+Stand: 16. Oktober 2026. Status: Implementierung und Abnahme abgeschlossen; der reguläre Stand ist auf `main` übernommen. Dieser Plan erhält den ursprünglich festgelegten Vertrag, die Arbeitspakete und Prüfkriterien. Die Entwicklungs- und Fehlerhistorie bleibt projektintern unter `runs/countdown-progress-integration-20261016T030055Z/` gesichert.
 
 Countdown ist seit Version 0.2.0 ein regulärer Ausführungsmodus der festen Strategie. Eine zusätzliche Policy `min_expected_progress` begrenzt die Fortsetzung auf Pläne mit ausreichender erwarteter Verbesserung. Ihr Default ist `0.001`. Beide Funktionen sind in dieselbe Solverarchitektur, dieselben öffentlichen Schnittstellen und dieselbe nachvollziehbare Ausführung integriert.
 
@@ -9,9 +9,8 @@ Die gesicherte Hauptzweig-Ausgangsbasis ist `3f70c16c962d01a5846659dd0bb49f32899
 ## Umsetzungs- und Abnahmestand
 
 Die Quellen, vollständigen Testzahlen und abgeschlossenen installierten Kontrollen
-stehen zentral im [Implementierungsstatus](implementation-status.md). Die
-[öffentliche Hauptstudie](../studies/strategy-grid100-progress001-20261016T030055Z/README.md) bindet ihre Ergebnisse an das
-tatsächlich ausgeführte Wheel. Fehlgeschlagene und verworfene Entwicklungsversuche
+stehen zentral im [Implementierungsstatus](implementation-status.md).
+Fehlgeschlagene und verworfene Entwicklungsversuche
 bleiben im getrennten projektinternen Abnahmenachweis erhalten; sie sind nicht
 Teil der Qualitätsstichprobe. Kein früherer Nachweis wird auf geänderte Quellen
 übertragen. Die folgenden Abschnitte dokumentieren die ursprünglichen
@@ -30,8 +29,6 @@ Nach der Umsetzung stehen drei Ausführungsvarianten zur Verfügung:
 `reduction_per_query` mit `countdown` bleibt ungültig. `receding` bleibt der Default des Ausführungsmodus. Der neue Default `0.001` betrifft den Mindestfortschritt aller drei gültigen Varianten.
 
 Die Integration umfasst Fachtypen, Policy, mathematische Auswahl, Ablaufsteuerung, SDK, native Aufzeichnung, Audit, Export, Konfigurationsbeispiele und Produktdokumentation. Es entsteht keine eigene Solverschleife für Countdown und keine Sonderimplementierung im Benchmarkcontroller.
-
-Der anschließende Vergleich von Neuplanung, Countdown und adaptiver Strategie bei Grid 3, 5, 10 und 20 wurde mit 100 neuen Problemen und zwölf Bedingungen durchgeführt. Der [Benchmarkplan](benchmark-plan-strategy-grid-comparison.md) dokumentiert die ursprüngliche Festlegung; die [Studienseite](../studies/strategy-grid100-progress001-20261016T030055Z/README.md) enthält die abgeschlossenen Ergebnisse und Rohdatenreferenzen.
 
 Geometrische Antwortwahrscheinlichkeiten, Querygeneratoren, numerische Toleranzen und zulässige Planungstiefen bleiben dieselben fachlichen Verfahren. Die Fortschrittsschwelle ist eine neue Abbruchstrategie. Laufzeitgewinne durch frühere ungelöste Abschlüsse werden deshalb getrennt von reinen Implementierungsverbesserungen ausgewiesen.
 

@@ -22,7 +22,6 @@ erhalten. Die abschließende Validierung bleibt in beiden Fällen verpflichtend.
 | Statische Prüfung | Ruff für Quellcode, Tests, Werkzeuge und Buildbackend sauber |
 | Installation und Betriebsqualifizierung | Release 11: 34 Mac- und 39 Linux-Kontrollen, öffentliche Fortsetzung und je acht korrekte CLI-Fälle bestanden; zusätzlich drei Mac-Terminalabläufe und externe SDK-Installation geprüft |
 | SDK-/CLI-Laufzeitkontrollen und Policyeffekte | SDK: 128 Aufrufe, 60 mathematisch gleiche Vergleichspaare und alle 20 ursprünglichen Laufzeitscreens bestanden. Separate CLI-Nachprüfung: 720 korrekte Aufrufe, 360 mathematisch gleiche Paare, alle zwölf festen Sign-Gates bestanden; acht gezielte Verhaltensprüfungen bestanden |
-| Größere Strategien-/Gridstudie | [Abgeschlossen und veröffentlicht](../studies/strategy-grid100-progress001-20261016T030055Z/README.md): 100 unabhängige Probleme × zwölf Bedingungen, 1.200 korrekte Singletonlösungen, 11.797 unabhängig geprüfte Antworten und 58 erfolgreiche Countdownersatzplanungen |
 
 Die Releases 5, 6 und 7 sind trotz bestandener Funktionskontrollen am vollständigen
 nativen Laufzeitgate gesperrt geblieben. Release 7 lieferte 84 korrekte Resultate
@@ -64,23 +63,14 @@ betraf ausschließlich den Test der unveränderten binären gewichteten Summe.
 Komponentenmessungen beschreiben ausschließlich ihre angegebenen Prüfgrenzen;
 sie ersetzen keine vollständigen Laufzeitgates. Die vollständige Entwicklungs-
 und Qualifizierungshistorie bleibt projektintern unter
-`runs/countdown-progress-integration-20261016T030055Z/` erhalten. Die öffentliche
-[Studienseite](../studies/strategy-grid100-progress001-20261016T030055Z/README.md) und ihre
-[Quellenbindung](../studies/strategy-grid100-progress001-20261016T030055Z/provenance/source.json)
-belegen die anschließende Hauptstudie; ihr Rohdatenpaket veröffentlicht nicht
-stillschweigend sämtliche Entwicklungsversuche.
+`runs/countdown-progress-integration-20261016T030055Z/` erhalten.
 
 Die Integration wurde auf `main` als
 `a5ba67b56d7214153535a3927cc04e76b3f5b274` übernommen. Das tatsächlich
 gemessene Wheel wurde aus
 `8256508bd711ab9b98a742f3a2741938fcc4d3bd` gebaut; sein Laufquellinventar
-ist das oben genannte `47c3d8…`. Der spätere Main- und der
-Veröffentlichungscommit werden davon getrennt ausgewiesen. Die Studie prüft
-fünf Ziele, fünf Alternativen, maximale Tiefe zwei, Grid 3/5/10/20 und
-`min_expected_progress=0.001`, jeweils genau einmal pro Bedingung und Problem.
-Es gab weder falsche noch ungelöste, fehlerhafte oder unterbrochene Zellen.
-Die Prüfung der gespeicherten Antworten und Gewinner behauptet keine
-geometrische Neuzertifizierung aller hypothetischen Planbewertungen.
+ist das oben genannte `47c3d8…`. Spätere Commits werden davon getrennt
+ausgewiesen.
 
 ## Historische Freigabe 0.1.0
 
@@ -168,8 +158,8 @@ Es besteht keine allgemeine Laufzeitgarantie für andere Eingaben oder
 Konfigurationen. Unklare, fehlende oder langsamere Messungen zählen nicht als
 bestanden.
 
-Eine Projektlizenz ist noch nicht festgelegt. Die erste ausdrücklich
-veröffentlichte Hauptstudie ist im [Studienkatalog](../studies/README.md) erfasst.
+Eine Projektlizenz ist noch nicht festgelegt. Veröffentlichte Studien
+sind im [Studienkatalog](../studies/README.md) erfasst.
 Weitere Laufdaten werden ausschließlich nach dem
 [Veröffentlichungsverfahren](publication.md) ausgewählt und nicht automatisch
 auf GitHub geladen.

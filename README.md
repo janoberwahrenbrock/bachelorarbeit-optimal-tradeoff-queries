@@ -6,9 +6,7 @@ Pythonprojekt zur Untersuchung des Optimal Tradeoff Query Algorithmus mit reprod
 
 Der Solver unterstützt feste und adaptive Planung bis Tiefe drei, geometrische Antwortwahrscheinlichkeiten ohne Sampling, Singleton- und Volumenkonfidenzabbruch sowie die Berücksichtigung des Abbruchs in der Planung. Die adaptive Strategie maximiert die erwartete Kandidatenverringerung pro erwarteter Query. Feste Planung unterstützt Neuplanung und Countdown mit einmaliger voller Ersatzplanung. Der Mindestfortschritt pro vollständigem Planungshorizont ist standardmäßig `0.001` und lässt sich ausdrücklich deaktivieren.
 
-Die [veröffentlichte Strategien-/Gridstudie](studies/strategy-grid100-progress001-20261016T030055Z/README.md) umfasst 100 gemeinsame Probleme, zwölf Bedingungen und 1.200 korrekte Singletonlösungen. Die [Studienübersicht](studies/README.md) verlinkt Ergebnisse, Eingaben und vollständige Rohdaten.
-
-Der [Vergleich von Grid und Grid plus Ratio](studies/query-source-grid100-ca-20261016T205019Z/README.md) ergänzt 800 frische Countdown-/Adaptiv-Läufe auf denselben 100 Problemen. Alle endeten korrekt beim Singleton; die historische Vergleichsgruppe umfasst 800 passende Zellen. Queryzahl und beobachtete Rechenzeit ergeben keine universell beste Queryquelle oder Gridgröße.
+Die [Studienübersicht](studies/README.md) führt zu den Veröffentlichungen der Bachelorarbeit, den Ergebnissen und den vollständigen Rohdaten. Die Untersuchungen vergleichen Zielzahl, Planungsmodus, Gridgröße, Alternativenzahl, Lookahead-Tiefe und volumenbasierte Abbruchregeln.
 
 Die Prüfnachweise sind an die jeweilige Paketquelle gebunden. Historische Vergleiche belegen weder automatisch die neue Fortschrittsschwelle noch die neue Countdown-Fallbacksemantik. Den geprüften Umfang und die Grenzen beschreibt [der Implementierungsstatus](docs/implementation-status.md); die [Laufzeitprüfung](docs/performance.md) trennt diese Ergebnisse von einer allgemeinen Laufzeitgarantie.
 
