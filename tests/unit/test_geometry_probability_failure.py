@@ -24,10 +24,10 @@ BOUNDARIES = (
 
 @pytest.mark.parametrize("volumes,message", BOUNDARIES)
 def test_unsupported_probability_recovery_preserves_failure_and_cause(volumes, message):
-    # Four simplex weights leave affine dimension three, outside the bounded
-    # exact clipping domain. A failed numeric volume must keep its public error.
+    # Eight weights exceed both the existing small-affine recovery and the new
+    # bounded simplex domain. A failed numeric volume must keep its public error.
     with GeometrySession() as session:
-        space = session.weight_space((), 4)
+        space = session.weight_space((), 8)
         with patch.object(session, "_volume_by_key", side_effect=volumes):
             with pytest.raises(RuntimeError, match=f"^{message}$") as raised:
                 session.probabilities(space, Query(0, 1, 1.0))
@@ -40,7 +40,9 @@ def test_supported_probability_recovery_uses_complete_exact_partition(volumes, m
     # Symmetry of a three-weight simplex gives two equal positive halves.
     with GeometrySession() as session:
         space = session.weight_space((), 3)
-        with patch.object(session, "_volume_by_key", side_effect=volumes):
+        with patch.object(session, "_volume_by_key", side_effect=volumes), patch.object(
+            geometry, "recover_simplex_probabilities", side_effect=AssertionError("small-affine route")
+        ):
             result = session.probabilities(space, Query(0, 1, 1.0))
     assert result == {"<": 0.5, "=": 0.0, ">": 0.5}
     assert result.recovered_exact_partition
@@ -64,6 +66,8 @@ def test_ordinary_positive_volumes_never_request_recovery():
         space = session.weight_space((), 3)
         with patch.object(session, "_volume_by_key", side_effect=[1.0, 0.25, 0.75]), patch.object(
             geometry, "recover_probabilities", side_effect=AssertionError("ordinary path")
+        ), patch.object(
+            geometry, "recover_simplex_probabilities", side_effect=AssertionError("ordinary simplex path")
         ):
             result = session.probabilities(space, Query(0, 1, 1.0))
     assert result == {"<": 0.25, "=": 0.0, ">": 0.75}

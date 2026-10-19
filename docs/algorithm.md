@@ -24,10 +24,44 @@ Bei verbleibender Planungstiefe `1` entstehen Ratioqueries aus den berechneten I
 
 | Quelle | Zulässige Queries oberhalb der letzten Ebene |
 | --- | --- |
-| `grid` | Logarithmisches Grid mit `grid_size` Werten. |
+| `grid` | Logarithmische Innenpunkte, bis zu `grid_size` Werte je Zielpaar. |
 | `both` | Dieses Grid plus Ratioqueries. |
 
-Das Grid reicht im aktiven Profil von `0.001` bis `100`. Quellzuordnung, Reihenfolge, Spiegelbereinigung und Filter bereits beantworteter Fragen gehören zur Methode. Die Ratioanalyse bleibt auch im Grid-only-Modus für die vorhandene Vorfilterung verfügbar, ohne dadurch zusätzliche Ratioqueries zu erzeugen.
+Das aktive numerische Profil `otqa-exact-v3` begrenzt ausschließlich das Grid
+auf `0.05` bis `20`. Für jedes geordnete Zielpaar wird das bereits berechnete
+Verhältnisintervall des aktuellen zulässigen Gewichtsraums damit geschnitten:
+`lower = max(0.05, ratio_lower)` und `upper = min(20, ratio_upper)`.
+Eine unbeschränkte obere Verhältnisgrenze wird dadurch auf `20` begrenzt.
+
+Für jedes nichtdegenerierte Intervall `0 < lower < upper` und jede konfigurierte
+Gridgröße `g >= 1` entstehen die logarithmischen Innenpunkte
+
+```text
+x_r = lower * (upper / lower) ** (r / (g + 1)),  r = 1, ..., g
+```
+
+Die Umsetzung verwendet `geomspace(lower, upper, g + 2)[1:-1]`. Damit sind auch
+die beiden äußeren Abstände zu den Intervallgrenzen im logarithmischen Maßstab
+gleich groß. Die Grenzen selbst sind keine Gridqueries. Bei `g = 1` ist der
+einzige Punkt die geometrische Mitte `sqrt(lower * upper)`. Für `g = 5` und das
+vollständige Intervall entstehen ungefähr
+`0.1357208808, 0.3684031499, 1.0, 2.7144176166, 7.3680629973`.
+Nach einer Antwort werden die Werte aus den neuen Verhältnisgrenzen berechnet;
+`1.0` muss dann nicht enthalten sein.
+
+Ein leerer Schnitt, exakt gleiche oder gemäß den bestehenden
+Gridgleichheitstoleranzen zusammenfallende Grenzen erzeugen keine Gridqueries.
+Auf eine Grenze gerundete Innenpunkte werden ebenfalls nicht ausgegeben.
+Fehlerhafte Optimierungsergebnisse bleiben Fehler. Zur Punktplatzierung sind
+keine zusätzlichen LP- oder Volumenberechnungen erforderlich.
+
+Beide Quellen verwenden dieselbe Gridfunktion. In `both` werden ihre Werte mit
+der unveränderten Ratiomenge vereinigt; Ratioqueries dürfen außerhalb der
+Gridgrenzen liegen. Die letzte Planungsebene verwendet weiterhin ausschließlich
+Ratioqueries. Quellzuordnung, deterministische Reihenfolge, Spiegelbereinigung
+und Filter bereits beantworteter Fragen gehören unverändert zur Methode.
+Die Ratioanalyse bleibt auch im Grid-only-Modus für die vorhandene Vorfilterung
+verfügbar, ohne dadurch zusätzliche Ratioqueries zu erzeugen.
 
 Weniger zulässige Fragen bedeuten eine andere Suche. Grid-only oder ein anderes `grid_size` können Laufzeit, gewählte Fragen und erreichbare Endzustände verändern. Ebenso ist eine größere Tiefe keine Garantie für weniger tatsächlich gestellte Fragen: optimiert wird ein endlicher Erwartungshorizont. Nach jeder tatsächlichen Antwort wird erneut geplant; der Ausführungsmodus legt fest, mit welcher Resttiefe.
 

@@ -7,6 +7,7 @@ import math
 import numpy as np
 
 from otqa.models import Query
+from otqa.numerics.profile import GRID_MINIMUM, GRID_MAXIMUM
 from otqa.state.ratios import ordered_pairs, ratio_bounds
 
 
@@ -128,21 +129,29 @@ def ratio_queries(goal_pair_intervals, epsilon=1e-3, *, capture_filter=None):
     return tuple(deduplicated)
 
 
-def grid_values(interval, grid_size, *, minimum=1e-3, maximum=100.0):
+def grid_values(interval, grid_size, *, minimum=GRID_MINIMUM, maximum=GRID_MAXIMUM):
+    """Place logarithmically spaced thresholds strictly inside the clipped bounds."""
     lower, upper = interval.lower, interval.upper
     if lower.status == "unbounded":
         raise ValueError("lower ratio bound must not be unbounded")
-    if lower.status != "optimal" or upper.status == "infeasible":
+    for bound in (lower, upper):
+        if bound.status not in {"optimal", "infeasible", "unbounded"}:
+            raise RuntimeError("unexpected ratio bound status: " + str(bound.status))
+        if bound.status == "optimal":
+            if bound.optimal_value is None:
+                raise RuntimeError("optimal ratio bound has no value")
+            if not math.isfinite(float(bound.optimal_value)):
+                raise RuntimeError("optimal ratio bound is not finite")
+    if lower.status == "infeasible" or upper.status == "infeasible":
         return []
-    if lower.optimal_value is None or (upper.status == "optimal" and upper.optimal_value is None):
-        raise RuntimeError("optimal ratio bound has no value")
     start = max(float(lower.optimal_value), minimum)
     stop = maximum if upper.status == "unbounded" else min(float(upper.optimal_value), maximum)
     if stop < minimum or start > stop:
         return []
     if math.isclose(start, stop, abs_tol=1e-15, rel_tol=1e-12):
-        return [start]
-    return np.geomspace(start, stop, grid_size, dtype=float).tolist()
+        return []
+    values = np.geomspace(start, stop, grid_size + 2, dtype=float)[1:-1].tolist()
+    return [value for value in values if start < value < stop]
 
 
 def grid_queries(system, grid_size, *, capture_filter=None):

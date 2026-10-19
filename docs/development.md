@@ -22,6 +22,30 @@ Jede fachliche Änderung braucht spezifische Tests für ihre sichtbare Berechnun
 
 Konfigurationen ändern keine Parameter verdeckt: Strategie, Tiefe, Grid, Queryquelle, Stopregel und Planungsbewertung bleiben in den gespeicherten Eingaben sichtbar. Nicht bestandene beziehungsweise noch nicht durchgeführte Prüfungen bleiben als solche dokumentiert.
 
+### Geänderter Gridvertrag
+
+Das aktive numerische Profil `otqa-exact-v3` verwendet logarithmische
+Gridinnenpunkte auf dem Schnitt der aktuellen Verhältnisgrenzen mit
+`[0.05, 20]`. Die Grenzen werden zentral in `otqa.numerics.profile` definiert und
+von der Gridfunktion als Standardwerte übernommen. Für jede Gridgröße `g`
+gilt `geomspace(lower, upper, g + 2)[1:-1]`; leere oder nach den unveränderten
+Toleranzen zusammenfallende Intervalle liefern keine Gridqueries. Ratioqueries
+und die Ratioebene bei Resttiefe eins behalten ihren bisherigen Vertrag.
+
+Die gezielten Prüfungen umfassen die Beispielwerte, `g=1`, die Gridgrößen
+3/5/10/20, logarithmische Abstände einschließlich der Intervallgrenzen,
+strikte Innenlage, eingeschränkte/unbeschränkte und degenerierte Intervalle
+sowie die gemeinsame Verwendung in `grid` und `both`. SDK- und Dateipfadprüfungen
+müssen die aktive v3-Profilbindung und ihre Binary64nachweise bestätigen.
+
+Diese Änderung verändert absichtlich die zulässige Querymenge. Gleiche
+Trajektorien, weniger Queries oder kürzere Laufzeiten gegenüber älteren
+Profilen sind keine Abnahmeanforderung oder bereits nachgewiesene Eigenschaft.
+Bestehende Studien, Rohdaten, Eingaben und operative Profile werden nicht
+umgeschrieben. Vor neuen Messungen sind das endgültige Wheel und seine neue
+Quellenbindung unabhängig zu prüfen und auf jedem Ausführungshost frisch zu
+qualifizieren; ältere Freigaben werden nicht übernommen.
+
 ## Reproduzierbarer nativer Probelauf
 
 Für dauerhafte Läufe kann eine eigene `.venv-runtime` das gebaute Wheel enthalten.

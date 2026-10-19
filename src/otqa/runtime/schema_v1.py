@@ -178,7 +178,16 @@ def _numerics() -> dict:
         ratio_batch_elements=integer(1), ratio_batch_pair_factor=integer(1), halfspace_options=array_of(nullable(TEXT), 1), higher_dim_prefix=TEXT, hull_fallback=TEXT)
     recovery = {key: integer(1) for key in ("max_lp_variables", "max_active_sets", "decimal_precision")}
     recovery["max_explicit_affine_dimension"] = integer()
-    return obj({"query_generation": obj(query_fields), "linear_programming": obj(lp), "geometry": obj(geo), "exact_recovery": obj(recovery)})
+    simplex_recovery = {key: integer(1) for key in (
+        "max_goals", "max_constraints", "max_vertices", "max_pair_checks",
+        "max_rank_calls", "max_faces", "max_simplices", "max_operations", "max_bits")}
+    simplex_recovery["max_wall_seconds"] = pos
+    # Historical numerical profiles remain readable. The active v2 profile
+    # binds this additional recovery method and all its actual work limits.
+    return obj({"query_generation": obj(query_fields), "linear_programming": obj(lp),
+                "geometry": obj(geo), "exact_recovery": obj(recovery),
+                "simplex_partition_recovery": obj(simplex_recovery)},
+               optional=("simplex_partition_recovery",))
 
 
 def _execution_documents(d: dict, docs: dict) -> None:

@@ -1,9 +1,12 @@
 """Resolved, active method constants; no user policy or inactive modes."""
 from copy import deepcopy
 
+GRID_MINIMUM = 0.05
+GRID_MAXIMUM = 20.0
+
 _VALUES = {
     "query_generation": {
-        "min_grid_value": 1e-3, "max_grid_value": 100.0, "grid_spacing": "log",
+        "min_grid_value": GRID_MINIMUM, "max_grid_value": GRID_MAXIMUM, "grid_spacing": "log",
         "ratio_query_epsilon": 1e-3, "raw_query_tolerance": 1e-12,
         "dedup_abs_tolerance": 1e-12, "dedup_rel_tolerance": 1e-9,
         "answered_abs_tolerance": 1e-12, "answered_rel_tolerance": 1e-9,
@@ -32,6 +35,13 @@ _VALUES = {
         "max_lp_variables": 5, "max_active_sets": 20_000,
         "max_explicit_affine_dimension": 2, "decimal_precision": 80,
     },
+    "simplex_partition_recovery": {
+        "max_goals": 7, "max_constraints": 96, "max_vertices": 1024,
+        "max_pair_checks": 200_000, "max_rank_calls": 100_000,
+        "max_faces": 30_000, "max_simplices": 100_000,
+        "max_operations": 3_000_000, "max_bits": 8192,
+        "max_wall_seconds": 45.0,
+    },
 }
 
 
@@ -40,7 +50,7 @@ def resolved_numerical_profile() -> dict:
     numeric_hex = {f"/values/{group}/{key}": value.hex()
                    for group, settings in values.items()
                    for key, value in settings.items() if type(value) is float}
-    return {"profile_id": "otqa-exact-v1", "values": values, "numeric_hex": numeric_hex}
+    return {"profile_id": "otqa-exact-v3", "values": values, "numeric_hex": numeric_hex}
 
 
 def resolved_cache_policy() -> dict:
