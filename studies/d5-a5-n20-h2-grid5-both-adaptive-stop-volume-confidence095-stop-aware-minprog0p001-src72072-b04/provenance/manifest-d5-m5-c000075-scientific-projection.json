@@ -1,0 +1,202 @@
+{
+  "attempt_id": "attempt0001",
+  "configuration_id": "d5-a5-h2-volume-confidence095-stop-aware-config",
+  "effective_algorithm": {
+    "depth": 2,
+    "grid_size": 5,
+    "higher_depth_query_source": "both",
+    "horizon_execution": "receding",
+    "min_expected_progress": 0.001,
+    "planning_evaluation": "stop_aware",
+    "query_strategy": "reduction_per_query",
+    "stopping": {
+      "rule": "volume_confidence",
+      "threshold": 0.95
+    }
+  },
+  "effective_budget": {
+    "max_queries": null
+  },
+  "effective_execution": {
+    "cache_policy_id": "bounded_v1",
+    "case_timeout_seconds": null,
+    "native_threads": 1,
+    "start_method": "forkserver",
+    "workers": 16
+  },
+  "effective_recording": {
+    "durability": "per_answer",
+    "profile": false,
+    "telemetry_failure_policy": "continue",
+    "trace_level": "standard"
+  },
+  "environment": {
+    "backend_capabilities": {
+      "continuous_validation_fastpath": true,
+      "reusable_highs": true,
+      "scipy_highs": true,
+      "scipy_qhull": true
+    },
+    "cpu_model": null,
+    "logical_cpus": 16,
+    "native_thread_environment": {
+      "BLIS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "packages": {
+      "attrs": "26.1.0",
+      "bachelorarbeit-optimal-tradeoff-queries": "0.2.0",
+      "jsonschema": "4.26.0",
+      "jsonschema-specifications": "2025.9.1",
+      "numpy": "2.5.4",
+      "referencing": "0.37.0",
+      "rpds-py": "2026.9.1",
+      "scipy": "1.18.1"
+    },
+    "physical_cores": null,
+    "platform": "Linux-7.0.0-14-generic-x86_64-with-glibc2.43",
+    "platform_family": "linux",
+    "python": "3.14.4"
+  },
+  "execution_kind": "fresh",
+  "initial_execution_cursor": {
+    "answered_total": 0,
+    "remaining_depth": 2
+  },
+  "mathematical_input_sha256": "efb7bc33d60a8bcff96128ff662ba0fd85da6c3967098bc97a84b0aac2c07bb7",
+  "numerical_profile": {
+    "numeric_hex": {
+      "/values/geometry/containment_relative_tolerance": "0x1.5798ee2308c3ap-27",
+      "/values/geometry/equality_residual_factor": "0x1.4000000000000p+3",
+      "/values/geometry/ratio_terminal_tolerance": "0x1.19799812dea11p-40",
+      "/values/geometry/snap_dedup_tolerance": "0x1.b7cdfd9d7bdbbp-34",
+      "/values/geometry/snap_relative_tolerance": "0x1.4f8b588e368f1p-17",
+      "/values/geometry/support_margin_factor": "0x1.9000000000000p+6",
+      "/values/geometry/support_margin_floor": "0x1.5798ee2308c3ap-27",
+      "/values/geometry/support_tolerance": "0x1.b7cdfd9d7bdbbp-34",
+      "/values/geometry/tolerance": "0x1.b7cdfd9d7bdbbp-34",
+      "/values/linear_programming/dual_feasibility_tolerance": "0x1.b7cdfd9d7bdbbp-34",
+      "/values/linear_programming/primal_feasibility_tolerance": "0x1.b7cdfd9d7bdbbp-34",
+      "/values/linear_programming/primal_validation_tol": "0x1.12e0be826d695p-30",
+      "/values/query_generation/answered_abs_tolerance": "0x1.19799812dea11p-40",
+      "/values/query_generation/answered_rel_tolerance": "0x1.12e0be826d695p-30",
+      "/values/query_generation/dedup_abs_tolerance": "0x1.19799812dea11p-40",
+      "/values/query_generation/dedup_rel_tolerance": "0x1.12e0be826d695p-30",
+      "/values/query_generation/grid_close_abs_tolerance": "0x1.203af9ee75616p-50",
+      "/values/query_generation/grid_close_rel_tolerance": "0x1.19799812dea11p-40",
+      "/values/query_generation/max_grid_value": "0x1.4000000000000p+4",
+      "/values/query_generation/min_grid_value": "0x1.999999999999ap-5",
+      "/values/query_generation/ratio_query_epsilon": "0x1.0624dd2f1a9fcp-10",
+      "/values/query_generation/raw_query_tolerance": "0x1.19799812dea11p-40",
+      "/values/simplex_partition_recovery/max_wall_seconds": "0x1.6800000000000p+5"
+    },
+    "profile_id": "otqa-exact-v3",
+    "values": {
+      "exact_recovery": {
+        "decimal_precision": 80,
+        "max_active_sets": 20000,
+        "max_explicit_affine_dimension": 2,
+        "max_lp_variables": 5
+      },
+      "geometry": {
+        "candidate_mode": "ratio_relevant",
+        "containment_relative_tolerance": 1e-08,
+        "equality_residual_factor": 10.0,
+        "halfspace_options": [
+          null,
+          "Q12",
+          "Q12 QJ"
+        ],
+        "higher_dim_prefix": "Qx",
+        "hull_fallback": "QJ",
+        "ratio_batch_elements": 1048576,
+        "ratio_batch_pair_factor": 4,
+        "ratio_terminal_tolerance": 1e-12,
+        "skip_exact_zero_branches": true,
+        "snap_dedup_tolerance": 1e-10,
+        "snap_relative_tolerance": 1e-05,
+        "support_margin_factor": 100.0,
+        "support_margin_floor": 1e-08,
+        "support_tolerance": 1e-10,
+        "tolerance": 1e-10
+      },
+      "linear_programming": {
+        "cold_solve": true,
+        "dual_feasibility_tolerance": 1e-10,
+        "method": "highs",
+        "presolve_first": true,
+        "primal_feasibility_tolerance": 1e-10,
+        "primal_validation_rule": "sqrt_tol_times_10",
+        "primal_validation_tol": 1e-09,
+        "retry_methods": [
+          "highs-ds",
+          "highs-ipm"
+        ],
+        "retry_without_presolve": true,
+        "variable_bounds": "explicit_constraints_free_variables"
+      },
+      "query_generation": {
+        "answer_order": [
+          "<",
+          "=",
+          ">"
+        ],
+        "answered_abs_tolerance": 1e-12,
+        "answered_rel_tolerance": 1e-09,
+        "dedup_abs_tolerance": 1e-12,
+        "dedup_rel_tolerance": 1e-09,
+        "grid_close_abs_tolerance": 1e-15,
+        "grid_close_rel_tolerance": 1e-12,
+        "grid_spacing": "log",
+        "max_grid_value": 20.0,
+        "min_grid_value": 0.05,
+        "ratio_query_epsilon": 0.001,
+        "raw_query_tolerance": 1e-12
+      },
+      "simplex_partition_recovery": {
+        "max_bits": 8192,
+        "max_constraints": 96,
+        "max_faces": 30000,
+        "max_goals": 7,
+        "max_operations": 3000000,
+        "max_pair_checks": 200000,
+        "max_rank_calls": 100000,
+        "max_simplices": 100000,
+        "max_vertices": 1024,
+        "max_wall_seconds": 45.0
+      }
+    }
+  },
+  "original_manifest_sha256": "352d3320316007f095c7246d49f35eb183bcb076528c7b03e36f65e32f29ef2a",
+  "problem_id": "d5-m5-c000075",
+  "public_scientific_projection_private_original_retained": true,
+  "resolved_cache_policy": {
+    "affine_bytes": 8388608,
+    "affine_entries": 4096,
+    "highs_model_bytes": 4194304,
+    "highs_models": 32,
+    "highs_options": 32,
+    "owner": "solver_and_worker_session",
+    "planning_entries": 16,
+    "policy_id": "bounded_v1",
+    "state_entries": 16,
+    "vertex_bytes": 67108864,
+    "vertex_entries": 32768,
+    "volume_entries": 32768
+  },
+  "run_id": "951834be-985d-4017-bbb8-3b0a4a73dd74",
+  "run_purpose": "production",
+  "schema_version": 2,
+  "series_id": "6e8c3533-0709-43e4-9560-bd94999aa647",
+  "source": {
+    "dirty": false,
+    "git_commit": "62d1d01339f91802e2916b63660a4e640d99c9cc",
+    "inventory_format": "otqa-source-v1",
+    "source_sha256": "720726607ae451b319e59e01453b6ba69b9950ef42420e700ed6b4eaa5b34d0e",
+    "version": "0.2.0"
+  }
+}
