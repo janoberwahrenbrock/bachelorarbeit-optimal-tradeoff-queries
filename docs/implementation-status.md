@@ -2,7 +2,7 @@
 
 ## Aktueller Entwicklungsstand: logarithmische Gridinnenpunkte
 
-Stand: 17. Oktober 2026. Der Arbeitsstand verwendet das numerische Profil
+Stand: 19. Oktober 2026. Main verwendet den Code der Bachelorarbeit mit dem numerischen Profil
 `otqa-exact-v3` mit Gridgrenzen `0.05` bis `20` und logarithmisch gleichmäßig
 verteilten Innenpunkten für jede konfigurierte Gridgröße. Leere und gemäß den
 bestehenden Toleranzen zusammenfallende Intervalle erzeugen keine Gridqueries.
@@ -13,10 +13,16 @@ Formel und Sonderfälle stehen in [Algorithmus](algorithm.md) und
 
 Die zusätzliche Partitionsrecovery des vorherigen Profils `otqa-exact-v2`
 bleibt enthalten. Der neue Gridvertrag verändert die Querymenge und kann
-Verläufe und Laufzeiten ändern. Die endgültige neue Wheel-/Quellenbindung und
-ihre vollständige Abnahme sind gesondert festzuhalten; die unten beschriebenen
-historischen Freigaben gelten dafür nicht. Bestehende Studien und ihre
-Rohdaten behalten ihre ursprüngliche Methode und Quellenbindung.
+Verläufe und Laufzeiten ändern. Die Quellenbindung der abgeschlossenen Studien
+ist im [Studienkatalog](../studies/README.md) festgehalten: gemessener Commit
+`62d1d01339f91802e2916b63660a4e640d99c9cc`, Produktionsquellhash
+`720726607ae451b319e59e01453b6ba69b9950ef42420e700ed6b4eaa5b34d0e`.
+Die 104 Veröffentlichungen enthalten ihre eigenen Ausführungsbedingungen,
+wissenschaftlichen Prüfbelege und Ergebnisse. 96 Studien sind den empirischen
+Abschnitten der Bachelorarbeit zugeordnet; acht weitere sind Zusatzdaten.
+Spätere Zusammenführungscommits verändern die ursprünglichen Messquellen und
+Rohdaten nicht. Die unten beschriebenen früheren Implementierungsfreigaben
+bleiben auf ihren jeweiligen Quellstand begrenzt.
 
 ## Abgenommene Integration 0.2.0 vom 16. Oktober 2026
 
