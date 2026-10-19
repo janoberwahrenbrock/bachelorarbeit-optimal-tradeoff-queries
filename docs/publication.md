@@ -72,33 +72,30 @@ wenn die zugehörigen Dateien tatsächlich enthalten sind.
 Die Veröffentlichung arbeitet lesend auf den ausgewählten Originaldateien.
 Ein Build darf bestehende eingefrorene Studien, terminale Resultate oder
 bereits publizierte Pakete nicht ersetzen. Neue Ausgabedateien erhalten neue
-Pfade. Beispiel für die erste veröffentlichte Studie, vom Projektroot aus:
+Pfade. Ersetze `example-study` im folgenden Beispiel durch die zu prüfende
+Studienkennung. Die Befehle werden vom Projektroot aus ausgeführt:
 
 ```sh
+study_id=example-study
 mkdir -p runs/publication-v1
 python3 tools/publication/study_bundle.py build \
   --project-root "$PWD" \
-  --manifest studies/strategy-grid100-progress001-20261016T030055Z/publication-manifest.json \
-  --output runs/publication-v1/strategy-grid100-progress001-20261016T030055Z-v1.zip
+  --manifest "studies/$study_id/publication-manifest.json" \
+  --output "runs/publication-v1/$study_id-v1.zip"
 
 python3 tools/publication/study_bundle.py verify \
-  --manifest studies/strategy-grid100-progress001-20261016T030055Z/publication-manifest.json \
-  --archive runs/publication-v1/strategy-grid100-progress001-20261016T030055Z-v1.zip \
+  --manifest "studies/$study_id/publication-manifest.json" \
+  --archive "runs/publication-v1/$study_id-v1.zip" \
   --destination runs/publication-v1/fresh-extraction
 ```
 
 Das Zielverzeichnis der Entpackprüfung muss neu sein. Die Prüfung gleicht
-Dateimenge, Pfade, Größen und Prüfsummen ab. Zusätzlich werden die
-wissenschaftlichen Tabellen und die ursprüngliche Zuordnung aller Ergebnisse
-anhand der enthaltenen Rohdaten geprüft. Die unabhängige Auswertung der
-aktuellen Studie benötigt nur Python und die entpackten Dateien:
+Dateimenge, Pfade, Größen und Prüfsummen ab. Die zusätzliche wissenschaftliche
+Prüfung gleicht Tabellen und die ursprüngliche Zuordnung aller Ergebnisse
+anhand der enthaltenen Rohdaten ab. Die jeweilige Reproduktionsanleitung nennt
+das enthaltene Auswertungswerkzeug und seine benötigten Dateien.
 
-```sh
-python3 runs/publication-v1/fresh-extraction/inputs/strategy-grid100-progress001-20261016T030055Z/analyze_series.py \
-  --project-root "$PWD/runs/publication-v1/fresh-extraction"
-```
-
-Die Auswertung schreibt einen neuen Analyseordner. Sie überschreibt keine
+Eine erneute Auswertung schreibt einen neuen Analyseordner. Sie überschreibt keine
 Originalresultate. Ihr Nachweis betrifft Quellenbindung, gespeicherte Queries,
 Antworten, Gewinner und Ablauf; er ist keine geometrische Neuzertifizierung
 sämtlicher hypothetischer Planbewertungen. Die studienspezifische
@@ -116,12 +113,11 @@ müssen nicht mit den ursprünglichen Messungen identisch sein.
 
 Nach bestandener lokaler Prüfung werden Studienseite, ausgewählte kompakte
 Dateien, Manifest und aktuelle Dokumentation gemeinsam auf Main übernommen.
-Ein Studien-Tag bindet den Veröffentlichungscommit. Für die erste veröffentlichte Studie lautet er
-`study/strategy-grid100-progress001-20261016T030055Z/v1`.
+Ein Studien-Tag der Form `study/<study-id>/v1` bindet den Veröffentlichungscommit.
 
 Der zugehörige Release bietet folgende Downloads:
 
-- das Datenpaket `strategy-grid100-progress001-20261016T030055Z-v1.zip`;
+- das Datenpaket `<study-id>-v1.zip`;
 - `publication-manifest.json` mit der ursprünglichen Dateizuordnung;
 - `SHA256SUMS` für die herunterladbaren Dateien.
 
@@ -140,7 +136,7 @@ Größengründen weggelassen.
 Das aktuelle Werkzeug baut ein einzelnes ZIP und weist Dateien ab 2 GiB zurück.
 Eine künftige Aufteilung benötigt je ZIP ein eigenes Dateimanifest und eine
 gemeinsame Downloadübersicht; automatisches Sharding ist derzeit nicht
-implementiert. Das erste veröffentlichte Paket benötigt keine Aufteilung.
+implementiert.
 
 Nach Veröffentlichung werden die tatsächlichen Release-Dateien einmal in ein
 neues Verzeichnis geladen. Ihre Prüfsummen und der Paketinhalt werden erneut
@@ -149,18 +145,6 @@ werden nicht allein anhand eines erfolgreich abgeschlossenen Uploads als
 öffentlich reproduzierbar bezeichnet.
 
 ## Spätere Studien und Korrekturen
-
-Die [Folgestudie zu Grid und Ratio bei Countdown und adaptiver Planung](../studies/query-source-grid100-ca-20261016T205019Z/README.md)
-veröffentlicht 800 frische Grid-Zellen und bindet 800 ausgewählte historische
-Both-Zellen aus dem vollständigen alten Bestand von 1.200. Ihr Tag lautet
-`study/query-source-grid100-ca-20261016T205019Z/v1`. Das neue Rohdatenpaket ist
-für die unveränderte neue Offlineanalyse vollständig; die festen kompakten
-Baseline-Referenzen sind enthalten. Eine zusätzliche vollständige Rohprüfung
-der alten Both-Studie verwendet deren bereits veröffentlichtes Paket statt
-einer doppelten Veröffentlichung. Die ausgeschlossene frühere Grid-Vorserie
-und ihre Versuchskosten bleiben historischer Anhang, ohne Primärübernahme.
-Die [neue Reproduktionsanleitung](../studies/query-source-grid100-ca-20261016T205019Z/reproduction/README.md)
-trennt Paketprüfung, vollständigen Analysevergleich und optionale Baseline-Rohprüfung.
 
 Jede neue Studie erhält einen eigenen Eintrag im Studienkatalog und eine neue
 Studienkennung. Sie übernimmt weder stillschweigend Fallzahlen noch

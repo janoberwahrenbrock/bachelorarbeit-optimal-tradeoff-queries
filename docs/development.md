@@ -112,10 +112,8 @@ threshold; conversion creates a separate current input rather than rewriting dat
 
 Die Integration ist auf `main` übernommen. Quellenbindung, vollständige
 Testzahlen und abgeschlossene Freigabegates stehen zentral im
-[Implementierungsstatus](implementation-status.md). Die
-[anschließende Hauptstudie](../studies/strategy-grid100-progress001-20261016T030055Z/README.md) veröffentlicht ihre
-eigenständigen Mess- und Prüfnachweise. Fehlgeschlagene Entwicklungsabnahmen
-und verworfene Kandidaten bleiben getrennt im lokalen Abnahmenachweis
+[Implementierungsstatus](implementation-status.md). Fehlgeschlagene
+Entwicklungsabnahmen und verworfene Kandidaten bleiben getrennt im lokalen Abnahmenachweis
 erhalten. Jede Änderung des Paketpayloads benötigt neue quellgebundene
 Kontrollen und Laufzeitgates.
 

@@ -65,8 +65,8 @@ mit ausdrücklich deaktivierter Fortschrittsschwelle misst den Implementierungs-
 aufwand bei gleichen vollständigen Rechnungen. Eine zweite Gruppe vergleicht
 die neue Quelle mit `None` und `0.001` und beschreibt die fachlich veränderten
 Stopps. Zusätzliche volle Countdownersatzplanung ist gewollter Suchaufwand und
-wird separat gezählt. Die Hauptstudie mit 100 neuen Fällen × 12 Bedingungen misst
-Strategie und Grid bei überall gleicher Schwelle, nicht einen isolierten
+wird separat gezählt. Vergleiche von Strategien und Gridgrößen bei gleicher
+Schwelle messen unterschiedliche Verfahren, nicht einen isolierten
 Codegeschwindigkeitsgewinn.
 
 Die vorab festgelegte kurze Matrix und drei gepaarten Blöcke stehen im
@@ -107,8 +107,8 @@ CLI-Laufzeitgewinne; Release 7 erhält neue installierte Funktions- und Laufzeit
 Release 7 bestand die frischen installierten Funktionskontrollen auf beiden
 Hosts, aber noch nicht das vollständige CLIgate. Alle 84 Ergebnisse waren korrekt
 und alle 42 Paare mathematisch identisch. Zehn Bedingungen blieben langsamer,
-zwei nach der vorgesehenen Ergänzung unklar. Diese Quelle wird daher nicht für
-die Hauptstudie freigegeben.
+zwei nach der vorgesehenen Ergänzung unklar. Diese Quelle erhält daher keine
+Laufzeitfreigabe.
 
 Zwei anschließend isolierte Vorschläge wurden verworfen: Ein größerer, auf eine
 Ergebnisprüfung begrenzter Schemacache verfehlte sowohl bei kalten als auch bei
@@ -229,33 +229,3 @@ alle 360 Mathematik-/Journalpaare identisch und alle 721 Controller-/Fallgruppen
 beendet. Die feste Stichprobe wurde nicht ergänzt. Der ursprüngliche
 84-Aufruf-Befund bleibt unverändert unklar; der separate neue Nachweis besteht
 innerhalb seiner oben angegebenen Grenzen.
-
-## Abgeschlossene Strategien-/Gridstudie vom 16. Oktober 2026
-
-Die [veröffentlichte Hauptstudie](../studies/strategy-grid100-progress001-20261016T030055Z/README.md) löste 100 neue
-Probleme mit fünf Zielen und fünf Alternativen unter zwölf Bedingungen:
-Neuplanung, Countdown und adaptive Verringerung pro erwarteter Query, jeweils
-mit maximaler Tiefe zwei, Grid 3/5/10/20 und Mindestfortschritt `0.001`.
-Alle 1.200 Zellen sind korrekte Singletonlösungen; jede wurde genau einmal
-ausgeführt. Die Daten sind 100 unabhängige Probleme mit gepaarten Bedingungen,
-keine 1.200 unabhängigen Qualitätsfälle und keine Timingwiederholungen.
-
-Das gemessene Wheel stammt aus `8256508bd711ab9b98a742f3a2741938fcc4d3bd`;
-sein Quellinventar ist
-`47c3d8b2f66446e1ba07f4538879ac9a99bdb567f3082bff254564ff2736ca76`.
-Der spätere Main-Stand `a5ba67b56d7214153535a3927cc04e76b3f5b274` und
-der Veröffentlichungscommit werden getrennt davon dokumentiert.
-
-Die Spanne vom ersten Fallstart bis zum letzten Fallende beträgt 4 Stunden,
-8 Minuten und 7 Sekunden. Die etwa 58 Minuten anschließender nativer
-Audit-/Export-/Archivarbeit sind gesonderter Abschlussaufwand. Summierte
-API-, Fall- und Controllerzeiten haben ineinander liegende Messgrenzen und
-werden nicht addiert oder mit dieser seriellen Zeitspanne gleichgesetzt.
-Die [vollständigen Ergebnisse](../studies/strategy-grid100-progress001-20261016T030055Z/results/results.json)
-weisen jeden einzelnen Lauf und sämtliche gepaarten Vergleiche aus.
-
-Countdown mit Grid 3 hatte die niedrigste mittlere API-Zeit; adaptiv mit
-Grid 20 benötigte die wenigsten Queries insgesamt. Diese beobachteten
-Rangfolgen sind weder eine allgemeine Laufzeitgarantie noch eine isolierte
-Messung eines Implementierungsgeschwindigkeitsgewinns. Die 58 erfolgreichen
-Countdownersatzplanungen gehören zum gemessenen Verfahren.

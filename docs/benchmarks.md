@@ -83,10 +83,7 @@ for a compatibility comparison with disabled progress admission.
 The historical 50-case Grid3/5 experiment and fresh25-case Grid3/5/9 experiment
 used the previous experimental modulo countdown without the new full retry.
 Their completed results are in the original study folders. They do not measure
-this new execution contract. The completed 100-case, twelve-condition study is
-[published with its results and raw downloads](../studies/strategy-grid100-progress001-20261016T030055Z/README.md);
-[the strategy/grid benchmark plan](benchmark-plan-strategy-grid-comparison.md)
-retains its original design.
+this new execution contract.
 New configuration and execution contracts require source-specific qualification;
 historical evidence cannot be relabeled as a current-source result.
 
